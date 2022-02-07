@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 moveInput;
     private Vector3 moveVelocity;
+
+    public GunController theGun;
     
     // Update is called once per frame
     void Update()
@@ -33,6 +35,16 @@ public class PlayerController : MonoBehaviour
 
             // i have read that you should not use look at for rotation, but i cannot find another solution
             transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+        }
+
+        // Left click @ mouse button
+        if(Input.GetMouseButtonDown(0))
+        {
+            theGun.isFiring = true;
+        }
+        if(Input.GetMouseButtonUp(0))
+        {
+            theGun.isFiring = false;
         }
     }
 
