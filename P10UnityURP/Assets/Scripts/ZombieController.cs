@@ -34,7 +34,11 @@ public class ZombieController : MonoBehaviour
     {
         // not sure if we should use update or fixed update for this?
         target = FindClosestTarget();
-        Follow();
+
+        if (target != null)
+        {
+            Follow();
+        }
         
         // at some point we need a switch case here for state machine behaviours
     }
@@ -86,7 +90,7 @@ public class ZombieController : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "GoodGuys")
         {
             //Debug.Log("Zombie has hit Player");
             other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
