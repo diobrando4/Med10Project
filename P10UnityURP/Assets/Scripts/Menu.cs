@@ -18,7 +18,7 @@ public class Menu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) 
         {
-            if (gameIsPaused) 
+            if (gameIsPaused == true) 
             {
                 Time.timeScale = 1f;
                 gameIsPaused = false;
