@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 8978342255453304515}
   - component: {fileID: 8978342255453304525}
   - component: {fileID: 8978342255453304526}
+  - component: {fileID: 4294776396455409104}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -356,3 +357,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombieHealth: 5
+--- !u!135 &4294776396455409104
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978342255453304518}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}

@@ -8,7 +8,8 @@ public class ZombieController : MonoBehaviour
     private Rigidbody rb;
     private NavMeshAgent agent;
 
-    public Transform player; // need to auto apply this!
+    private GameObject target;
+    //public Transform target; // need to auto apply this!
 
     void Awake()
     {
@@ -32,13 +33,53 @@ public class ZombieController : MonoBehaviour
     void Update()
     {
         // not sure if we should use update or fixed update for this?
+        target = FindClosestTarget();
         Follow();
+        
         // at some point we need a switch case here for state machine behaviours
     }
 
     void Follow()
     {
-        agent.SetDestination(player.position);
+        //Transform eatthisone;
+        //if (target.tag == "Player" || target.tag == "NPC")
+        //{
+        //    Vector3.Distance(rb.position, target.GetComponent<Rigidbody>().position);
+        //}
+        //agent.SetDestination();
+        agent.SetDestination(target.transform.position);
+    }
+
+/*     private bool isTriggered = false;
+    public void OnTriggerEnter(Collider col){
+        if (col.GetComponent<Collider>().gameObject.tag == "Player" || col.GetComponent<Collider>().gameObject.tag == "NPC"){
+            if (isTriggered = false)
+            {
+            isTriggered = true;
+            }
+        }
+    } */
+
+    public GameObject FindClosestTarget()
+    {
+        GameObject[] candidates;
+        candidates = GameObject.FindGameObjectsWithTag("GoodGuys");
+
+        GameObject closestTarget = null;
+
+        float distance = Mathf.Infinity;
+        Vector3 pos = transform.position;
+        foreach(GameObject posCand in candidates)
+        {
+            Vector3 diff = posCand.transform.position - pos;
+            float curDist = diff.sqrMagnitude;
+            if (curDist < distance)
+            {
+                closestTarget = posCand;
+                distance = curDist;
+            }
+        }
+        return closestTarget;
     }
 
     public int damageGiven = 1;

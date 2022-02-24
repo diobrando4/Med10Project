@@ -8,13 +8,15 @@ public class NPCController : MonoBehaviour
     private Rigidbody npc_rb;
     private NavMeshAgent npc_agent;
 
-    public Transform targetPlayer;
+    private GameObject targetPlayer;
+    private GameObject targetEnemy;
 
     // Start is called before the first frame update
     void Start()
     {
         npc_rb = GetComponent<Rigidbody>();
         npc_agent = GetComponent<NavMeshAgent>();
+        targetPlayer = GameObject.FindGameObjectWithTag("Player");
         //TargetPlayer;
 
         if (npc_rb == null)
@@ -27,15 +29,37 @@ public class NPCController : MonoBehaviour
         }
 
     }
-
     // Update is called once per frame
     void Update()
     {
+        targetEnemy = FindClosestTarget();
         FollowPlayer();
     }
 
     void FollowPlayer()
     {
-            npc_agent.SetDestination(targetPlayer.position);
+        npc_agent.SetDestination(targetPlayer.transform.position);
+    }
+
+    public GameObject FindClosestTarget()
+    {
+        GameObject[] candidates;
+        candidates = GameObject.FindGameObjectsWithTag("Enemy");
+
+        GameObject closestTarget = null;
+
+        float distance = Mathf.Infinity;
+        Vector3 pos = transform.position;
+        foreach(GameObject posCand in candidates)
+        {
+            Vector3 diff = posCand.transform.position - pos;
+            float curDist = diff.sqrMagnitude;
+            if (curDist < distance)
+            {
+                closestTarget = posCand;
+                distance = curDist;
+            }
+        }
+        return closestTarget;
     }
 }
