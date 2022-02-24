@@ -16,6 +16,7 @@ public class Menu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // pause / unpause
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) 
         {
             if (gameIsPaused == true) 
@@ -29,9 +30,15 @@ public class Menu : MonoBehaviour
                 gameIsPaused = true;
             }
         }
+        // restart current scene
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        // quit game
+        if (Input.GetKeyDown(KeyCode.K)) 
+        {
+            Application.Quit();
         }
     }
 }
