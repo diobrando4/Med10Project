@@ -1,31 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    public int playerHealth = 3;
-    private int currentHealth;
+    public float playerMaxHealth = 3; // should probably rename this into max health
+    [SerializeField]
+    private float playerCurrentHealth;
+
+    public Image healthBar;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = playerHealth;
+        // starting with full health
+        playerCurrentHealth = playerMaxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(currentHealth <= 0)
+        if(playerCurrentHealth <= 0)
         {
             gameObject.SetActive(false);
             //Debug.Log("YOU DIED");
         }
     }
 
-    public void HurtPlayer(int damageTaken)
+    public void HurtPlayer(float damageTaken)
     {
-        currentHealth -= damageTaken;
-        // ?.fillAmount = ?;
+        playerCurrentHealth -= damageTaken;
+        healthBar.fillAmount = playerCurrentHealth / playerMaxHealth;
     }
 }

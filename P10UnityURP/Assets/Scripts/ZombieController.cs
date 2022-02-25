@@ -6,8 +6,9 @@ using UnityEngine.AI; // is needed for NavMesh
 public class ZombieController : MonoBehaviour
 {
     private Rigidbody rb;
+    [SerializeField]
     private NavMeshAgent agent;
-
+    [SerializeField]
     private GameObject target;
     //public Transform target; // need to auto apply this!
 

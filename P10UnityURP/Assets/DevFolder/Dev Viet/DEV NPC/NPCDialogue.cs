@@ -6,8 +6,8 @@ public class NPCDialogue : MonoBehaviour
 {
     public GameObject player;
     
-    public int playerHealth;
-    public int playercurrHealth;
+    public float playerHealth;
+    public float playercurrHealth;
 
     public GameObject otherNPC;
 
@@ -19,14 +19,14 @@ public class NPCDialogue : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("ThePlayer");
-        playerHealth = player.GetComponent<PlayerHealthManager>().playerHealth;
+        playerHealth = player.GetComponent<PlayerHealthManager>().playerMaxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        playercurrHealth = player.GetComponent<PlayerHealthManager>().playerHealth;
+        playercurrHealth = player.GetComponent<PlayerHealthManager>().playerMaxHealth;
 
         if (playercurrHealth == playerHealth-1) 
         {
