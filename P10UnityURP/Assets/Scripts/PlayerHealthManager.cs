@@ -9,7 +9,7 @@ public class PlayerHealthManager : MonoBehaviour
     [SerializeField]
     private float playerCurrentHealth;
 
-    public Image healthBar;
+    public Image healthBarFill;
 
     // Start is called before the first frame update
     void Start()
@@ -28,9 +28,18 @@ public class PlayerHealthManager : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private Transform _canvasTransform;
+
+    void LateUpdate()
+    {
+        //_canvasTransform.LookAt(Camera.main.transform);
+        _canvasTransform.LookAt(transform.position + Camera.main.transform.forward);
+    }
+
     public void HurtPlayer(float damageTaken)
     {
         playerCurrentHealth -= damageTaken;
-        healthBar.fillAmount = playerCurrentHealth / playerMaxHealth;
+        healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
     }
 }
