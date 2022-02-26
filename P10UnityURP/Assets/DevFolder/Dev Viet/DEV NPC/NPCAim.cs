@@ -5,9 +5,14 @@ using UnityEngine;
 public class NPCAim : MonoBehaviour
 {
 
-    public GameObject target;
-    //public GameObject gunPivot;
+    public bool isFiring;
 
+    public float fireRate;
+    public float projectileSpeed;
+    public BulletController bullet;
+    
+    public Transform muzzle;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +22,15 @@ public class NPCAim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(target.transform);
+        
+    }
+
+    void shoot()
+    {
+        if(isFiring == true)
+        {
+            BulletController newNPCBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
+            newNPCBullet.speed = projectileSpeed;
+        }
     }
 }
