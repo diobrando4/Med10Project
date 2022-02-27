@@ -11,6 +11,14 @@ public class NPCController : MonoBehaviour
     private GameObject player;
     private GameObject targetEnemy;
 
+    private bool isFiring;
+    public float fireRate;
+    public float projectileSpeed;
+    private float shotCounter;
+
+    public BulletController bullet;
+    public Transform muzzle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,12 +42,16 @@ public class NPCController : MonoBehaviour
     {
         targetEnemy = FindClosestTarget();
         AvoidEnemy(targetEnemy);
-        //FollowPlayer();
+        ShootNearestEnemy(targetEnemy);
+        FollowPlayer(targetEnemy);
     }
 
-    void FollowPlayer()
+    void FollowPlayer(GameObject enemy)
     {
-        npc_agent.SetDestination(player.transform.position);
+        if (enemy == null)
+        {
+            npc_agent.SetDestination(player.transform.position);            
+        }
     }
 
     public GameObject FindClosestTarget()
@@ -60,21 +72,52 @@ public class NPCController : MonoBehaviour
                 distance = curDist;
             }
         }
-        transform.LookAt(closestTarget.transform); //Look towards nearest target
+        if (closestTarget != null)
+        {
+            transform.LookAt(closestTarget.transform); //Look towards nearest target
+        }
         return closestTarget;
     }
 
     void AvoidEnemy(GameObject enemy)
     {
-        float enemyDistance = Vector3.Distance(transform.position, enemy.transform.position); //Calc Distance between self and enemy
-        float runAwayDistance = 4; //Distance before backing off
-        if(enemyDistance < runAwayDistance)
+        if (enemy != null)
         {
-            Vector3 dir2Enemy = transform.position - enemy.transform.position; //Calc direction to enemy
-            Vector3 newPos = transform.position + dir2Enemy; //Add position with enemy direction
+            float enemyDistance = Vector3.Distance(transform.position, enemy.transform.position); //Calc Distance between self and enemy
+            float runAwayDistance = 5; //Distance before backing off
+            if(enemyDistance < runAwayDistance)
+            {
+                Vector3 dir2Enemy = transform.position - enemy.transform.position; //Calc direction to enemy
+                Vector3 newPos = transform.position + dir2Enemy; //Add position with enemy direction
 
-            npc_agent.SetDestination(newPos);
+                npc_agent.SetDestination(newPos);
+            }
         }
     }
+
+    void ShootNearestEnemy(GameObject enemy)
+    {
+        if (enemy != null)
+        {
+            float enemyDistance = Vector3.Distance(transform.position, enemy.transform.position);
+            float distanceB4Shoot = 10; //Distance before shooting at enemy
+            if(enemyDistance < distanceB4Shoot)
+            {
+                shotCounter -= Time.deltaTime;
+                if(shotCounter <= 0)
+                {
+                    shotCounter = fireRate;
+                    BulletController newNPCBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
+                    newNPCBullet.speed = projectileSpeed;                
+                }
+            }
+            else
+            {
+                shotCounter = 0;                
+            }
+        }
+    }
+
+
 
 }
