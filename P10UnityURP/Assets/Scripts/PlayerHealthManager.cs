@@ -11,6 +11,8 @@ public class PlayerHealthManager : MonoBehaviour
 
     public Image healthBarFill;
 
+    public bool killable = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +41,10 @@ public class PlayerHealthManager : MonoBehaviour
 
     public void HurtPlayer(float damageTaken)
     {
-        playerCurrentHealth -= damageTaken;
-        healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
+        if (killable == true)
+        {
+            playerCurrentHealth -= damageTaken;
+            healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
+        }
     }
 }

@@ -14,6 +14,7 @@ public class ZombieSpawner : MonoBehaviour
         StartCoroutine(SpawnTimer());
     }
 
+    // this function is never stopped
     IEnumerator SpawnTimer()
     {
         while (true)
