@@ -7,7 +7,8 @@ public class TestSpeechBubble : MonoBehaviour
 {
     public RectTransform backgroundRectTransform;
     public TextMeshProUGUI textMeshPro;
-
+    private Coroutine someCoroutine;
+    
     void Awake()
     {
         
@@ -18,19 +19,29 @@ public class TestSpeechBubble : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+            if (someCoroutine == null)
+            {
             SetupText("Press F to Pay Respects");
-            //textMeshPro.text = "Press F to Pay Respects";
-            StartCoroutine(RemoveText());
+            someCoroutine = StartCoroutine(RemoveText());
+            }
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
+            if (someCoroutine == null)
+            {
             SetupText("GGGGG\nGGGGG");
             StartCoroutine(RemoveText());
+            someCoroutine = StartCoroutine(RemoveText());
+            }
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
+            if (someCoroutine == null)
+            {
             SetupText("HHHHH HHHHH\nHHHHH\nHHHHH HHHHH\nHHHHH");
             StartCoroutine(RemoveText());
+            someCoroutine = StartCoroutine(RemoveText());
+            }
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -55,11 +66,15 @@ public class TestSpeechBubble : MonoBehaviour
     }
 
     private float removeTextInSeconds = 2.0f;
+    //private bool testing;
 
     // this is an issue with this; it doesn't reset/resume when it's already running!
     IEnumerator RemoveText()
     {
+        //Debug.Log("Corourtine starts");
         yield return new WaitForSeconds(removeTextInSeconds);
+        //Debug.Log("Corourtine ends");
         SetupText("");
+        someCoroutine = null;
     }
 }
