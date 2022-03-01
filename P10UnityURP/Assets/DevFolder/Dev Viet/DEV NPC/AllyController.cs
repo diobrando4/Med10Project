@@ -5,17 +5,20 @@ using UnityEngine.AI;
 
 public class AllyController : MonoBehaviour
 {
-    private Rigidbody ally_rb;
+    //Self
+    private Rigidbody ally_rb; //Currently unused?
     private NavMeshAgent ally_agent;
+    public float stopDistanceFromPlayer = 3f;
 
+    //Target/Player
     private GameObject player;
     private GameObject targetGameObject;
 
+    //Shooting
     private bool isFiring;
     public float fireRate;
     public float projectileSpeed;
     private float shotCounter;
-
     public BulletController bullet;
     public Transform muzzle;
 
@@ -42,36 +45,38 @@ public class AllyController : MonoBehaviour
     {
         targetGameObject = FindClosest();
         //AvoidEnemy(targetGameObject);
-        ShootNearestEnemy(targetGameObject);
         Move2Target(targetGameObject);
+        ShootNearestEnemy(targetGameObject);        
     }
 
     void Move2Target(GameObject target)
     {
-        if (target == null) //If there is no enemies
+        if (target == null) //If there is no enemies, follow player
         {
-            ally_agent.stoppingDistance = 3f;
+            ally_agent.stoppingDistance = stopDistanceFromPlayer;
             ally_agent.SetDestination(player.transform.position);
+            transform.LookAt(player.transform);
         } 
         else if (target.tag == "Enemy") //If there is enemies
         {
             float enemyDistance = Vector3.Distance(transform.position, target.transform.position); //Calc Distance between self and enemy
             float runAwayDistance = 5; //Distance before backing off
-            if(enemyDistance <= runAwayDistance)
+            if(enemyDistance <= runAwayDistance) //If enemies are too close, backoff
             {
                 Vector3 dir2Enemy = transform.position - target.transform.position; //Calc direction to enemy
                 Vector3 newPos = transform.position + dir2Enemy; //Add position with enemy direction
 
                 ally_agent.stoppingDistance = 3f;
                 ally_agent.SetDestination(newPos);
-                print("Avoiding");
+                //print(gameObject + " Avoiding");
             }
-            else if (enemyDistance > runAwayDistance)
+            else if (enemyDistance > runAwayDistance) //If enemies are not too close, move closer
             {
                 ally_agent.stoppingDistance = 6f;
                 ally_agent.SetDestination(target.transform.position);
-                print("Engaging");
+                //print(gameObject + " Engaging");
             }
+        transform.LookAt(target.transform);
         }
     }
 
@@ -117,10 +122,10 @@ public class AllyController : MonoBehaviour
                 distance = curDist;
             }
         }
-        if (closestTarget != null)
+/*         if (closestTarget != null)
         {
             transform.LookAt(closestTarget.transform); //Look towards nearest target
-        }
+        } */
         return closestTarget;
     }
 
