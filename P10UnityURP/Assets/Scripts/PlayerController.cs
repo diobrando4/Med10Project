@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Rigidbody rb;
-    public Camera mainCamera;
+    public Camera mainCam;
     private Plane groundPlane;
     private Ray cameraRay;
     private float rayLength;
     private Vector3 pointToLook;
 
+    public Rigidbody rb;
     public float moveSpeed = 5f;
-
     private Vector3 moveInput;
     private Vector3 moveVelocity;
 
     public GunController theGun;
     
+    void Awake()
+    {
+        mainCam = Camera.main;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -25,7 +29,8 @@ public class PlayerController : MonoBehaviour
         moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
         moveVelocity = moveInput * moveSpeed;
 
-        cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+        // camera related
+        cameraRay = mainCam.ScreenPointToRay(Input.mousePosition);
         groundPlane = new Plane(Vector3.up, Vector3.zero);
 
         if(groundPlane.Raycast(cameraRay, out rayLength))

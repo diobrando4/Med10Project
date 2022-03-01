@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class PlayerHealthManager : MonoBehaviour
 {
     public float playerMaxHealth = 3; // should probably rename this into max health
-    [SerializeField]
-    private float playerCurrentHealth;
+    //[SerializeField]
+    public float playerCurrentHealth;
 
     public Image healthBarFill;
 
