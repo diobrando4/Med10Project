@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCShooting : MonoBehaviour
+public class TestShooting : MonoBehaviour
 {
 
     public bool isFiring;
@@ -12,13 +12,13 @@ public class NPCShooting : MonoBehaviour
     private float shotCounter;
 
     public BulletController bullet;
-    public NPCController script;
+    public AllyController script;
     public Transform muzzle;
     
     // Start is called before the first frame update
     void Start()
     {
-        script = GetComponent<NPCController>();
+        script = GetComponent<AllyController>();
     }
 
     // Update is called once per frame
