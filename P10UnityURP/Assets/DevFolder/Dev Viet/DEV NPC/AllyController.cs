@@ -80,7 +80,7 @@ public class AllyController : MonoBehaviour
         }
     }
 
-/*     void AvoidEnemy(GameObject enemy)
+/*     void AvoidEnemy(GameObject enemy) //Merged into Move2Target
     {
         if (enemy.tag == "Enemy")
         {
@@ -122,18 +122,14 @@ public class AllyController : MonoBehaviour
                 distance = curDist;
             }
         }
-/*         if (closestTarget != null)
-        {
-            transform.LookAt(closestTarget.transform); //Look towards nearest target
-        } */
         return closestTarget;
     }
 
     void ShootNearestEnemy(GameObject enemy)
     {
-        if (enemy != null)
+        if (enemy != null) //If there is enemies
         {
-            float enemyDistance = Vector3.Distance(transform.position, enemy.transform.position);
+            float enemyDistance = Vector3.Distance(transform.position, enemy.transform.position); //Calculate distance between ally and enemy
             float distanceB4Shoot = 10; //Distance before shooting at enemy
             if(enemyDistance < distanceB4Shoot)
             {
