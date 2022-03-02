@@ -21,6 +21,7 @@ public class AllyDialogue : MonoBehaviour
     public TextMeshProUGUI textMeshPro;
     private Coroutine someCoroutine;
 
+    [SerializeField]
     private Camera mainCam;
 
     void Awake()
@@ -39,7 +40,7 @@ public class AllyDialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // not sure why the text seems to follow in player controller, but it doesn't seem to do that here
+        // this needs to be changed, since this only turns the text towards the cam, not the canvas!
         backgroundRectTransform.LookAt(backgroundRectTransform.position + mainCam.transform.rotation * Vector3.forward, mainCam.transform.rotation * Vector3.up);
 
         // GetComponent is not recommended in update as it is quite expensive

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Camera mainCam;
+    [SerializeField]
+    private Camera mainCam;
     private Plane groundPlane;
     private Ray cameraRay;
     private float rayLength;
