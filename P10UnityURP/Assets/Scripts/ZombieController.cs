@@ -88,17 +88,31 @@ public class ZombieController : MonoBehaviour
     }
 
     public int damageGiven = 1;
-
+    private bool hasDamaged = false;
     void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "GoodGuys")
         {
-            //Debug.Log("Zombie has hit Player");
-            other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
-            //other.gameObject.GetComponent<ZombieHealthManager>().HurtZombie(damageGiven);
+            if(hasDamaged == false)
+            {
+                hasDamaged = true;
+                //Debug.Log("Zombie has hit Player");
+                other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
+                //other.gameObject.GetComponent<ZombieHealthManager>().HurtZombie(damageGiven);
 
-            // destroys the bullet when hitting the enemy
-            Destroy(gameObject);
+                // destroys the bullet when hitting the enemy
+                Destroy(gameObject);
+
+/*                 AttackResetDelay(4f);
+                print("RESET"); */
+            }
         }
     }
+/*     IEnumerator AttackResetDelay(float time)
+    {
+        hasDamaged = true;
+        yield return new WaitForSeconds(time);
+        hasDamaged = false;
+
+    } */
 }
