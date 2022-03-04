@@ -19,7 +19,8 @@ public class AllyDialogue : MonoBehaviour
     // for the speech bubbles
     public RectTransform backgroundRectTransform;
     public TextMeshProUGUI textMeshPro;
-    private Coroutine someCoroutine;
+    //private Coroutine currentCoroutine;
+    //private Coroutine previousCoroutine;
 
     [SerializeField]
     private Camera mainCam;
@@ -45,24 +46,28 @@ public class AllyDialogue : MonoBehaviour
 
         // GetComponent is not recommended in update as it is quite expensive
         playerCurrHp = playerObject.GetComponent<PlayerHealthManager>().playerCurrentHealth;
+        Dialogue();
+        // if (playerCurrHp <= 0)
+        // {
+        //      if (currentCoroutine == null)
+        //     {
+        //     //SetupText("Commander down!");
+        //     currentCoroutine = StartCoroutine(RemoveText("", 2f));
+        //     } */
+        //     DisplayText("Player Dead!", 2f);
+        //     print("Dead");
+        // }
 
-        if (playerCurrHp <= 0)
-        {
-            if (someCoroutine == null)
-            {
-            SetupText("Commander down!");
-            someCoroutine = StartCoroutine(RemoveText());
-            }
-        }
+        // if (playerCurrHp == playerMaxHp-1)
+        // {
+        //      if (currentCoroutine == null)
+        //     {
+        //     //SetupText("Are you okay?");
+        //     currentCoroutine = StartCoroutine(RemoveText("", 2f));
+        //     } */
+        //     DisplayText("Player Damaged", 2f);
 
-        if (playerCurrHp == playerMaxHp-1)
-        {
-            if (someCoroutine == null)
-            {
-            SetupText("Are you okay?");
-            someCoroutine = StartCoroutine(RemoveText());
-            }
-        }
+        // }
 
         /*
         if (isPlayerHurt = playerCurrHp == playerMaxHp -1 ? true : false)
@@ -126,9 +131,40 @@ public class AllyDialogue : MonoBehaviour
         }
         */
     } // Update
+    private bool triggerDialogue = false;
+
+    void Dialogue()
+    {
+        float playerHPTracker;
+        playerHPTracker = playerMaxHp;
+        //IEnumerator c = ClearText(3);
+
+        if (playerCurrHp <= 0)
+        {   
+            StopAllCoroutines();     
+            //Do something
+            //SetupText("Doed");
+            //StartCoroutine(c);
+        }
+
+        
+        if (playerCurrHp == playerHPTracker-1)
+        {
+            if (triggerDialogue == false)
+            {
+                playerHPTracker = playerHPTracker-1;
+                // Do Something
+                StopAllCoroutines();
+                //SetupText("Hovsa?");
+                //Debug.Log(playerCurrHp + " " + playerHPTracker);
+                StartCoroutine(ClearText("Hovsa",3));  
+            }
+                      
+        }
+    } 
+
 
     private Vector2 textSize;
-
     void SetupText(string text)
     {
         textMeshPro.SetText(text);
@@ -136,17 +172,19 @@ public class AllyDialogue : MonoBehaviour
         textMeshPro.ForceMeshUpdate();
         textSize = textMeshPro.GetRenderedValues(false);
         
-        backgroundRectTransform.sizeDelta = textSize;
-    }
+        backgroundRectTransform.sizeDelta = textSize;  
+    } 
 
-    private float removeTextInSeconds = 2.0f;
-
-    IEnumerator RemoveText()
+    IEnumerator ClearText(string text, float removeTextInSeconds)
     {
-        //Debug.Log("Corourtine starts");
+        triggerDialogue = true;
+        SetupText(text);
+        //Debug.Log(gameObject + "Corourtine starts");
         yield return new WaitForSeconds(removeTextInSeconds);
-        //Debug.Log("Corourtine ends");
+        //text = " ";
+
         SetupText("");
-        someCoroutine = null;
+        Debug.Log("END");
+        triggerDialogue = false;            
     }
 }
