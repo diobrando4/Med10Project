@@ -31,12 +31,14 @@ public class PlayerHealthManager : MonoBehaviour
     }
 
     [SerializeField]
-    private Transform _canvasTransform;
+    //private Transform _canvasTransform;
 
     void LateUpdate()
     {
         //_canvasTransform.LookAt(Camera.main.transform);
-        _canvasTransform.LookAt(transform.position + Camera.main.transform.forward);
+
+        // this is the one we're currently using!
+        //_canvasTransform.LookAt(transform.position + Camera.main.transform.forward);
     }
 
     public void HurtPlayer(float damageTaken)

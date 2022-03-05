@@ -97,7 +97,7 @@ public class ZombieController : MonoBehaviour
             {
                 hasDamaged = true;
                 //Debug.Log("Zombie has hit Player");
-                other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
+                other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven); // not sure why but this sometimes gives an error; when being damaged the 2nd time and afterwards
                 //other.gameObject.GetComponent<ZombieHealthManager>().HurtZombie(damageGiven);
 
                 // destroys the bullet when hitting the enemy
