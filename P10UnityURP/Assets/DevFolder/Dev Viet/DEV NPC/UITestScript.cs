@@ -9,16 +9,16 @@ public class UITestScript : MonoBehaviour
     private GameObject ally2;
     private GameObject player;
 
-//Need to auto set this later
     public TMP_Text ally1dialogue;
     public TMP_Text ally2dialogue;
     public GameObject ally1DialogueBox;
     public GameObject ally2DialogueBox;
 
-    public TextAsset textFile;
-    public string[] textLines;
-    public List<string> ally1Lines = new List<string>();
-    public List<string> ally2Lines = new List<string>();
+    public TextAsset textFile; //Need to make an interchangeable system
+
+    private string[] textLines;
+    private List<string> ally1Lines = new List<string>();
+    private List<string> ally2Lines = new List<string>();
 
     public int currentLine;
     public int endAtLine;
@@ -32,7 +32,7 @@ public class UITestScript : MonoBehaviour
     {
         ally1 = GameObject.Find("AllyBlueBot");
         ally2 = GameObject.Find("AllyOrangeBot");
-        player = GameObject.Find("ThePlayer");    
+        player = GameObject.Find("ThePlayer"); 
 
         if(textFile != null) //If there is a text file
         {
@@ -58,79 +58,74 @@ public class UITestScript : MonoBehaviour
         {
             endAtLine = textLines.Length - 1;
         }
+
+        StartCoroutine(TextScrollAlly(ally1Lines[currentLine],ally2Lines[currentLine]));
+
     } // Start
 
     // Update is called once per frame
     void Update()
     {
-        ally1dialogue.text = ally1Lines[currentLine];
-        ally2dialogue.text = ally2Lines[currentLine];
+        //ally1dialogue.text = ally1Lines[currentLine];
+        //ally2dialogue.text = ally2Lines[currentLine];
+        
         if (currentLine < endAtLine)
         {
             ally1DialogueBox.SetActive(true);
-            ally2DialogueBox.SetActive(true);            
-            if (Input.GetKeyDown(KeyCode.Return))
+            ally2DialogueBox.SetActive(true);        
+            if (Input.GetKeyDown(KeyCode.Return) && currentLine != endAtLine)
             {
-                currentLine += 1;
-            }            
-        }
-        else if (currentLine == endAtLine)
-        {
-            ally1dialogue.text = ally1dialogue.text + "\n[End]";
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                ally1DialogueBox.SetActive(false);
-                ally2DialogueBox.SetActive(false);
-                //Debug.Log(endAtLine);
-            }            
-        }
+                if (!isTyping)
+                {
 
+                    currentLine += 1;
+                    StartCoroutine(TextScrollAlly(ally1Lines[currentLine],ally2Lines[currentLine]));
+
+                }
+                else if (isTyping && !cancelTyping)
+                {
+                    cancelTyping = true;
+                }
+            }      
+        }
+        else if (Input.GetKeyDown(KeyCode.Return) && currentLine == endAtLine)
+        {
+            ally1DialogueBox.SetActive(false);
+            ally2DialogueBox.SetActive(false);
+        }    
     } //Update
 
-    void TypingText() // Experimental
+    IEnumerator TextScrollAlly(string lineOfText1, string lineOfText2) //Experimental
     {
-        if (!isTyping) //If text isnt being typed out
-        {
-            StartCoroutine(TextScroll("This is a test"));
-        }
-        else if (isTyping && !cancelTyping) //If text is currently being typed out, and it hasnt been canceled
-        {
-            cancelTyping = true;
-        }
-    }// TypingText
-
-    IEnumerator TextScroll(string lineOfText) //Experimental
-    {
-        int letterTracker = 0;
+        int letterTracker1 = 0;
+        int letterTracker2 = 0;
         ally1dialogue.text = "";
         ally2dialogue.text = "";
         isTyping = true;
         cancelTyping = false;
-        while (isTyping && !cancelTyping && (letterTracker < lineOfText.Length - 1))
+        while (isTyping && !cancelTyping && (letterTracker1 < lineOfText1.Length - 1))
         {
-            ally1dialogue.text += lineOfText[letterTracker];
-            ally2dialogue.text += lineOfText[letterTracker];
-            letterTracker += 1;
+            ally1dialogue.text += lineOfText1[letterTracker1];
+            letterTracker1 += 1;
             yield return new WaitForSeconds(typeSpeed);
         }
-        ally1dialogue.text = lineOfText;
-        ally2dialogue.text = lineOfText;
+
+        while (isTyping && !cancelTyping && (letterTracker2 < lineOfText2.Length - 1))
+        {
+            ally2dialogue.text += lineOfText2[letterTracker2];
+            letterTracker2 += 1;
+            yield return new WaitForSeconds(typeSpeed);
+        }
+
+        ally1dialogue.text = lineOfText1;
+        if (currentLine == endAtLine)
+        {
+            ally1dialogue.text = ally1dialogue.text + "\n[End]";
+            ally2dialogue.text = ally2dialogue.text + "\n[End]";
+        }        
+        ally2dialogue.text = lineOfText2;
         isTyping = false;
         cancelTyping = false;
-    }// TextScroll
-
-    IEnumerator ClearText(float clearTime)
-    {
-
-        yield return new WaitForSeconds(clearTime);
-        
-    }
-
-    IEnumerator ProgressDialogue(float clearTime)
-    {
-
-        yield return new WaitForSeconds(clearTime);
-        
-    }
+    }// TextScrollAlly1
     
 }
