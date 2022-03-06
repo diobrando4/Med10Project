@@ -1,0 +1,6 @@
+[0]Testing this, im ally 1
+[1]Sure you are, im ally 2
+[0]What do you think of this system?
+[1]Not quite sure
+[1]Might cut down on time when writting dialogue
+[0]Yeah sure, can be
