@@ -52,11 +52,16 @@ public class PlayerController : MonoBehaviour
         {
             theGun.isFiring = false;
         }
+
+        // not sure if the movement should happen in fixed or not, since rigidbody is already using the physics engine?
+        //rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
+        //rb.velocity = moveVelocity;
     }
 
     // used for physics
     void FixedUpdate()
     {
+        // i'm not sure, but i don't think you ever use foxedDeltaTime in FixedUpdate?
         //rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
         rb.velocity = moveVelocity;
     }

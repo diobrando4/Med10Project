@@ -15,10 +15,19 @@ public class BulletController : MonoBehaviour
     
     public int damageGiven = 1;
 
+    public Rigidbody rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        // this needs to use rigidbody instead!
+        //transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        rb.velocity = transform.forward * speed;
 
         // destroys the bullet after having reached the end of its life time
         lifeTime -= Time.deltaTime;
