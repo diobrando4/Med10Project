@@ -91,7 +91,27 @@ public class ZombieController : MonoBehaviour
     private bool hasDamaged = false;
     void OnCollisionEnter(Collision other)
     {
+        // we might need a better system for how to deal damage? because of different objects having shared tags, but it works for now
+
         if(other.gameObject.tag == "GoodGuys")
+        {
+            if(hasDamaged == false)
+            {
+                hasDamaged = true;
+                //Debug.Log("Zombie has hit Player");
+                other.gameObject.GetComponent<AllyHealthManager>().HurtAlly(damageGiven); // not sure why but this sometimes gives an error; when being damaged the 2nd time and afterwards
+                //other.gameObject.GetComponent<ZombieHealthManager>().HurtZombie(damageGiven);
+
+                // destroys the zombie
+                Destroy(gameObject);
+                
+                /*
+                AttackResetDelay(4f);
+                print("RESET");
+                */
+            }
+        }
+        if(other.gameObject.tag == "Player")
         {
             if(hasDamaged == false)
             {
@@ -100,19 +120,19 @@ public class ZombieController : MonoBehaviour
                 other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven); // not sure why but this sometimes gives an error; when being damaged the 2nd time and afterwards
                 //other.gameObject.GetComponent<ZombieHealthManager>().HurtZombie(damageGiven);
 
-                // destroys the bullet when hitting the enemy
+                // destroys the zombie
                 Destroy(gameObject);
-
-/*                 AttackResetDelay(4f);
-                print("RESET"); */
             }
         }
     }
-/*     IEnumerator AttackResetDelay(float time)
+
+    /*     
+    IEnumerator AttackResetDelay(float time)
     {
         hasDamaged = true;
         yield return new WaitForSeconds(time);
         hasDamaged = false;
 
-    } */
+    }
+    */
 }

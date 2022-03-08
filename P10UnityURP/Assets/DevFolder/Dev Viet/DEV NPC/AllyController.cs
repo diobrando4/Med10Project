@@ -16,6 +16,8 @@ public class AllyController : MonoBehaviour
 
     //Shooting
     private bool isFiring;
+    [Header("Higher Fire Rate = Slower")]
+    [Tooltip("Higher Fire Rate = Slower")]
     public float fireRate;
     public float projectileSpeed;
     private float shotCounter;

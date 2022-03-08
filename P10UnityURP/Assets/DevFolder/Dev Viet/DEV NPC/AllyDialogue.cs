@@ -184,7 +184,7 @@ public class AllyDialogue : MonoBehaviour
         //text = " ";
 
         SetupText("");
-        Debug.Log("END");
+        //Debug.Log("END");
         triggerDialogue = false;            
     }
 }
