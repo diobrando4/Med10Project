@@ -17,17 +17,6 @@ public class ZombieController : MonoBehaviour
         // these could also be done this in the inspector
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-
-        // checks if the Rigidbody has been added to the zombie
-        if (rb == null)
-        {
-            Debug.LogError("The Rigidbody isn't attached to " + gameObject.name);
-        }
-        // checks if the NavMesh has been added to the zombie
-        if (agent == null)
-        {
-            Debug.LogError("The NavMesh isn't attached to " + gameObject.name);
-        }
     }
 
     // Update is called once per frame
@@ -89,6 +78,9 @@ public class ZombieController : MonoBehaviour
 
     public int damageGiven = 1;
     private bool hasDamaged = false;
+
+    public ExitDoor exitDoor;
+
     void OnCollisionEnter(Collision other)
     {
         // we might need a better system for how to deal damage? because of different objects having shared tags, but it works for now
@@ -102,6 +94,7 @@ public class ZombieController : MonoBehaviour
                 other.gameObject.GetComponent<AllyHealthManager>().HurtAlly(damageGiven); // not sure why but this sometimes gives an error; when being damaged the 2nd time and afterwards
                 //other.gameObject.GetComponent<ZombieHealthManager>().HurtZombie(damageGiven);
 
+                exitDoor.remainingEnemies.Remove(gameObject);
                 // destroys the zombie
                 Destroy(gameObject);
                 
@@ -120,6 +113,7 @@ public class ZombieController : MonoBehaviour
                 other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven); // not sure why but this sometimes gives an error; when being damaged the 2nd time and afterwards
                 //other.gameObject.GetComponent<ZombieHealthManager>().HurtZombie(damageGiven);
 
+                exitDoor.remainingEnemies.Remove(gameObject);
                 // destroys the zombie
                 Destroy(gameObject);
             }

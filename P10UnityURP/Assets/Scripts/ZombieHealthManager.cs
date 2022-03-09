@@ -7,6 +7,8 @@ public class ZombieHealthManager : MonoBehaviour
     public int zombieHealth = 5;
     private int currentHealth;
 
+    public ExitDoor exitDoor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,7 @@ public class ZombieHealthManager : MonoBehaviour
         // if the zombie reaches 0 health then it gets destroyed
         if(currentHealth <= 0)
         {
+            exitDoor.remainingEnemies.Remove(gameObject);
             Destroy(gameObject);
         }
     }

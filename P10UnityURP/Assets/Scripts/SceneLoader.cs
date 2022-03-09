@@ -21,12 +21,13 @@ public class SceneLoader : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            transform.GetComponent<MeshRenderer>().material.color = Color.red;
+            //transform.GetComponent<MeshRenderer>().material.color = Color.red;
 
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetMouseButtonDown(0))
+            //if (Input.GetKeyDown(KeyCode.F))
             {
-                //Debug.Log("Loading new level");
-                SceneManager.LoadScene("Gym01");
+                Debug.Log("Loading new level");
+                //SceneManager.LoadScene("Gym01");
             }
         }
     }
@@ -35,7 +36,7 @@ public class SceneLoader : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            transform.GetComponent<MeshRenderer>().material.color = Color.white;
+            //transform.GetComponent<MeshRenderer>().material.color = Color.white;
         }
     }
 }
