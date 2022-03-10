@@ -7,7 +7,6 @@ public class AllyHealthManager : MonoBehaviour
 {
     public float allyMaxHealth = 6;
     public float allyCurrentHealth;
-
     //public Image healthBarFill;
 
     void Start()

@@ -1,0 +1,31 @@
+Getting hit
+[0]Just a flesh wound
+[0]Hull compromised
+[0]Damage taken
+[1]Ow!
+[1]Cut it out!
+[1]Why!?
+
+Downed
+[0]Life.exe stopped working
+[0]Update in progress
+[0]-ERROR-
+[1]Im down!...
+[1]Sorry...
+[1]Help!...
+
+Player hit
+[0]Commander Damaged
+[0]Warning: You lost health
+[0]Error: No repair kit
+[1]Are you okay?
+[1]Watch out!
+[1]Careful!
+
+Player downed
+[0]Commander Compromised
+[0]Leader has been downed
+[0]Failure imminent
+[1]Commander down!
+[1]Hold it together!
+[1]Thats not good...

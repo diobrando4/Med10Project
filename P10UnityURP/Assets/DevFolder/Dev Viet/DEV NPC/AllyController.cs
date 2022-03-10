@@ -9,6 +9,8 @@ public class AllyController : MonoBehaviour
     private Rigidbody ally_rb; //Currently unused?
     private NavMeshAgent ally_agent;
     public float stopDistanceFromPlayer = 3f;
+    // public float allyMaxHealth = 6;
+    // public float allyCurrentHealth;    
 
     //Target/Player
     private GameObject player;
@@ -41,6 +43,8 @@ public class AllyController : MonoBehaviour
             Debug.LogError("No NavMesh attached to " + gameObject.name);
         }
 
+        // allyCurrentHealth = allyMaxHealth;
+
     }
     // Update is called once per frame
     void Update()
@@ -48,7 +52,12 @@ public class AllyController : MonoBehaviour
         targetGameObject = FindClosest();
         //AvoidEnemy(targetGameObject);
         Move2Target(targetGameObject);
-        ShootNearestEnemy(targetGameObject);        
+        ShootNearestEnemy(targetGameObject);
+
+        // if (allyCurrentHealth <= 0)
+        // {
+        //     gameObject.SetActive(false);
+        // }    
     }
 
     void Move2Target(GameObject target)
@@ -150,6 +159,11 @@ public class AllyController : MonoBehaviour
         }
     }
 
-
+    // public void HurtAlly(float damageTaken)
+    // {
+    //     allyCurrentHealth -= damageTaken;
+    //     //Debug.Log(allyCurrentHealth);
+    //     //healthBarFill.fillAmount = allyCurrentHealth / allyMaxHealth;
+    // }
 
 }

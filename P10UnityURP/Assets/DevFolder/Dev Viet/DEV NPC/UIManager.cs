@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class UITestScript : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     private GameObject ally1;
+
     private GameObject ally2;
+
     private GameObject player;
 
     public TMP_Text ally1dialogue;
@@ -14,11 +16,10 @@ public class UITestScript : MonoBehaviour
     public GameObject ally1DialogueBox;
     public GameObject ally2DialogueBox;
 
-    public TextAsset textFile; //Need to make an interchangeable system
-
-    private string[] textLines;
-    private List<string> ally1Lines = new List<string>();
-    private List<string> ally2Lines = new List<string>();
+    public TextAsset textFileNarrative; //Need to make an interchangeable system
+    private string[] textLinesNarrative;
+    private List<string> ally1NarrativeLines = new List<string>();
+    private List<string> ally2NarrativeLines = new List<string>();
 
     public int currentLine;
     public int endAtLine;
@@ -34,40 +35,39 @@ public class UITestScript : MonoBehaviour
         ally2 = GameObject.Find("AllyOrangeBot");
         player = GameObject.Find("ThePlayer"); 
 
-        if(textFile != null) //If there is a text file
+        if(textFileNarrative != null) //If there is a text file
         {
-            textLines = (textFile.text.Split('\n')); //Seperate per line
-
+            textLinesNarrative = (textFileNarrative.text.Split('\n')); //Seperate per line
         }
-        for (int i = 0; i < textLines.Length; i++) //Split textfile between ally1 and ally2 depending on marker [0] and [1]
+        for (int i = 0; i < textLinesNarrative.Length; i++) //Split textfile between ally1 and ally2 depending on marker [0] and [1]
         {
-            if(textLines[i].Contains("[0]"))
+            if(textLinesNarrative[i].Contains("[0]"))
             {
-                textLines[i] = textLines[i].Replace("[0]", "");                
-                ally1Lines.Add(textLines[i]);
-                ally2Lines.Add(" ");
+                textLinesNarrative[i] = textLinesNarrative[i].Replace("[0]", "");                
+                ally1NarrativeLines.Add(textLinesNarrative[i]);
+                ally2NarrativeLines.Add(" ");
             }
-            else if (textLines[i].Contains("[1]"))
+            else if (textLinesNarrative[i].Contains("[1]"))
             {
-                textLines[i] = textLines[i].Replace("[1]", "");
-                ally1Lines.Add(" ");
-                ally2Lines.Add(textLines[i]);  
+                textLinesNarrative[i] = textLinesNarrative[i].Replace("[1]", "");
+                ally1NarrativeLines.Add(" ");
+                ally2NarrativeLines.Add(textLinesNarrative[i]);  
             }
         }
         if (endAtLine == 0)
         {
-            endAtLine = textLines.Length - 1;
+            endAtLine = textLinesNarrative.Length - 1;
         }
 
-        StartCoroutine(TextScrollAlly(ally1Lines[currentLine],ally2Lines[currentLine]));
+        StartCoroutine(TextScrollNarrative(ally1NarrativeLines[currentLine],ally2NarrativeLines[currentLine]));
 
     } // Start
 
     // Update is called once per frame
     void Update()
     {
-        //ally1dialogue.text = ally1Lines[currentLine];
-        //ally2dialogue.text = ally2Lines[currentLine];
+        //ally1dialogue.text = ally1NarrativeLines[currentLine];
+        //ally2dialogue.text = ally2NarrativeLines[currentLine];
         
         if (currentLine < endAtLine)
         {
@@ -79,7 +79,7 @@ public class UITestScript : MonoBehaviour
                 {
 
                     currentLine += 1;
-                    StartCoroutine(TextScrollAlly(ally1Lines[currentLine],ally2Lines[currentLine]));
+                    StartCoroutine(TextScrollNarrative(ally1NarrativeLines[currentLine],ally2NarrativeLines[currentLine]));
 
                 }
                 else if (isTyping && !cancelTyping)
@@ -95,7 +95,7 @@ public class UITestScript : MonoBehaviour
         }    
     } //Update
 
-    IEnumerator TextScrollAlly(string lineOfText1, string lineOfText2) //Experimental
+    IEnumerator TextScrollNarrative(string lineOfText1, string lineOfText2) //Experimental
     {
         int letterTracker1 = 0;
         int letterTracker2 = 0;
