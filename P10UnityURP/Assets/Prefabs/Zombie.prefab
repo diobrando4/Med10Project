@@ -345,6 +345,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   target: {fileID: 0}
   damageGiven: 1
+  exitDoor: {fileID: 0}
 --- !u!114 &8978342255453304526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,6 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombieHealth: 10
+  exitDoor: {fileID: 0}
 --- !u!135 &4294776396455409104
 SphereCollider:
   m_ObjectHideFlags: 0
