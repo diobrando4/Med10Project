@@ -7,6 +7,7 @@ public class CombatDialogueManager : MonoBehaviour
 {
     private GameObject ally1;
     private GameObject ally2;
+    //[SerializeField]
     private GameObject player;
 
     private AllyHealthManager ally1Health;
@@ -43,7 +44,8 @@ public class CombatDialogueManager : MonoBehaviour
     {
         ally1 = GameObject.Find("AllyBlueBot");
         ally2 = GameObject.Find("AllyOrangeBot");
-        player = GameObject.Find("ThePlayer"); 
+        //player = GameObject.Find("ThePlayer"); 
+        player = GameObject.FindGameObjectWithTag("Player");
 
         if (ally1 != null)
         {
