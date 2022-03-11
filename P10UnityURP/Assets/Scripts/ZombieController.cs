@@ -94,7 +94,11 @@ public class ZombieController : MonoBehaviour
                 other.gameObject.GetComponent<AllyHealthManager>().HurtAlly(damageGiven); // not sure why but this sometimes gives an error; when being damaged the 2nd time and afterwards
                 //other.gameObject.GetComponent<ZombieHealthManager>().HurtZombie(damageGiven);
 
-                exitDoor.remainingEnemies.Remove(gameObject);
+                // if we don't do this and there isn't an exit door; then zombies can't be destroyed and we'll get a lot of errors
+                if (exitDoor != null)
+                {
+                    exitDoor.remainingEnemies.Remove(gameObject);
+                }                
                 // destroys the zombie
                 Destroy(gameObject);
                 
@@ -113,7 +117,11 @@ public class ZombieController : MonoBehaviour
                 other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven); // not sure why but this sometimes gives an error; when being damaged the 2nd time and afterwards
                 //other.gameObject.GetComponent<ZombieHealthManager>().HurtZombie(damageGiven);
 
-                exitDoor.remainingEnemies.Remove(gameObject);
+                // if we don't do this and there isn't an exit door; then zombies can't be destroyed and we'll get a lot of errors
+                if (exitDoor != null)
+                {
+                    exitDoor.remainingEnemies.Remove(gameObject);
+                }   
                 // destroys the zombie
                 Destroy(gameObject);
             }
