@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class AllySceneLoader : MonoBehaviour
+public class AllyLevelLoader : MonoBehaviour
 {
+    public LevelLoader levelLoader;
+
     void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -14,8 +16,9 @@ public class AllySceneLoader : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             //if (Input.GetKeyDown(KeyCode.F))
             {
-                Debug.Log("Loading new level");
-                //SceneManager.LoadScene("Gym01");
+                //Debug.Log("Loading new level");
+                //FadeToLevel("TestScene1");
+                levelLoader.LoadNextLevel();
             }
         }
     }
@@ -27,4 +30,19 @@ public class AllySceneLoader : MonoBehaviour
             //transform.GetComponent<MeshRenderer>().material.color = Color.white;
         }
     }
+
+    /*
+    public Animator animator;
+
+    void FadeToLevel(string level)
+    {
+        //Debug.Log("fading out");
+        animator.SetTrigger("FadeOut");
+    }
+
+    void OnFadeComplete()
+    {
+        SceneManager.LoadScene("TestScene1");
+    }
+    */
 }

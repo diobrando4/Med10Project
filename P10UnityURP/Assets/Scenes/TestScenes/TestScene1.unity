@@ -1271,7 +1271,7 @@ GameObject:
   - component: {fileID: 429336994}
   - component: {fileID: 429336998}
   m_Layer: 0
-  m_Name: ExitDoorCube
+  m_Name: ExitDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1912,7 +1912,7 @@ GameObject:
   - component: {fileID: 645972452}
   - component: {fileID: 645972451}
   m_Layer: 0
-  m_Name: PlayerCube
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3865,6 +3865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3295736388396428fcb2cd2cd510cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextLevel: TestScene2
 --- !u!65 &1987065791
 BoxCollider:
   m_ObjectHideFlags: 0
