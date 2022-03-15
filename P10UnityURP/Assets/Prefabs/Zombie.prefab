@@ -204,9 +204,7 @@ GameObject:
   - component: {fileID: 8978342255453304519}
   - component: {fileID: 8978342255453304524}
   - component: {fileID: 8978342255453304515}
-  - component: {fileID: 8978342255453304525}
-  - component: {fileID: 8978342255453304526}
-  - component: {fileID: 4294776396455409104}
+  - component: {fileID: 5123329521277414728}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -330,7 +328,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8978342255453304525
+--- !u!114 &5123329521277414728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -339,37 +337,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8978342255453304518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76b53640435e4204d939692012b76fd1, type: 3}
+  m_Script: {fileID: 11500000, guid: 46d5ac84cffdffb458efa9b9bdb4b3eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
   target: {fileID: 0}
   damageGiven: 1
-  exitDoor: {fileID: 0}
---- !u!114 &8978342255453304526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978342255453304518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c021f1b47ff50c1478d5c92febf04865, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zombieHealth: 10
-  exitDoor: {fileID: 0}
---- !u!135 &4294776396455409104
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978342255453304518}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
+  fireRate: 0
+  projectileSpeed: 0
+  distanceB4Shoot: 0
+  bullet: {fileID: 0}
+  muzzle: {fileID: 0}

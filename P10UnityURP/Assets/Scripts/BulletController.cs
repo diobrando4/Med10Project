@@ -42,7 +42,7 @@ public class BulletController : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<ZombieHealthManager>().HurtZombie(damageGiven);
+            other.gameObject.GetComponent<Zombie>().DamageTaken(damageGiven);
 
             // destroys the bullet when hitting the enemy
             Destroy(gameObject);

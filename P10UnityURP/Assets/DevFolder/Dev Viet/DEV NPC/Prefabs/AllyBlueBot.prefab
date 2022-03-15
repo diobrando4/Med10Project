@@ -185,7 +185,7 @@ RectTransform:
   - {fileID: 6132956586202271208}
   - {fileID: 965671903}
   m_Father: {fileID: 9175027577546554138}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -672,7 +672,7 @@ Transform:
   m_Children:
   - {fileID: 9175027575920174596}
   m_Father: {fileID: 9175027577546554138}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9175027576103038761
 MeshFilter:
@@ -750,9 +750,8 @@ GameObject:
   - component: {fileID: 9175027577546554143}
   - component: {fileID: 9175027577546554142}
   - component: {fileID: 9175027577546554148}
-  - component: {fileID: 9175027577546554139}
+  - component: {fileID: 6264798026682359731}
   - component: {fileID: 3866114654709989312}
-  - component: {fileID: 1709100712}
   m_Layer: 0
   m_Name: AllyBlueBot
   m_TagString: GoodGuys
@@ -771,8 +770,8 @@ Transform:
   m_LocalPosition: {x: 2.6, y: 0.588, z: -1.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5486668503852150670}
   - {fileID: 9175027576103038766}
+  - {fileID: 5486668503852150670}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -876,7 +875,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &9175027577546554139
+--- !u!114 &6264798026682359731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -885,14 +884,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 9175027577546554141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e756846852d46c142b61c0ad2fc9eb08, type: 3}
+  m_Script: {fileID: 11500000, guid: ed7a66bc211398c44aa308317e742697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopDistanceFromPlayer: 3
-  fireRate: 0.75
-  projectileSpeed: 10
+  maxHealth: 0
+  currHealth: 0
+  damageGiven: 0
+  fireRate: 0
+  projectileSpeed: 0
+  distanceB4Shoot: 0
   bullet: {fileID: -2671395265167506613, guid: 03c5e20a095d6fa4aa5bf2f892748f51, type: 3}
-  muzzle: {fileID: 9175027575920174596}
+  muzzle: {fileID: 0}
+  stopDistanceFromPlayer: 3
 --- !u!114 &3866114654709989312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,17 +917,3 @@ MonoBehaviour:
   backgroundRectTransform: {fileID: 0}
   textMeshPro: {fileID: 0}
   mainCam: {fileID: 0}
---- !u!114 &1709100712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9175027577546554141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8fa0d28137e70a4a9cef064b074310e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allyMaxHealth: 6
-  allyCurrentHealth: 0

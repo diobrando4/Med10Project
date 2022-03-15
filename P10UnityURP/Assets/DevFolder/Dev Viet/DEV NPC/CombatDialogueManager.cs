@@ -10,8 +10,8 @@ public class CombatDialogueManager : MonoBehaviour
     //[SerializeField]
     private GameObject player;
 
-    private AllyHealthManager ally1Health;
-    private AllyHealthManager ally2Health;
+    private Ally ally1Health;
+    private Ally ally2Health;
     private PlayerHealthManager playerHealth;
 
     private float ally1HPTracker;
@@ -49,14 +49,14 @@ public class CombatDialogueManager : MonoBehaviour
 
         if (ally1 != null)
         {
-            ally1Health = ally1.GetComponent<AllyHealthManager>();
-            ally1HPTracker = ally1Health.allyMaxHealth;
+            ally1Health = ally1.GetComponent<Ally>();
+            ally1HPTracker = ally1Health.maxHealth;
             ally1TextColor = ally1.GetComponent<Renderer>().material.color;
         }
         if (ally2 != null)
         {
-            ally2Health = ally2.GetComponent<AllyHealthManager>();
-            ally2HPTracker = ally2Health.allyMaxHealth;           
+            ally2Health = ally2.GetComponent<Ally>();
+            ally2HPTracker = ally2Health.maxHealth;           
             ally2TextColor = ally2.GetComponent<Renderer>().material.color;
         }
         if (player != null)
@@ -94,39 +94,39 @@ public class CombatDialogueManager : MonoBehaviour
     void Update()
     {
         //If Ally 1 is hurt
-        if(ally1HPTracker > ally1Health.allyCurrentHealth && ally1Health.allyCurrentHealth != 0)
+        if(ally1HPTracker > ally1Health.currHealth && ally1Health.currHealth != 0)
         {
             dialogueTrigger = false;
             if (dialogueTrigger == false)
             {
                 ShowFloatingTextAlly1(ResponseAlly1(1));
-                ally1HPTracker = ally1Health.allyCurrentHealth;
+                ally1HPTracker = ally1Health.currHealth;
                 dialogueTrigger = true;
             }
         }
         //If Ally 2 is hurt
-        if(ally2HPTracker > ally2Health.allyCurrentHealth && ally2Health.allyCurrentHealth != 0)
+        if(ally2HPTracker > ally2Health.currHealth && ally2Health.currHealth != 0)
         {
             dialogueTrigger = false;
             if (dialogueTrigger == false)
             {
                 ShowFloatingTextAlly2(ResponseAlly2(1));  
-                ally2HPTracker = ally2Health.allyCurrentHealth; 
+                ally2HPTracker = ally2Health.currHealth; 
                 dialogueTrigger = true;  
             }           
         }
         //If Ally 1 has 0 hp
-        if(ally1Health.allyCurrentHealth <= 0)
+        if(ally1Health.currHealth <= 0)
         {
             dialogueTrigger = false;
             if (dialogueTrigger == false && checkIfAlly1Downed == false)
             {
                 ShowFloatingTextAlly1(ResponseAlly1(2));
-                ally1HPTracker = ally1Health.allyCurrentHealth;
+                ally1HPTracker = ally1Health.currHealth;
                 dialogueTrigger = true;
             }
         }
-        else if (ally1Health.allyCurrentHealth > 0)
+        else if (ally1Health.currHealth > 0)
         {
             if (checkIfAlly1Downed == true)
             {
@@ -134,17 +134,17 @@ public class CombatDialogueManager : MonoBehaviour
             }
         }
         //If Ally 2 has 0 hp
-        if(ally2Health.allyCurrentHealth <= 0)
+        if(ally2Health.currHealth <= 0)
         {
             dialogueTrigger = false;
             if (dialogueTrigger == false && checkIfAlly2Downed == false)
             {
                 ShowFloatingTextAlly2(ResponseAlly2(2));  
-                ally2HPTracker = ally2Health.allyCurrentHealth; 
+                ally2HPTracker = ally2Health.currHealth; 
                 dialogueTrigger = true;  
             }           
         }
-        else if (ally2Health.allyCurrentHealth > 0)
+        else if (ally2Health.currHealth > 0)
         {
             if (checkIfAlly2Downed == true)
             {
@@ -188,7 +188,7 @@ public class CombatDialogueManager : MonoBehaviour
         // if (Input.GetKeyDown(KeyCode.Space))
         // {
         //     //dialogueTrigger = false;
-        //     //ally1Health.allyCurrentHealth -=1;
+        //     //ally1Health.currHealth -=1;
         //     playerHealth.playerCurrentHealth -= 1;
         // }
     }// Update

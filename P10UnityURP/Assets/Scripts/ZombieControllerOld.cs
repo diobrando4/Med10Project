@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI; // is needed for NavMesh
 
-public class ZombieController : MonoBehaviour
+public class ZombieControllerOld : MonoBehaviour
 {
     private Rigidbody rb;
     [SerializeField]
