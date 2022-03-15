@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowWorld : MonoBehaviour
 {
-    // this script needs to be on the object that needs to follow the camera
+    // this script needs to be on all of the objects that needs to follow the camera
 
     public Transform lookAt; // the object it should follow
     public Vector3 offset;

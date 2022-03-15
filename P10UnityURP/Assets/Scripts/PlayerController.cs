@@ -33,16 +33,7 @@ public class PlayerController : MonoBehaviour
         // camera related
         cameraRay = mainCam.ScreenPointToRay(Input.mousePosition);
         groundPlane = new Plane(Vector3.up, Vector3.zero);
-
-        if(groundPlane.Raycast(cameraRay, out rayLength))
-        {
-            pointToLook = cameraRay.GetPoint(rayLength);
-            //Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
-
-            // i have read that you should not use look at for rotation, but i cannot find another solution
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
-        }
-
+        
         // Left click @ mouse button
         if(Input.GetMouseButtonDown(0))
         {
@@ -64,5 +55,14 @@ public class PlayerController : MonoBehaviour
         // i'm not sure, but i don't think you ever use foxedDeltaTime in FixedUpdate?
         //rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
         rb.velocity = moveVelocity;
+
+        if(groundPlane.Raycast(cameraRay, out rayLength))
+        {
+            pointToLook = cameraRay.GetPoint(rayLength);
+            //Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
+
+            // i have read that you should not use look at for rotation, but i cannot find another solution
+            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+        }
     }
 }

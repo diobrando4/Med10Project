@@ -4,9 +4,38 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform playerTransform;
+    public Transform target; // the target in this case is the player transform
+    public Vector3 offset; // the offset of the camera
 
-    private Vector3 _cameraOffset;
+    [Range(0.0f, 1.0f)]
+    public float smoothSpeed = 0.125f;
+
+    void Awake()
+    {
+        // finds the player automatically
+        //target = GameObject.FindGameObjectWithTag("Player");
+
+        // version 1
+        // in case we want to change the rotation of the camera in the script
+        //transform.rotation = Quaternion.Euler(55,0,0);
+
+        // in case we want to circumvent/bypass the inspector and set the values ourselves
+        //offset = new Vector3(0,16,-12);
+    }
+
+    void LateUpdate()
+    {
+        // version 1
+        // it's very basic but it works
+        transform.position = target.position + offset;
+
+        // version 2
+        // there isn't a version 2 yet
+    }
+
+    // the old version of this script
+    /*
+    public Vector3 _cameraOffset;
 
     [Range(0.01f, 1.0f)]
     public float smoothSpeed = 0.5f; // has to be between 0-1
@@ -19,7 +48,7 @@ public class CameraFollow : MonoBehaviour
         _cameraOffset = transform.position - playerTransform.position;
     }
 
-    // LateUpdate is called after Update methods
+    // LateUpdate is called after Update methods, if it lags then use FixedUpdate instead
     void LateUpdate()
     {
         Vector3 newPos = playerTransform.position + _cameraOffset;
@@ -32,4 +61,5 @@ public class CameraFollow : MonoBehaviour
             transform.LookAt(playerTransform);
         }
     }
+    */
 }
