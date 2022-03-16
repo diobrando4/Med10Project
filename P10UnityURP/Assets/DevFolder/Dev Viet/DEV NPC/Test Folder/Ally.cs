@@ -40,7 +40,7 @@ public class Ally : BaseClassNPC
     // Update is called once per frame
     void Update()
     {
-        DestroyOnDeath(); //Inherited function
+        //DestroyOnDeath(); //Inherited function
         target = FindClosestTargetWithTag("Enemy");//Inherited function
         Move2Target(target);
         ShootNearestObject(target);//Inherited function
