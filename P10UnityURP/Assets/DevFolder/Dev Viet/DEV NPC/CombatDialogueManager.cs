@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//This script takes care of all combat related dialogues that needs to pop up above the Ally's head
+//It takes in a .txt file and filters out the relevant dialogue to each Ally, using a tag system of [0] and [1]
+
 public class CombatDialogueManager : MonoBehaviour
 {
     private GameObject ally1;
@@ -187,9 +190,12 @@ public class CombatDialogueManager : MonoBehaviour
         //FOR DEBUGGING
         // if (Input.GetKeyDown(KeyCode.Space))
         // {
-        //     //dialogueTrigger = false;
-        //     //ally1Health.currHealth -=1;
-        //     playerHealth.playerCurrentHealth -= 1;
+        //     dialogueTrigger = false;
+        //     ally1Health.DamageTaken(1);
+        //     ally2Health.DamageTaken(1);
+        //     //ally1Health.UpdateHealthBar();
+        //     //Debug.Log("Space Pressed");
+        //     playerHealth.HurtPlayer(1);
         // }
     }// Update
 

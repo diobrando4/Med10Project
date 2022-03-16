@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+
+//Child of BaseClassNPC, Ally that will help the player by shooting and later on do other tasks
 
 public class Ally : BaseClassNPC
 {
     public float stopDistanceFromPlayer;
     private GameObject player;
-    // Start is called before the first frame update
-    //private bool isFiring;
-    //[Header("Higher Fire Rate = Slower")]
-    //[Tooltip("Higher Fire Rate = Slower")]
+
+    public Image healthBarFill;
 
     void Start()
     {
+        //Initial Values can be defined for the inherited variables
         maxHealth = 6;
         currHealth = maxHealth;
         distanceB4Shoot = 10; 
@@ -31,20 +33,23 @@ public class Ally : BaseClassNPC
             Debug.Log("Missing NavMeshAgent on "+gameObject);
         }
 
-
         muzzle = gameObject.transform.GetChild(0).Find("Muzzle");
-
-    }
+        UpdateHealthBar();
+    }//Start
 
     // Update is called once per frame
     void Update()
     {
-        DestroyOnDeath();
-        target = FindClosestTargetWithTag("Enemy");
+        DestroyOnDeath(); //Inherited function
+        target = FindClosestTargetWithTag("Enemy");//Inherited function
         Move2Target(target);
-        ShootNearestObject(target);
-    }
+        ShootNearestObject(target);//Inherited function
 
+        UpdateHealthBar();
+    }//Update
+
+    //Special made function that allows Ally to move towards a target without getting too close, 
+    //but also follow the player if no valid enemy target is found
     void Move2Target(GameObject target)
     {
         if (target == null) //If there is no enemies, follow player
@@ -74,5 +79,14 @@ public class Ally : BaseClassNPC
             }
         transform.LookAt(target.transform);
         }
-    }
+    }//Move2Target
+
+    //Update the healthbar on the UI, if fill image has been assigned
+    public void UpdateHealthBar()
+    {
+        if (healthBarFill != null)
+        {
+            healthBarFill.fillAmount = (float)currHealth / (float)maxHealth; //Since we are dealing with percentages, int variables are casted into floats for this calculation.
+        }
+    }//UpdateHealthBar
 }

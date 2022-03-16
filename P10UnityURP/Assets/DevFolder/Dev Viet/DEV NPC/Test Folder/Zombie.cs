@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//Child of BaseClassNPC, Zombie enemy. A simple suicide damage dealer
+
 public class Zombie : BaseClassNPC
 {
     // what's the point of this variable?
+    //Bool checking to stop the multi-hit
     private bool hasDamaged = false;
 
     // Start is called before the first frame update
@@ -41,10 +44,11 @@ public class Zombie : BaseClassNPC
     void OnCollisionEnter(Collision other)
     {
         // we might need a better system for how to deal damage? because of different objects having shared tags, but it works for now
-
+        //Think this might be alright afterall, since Player and Ally needs different triggers for their function anyway
         if(other.gameObject.tag == "GoodGuys")
         {
             // what purpose does hasDamage serve? if the zombies didn't die after hitting their taget, then this would make them unable to do anything, after hitting their target once?
+            //Prevents the multi-hit bug. Even if the zombie is set to be destroyed on collision, there is still chance for it to do the multi-hit due to collisions
             if(hasDamaged == false)
             {
                 hasDamaged = true;
@@ -65,5 +69,5 @@ public class Zombie : BaseClassNPC
                 Destroy(gameObject);
             }
         }
-    }
+    }//OnCollisionEnter
 }

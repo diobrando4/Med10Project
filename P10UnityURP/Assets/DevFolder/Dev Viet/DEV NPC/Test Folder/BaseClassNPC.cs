@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//BaseClass for all variables and functions that a majority of multiple Actors are going to have or use in some shape or form
+//Childs can then inherit the variables and functions, and call/overload them as needed
+
 public class BaseClassNPC : MonoBehaviour
 {
-    protected NavMeshAgent agent;
-    protected GameObject target;
+    protected NavMeshAgent agent; //NavMeshAgent of GameObject
+    protected GameObject target; //GameObject that it needs to target
 
-    [SerializeField]
-    public int maxHealth;
-    public int currHealth;
-    protected bool isDead = false;
-    public int damageGiven;
+    [Header("Health related variables")]
+    public int maxHealth; //Max health of GameObject
+    public int currHealth; //Current health of GameObject
+    protected bool isDead = false; //Death check
+
+    [Header("Only Relevant for non-shooting enemies")]
+    public int damageGiven; //Damage given. Relevant to Enemies
 
     [Header("Only Relevant if it shoots")]
     public float fireRate;
@@ -27,14 +32,15 @@ public class BaseClassNPC : MonoBehaviour
     void Start()
     {
 
-    }
+    } //Start
 
     // Update is called once per frame
     void Update()
     {
 
-    }
+    } //Update
 
+    //Function to find the closest target with teh given tag
     protected GameObject FindClosestTargetWithTag(string tag)
     {
         GameObject[] candidates;
@@ -55,13 +61,16 @@ public class BaseClassNPC : MonoBehaviour
             }
         }
         return closestTarget;
-    }
 
+    }//FindClosestTarget
+
+    //Simple follow to a GameObject
     public void Follow(GameObject target2Follow)
     {
         agent.SetDestination(target2Follow.transform.position);
-    }
+    }//Follow
 
+    //Function that destroys GameObject on 0 or less HP. Can be changed to a disable
     protected void DestroyOnDeath()
     {
         if (currHealth <= 0)
@@ -69,13 +78,15 @@ public class BaseClassNPC : MonoBehaviour
             Destroy(gameObject);
             isDead = true;
         }
-    }
+    }//DestroyOnDeath
 
+    //Call function to reduce health
     public void DamageTaken(int damage)
     {
         currHealth -= damage;
-    }
+    }//DamageTaken
 
+    //Function that dictates shooting the nearest GameObject
     protected void ShootNearestObject(GameObject target2Shoot)
     {
         if (target2Shoot != null) //If there is enemies
@@ -97,5 +108,5 @@ public class BaseClassNPC : MonoBehaviour
                 shotCounter = 0;                
             }
         }
-    }
+    }//ShootNearest
 }
