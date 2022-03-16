@@ -8,22 +8,16 @@ public class AllyHealthUi : MonoBehaviour
     public Ally allyScript;
     public Image healthBarFill;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        healthBarFill.fillAmount = allyScript.currHealth / allyScript.maxHealth;
+        //healthBarFill.fillAmount = allyScript.currHealth / allyScript.maxHealth;
+        //Debug.Log(allyScript.maxHealth);
+        //Debug.Log(allyScript.currHealth);
+    }
 
-        /*
-        if (allyScript.currHealth <= 0)
-        {
-            gameObject.SetActive(false);
-        }
-        */
+    void UpdateHealthBar()
+    {
+        healthBarFill.fillAmount = allyScript.currHealth / allyScript.maxHealth;
     }
 }

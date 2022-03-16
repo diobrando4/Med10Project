@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class Zombie : BaseClassNPC
 {
+    // what's the point of this variable?
     private bool hasDamaged = false;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +44,7 @@ public class Zombie : BaseClassNPC
 
         if(other.gameObject.tag == "GoodGuys")
         {
+            // what purpose does hasDamage serve? if the zombies didn't die after hitting their taget, then this would make them unable to do anything, after hitting their target once?
             if(hasDamaged == false)
             {
                 hasDamaged = true;

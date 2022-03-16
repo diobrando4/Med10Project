@@ -11,6 +11,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     public Image healthBarFill;
 
+    // can be used for testing and maybe for invincibility frames
     public bool killable = true;
 
     // Start is called before the first frame update

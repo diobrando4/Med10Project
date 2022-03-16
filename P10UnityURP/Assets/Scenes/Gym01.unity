@@ -2999,7 +2999,7 @@ GameObject:
   - component: {fileID: 862109473}
   - component: {fileID: 862109472}
   m_Layer: 5
-  m_Name: imgFill
+  m_Name: imgFillBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3725,7 +3725,7 @@ GameObject:
   - component: {fileID: 1098550434}
   - component: {fileID: 1098550433}
   m_Layer: 5
-  m_Name: imgFill
+  m_Name: imgFillOrange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4839,7 +4839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allyScript: {fileID: 1446204372}
-  healthBarFill: {fileID: 1657395736}
+  healthBarFill: {fileID: 1098550433}
 --- !u!114 &1446204372 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6150088647173010488, guid: ec29c5457db0aee468a804d383800b1e, type: 3}
@@ -5132,7 +5132,7 @@ GameObject:
   - component: {fileID: 1657395737}
   - component: {fileID: 1657395736}
   m_Layer: 5
-  m_Name: imgFill
+  m_Name: imgFillPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
