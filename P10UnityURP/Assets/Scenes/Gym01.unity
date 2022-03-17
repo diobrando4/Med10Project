@@ -948,6 +948,7 @@ GameObject:
   - component: {fileID: 298494272}
   - component: {fileID: 298494274}
   - component: {fileID: 298494276}
+  - component: {fileID: 298494275}
   m_Layer: 0
   m_Name: PlayerCube
   m_TagString: Player
@@ -1050,6 +1051,7 @@ MonoBehaviour:
   rb: {fileID: 298494273}
   moveSpeed: 5
   theGun: {fileID: 1181214473}
+  playerHealthScript: {fileID: 0}
 --- !u!54 &298494273
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1081,7 +1083,23 @@ MonoBehaviour:
   playerMaxHealth: 5
   playerCurrentHealth: 0
   healthBarFill: {fileID: 1657395736}
-  killable: 1
+  isPlayerDead: 0
+  isPlayerKillable: 1
+--- !u!114 &298494275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298494267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a719ec93f59774c81bd37928926cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
+  allyScript: {fileID: 0}
+  playerHealthScript: {fileID: 0}
 --- !u!195 &298494276
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4821,6 +4839,39 @@ MonoBehaviour:
   target: {fileID: 298494271}
   offset: {x: 0, y: 16, z: -12}
   smoothSpeed: 0.125
+--- !u!1 &1446204370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2688752464953211875, guid: ec29c5457db0aee468a804d383800b1e, type: 3}
+  m_PrefabInstance: {fileID: 1749488880}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1446204371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446204370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a719ec93f59774c81bd37928926cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
+  allyScript: {fileID: 0}
+  playerHealthScript: {fileID: 0}
+--- !u!135 &1446204372
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446204370}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1485652611
 GameObject:
   m_ObjectHideFlags: 0
@@ -5236,6 +5287,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBlueBot
       objectReference: {fileID: 0}
+    - target: {fileID: 9175027577546554141, guid: b7b92738130074a4682c2294742c6941, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7b92738130074a4682c2294742c6941, type: 3}
 --- !u!1001 &1749488880
@@ -5315,6 +5370,39 @@ PrefabInstance:
       objectReference: {fileID: 1098550433}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec29c5457db0aee468a804d383800b1e, type: 3}
+--- !u!1 &1818606588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9175027577546554141, guid: b7b92738130074a4682c2294742c6941, type: 3}
+  m_PrefabInstance: {fileID: 1709100710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1818606589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818606588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a719ec93f59774c81bd37928926cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
+  allyScript: {fileID: 0}
+  playerHealthScript: {fileID: 0}
+--- !u!135 &1818606590
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818606588}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1830730303
 PrefabInstance:
   m_ObjectHideFlags: 0

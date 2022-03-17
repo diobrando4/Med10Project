@@ -11,8 +11,10 @@ public class PlayerHealthManager : MonoBehaviour
 
     public Image healthBarFill;
 
+    public bool isPlayerDead = false;
+
     // can be used for testing and maybe for invincibility frames
-    public bool killable = true;
+    public bool isPlayerKillable = true;
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +28,11 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if(playerCurrentHealth <= 0)
         {
-            gameObject.SetActive(false);
             //Debug.Log("YOU DIED");
+            //gameObject.SetActive(false);
+            
+            isPlayerDead = true;
+            // player movement is disabled in the player controller!
         }
     }
 
@@ -44,7 +49,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     public void HurtPlayer(float damageTaken)
     {
-        if (killable == true)
+        if (isPlayerKillable == true)
         {
             playerCurrentHealth -= damageTaken;
             healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;

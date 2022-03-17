@@ -13,6 +13,8 @@ public class Ally : BaseClassNPC
 
     public Image healthBarFill;
 
+    public bool isAllyDead = false;
+
     void Start()
     {
         //Initial Values can be defined for the inherited variables
@@ -46,6 +48,12 @@ public class Ally : BaseClassNPC
         ShootNearestObject(target);//Inherited function
 
         UpdateHealthBar();
+
+        // ally death state
+        if (currHealth <= 0)
+        {
+            isAllyDead = true;
+        }
     }//Update
 
     //Special made function that allows Ally to move towards a target without getting too close, 

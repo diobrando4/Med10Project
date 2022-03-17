@@ -17,10 +17,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveVelocity;
 
     public GunController theGun;
+    public PlayerHealthManager playerHealthScript;
     
     void Awake()
     {
         mainCam = Camera.main;
+        playerHealthScript = GetComponent<PlayerHealthManager>();
     }
 
     // Update is called once per frame
@@ -54,8 +56,14 @@ public class PlayerController : MonoBehaviour
     {
         // i'm not sure, but i don't think you ever use foxedDeltaTime in FixedUpdate?
         //rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
-        rb.velocity = moveVelocity;
-
+        
+        // when the player dies; their movement is disabled
+        if (playerHealthScript.isPlayerDead == false)
+        {
+            rb.velocity = moveVelocity;
+            // the player slides slightly when movement is disable, not sure how to prevent this!
+        }
+        
         if(groundPlane.Raycast(cameraRay, out rayLength))
         {
             pointToLook = cameraRay.GetPoint(rayLength);
