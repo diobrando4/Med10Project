@@ -40,7 +40,7 @@ public class SafeZone : MonoBehaviour
             allyBlue.GetComponent<Ally>().inCombat = true;
             allyOrange.GetComponent<Ally>().inCombat = true;
 
-            enemiesOnLevel[0].GetComponent<Zombie>().inCombat = true;
+            //enemiesOnLevel[0].GetComponent<Zombie>().inCombat = true;
 
             transform.Find("Bubble").GetComponent<MeshRenderer>().enabled = false;
 

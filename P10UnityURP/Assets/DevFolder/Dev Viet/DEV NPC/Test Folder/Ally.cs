@@ -43,6 +43,7 @@ public class Ally : BaseClassNPC
     void Update()
     {
         //DestroyOnDeath(); //Inherited function
+
         target = FindClosestTargetWithTag("Enemy");//Inherited function
         Move2Target(target);
         ShootNearestObject(target);//Inherited function
@@ -60,13 +61,13 @@ public class Ally : BaseClassNPC
     //but also follow the player if no valid enemy target is found
     void Move2Target(GameObject target)
     {
-        if (target == null) //If there is no enemies, follow player
+        if (inCombat == false) //If there is no enemies, follow player
         {
             agent.stoppingDistance = stopDistanceFromPlayer;
             agent.SetDestination(player.transform.position);
             transform.LookAt(player.transform);
         } 
-        else if (target.tag == "Enemy") //If there is enemies
+        else if (inCombat == true) //If there is enemies
         {
             float enemyDistance = Vector3.Distance(transform.position, target.transform.position); //Calc Distance between self and enemy
             float runAwayDistance = 5; //Distance before backing off
