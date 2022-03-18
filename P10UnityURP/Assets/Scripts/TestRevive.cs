@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TestRevive : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class TestRevive : MonoBehaviour
     public float reviveMax = 100;
     public float reviveCurrent = 0; // has to be reset each time reviving is aborted
     public float reviveRate = 100;
+
+    public Image reviveBarFill;
 
     // these are just for testing
     public bool isAllyDead = false;
@@ -84,13 +87,15 @@ public class TestRevive : MonoBehaviour
         // is used for when the player exits the trigger of an ally
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log(other.tag + " exit trigger");
+            //Debug.Log(other.tag + " has exit trigger");
             //transform.GetComponent<Renderer>().material.color = Color.blue;
 
             //StopCoroutine(Revive()); // can't get this one to work
             //StopAllCoroutines();
 
+            // resets revive if unsuccessfully revived
             reviveCurrent = 0;
+            reviveBarFill.fillAmount = 0;
         }
         
         // is used for when an ally exists the trigger of the player
@@ -99,7 +104,11 @@ public class TestRevive : MonoBehaviour
             //Debug.Log(other.tag + " has exit trigger");
             //transform.GetComponent<Renderer>().material.color = Color.red;
 
+            // ally controller goes here!
+
+            // resets revive if unsuccessfully revived
             reviveCurrent = 0;
+            //reviveBarFill.fillAmount = 0; // for some reason we get an error when both of these are active, maybe because of double tag?
         }
     }
 
@@ -111,10 +120,30 @@ public class TestRevive : MonoBehaviour
 
             reviveCurrent += reviveMax / reviveRate;
 
-            // fill bar here
+            if (reviveCurrent >= reviveMax)
+            {
+                //Debug.Log("ally is alive");
+                isAllyDead = false;
+
+                // we also need something for player, but i don't know how we should split it up!
+            }
+
+            // fill revive bar here
+            reviveBarFill.fillAmount = reviveCurrent / reviveMax;
+
+            /*
+            public void HurtPlayer(float damageTaken)
+            {
+                if (isPlayerKillable == true)
+                {
+                    playerCurrentHealth -= damageTaken;
+                    healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
+                }
+            }
+            */
 
             //yield return null;
-            yield break; // makes the coroutine stop; when x is no longer inside the trigger
+            yield break; // makes the coroutine stop; when x is no longer inside the trigger, so we don't have to use StopAllCoroutines
         }
     }
 }
