@@ -13,14 +13,14 @@ public class CameraFollow : MonoBehaviour
     void Awake()
     {
         // finds the player automatically
-        //target = GameObject.FindGameObjectWithTag("Player");
+        target = GameObject.FindWithTag("Player").transform;
 
         // version 1
         // in case we want to change the rotation of the camera in the script
-        //transform.rotation = Quaternion.Euler(55,0,0);
+        transform.rotation = Quaternion.Euler(55,0,0);
 
         // in case we want to circumvent/bypass the inspector and set the values ourselves
-        //offset = new Vector3(0,16,-12);
+        offset = new Vector3(0,16,-12);
     }
 
     void LateUpdate()
