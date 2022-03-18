@@ -8,15 +8,15 @@ using TMPro;
 
 public class CombatDialogueManager : MonoBehaviour
 {
+    //[SerializeField]
     private GameObject ally1;
     private GameObject ally2;
-    //[SerializeField]
     private GameObject player;
 
     private Ally ally1Health;
     private Ally ally2Health;
     private PlayerHealthManager playerHealth;
-
+    //[SerializeField]
     private float ally1HPTracker;
     private float ally2HPTracker;
     private float playerHPTracker;
@@ -27,6 +27,11 @@ public class CombatDialogueManager : MonoBehaviour
     private GameObject ally2floatText;
     private Color ally1TextColor; //main material color for the text, determined by the GameObject material
     private Color ally2TextColor;
+
+    private RectTransform ally1TextBackgroundRect;
+    private RectTransform ally2TextBackgroundRect;
+    private Vector2 ally1TextBackgroundSize;
+    private Vector2 ally2TextBackgroundSize;
 
     public TextAsset textFileCombat; //For lines said during combat
     private string[] textLinesCombat;
@@ -100,7 +105,7 @@ public class CombatDialogueManager : MonoBehaviour
         if(ally1HPTracker > ally1Health.currHealth && ally1Health.currHealth != 0)
         {
             dialogueTrigger = false;
-            if (dialogueTrigger == false)
+            if (dialogueTrigger == false && checkIfAlly1Downed == false)
             {
                 ShowFloatingTextAlly1(ResponseAlly1(1));
                 ally1HPTracker = ally1Health.currHealth;
@@ -111,7 +116,7 @@ public class CombatDialogueManager : MonoBehaviour
         if(ally2HPTracker > ally2Health.currHealth && ally2Health.currHealth != 0)
         {
             dialogueTrigger = false;
-            if (dialogueTrigger == false)
+            if (dialogueTrigger == false && checkIfAlly2Downed == false)
             {
                 ShowFloatingTextAlly2(ResponseAlly2(1));  
                 ally2HPTracker = ally2Health.currHealth; 
@@ -127,6 +132,7 @@ public class CombatDialogueManager : MonoBehaviour
                 ShowFloatingTextAlly1(ResponseAlly1(2));
                 ally1HPTracker = ally1Health.currHealth;
                 dialogueTrigger = true;
+                checkIfAlly1Downed = true;
             }
         }
         else if (ally1Health.currHealth > 0)
@@ -145,6 +151,7 @@ public class CombatDialogueManager : MonoBehaviour
                 ShowFloatingTextAlly2(ResponseAlly2(2));  
                 ally2HPTracker = ally2Health.currHealth; 
                 dialogueTrigger = true;  
+                checkIfAlly1Downed = true;
             }           
         }
         else if (ally2Health.currHealth > 0)
@@ -158,7 +165,7 @@ public class CombatDialogueManager : MonoBehaviour
         if(playerHPTracker > playerHealth.playerCurrentHealth && playerHealth.playerCurrentHealth != 0)
         {
             dialogueTrigger = false;
-            if (dialogueTrigger == false)
+            if (dialogueTrigger == false && checkIfPlayerDowned == false)
             {
                 ShowFloatingTextAlly1(ResponseAlly1(3));
                 ShowFloatingTextAlly2(ResponseAlly2(3));  
@@ -192,10 +199,10 @@ public class CombatDialogueManager : MonoBehaviour
         // {
         //     dialogueTrigger = false;
         //     ally1Health.DamageTaken(1);
-        //     ally2Health.DamageTaken(1);
+        //     //ally2Health.DamageTaken(1);
         //     //ally1Health.UpdateHealthBar();
         //     //Debug.Log("Space Pressed");
-        //     playerHealth.HurtPlayer(1);
+        //     //playerHealth.HurtPlayer(1);
         // }
     }// Update
 
@@ -268,9 +275,14 @@ public class CombatDialogueManager : MonoBehaviour
         if (ally1 != null)
         {
             ally1floatText = (GameObject)Instantiate(FloatingTextPrefab, ally1.transform.position, Quaternion.identity, ally1.transform);
-            ally1floatText.GetComponent<TMP_Text>().color = ally1TextColor;
+            ally1floatText.GetComponentInChildren<TMP_Text>().color = ally1TextColor;
             ally1floatText.transform.localPosition += offset;
-            ally1floatText.GetComponent<TMP_Text>().text = text;
+            ally1floatText.GetComponentInChildren<TMP_Text>().text = text;
+            ally1floatText.GetComponentInChildren<TMP_Text>().ForceMeshUpdate();
+            ally1TextBackgroundRect = ally1floatText.GetComponentInChildren<RectTransform>();
+            ally1TextBackgroundSize = ally1floatText.GetComponentInChildren<TMP_Text>().GetRenderedValues(true);
+            ally1TextBackgroundRect.sizeDelta = ally1TextBackgroundSize;
+            
         }
     }//ShowFloatingTextAlly1
 
@@ -281,13 +293,17 @@ public class CombatDialogueManager : MonoBehaviour
             Destroy(ally2floatText);
         }
 
-        //ally1floatText = (GameObject)Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
+        //ally2floatText = (GameObject)Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
         if (ally2 != null)
         {
             ally2floatText = (GameObject)Instantiate(FloatingTextPrefab, ally2.transform.position, Quaternion.identity, ally2.transform);
-            ally2floatText.GetComponent<TMP_Text>().color = ally2TextColor;
+            ally2floatText.GetComponentInChildren<TMP_Text>().color = ally2TextColor;
             ally2floatText.transform.localPosition += offset;
-            ally2floatText.GetComponent<TMP_Text>().text = text;
+            ally2floatText.GetComponentInChildren<TMP_Text>().text = text;
+            ally2floatText.GetComponentInChildren<TMP_Text>().ForceMeshUpdate();
+            ally2TextBackgroundRect = ally2floatText.GetComponentInChildren<RectTransform>();
+            ally2TextBackgroundSize = ally2floatText.GetComponentInChildren<TMP_Text>().GetRenderedValues(true);
+            ally2TextBackgroundRect.sizeDelta = ally2TextBackgroundSize;
         }
-    }//ShowFloatingTextAlly1
+    }//ShowFloatingTextAlly2
 }

@@ -36,7 +36,10 @@ public class Zombie : BaseClassNPC
         //Debug.Log(agent);
         if (target != null && isDead == false)
         {
+            if (inCombat == true)
+            {
             Follow(target);
+            }
         }
         //Debug.Log(target);
     }

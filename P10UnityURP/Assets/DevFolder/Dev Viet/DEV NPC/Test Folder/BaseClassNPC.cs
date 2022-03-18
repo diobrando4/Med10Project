@@ -11,6 +11,8 @@ public class BaseClassNPC : MonoBehaviour
     protected NavMeshAgent agent; //NavMeshAgent of GameObject
     protected GameObject target; //GameObject that it needs to target
 
+    public bool inCombat = false; //Bool if combat mode is active
+
     [Header("Health related variables")]
     public int maxHealth; //Max health of GameObject
     public int currHealth; //Current health of GameObject
@@ -66,7 +68,7 @@ public class BaseClassNPC : MonoBehaviour
 
     //Simple follow to a GameObject
     public void Follow(GameObject target2Follow)
-    {
+    {   
         agent.SetDestination(target2Follow.transform.position);
     }//Follow
 
@@ -89,7 +91,7 @@ public class BaseClassNPC : MonoBehaviour
     //Function that dictates shooting the nearest GameObject
     protected void ShootNearestObject(GameObject target2Shoot)
     {
-        if (target2Shoot != null) //If there is enemies
+        if (target2Shoot != null && inCombat == true) //If there is enemies
         {
             float enemyDistance = Vector3.Distance(transform.position, target2Shoot.transform.position); //Calculate distance between ally and enemy
             
