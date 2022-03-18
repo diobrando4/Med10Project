@@ -7,23 +7,20 @@ using UnityEngine;
 
 public class SafeZone : MonoBehaviour
 {
-    //[SerializeField]
-    //private GameObject player;
-    //[SerializeField]
     private GameObject allyBlue;
-    //[SerializeField]
     private GameObject allyOrange;
-    private List<GameObject> enemiesOnLevel;
-    
+    [SerializeField]
+    private List<BaseClassNPC> actors; //All obj on scene that uses the baseclass
+    //private Collider ownCollider;
+
     private bool combatTriggered = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
         allyBlue = GameObject.Find("AllyBlueBot");
         allyOrange = GameObject.Find("AllyOrangeBot");
-        enemiesOnLevel = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        actors = new List<BaseClassNPC>(Object.FindObjectsOfType<BaseClassNPC>());
     }
 
     // Update is called once per frame
@@ -31,29 +28,30 @@ public class SafeZone : MonoBehaviour
     {
         ResetCombatMode();
     }
+    //When the player leaves exits trigger and combat hasnt been triggered yet, turn all objects that uses the BaseClassNPC or a child of it, to inCombat == true
     void OnTriggerExit(Collider col)
     {
         if (col.gameObject.tag == "Player" && combatTriggered == false)
         {
             combatTriggered = true;
-            //player.GetComponent<PlayerController>().inCombat;
-            allyBlue.GetComponent<Ally>().inCombat = true;
-            allyOrange.GetComponent<Ally>().inCombat = true;
 
-            //enemiesOnLevel[0].GetComponent<Zombie>().inCombat = true;
-
-            transform.Find("Bubble").GetComponent<MeshRenderer>().enabled = false;
-
-            Debug.Log("Player Left SafeZone");
+            for (int i = 0; i < actors.Count; i++) 
+            {
+                actors[i].inCombat = true;
+            }
+            transform.GetComponent<MeshRenderer>().enabled = false; //Disable the bubble mesh
+            transform.GetComponent<Collider>().enabled = false; //Disable collider so it wont retrigger unintentionally
+            //Debug.Log("Player Left SafeZone");
         }
     }
+    //Once there is no enemies left, reset Ally back to inCombat == false
     void ResetCombatMode()
     {
-        if (combatTriggered == true && enemiesOnLevel.Count == 0)
+        if (combatTriggered == true && actors.Count == 0)
         {
-            combatTriggered = false;
+            //combatTriggered = false;
             allyBlue.GetComponent<Ally>().inCombat = false;
             allyOrange.GetComponent<Ally>().inCombat = false;
         }
-    }
+    }//ResetCombatMode
 }

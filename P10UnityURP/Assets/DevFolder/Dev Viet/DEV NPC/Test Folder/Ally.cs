@@ -45,8 +45,11 @@ public class Ally : BaseClassNPC
         //DestroyOnDeath(); //Inherited function
 
         target = FindClosestTargetWithTag("Enemy");//Inherited function
-        Move2Target(target);
-        ShootNearestObject(target);//Inherited function
+        if (isAllyDead == false) 
+        {
+            Move2Target(target);
+            ShootNearestObject(target);//Inherited function
+        }
 
         UpdateHealthBar();
 
