@@ -17,10 +17,10 @@ public class Ally : BaseClassNPC
     public Image healthBarFill; //Need to automate this later
     public bool isAllyDead = false;
 
+    //Revive Related
     private float reviveMax = 100;
     private float reviveCurrent = 0; // has to be reset each time reviving is aborted
     private float reviveRate = 100;
-
     public Image reviveBarFill; //Need to automate this later
 
     void Start()
