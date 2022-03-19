@@ -8,12 +8,20 @@ using UnityEngine.UI;
 
 public class Ally : BaseClassNPC
 {
-    public float stopDistanceFromPlayer;
+    
     private GameObject player;
+    public float stopDistanceFromPlayer;
 
-    public Image healthBarFill;
+    private Ally allyFriend;
 
+    public Image healthBarFill; //Need to automate this later
     public bool isAllyDead = false;
+
+    private float reviveMax = 100;
+    private float reviveCurrent = 0; // has to be reset each time reviving is aborted
+    private float reviveRate = 100;
+
+    public Image reviveBarFill; //Need to automate this later
 
     void Start()
     {
@@ -25,7 +33,7 @@ public class Ally : BaseClassNPC
         fireRate = 0.75f;
 
         player = GameObject.FindGameObjectWithTag("Player");
-
+        //NAvMeshAgent Check
         if (agent == null)
         {
             agent = GetComponent<NavMeshAgent>();
@@ -35,6 +43,16 @@ public class Ally : BaseClassNPC
             Debug.Log("Missing NavMeshAgent on "+gameObject);
         }
 
+        //allyFriend Check
+        if (gameObject == GameObject.Find("AllyBlueBot"))
+        {
+            allyFriend = GameObject.Find("AllyOrangeBot").GetComponent<Ally>();
+        }
+        else if (gameObject == GameObject.Find("AllyOrangeBot"))
+        {
+            allyFriend = GameObject.Find("AllyBlueBot").GetComponent<Ally>();
+        }
+        //Find where the bullet spawns from
         muzzle = gameObject.transform.GetChild(0).Find("Muzzle");
         UpdateHealthBar();
     }//Start
@@ -101,4 +119,42 @@ public class Ally : BaseClassNPC
             healthBarFill.fillAmount = (float)currHealth / (float)maxHealth; //Since we are dealing with percentages, int variables are casted into floats for this calculation.
         }
     }//UpdateHealthBar
+
+    private void OnTriggerStay(Collider col)
+    {
+        if(col.gameObject == player)
+        {
+            if(isAllyDead == true)
+            {
+                StartCoroutine(ReviveAlly());
+            }
+        }
+    }//OntriggerStay
+
+    private void OnTriggerExit(Collider col)
+    {
+        //Reset revive bar to 0 if player exits the radius
+        if(col.gameObject == player)
+        {
+            reviveCurrent = 0;
+            reviveBarFill.fillAmount = 0;
+        }
+    }
+
+    IEnumerator ReviveAlly()
+    {
+        while(reviveCurrent < reviveMax)
+        {
+            reviveCurrent += reviveMax / reviveRate;
+            if (reviveCurrent >= reviveMax)
+            {
+                isAllyDead = false;
+                currHealth = maxHealth;
+            }
+
+            // fill revive bar here
+            reviveBarFill.fillAmount = reviveCurrent / reviveMax;
+            yield break; // makes the coroutine stop; when x is no longer inside the trigger, so we don't have to use StopAllCoroutines
+        }
+    }
 }

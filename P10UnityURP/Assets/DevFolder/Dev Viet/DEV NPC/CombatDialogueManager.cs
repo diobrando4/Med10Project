@@ -151,7 +151,7 @@ public class CombatDialogueManager : MonoBehaviour
                 ShowFloatingTextAlly2(ResponseAlly2(2));  
                 ally2HPTracker = ally2Health.currHealth; 
                 dialogueTrigger = true;  
-                checkIfAlly1Downed = true;
+                checkIfAlly2Downed = true;
             }           
         }
         else if (ally2Health.currHealth > 0)
@@ -195,15 +195,15 @@ public class CombatDialogueManager : MonoBehaviour
             }
         }
         //FOR DEBUGGING
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     dialogueTrigger = false;
-        //     ally1Health.DamageTaken(1);
-        //     //ally2Health.DamageTaken(1);
-        //     //ally1Health.UpdateHealthBar();
-        //     //Debug.Log("Space Pressed");
-        //     //playerHealth.HurtPlayer(1);
-        // }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            dialogueTrigger = false;
+            ally1Health.DamageTaken(1);
+            ally2Health.DamageTaken(1);
+            //ally1Health.UpdateHealthBar();
+            //Debug.Log("Space Pressed");
+            //playerHealth.HurtPlayer(1);
+        }
     }// Update
 
     string ResponseAlly1(int response) //Return a string with the response dialogue
