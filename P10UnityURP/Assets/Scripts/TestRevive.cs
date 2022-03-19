@@ -99,7 +99,7 @@ public class TestRevive : MonoBehaviour
 
             // resets revive if unsuccessfully revived
             reviveCurrent = 0;
-            reviveBarFill.fillAmount = 0; // for some reason we get an error when both of these are active!
+            reviveBarFill.fillAmount = 0;
         }
         
         // is used for when an ally exists the trigger of the player
@@ -112,7 +112,7 @@ public class TestRevive : MonoBehaviour
 
             // resets revive if unsuccessfully revived
             reviveCurrent = 0;
-            reviveBarFill.fillAmount = 0; // for some reason we get an error when both of these are active! maybe because they all use the same bar?
+            reviveBarFill.fillAmount = 0;
         }
     }
 
