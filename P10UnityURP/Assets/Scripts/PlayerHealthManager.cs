@@ -66,7 +66,7 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if(col.gameObject.tag == "GoodGuys")
         {
-            if(isAllyDead == true)
+            if(isPlayerDead == true)
             {
                 revivingAlly = col.gameObject;
                 StartCoroutine(RevivePlayer());
