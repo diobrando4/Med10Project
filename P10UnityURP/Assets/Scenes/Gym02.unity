@@ -783,7 +783,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a719ec93f59774c81bd37928926cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allyScript: {fileID: 0}
+  allySelfScript: {fileID: 0}
+  allyFriendScript: {fileID: 0}
   playerHealthScript: {fileID: 0}
   reviveMax: 100
   reviveCurrent: 0
@@ -791,6 +792,8 @@ MonoBehaviour:
   reviveBarFill: {fileID: 0}
   isAllyDead: 0
   isPlayerDead: 0
+  isDebugStopped: 1
+  colerOriginal: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &600810664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -808,6 +811,8 @@ MonoBehaviour:
   healthBarFill: {fileID: 0}
   isPlayerDead: 0
   isPlayerKillable: 1
+  reviveBarFill: {fileID: 0}
+  revivingAlly: {fileID: 0}
 --- !u!114 &600810665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,7 +1317,7 @@ GameObject:
   - component: {fileID: 1641742628}
   - component: {fileID: 1641742627}
   m_Layer: 0
-  m_Name: AllyCube
+  m_Name: AllyCube1
   m_TagString: GoodGuys
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1388,7 +1393,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641742622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.94, y: 0, z: 0}
+  m_LocalPosition: {x: -9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1406,7 +1411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a719ec93f59774c81bd37928926cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allyScript: {fileID: 0}
+  allySelfScript: {fileID: 0}
+  allyFriendScript: {fileID: 0}
   playerHealthScript: {fileID: 0}
   reviveMax: 100
   reviveCurrent: 0
@@ -1414,6 +1420,8 @@ MonoBehaviour:
   reviveBarFill: {fileID: 89401848}
   isAllyDead: 1
   isPlayerDead: 0
+  isDebugStopped: 1
+  colerOriginal: {r: 0, g: 0, b: 0, a: 0}
 --- !u!135 &1641742628
 SphereCollider:
   m_ObjectHideFlags: 0

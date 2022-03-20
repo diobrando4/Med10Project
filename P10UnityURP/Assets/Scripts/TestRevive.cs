@@ -19,11 +19,18 @@ public class TestRevive : MonoBehaviour
     public Image reviveBarFill;
 
     // these are just for testing, at some point should be deleted or comment out
-    //public bool isAllyDead = false;
-    //public bool isPlayerDead = false;
+    public bool isAllyDead = false;
+    public bool isPlayerDead = false;
+    public bool isDebugStopped = true;
+
+    // used for changing color back and forth for dying
+    public Color colerOriginal;
 
     void Awake()
     {
+        // used for changing color back and forth for dying
+        colerOriginal = GetComponent<Renderer>().material.color;
+
         allySelfScript = GetComponent<Ally>();
         if (gameObject == GameObject.Find("AllyBlueBot"))
         {
@@ -34,21 +41,33 @@ public class TestRevive : MonoBehaviour
             allyFriendScript = GameObject.Find("AllyBlueBot").GetComponent<Ally>();
         }
         playerHealthScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealthManager>();
-        // also i'm not sure how we should do this for the player; since there are 2 allies (it works for the player since there is only 1), not sure how to solve this, maybe a list?
+        // i'm not sure how we should do this for the player; since there are 2 allies (it works for the player since there is only 1), not sure how to solve this, maybe a list?
         // or maybe the solution should be to have a player revive script and an ally revive srcript, since they'll be working differently anyway?
     }
 
-    /*
     void Update()
     {
+        // used for changing color back and forth for dying
+        if (isAllyDead == true && isDebugStopped == true)
+        {
+            Debug.Log(isAllyDead);
+            isDebugStopped = false; // to prevent it from keep running
+
+            // used for changing color back and forth for dying
+            //GetComponent<Renderer>().material.color = Color.black;
+            GetComponent<Renderer>().material.color = new Color (0,0,0);
+        }
+
+        /*
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("stop coroutine");
             //StopCoroutine(Revive()); // can't get this one to work
             StopAllCoroutines();
         }
+        */
     }
-    */
+    
 
     void OnTriggerStay(Collider other)
     {
@@ -70,23 +89,25 @@ public class TestRevive : MonoBehaviour
                 }
             }
             */
-            if (allySelfScript.isAllyDead == true)
-            //if (isAllyDead == true)
+            //if (allySelfScript.isAllyDead == true)
+            if (isAllyDead == true)
             {
                 StartCoroutine(ReviveAlly());
             }
         }
         
         // is used for when an ally enters the trigger of the player
+        /*
         if (other.gameObject.tag == "GoodGuys")
         {
             // reviving over time by staying inside the trigger
-            if (playerHealthScript.isPlayerDead == true)
-            //if (isPlayerDead == true)
+            //if (playerHealthScript.isPlayerDead == true)
+            if (isPlayerDead == true)
             {
                 //StartCoroutine(Revive());
             }
         }
+        */
     } // OnTriggerStay
 
     void OnTriggerExit(Collider other)
@@ -100,12 +121,14 @@ public class TestRevive : MonoBehaviour
         }
         
         // is used for when an ally exists the trigger of the player
+        /*
         if (other.gameObject.tag == "GoodGuys")
         {
             // resets revive if unsuccessfully revived
             reviveCurrent = 0;
             reviveBarFill.fillAmount = 0;
         }
+        */
     }
 
     IEnumerator ReviveAlly()
@@ -119,9 +142,14 @@ public class TestRevive : MonoBehaviour
             if (reviveCurrent >= reviveMax)
             {
                 //Debug.Log("ally is alive");
-                allySelfScript.isAllyDead = false;
-                //isAllyDead = false;
-                allySelfScript.currHealth = allySelfScript.maxHealth;
+
+                //allySelfScript.isAllyDead = false;
+                isAllyDead = false;
+
+                // used for changing color back and forth for dying
+                GetComponent<Renderer>().material.color = colerOriginal;
+                
+                //allySelfScript.currHealth = allySelfScript.maxHealth;
 
                 // we also need something for player, but i don't know how we should split it up!
             }
