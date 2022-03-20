@@ -33,16 +33,13 @@ public class PlayerHealthManager : MonoBehaviour
     void Update()
     {
         if(playerCurrentHealth <= 0)
-        {
-            //Debug.Log("YOU DIED");
-            //gameObject.SetActive(false);
-            
+        {          
             isPlayerDead = true;
             // player movement is disabled in the player controller!
         }
     }
 
-    [SerializeField]
+    //[SerializeField]
     //private Transform _canvasTransform;
 
     void LateUpdate()
@@ -95,6 +92,8 @@ public class PlayerHealthManager : MonoBehaviour
                 isPlayerDead = false;
                 playerCurrentHealth = playerMaxHealth;
                 revivingAlly = null;
+                reviveCurrent = 0;
+                reviveBarFill.fillAmount = 0;
             }
             // fill revive bar here
             reviveBarFill.fillAmount = reviveCurrent / reviveMax;

@@ -197,9 +197,9 @@ public class CombatDialogueManager : MonoBehaviour
         //FOR DEBUGGING
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            dialogueTrigger = false;
-            ally1Health.DamageTaken(1);
-            ally2Health.DamageTaken(1);
+            //dialogueTrigger = false;
+            //ally1Health.DamageTaken(1);
+            //ally2Health.DamageTaken(1);
             //ally1Health.UpdateHealthBar();
             //Debug.Log("Space Pressed");
             //playerHealth.HurtPlayer(1);

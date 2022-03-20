@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class Ally : BaseClassNPC
 {
-    
+    [SerializeField]
     private GameObject player;
     public float stopDistanceFromPlayer;
 
@@ -33,7 +33,7 @@ public class Ally : BaseClassNPC
         fireRate = 0.75f;
 
         player = GameObject.FindGameObjectWithTag("Player");
-        //NAvMeshAgent Check
+        //NAvMeshAgent Check & Init
         if (agent == null)
         {
             agent = GetComponent<NavMeshAgent>();
@@ -43,7 +43,7 @@ public class Ally : BaseClassNPC
             Debug.Log("Missing NavMeshAgent on "+gameObject);
         }
 
-        //allyFriend Check
+        //allyFriend Check & Init
         if (gameObject == GameObject.Find("AllyBlueBot"))
         {
             allyFriend = GameObject.Find("AllyOrangeBot").GetComponent<Ally>();
@@ -82,32 +82,48 @@ public class Ally : BaseClassNPC
     //but also follow the player if no valid enemy target is found
     void Move2Target(GameObject target)
     {
-        if (inCombat == false || target == null) //If there is no enemies, follow player
+        if (player.GetComponent<PlayerHealthManager>().isPlayerDead == false)//If the player is not dead
         {
-            agent.stoppingDistance = stopDistanceFromPlayer;
-            agent.SetDestination(player.transform.position);
-            transform.LookAt(player.transform);
-        } 
-        else if (inCombat == true && target.tag == "Enemy") //If there is enemies
-        {
-            float enemyDistance = Vector3.Distance(transform.position, target.transform.position); //Calc Distance between self and enemy
-            float runAwayDistance = 5; //Distance before backing off
-            if(enemyDistance <= runAwayDistance) //If enemies are too close, backoff
+            if (inCombat == false || target == null) //If there is no enemies, follow player
             {
-                Vector3 dir2Enemy = transform.position - target.transform.position; //Calc direction to enemy
-                Vector3 newPos = transform.position + dir2Enemy; //Add position with enemy direction
+                agent.stoppingDistance = stopDistanceFromPlayer;
+                agent.SetDestination(player.transform.position);
+                transform.LookAt(player.transform);
+            } 
+            else if (inCombat == true && target.tag == "Enemy") //If there is enemies
+            {
+                float enemyDistance = Vector3.Distance(transform.position, target.transform.position); //Calc Distance between self and enemy
+                float runAwayDistance = 5; //Distance before backing off
+                if(enemyDistance <= runAwayDistance) //If enemies are too close, backoff
+                {
+                    Vector3 dir2Enemy = transform.position - target.transform.position; //Calc direction to enemy
+                    Vector3 newPos = transform.position + dir2Enemy; //Add position with enemy direction
 
-                agent.stoppingDistance = 3f;
-                agent.SetDestination(newPos);
-                //print(gameObject + " Avoiding");
+                    agent.stoppingDistance = 3f;
+                    agent.SetDestination(newPos);
+                    //print(gameObject + " Avoiding");
+                }
+                else if (enemyDistance > runAwayDistance) //If enemies are not too close, move closer
+                {
+                    agent.stoppingDistance = 6f;
+                    agent.SetDestination(target.transform.position);
+                    //print(gameObject + " Engaging");
+                }
+            transform.LookAt(target.transform);
             }
-            else if (enemyDistance > runAwayDistance) //If enemies are not too close, move closer
+        }
+        else//If player is dead
+        {
+            agent.stoppingDistance = 1.5f;
+            agent.SetDestination(player.transform.position);
+            if(target != null)
             {
-                agent.stoppingDistance = 6f;
-                agent.SetDestination(target.transform.position);
-                //print(gameObject + " Engaging");
+               transform.LookAt(target.transform); 
             }
-        transform.LookAt(target.transform);
+            else
+            {
+                transform.LookAt(player.transform); 
+            }
         }
     }//Move2Target
 
@@ -150,8 +166,9 @@ public class Ally : BaseClassNPC
             {
                 isAllyDead = false;
                 currHealth = maxHealth;
+                reviveCurrent = 0;
+                reviveBarFill.fillAmount = 0;
             }
-
             // fill revive bar here
             reviveBarFill.fillAmount = reviveCurrent / reviveMax;
             yield break; // makes the coroutine stop; when x is no longer inside the trigger, so we don't have to use StopAllCoroutines
