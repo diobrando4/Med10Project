@@ -61,6 +61,7 @@ public class PlayerHealthManager : MonoBehaviour
         {
             playerCurrentHealth -= damageTaken;
             healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
+            FindObjectOfType<SoundManager>().SoundPlay("PlayerHurt");
         }
     }
 

@@ -1276,7 +1276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &429336994
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1955,7 +1955,9 @@ MonoBehaviour:
   playerMaxHealth: 5
   playerCurrentHealth: 0
   healthBarFill: {fileID: 635208791}
-  killable: 1
+  isPlayerDead: 0
+  isPlayerKillable: 1
+  reviveBarFill: {fileID: 0}
 --- !u!114 &645972453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1972,6 +1974,7 @@ MonoBehaviour:
   rb: {fileID: 645972454}
   moveSpeed: 5
   theGun: {fileID: 1072059457}
+  playerHealthScript: {fileID: 0}
 --- !u!54 &645972454
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3761,6 +3764,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891832527}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1915649532
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1171220516869664372, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171220516869664372, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171220516869664372, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171220516869664372, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171220516869664372, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171220516869664372, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171220516869664372, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171220516869664372, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171220516869664372, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171220516869664372, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171220516869664372, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171220516869664374, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1cb23df1ba2d0f64d94f1fc18a290625, type: 3}
 --- !u!1001 &1977793497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3961,9 +4021,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fcc5c3d28867245b41b60220221590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 645972458}
+  target: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
   smoothSpeed: 1
-  lookAtPlayer: 0
 --- !u!1 &1987065789
 GameObject:
   m_ObjectHideFlags: 0

@@ -1276,7 +1276,9 @@ MonoBehaviour:
   playerMaxHealth: 5
   playerCurrentHealth: 0
   healthBarFill: {fileID: 635208791}
-  killable: 1
+  isPlayerDead: 0
+  isPlayerKillable: 1
+  reviveBarFill: {fileID: 0}
 --- !u!114 &645972453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,6 +1295,7 @@ MonoBehaviour:
   rb: {fileID: 645972454}
   moveSpeed: 5
   theGun: {fileID: 1072059457}
+  playerHealthScript: {fileID: 0}
 --- !u!54 &645972454
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3703,9 +3706,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fcc5c3d28867245b41b60220221590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 645972458}
+  target: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
   smoothSpeed: 1
-  lookAtPlayer: 0
 --- !u!1001 &2071851760
 PrefabInstance:
   m_ObjectHideFlags: 0
