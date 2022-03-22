@@ -18,15 +18,19 @@ public class PlayerHealthManager : MonoBehaviour
     private float reviveMax = 100;
     private float reviveCurrent = 0; // has to be reset each time reviving is aborted
     private float reviveRate = 100;
-    public Image reviveBarFill; //Need to automate this later
-    [SerializeField]
+    public Image reviveBarFill;
+    //[SerializeField]
     private GameObject revivingAlly; //Need to make sure that the revive bar does not reset just because the other ally is passing through
+    
 
     // Start is called before the first frame update
     void Start()
     {
         // starting with full health
         playerCurrentHealth = playerMaxHealth;
+        reviveBarFill = gameObject.transform.Find("ReviveBarPopUp/Canvas/ReviveBar/imgBackground/imgFill").GetComponent<Image>();
+
+        gameObject.GetComponentInChildren<Image>().enabled = false; //Disable Image comp of Imgbackground on start
     }
 
     // Update is called once per frame
@@ -36,6 +40,7 @@ public class PlayerHealthManager : MonoBehaviour
         {          
             isPlayerDead = true;
             // player movement is disabled in the player controller!
+            gameObject.GetComponentInChildren<Image>().enabled = true;
         }
     }
 
@@ -90,10 +95,12 @@ public class PlayerHealthManager : MonoBehaviour
             if (reviveCurrent >= reviveMax)
             {
                 isPlayerDead = false;
+                gameObject.GetComponentInChildren<Image>().enabled = false;
                 playerCurrentHealth = playerMaxHealth;
                 revivingAlly = null;
                 reviveCurrent = 0;
                 reviveBarFill.fillAmount = 0;
+                healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
             }
             // fill revive bar here
             reviveBarFill.fillAmount = reviveCurrent / reviveMax;

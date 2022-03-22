@@ -35,17 +35,19 @@ public class PlayerController : MonoBehaviour
         // camera related
         cameraRay = mainCam.ScreenPointToRay(Input.mousePosition);
         groundPlane = new Plane(Vector3.up, Vector3.zero);
-        
-        // Left click @ mouse button
-        if(Input.GetMouseButtonDown(0))
-        {
-            theGun.isFiring = true;
-        }
-        if(Input.GetMouseButtonUp(0))
-        {
-            theGun.isFiring = false;
-        }
 
+        if (playerHealthScript.isPlayerDead == false)
+        {            
+            // Left click @ mouse button
+            if(Input.GetMouseButtonDown(0))
+            {
+                theGun.isFiring = true;
+            }
+            if(Input.GetMouseButtonUp(0))
+            {
+                theGun.isFiring = false;
+            }
+        }
         // not sure if the movement should happen in fixed or not, since rigidbody is already using the physics engine?
         //rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
         //rb.velocity = moveVelocity;
@@ -62,15 +64,15 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = moveVelocity;
             // the player slides slightly when movement is disable, not sure how to prevent this!
-        }
         
-        if(groundPlane.Raycast(cameraRay, out rayLength))
-        {
-            pointToLook = cameraRay.GetPoint(rayLength);
-            //Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
+            if(groundPlane.Raycast(cameraRay, out rayLength))
+            {
+                pointToLook = cameraRay.GetPoint(rayLength);
+                //Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
 
-            // i have read that you should not use look at for rotation, but i cannot find another solution
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+                // i have read that you should not use look at for rotation, but i cannot find another solution
+                transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+            }
         }
     }
 }

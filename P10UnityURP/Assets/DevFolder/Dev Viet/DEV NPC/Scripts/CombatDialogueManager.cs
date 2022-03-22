@@ -202,7 +202,7 @@ public class CombatDialogueManager : MonoBehaviour
             //ally2Health.DamageTaken(1);
             //ally1Health.UpdateHealthBar();
             //Debug.Log("Space Pressed");
-            //playerHealth.HurtPlayer(1);
+            playerHealth.HurtPlayer(1);
         }
     }// Update
 

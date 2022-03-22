@@ -21,7 +21,7 @@ public class Ally : BaseClassNPC
     private float reviveMax = 100;
     private float reviveCurrent = 0; // has to be reset each time reviving is aborted
     private float reviveRate = 100;
-    public Image reviveBarFill; //Need to automate this later
+    public Image reviveBarFill;
 
     void Start()
     {
@@ -31,8 +31,12 @@ public class Ally : BaseClassNPC
         distanceB4Shoot = 10; 
         projectileSpeed = 10f;
         fireRate = 0.75f;
+        muzzle = gameObject.transform.Find("AllyGun/Muzzle");
 
         player = GameObject.FindGameObjectWithTag("Player");
+        reviveBarFill = gameObject.transform.Find("ReviveBarPopUp/Canvas/ReviveBar/imgBackground/imgFill").GetComponent<Image>();
+        gameObject.GetComponentInChildren<Image>().enabled = false; //Disable Image comp of Imgbackground on start
+
         //NAvMeshAgent Check & Init
         if (agent == null)
         {
@@ -61,7 +65,7 @@ public class Ally : BaseClassNPC
     void Update()
     {
         //DestroyOnDeath(); //Inherited function
-
+        //Debug.Log(player);
         target = FindClosestTargetWithTag("Enemy");//Inherited function
         if (isAllyDead == false) 
         {
@@ -75,28 +79,29 @@ public class Ally : BaseClassNPC
         if (currHealth <= 0)
         {
             isAllyDead = true;
+            gameObject.GetComponentInChildren<Image>().enabled = true;
         }
     }//Update
 
     //Special made function that allows Ally to move towards a target without getting too close, 
     //but also follow the player if no valid enemy target is found
-    void Move2Target(GameObject target)
+    void Move2Target(GameObject m2target)
     {
         if (player.GetComponent<PlayerHealthManager>().isPlayerDead == false)//If the player is not dead
         {
-            if (inCombat == false || target == null) //If there is no enemies, follow player
+            if (inCombat == false || m2target == null) //If there is no enemies, follow player
             {
                 agent.stoppingDistance = stopDistanceFromPlayer;
                 agent.SetDestination(player.transform.position);
                 transform.LookAt(player.transform);
             } 
-            else if (inCombat == true && target.tag == "Enemy") //If there is enemies
+            else if (inCombat == true && m2target.tag == "Enemy") //If there is enemies
             {
-                float enemyDistance = Vector3.Distance(transform.position, target.transform.position); //Calc Distance between self and enemy
+                float enemyDistance = Vector3.Distance(transform.position, m2target.transform.position); //Calc Distance between self and enemy
                 float runAwayDistance = 5; //Distance before backing off
                 if(enemyDistance <= runAwayDistance) //If enemies are too close, backoff
                 {
-                    Vector3 dir2Enemy = transform.position - target.transform.position; //Calc direction to enemy
+                    Vector3 dir2Enemy = transform.position - m2target.transform.position; //Calc direction to enemy
                     Vector3 newPos = transform.position + dir2Enemy; //Add position with enemy direction
 
                     agent.stoppingDistance = 3f;
@@ -106,19 +111,19 @@ public class Ally : BaseClassNPC
                 else if (enemyDistance > runAwayDistance) //If enemies are not too close, move closer
                 {
                     agent.stoppingDistance = 6f;
-                    agent.SetDestination(target.transform.position);
+                    agent.SetDestination(m2target.transform.position);
                     //print(gameObject + " Engaging");
                 }
-            transform.LookAt(target.transform);
+            transform.LookAt(m2target.transform);
             }
         }
         else//If player is dead
         {
             agent.stoppingDistance = 1.5f;
             agent.SetDestination(player.transform.position);
-            if(target != null)
+            if(m2target != null)
             {
-               transform.LookAt(target.transform); 
+               transform.LookAt(m2target.transform); 
             }
             else
             {
@@ -165,6 +170,7 @@ public class Ally : BaseClassNPC
             if (reviveCurrent >= reviveMax)
             {
                 isAllyDead = false;
+                gameObject.GetComponentInChildren<Image>().enabled = false;
                 currHealth = maxHealth;
                 reviveCurrent = 0;
                 reviveBarFill.fillAmount = 0;
