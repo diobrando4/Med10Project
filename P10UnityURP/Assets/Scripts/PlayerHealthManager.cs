@@ -60,8 +60,8 @@ public class PlayerHealthManager : MonoBehaviour
         if (isPlayerKillable == true)
         {
             playerCurrentHealth -= damageTaken;
-            healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
             FindObjectOfType<SoundManager>().SoundPlay("PlayerHurt");
+            healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
         }
     }
 
