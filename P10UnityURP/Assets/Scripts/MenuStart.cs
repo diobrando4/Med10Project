@@ -9,6 +9,8 @@ public class MenuStart : MonoBehaviour
 {
     public LevelLoader levelLoader;
 
+    // make a function that auto loads the level loader?
+
     public void GameStart()
     {
         levelLoader.LoadNextLevel();
