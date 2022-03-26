@@ -91,8 +91,22 @@ public class Ally : BaseClassNPC
         {
             if (inCombat == false || m2target == null) //If there is no enemies, follow player
             {
-                agent.stoppingDistance = stopDistanceFromPlayer;
-                agent.SetDestination(player.transform.position);
+                float playerDistance = Vector3.Distance(transform.position, player.transform.position);
+                float spacingDistance = 3;
+                if(playerDistance <= spacingDistance) //If player is too close, back off
+                {
+                    Vector3 dir2Player = transform.position - player.transform.position;
+                    Vector3 newPos = transform.position + dir2Player;
+
+                    agent.stoppingDistance = stopDistanceFromPlayer;
+                    agent.SetDestination(newPos);
+                    //Debug.Log("Avoiding");
+                }
+                else if(playerDistance > spacingDistance) //If player is too far, get closer
+                {
+                    agent.stoppingDistance = stopDistanceFromPlayer;
+                    agent.SetDestination(player.transform.position);
+                }
                 transform.LookAt(player.transform);
             } 
             else if (inCombat == true && m2target.tag == "Enemy") //If there is enemies
@@ -114,7 +128,7 @@ public class Ally : BaseClassNPC
                     agent.SetDestination(m2target.transform.position);
                     //print(gameObject + " Engaging");
                 }
-            transform.LookAt(m2target.transform);
+                transform.LookAt(m2target.transform);
             }
         }
         else//If player is dead
@@ -141,6 +155,7 @@ public class Ally : BaseClassNPC
         }
     }//UpdateHealthBar
 
+    //Start coroutine for reviving Ally if they are downed and the Player is close enough
     private void OnTriggerStay(Collider col)
     {
         if(col.gameObject == player)
@@ -152,6 +167,7 @@ public class Ally : BaseClassNPC
         }
     }//OntriggerStay
 
+    //Reset revive timer if Player leaves the radius
     private void OnTriggerExit(Collider col)
     {
         //Reset revive bar to 0 if player exits the radius
@@ -160,8 +176,9 @@ public class Ally : BaseClassNPC
             reviveCurrent = 0;
             reviveBarFill.fillAmount = 0;
         }
-    }
+    }//OnTriggerExit
 
+    //Revive coroutine
     IEnumerator ReviveAlly()
     {
         while(reviveCurrent < reviveMax)
@@ -178,6 +195,17 @@ public class Ally : BaseClassNPC
             // fill revive bar here
             reviveBarFill.fillAmount = reviveCurrent / reviveMax;
             yield break; // makes the coroutine stop; when x is no longer inside the trigger, so we don't have to use StopAllCoroutines
+        }
+    }//ReviveAlly
+
+    private void CureDebuff()
+    {
+        if(player.GetComponent<PlayerHealthManager>().isDebuffed == true)
+        {
+            player.GetComponent<PlayerHealthManager>().isDebuffed = false;
+            debuffMan.RestorePlayerHealth();
+            debuffMan.RestorePlayerSpeed();
+        
         }
     }
 }

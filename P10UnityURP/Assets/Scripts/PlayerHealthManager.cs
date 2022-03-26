@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    public float playerMaxHealth = 3; // should probably rename this into max health
+    public float playerMaxHealth = 5; // should probably rename this into max health
     public float playerCurrentHealth;
     public Image healthBarFill;
+
+    public bool isDebuffed = false;
 
     public bool isPlayerDead = false;
 

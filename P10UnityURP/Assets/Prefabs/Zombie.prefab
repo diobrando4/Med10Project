@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 8978342255453304519}
   - component: {fileID: 8978342255453304524}
   - component: {fileID: 8978342255453304515}
-  - component: {fileID: 5123329521277414728}
+  - component: {fileID: -4844319622958717224}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -328,7 +328,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5123329521277414728
+--- !u!114 &-4844319622958717224
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -337,10 +337,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8978342255453304518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46d5ac84cffdffb458efa9b9bdb4b3eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 007fd892582b8ad45bdcfdd6016d3a22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  inCombat: 0
+  maxHealth: 5
+  currHealth: 5
   damageGiven: 1
   fireRate: 0
   projectileSpeed: 0

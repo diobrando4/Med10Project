@@ -23,7 +23,7 @@ public class DebuffManager : MonoBehaviour
     private float reducedHealth = 3;
     //State related variables
     public int selectorNum = 0;
-    public bool isActive = false;
+    //public bool isActive = false;
     public string debuffText;
 
     // Start is called before the first frame update
@@ -43,67 +43,67 @@ public class DebuffManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Selector(selectorNum);
+        //DebuffSelector(selectorNum);
     }
 
-    void Selector (int number)
+    public void DebuffSelector (int number)
     {
         switch (number)
         {
             case 0: //No Debuff
-                debuffText = "";
+                debuffText = "All Clear!";
                 break;
 
             case 1: //Slow player
                 ChangePlayerSpeed(slowedSpeed);
-                debuffText = "";
+                debuffText = "Slowed!";
                 break; 
 
             case 2: //Reversed Speed 
                 ChangePlayerSpeed(reverseSpeed);
-                debuffText = "";
+                debuffText = "Reverse!";
                 break;   
 
             case 3: //Reduced MaxHP
                 ChangePlayerHealth(reducedHealth);
-                debuffText = "";
+                debuffText = "Reduced Health!";
                 break;
 
             default:
                 Debug.Log("Not a valid number");
-                debuffText = "";
+                debuffText = "ERROR!";
                 break;
         }
     }
 
     //Change player speed, return to default if deactivated
-    void ChangePlayerSpeed(float newSpeed)
+    public void ChangePlayerSpeed(float newSpeed)
     {
-        if (isActive == true)
+        if (playerHPMan.isDebuffed == true)
         {
             playerCont.moveSpeed = newSpeed;
         }
-        else
-        {
-            playerCont.moveSpeed = playerDefaultSpeed;
-        }
+    }
+
+    public void RestorePlayerSpeed()
+    {
+        playerCont.moveSpeed = playerDefaultSpeed;
     }
 
     //Change player health to a new MaxHP value and update current health to match, return to default MaxHP values after
     //Not sure what to do if the player has already lost health before reaching this debuff
     //Not sure what to do if the player has lost health and the debuff goes away
-    void ChangePlayerHealth(float newHealth)
+    public void ChangePlayerHealth(float newHealth)
     {
-        if (isActive == true)
+        if (playerHPMan.isDebuffed)
         {
             playerHPMan.playerMaxHealth = newHealth;
             playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth;
-        }
-        else
-        {
-            playerHPMan.playerMaxHealth = playerDefaultHealth;
-            playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth; //For now, restores curr HP to max HP
-        }        
+        }      
     }
-
+    public void RestorePlayerHealth()
+    {
+        playerHPMan.playerMaxHealth = playerDefaultHealth;
+        playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth; //For now, restores curr HP to max HP
+    }
 }

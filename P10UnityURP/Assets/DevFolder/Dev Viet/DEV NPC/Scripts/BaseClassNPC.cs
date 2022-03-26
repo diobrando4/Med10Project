@@ -13,6 +13,9 @@ public class BaseClassNPC : MonoBehaviour
 
     public bool inCombat = false; //Bool if combat mode is active
 
+    //Variables related to status effect
+    protected DebuffManager debuffMan;
+
     [Header("Health related variables")]
     public int maxHealth; //Max health of GameObject
     public int currHealth; //Current health of GameObject
@@ -33,7 +36,11 @@ public class BaseClassNPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        debuffMan = GameObject.Find("DebuffManager").GetComponent<DebuffManager>();
+        if (debuffMan == null)
+        {
+            Debug.Log("DebuffManager is null");
+        }
     } //Start
 
     // Update is called once per frame
@@ -42,7 +49,7 @@ public class BaseClassNPC : MonoBehaviour
 
     } //Update
 
-    //Function to find the closest target with teh given tag
+    //Function to find the closest target with the given tag
     protected GameObject FindClosestTargetWithTag(string tag)
     {
         GameObject[] candidates;
