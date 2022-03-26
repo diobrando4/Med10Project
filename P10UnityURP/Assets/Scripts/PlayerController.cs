@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
 
     // for dash
     private bool isDashing = false;
-    private float dashSpeed = 2; // multiplies the base speed of the player, the higher this is the faster the dash is
-    private float dashTime = 0.5f; // the higher the number is; the longer the dash lasts
+    public float dashSpeed = 10; // multiplies the base speed of the player, the higher this is the faster the dash is
+    public float dashTime = 0.1f; // the higher the number is; the longer the dash lasts
     private float baseSpeed;
     
     void Awake()
