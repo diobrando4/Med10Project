@@ -66,23 +66,11 @@ public class BaseClassEnemy : BaseClassNPC
         }
     }//SuicideSingleAttack
 
-    //Debuff that reduces the Player's Max HP to a new value, until they are no longer debuffed,
-    //In which the Player's Max HP and health is restored to what it was previously.
-    // private void DebuffReducePlayerHealth(float newHealth, GameObject victim)
-    // {
-    //     if (victim.tag == "Player")
-    //     {   
-    //         if(victim.GetComponent<PlayerHealthManager>().isDebuffed == true)
-    //         {
-    //             defaultPlayerMaxHP = victim.GetComponent<PlayerHealthManager>().playerMaxHealth;
-    //             victim.GetComponent<PlayerHealthManager>().playerMaxHealth = newHealth;
-    //             victim.GetComponent<PlayerHealthManager>().playerCurrentHealth = victim.GetComponent<PlayerHealthManager>().playerMaxHealth;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         victim.GetComponent<PlayerHealthManager>().playerMaxHealth = defaultPlayerMaxHP;
-    //         victim.GetComponent<PlayerHealthManager>().playerCurrentHealth = victim.GetComponent<PlayerHealthManager>().playerMaxHealth;
-    //     }
-    // }
+    protected void DebuffAura(GameObject victim, int debuffNum)
+    {
+        if(victim.tag == "Player")
+        {
+            debuffMan.DebuffSelector(debuffNum);
+        }
+    }
 }

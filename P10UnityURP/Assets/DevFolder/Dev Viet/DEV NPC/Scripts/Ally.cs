@@ -205,7 +205,6 @@ public class Ally : BaseClassNPC
             player.GetComponent<PlayerHealthManager>().isDebuffed = false;
             debuffMan.RestorePlayerHealth();
             debuffMan.RestorePlayerSpeed();
-        
         }
     }
 }

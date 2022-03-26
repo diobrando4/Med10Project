@@ -95,7 +95,7 @@ public class DebuffManager : MonoBehaviour
     //Not sure what to do if the player has lost health and the debuff goes away
     public void ChangePlayerHealth(float newHealth)
     {
-        if (playerHPMan.isDebuffed)
+        if (playerHPMan.isDebuffed == true)
         {
             playerHPMan.playerMaxHealth = newHealth;
             playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth;
