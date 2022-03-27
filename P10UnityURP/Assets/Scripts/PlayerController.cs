@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
+    //[SerializeField]
     private Camera mainCam;
     private Plane groundPlane;
     private Ray cameraRay;
@@ -21,15 +21,26 @@ public class PlayerController : MonoBehaviour
 
     // for dash
     private bool isDashing = false;
-    public float dashSpeed = 10; // multiplies the base speed of the player, the higher this is the faster the dash is
-    public float dashTime = 0.1f; // the higher the number is; the longer the dash lasts
     private float baseSpeed;
+    public float dashSpeed = 10f; // multiplies the base speed of the player, the higher this is the faster the dash is
+    public float dashTime = 0.1f; // the higher the number is; the longer the dash lasts
+    // maybe dashCharges would be a better name than dashUses?
+    public int dashUses = 1; // how many times the player can dash before it needs to be reset
+    private int dashUsesMax;
+    public float cooldown = 3f;
+    [SerializeField]
+    private float cooldownTimer;
+    
     
     void Awake()
     {
         mainCam = Camera.main;
         playerHealthScript = GetComponent<PlayerHealthManager>();
+        
+        // for dashing
         baseSpeed = moveSpeed;
+        dashUsesMax = dashUses;
+        cooldownTimer = cooldown;
     }
 
     // Update is called once per frame
@@ -42,6 +53,20 @@ public class PlayerController : MonoBehaviour
         // camera related
         cameraRay = mainCam.ScreenPointToRay(Input.mousePosition);
         groundPlane = new Plane(Vector3.up, Vector3.zero);
+
+        // not sure if we should put this inside player death or not, it depends if we want the cooldown to keep running while the player is dead or not
+        if (dashUses < dashUsesMax)
+        {
+            if (cooldownTimer > 0)
+            {
+                cooldownTimer -= Time.deltaTime;
+            }
+            else
+            {
+                dashUses += 1;
+                cooldownTimer = cooldown;
+            }
+        }
 
         if (playerHealthScript.isPlayerDead == false)
         {            
@@ -58,10 +83,16 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftShift))
             //if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (!isDashing)
+                if (dashUses > 0)
                 {
-                    StartCoroutine(Dash());
+                    dashUses -= 1;
+
+                    if (!isDashing)
+                    {
+                        StartCoroutine(Dash());
+                    }
                 }
+                
             }
         }
 
@@ -92,7 +123,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    
     IEnumerator Dash()
     {
         isDashing = true;
@@ -116,16 +147,19 @@ public class PlayerController : MonoBehaviour
     IEnumerator Dash()
     {
         isDashing = true;
-        Debug.Log("isDashing: " + isDashing);
         playerHealthScript.isPlayerKillable = false;
-        Debug.Log("isPlayerKillable: " + playerHealthScript.isPlayerKillable);
         
+        float startTime = Time.time;
 
+        while (Time.time < startTime + dashTime)
+        {
+            // moveInput * dashSpeed * Time.deltaTime
 
+            isDashing = false;
+            playerHealthScript.isPlayerKillable = true;
 
-        //isDashing = false;
-        //playerHealthScript.isPlayerKillable = true;
-        yield return null;
+            yield return null;
+        }
     }
     */
 }

@@ -4970,7 +4970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9175027577546554138, guid: b7b92738130074a4682c2294742c6941, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 9175027577546554138, guid: b7b92738130074a4682c2294742c6941, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5051,7 +5051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688752464953211882, guid: ec29c5457db0aee468a804d383800b1e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2688752464953211882, guid: ec29c5457db0aee468a804d383800b1e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5677,8 +5677,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2065505483842465992, guid: 52bf213bb52f1f947a1703b53fde1627, type: 3}
-      propertyPath: dashSpeed
-      value: 10
+      propertyPath: cooldown
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2065505483842465994, guid: 52bf213bb52f1f947a1703b53fde1627, type: 3}
       propertyPath: healthBarFill
