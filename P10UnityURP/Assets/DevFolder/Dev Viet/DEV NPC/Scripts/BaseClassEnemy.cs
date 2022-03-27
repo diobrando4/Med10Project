@@ -58,7 +58,7 @@ public class BaseClassEnemy : BaseClassNPC
             else if(victim.tag == "Player")
             {
                 victim.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
-                victim.GetComponent<PlayerHealthManager>().isDebuffed = true;
+                //victim.GetComponent<PlayerHealthManager>().isDebuffed = true;
                 debuffMan.DebuffSelector(debuffNum);
                 hasDamaged = true;
                 Destroy(gameObject);

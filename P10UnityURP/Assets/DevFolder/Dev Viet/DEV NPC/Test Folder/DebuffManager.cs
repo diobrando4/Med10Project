@@ -70,8 +70,8 @@ public class DebuffManager : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("Not a valid number");
-                debuffText = "ERROR!";
+                Debug.Log("Not a valid int");
+                debuffText = "ERROR! no seriously";
                 break;
         }
     }
@@ -79,14 +79,13 @@ public class DebuffManager : MonoBehaviour
     //Change player speed, return to default if deactivated
     public void ChangePlayerSpeed(float newSpeed)
     {
-        if (playerHPMan.isDebuffed == true)
-        {
-            playerCont.moveSpeed = newSpeed;
-        }
+        playerHPMan.isDebuffed = true;
+        playerCont.moveSpeed = newSpeed;
     }
-
+    //Revert player speed to default
     public void RestorePlayerSpeed()
     {
+        playerHPMan.isDebuffed = false;
         playerCont.moveSpeed = playerDefaultSpeed;
     }
 
@@ -95,14 +94,14 @@ public class DebuffManager : MonoBehaviour
     //Not sure what to do if the player has lost health and the debuff goes away
     public void ChangePlayerHealth(float newHealth)
     {
-        if (playerHPMan.isDebuffed == true)
-        {
-            playerHPMan.playerMaxHealth = newHealth;
-            playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth;
-        }      
+        playerHPMan.isDebuffed = true;
+        playerHPMan.playerMaxHealth = newHealth;
+        playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth;   
     }
+    //Revert player MaxHP to default
     public void RestorePlayerHealth()
     {
+        playerHPMan.isDebuffed = false;
         playerHPMan.playerMaxHealth = playerDefaultHealth;
         playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth; //For now, restores curr HP to max HP
     }

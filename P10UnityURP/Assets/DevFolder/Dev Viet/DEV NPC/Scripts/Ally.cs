@@ -198,11 +198,12 @@ public class Ally : BaseClassNPC
         }
     }//ReviveAlly
 
+    //Restores Player speed and MaxHP default values
     private void CureDebuff()
     {
         if(player.GetComponent<PlayerHealthManager>().isDebuffed == true)
         {
-            player.GetComponent<PlayerHealthManager>().isDebuffed = false;
+            //player.GetComponent<PlayerHealthManager>().isDebuffed = false;
             debuffMan.RestorePlayerHealth();
             debuffMan.RestorePlayerSpeed();
         }
