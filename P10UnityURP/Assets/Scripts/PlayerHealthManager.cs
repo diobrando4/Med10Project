@@ -42,7 +42,6 @@ public class PlayerHealthManager : MonoBehaviour
         {          
             isPlayerDead = true;
             // player movement is disabled in the player controller!
-            gameObject.GetComponentInChildren<Image>().enabled = true;
         }
     }
 
@@ -74,6 +73,7 @@ public class PlayerHealthManager : MonoBehaviour
             if(isPlayerDead == true)
             {
                 revivingAlly = col.gameObject;
+                gameObject.GetComponentInChildren<Image>().enabled = true;
                 StartCoroutine(RevivePlayer());
             }
         }
@@ -86,6 +86,7 @@ public class PlayerHealthManager : MonoBehaviour
         {
             reviveCurrent = 0;
             reviveBarFill.fillAmount = 0;
+            gameObject.GetComponentInChildren<Image>().enabled = false;
             revivingAlly = null;
         }
     }
@@ -98,11 +99,11 @@ public class PlayerHealthManager : MonoBehaviour
             if (reviveCurrent >= reviveMax)
             {
                 isPlayerDead = false;
-                gameObject.GetComponentInChildren<Image>().enabled = false;
                 playerCurrentHealth = playerMaxHealth;
                 revivingAlly = null;
                 reviveCurrent = 0;
                 reviveBarFill.fillAmount = 0;
+                gameObject.GetComponentInChildren<Image>().enabled = false;
                 healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
             }
             // fill revive bar here

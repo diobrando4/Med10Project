@@ -11,7 +11,7 @@ public class BaseClassNPC : MonoBehaviour
     protected NavMeshAgent agent; //NavMeshAgent of GameObject
     protected GameObject target; //GameObject that it needs to target
 
-    public bool inCombat = false; //Bool if combat mode is active
+    public bool inCombat = true; //Bool if combat mode is active
 
     //Variables related to status effect
     protected DebuffManager debuffMan;
