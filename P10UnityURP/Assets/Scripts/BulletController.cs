@@ -42,12 +42,13 @@ public class BulletController : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
+            // need to use TryGetComponent for this one!
             other.gameObject.GetComponent<Zombie>().DamageTaken(damageGiven);
 
             // destroys the bullet when hitting the enemy
             Destroy(gameObject);
         }
-        if(other.gameObject.tag == "Wall")
+        if(other.gameObject.tag == "Wall" || other.gameObject.tag == "Untagged")
         {
             //Debug.Log("a bullet hit a wall");
             // destroys the bullet when hitting a wall

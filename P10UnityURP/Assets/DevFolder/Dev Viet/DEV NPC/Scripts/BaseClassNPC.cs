@@ -36,7 +36,12 @@ public class BaseClassNPC : MonoBehaviour
 
     void Awake()
     {
-        debuffMan = GameObject.Find("DebuffManager").GetComponent<DebuffManager>();
+        //so we don't get a bunch of errors when it's missing
+        if (debuffMan != null)
+        {
+            debuffMan = GameObject.Find("DebuffManager").GetComponent<DebuffManager>();
+        }
+        //runs debug if it's missing
         if (debuffMan == null)
         {
             Debug.Log("DebuffManager is null");
