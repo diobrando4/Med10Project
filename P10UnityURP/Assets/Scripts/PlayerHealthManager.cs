@@ -9,7 +9,9 @@ public class PlayerHealthManager : MonoBehaviour
     public float playerCurrentHealth;
     public Image healthBarFill;
 
+    //Debuff related
     public bool isDebuffed = false;
+    public bool isDebuffable = true;
 
     public bool isPlayerDead = false;
 
@@ -91,7 +93,7 @@ public class PlayerHealthManager : MonoBehaviour
         }
     }
 
-    IEnumerator RevivePlayer()
+    private IEnumerator RevivePlayer()
     {
         while(reviveCurrent < reviveMax)
         {
@@ -111,4 +113,17 @@ public class PlayerHealthManager : MonoBehaviour
             yield break; // makes the coroutine stop; when x is no longer inside the trigger, so we don't have to use StopAllCoroutines
         }
     }
+
+    //Coroutine that will make the player immune to further debuffs once an ally has Dispelled previous debuffs
+    public IEnumerator DebuffImmunity()
+    {
+        if (isDebuffable == false)
+        {
+            Debug.Log("Player Immune!");
+            yield return new WaitForSeconds(3);
+            isDebuffable = true;
+            Debug.Log("Player Not Immune!");
+        }
+        yield break;
+    }//Debuffimmunity
 }

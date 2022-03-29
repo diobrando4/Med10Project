@@ -23,6 +23,8 @@ public class Ally : BaseClassNPC
     private float reviveRate = 100;
     public Image reviveBarFill;
 
+    private bool canCureDebuff = true;
+
     void Start()
     {
         //Initial Values can be defined for the inherited variables
@@ -36,7 +38,7 @@ public class Ally : BaseClassNPC
         player = GameObject.FindGameObjectWithTag("Player");
         reviveBarFill = gameObject.transform.Find("ReviveBarPopUp/Canvas/ReviveBar/imgBackground/imgFill").GetComponent<Image>();
         gameObject.GetComponentInChildren<Image>().enabled = false; //Disable Image comp of Imgbackground on start
-
+        
         //NAvMeshAgent Check & Init
         if (agent == null)
         {
@@ -71,6 +73,11 @@ public class Ally : BaseClassNPC
         {
             Move2Target(target);
             ShootNearestObject(target);//Inherited function
+
+            if (player.GetComponent<PlayerHealthManager>().isDebuffed == true && canCureDebuff == true)
+            {
+                StartCoroutine(Dispel());
+            }
         }
 
         UpdateHealthBar();
@@ -85,7 +92,7 @@ public class Ally : BaseClassNPC
 
     //Special made function that allows Ally to move towards a target without getting too close, 
     //but also follow the player if no valid enemy target is found
-    void Move2Target(GameObject m2target)
+    private void Move2Target(GameObject m2target)
     {
         if (player.GetComponent<PlayerHealthManager>().isPlayerDead == false)//If the player is not dead
         {
@@ -179,7 +186,7 @@ public class Ally : BaseClassNPC
     }//OnTriggerExit
 
     //Revive coroutine
-    IEnumerator ReviveAlly()
+    private IEnumerator ReviveAlly()
     {
         while(reviveCurrent < reviveMax)
         {
@@ -198,14 +205,19 @@ public class Ally : BaseClassNPC
         }
     }//ReviveAlly
 
-    //Restores Player speed and MaxHP default values
-    private void CureDebuff()
+    //Restores Player speed and MaxHP default values, then enter a cooldown before it can be reapplied
+    private IEnumerator Dispel()
     {
-        if(player.GetComponent<PlayerHealthManager>().isDebuffed == true)
-        {
-            //player.GetComponent<PlayerHealthManager>().isDebuffed = false;
-            debuffMan.RestorePlayerHealth();
-            debuffMan.RestorePlayerSpeed();
-        }
-    }
+        debuffMan.RestorePlayerHealth();
+        debuffMan.RestorePlayerSpeed();
+        player.GetComponent<PlayerHealthManager>().isDebuffable = false;
+        canCureDebuff = false;
+        StartCoroutine(player.GetComponent<PlayerHealthManager>().DebuffImmunity());
+        Debug.Log(gameObject+" Dispel Cooldown Start");
+        yield return new WaitForSeconds(5);
+
+        canCureDebuff = true;
+        Debug.Log(gameObject+" Dispel Cooldown End");
+        yield break;
+    }//Dispel
 }

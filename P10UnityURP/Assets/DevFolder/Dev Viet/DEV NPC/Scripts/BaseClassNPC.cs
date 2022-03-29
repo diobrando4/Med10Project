@@ -14,6 +14,7 @@ public class BaseClassNPC : MonoBehaviour
     public bool inCombat = true; //Bool if combat mode is active
 
     //Variables related to status effect
+    [SerializeField]
     protected DebuffManager debuffMan;
 
     [Header("Health related variables")]
@@ -33,21 +34,14 @@ public class BaseClassNPC : MonoBehaviour
     [SerializeField]
     protected Transform muzzle;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         debuffMan = GameObject.Find("DebuffManager").GetComponent<DebuffManager>();
         if (debuffMan == null)
         {
             Debug.Log("DebuffManager is null");
         }
-    } //Start
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    } //Update
+    }
 
     //Function to find the closest target with the given tag
     protected GameObject FindClosestTargetWithTag(string tag)
