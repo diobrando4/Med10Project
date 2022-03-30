@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 //Child of BaseClassEnemy, Zombie enemy. A simple suicide damage dealer
 
-public class Zombie : BaseClassEnemy
+public class EnemyZombie : BaseClassEnemy
 {
     // Start is called before the first frame update
     void Start()
