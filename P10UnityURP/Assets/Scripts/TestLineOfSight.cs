@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestSight : MonoBehaviour
+public class TestLineOfSight : MonoBehaviour
 {
     private RaycastHit rayHit;
     float attackDistance = 10f;

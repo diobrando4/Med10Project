@@ -763,7 +763,6 @@ GameObject:
   - component: {fileID: 600810666}
   - component: {fileID: 600810665}
   - component: {fileID: 600810664}
-  - component: {fileID: 600810662}
   m_Layer: 0
   m_Name: PlayerCube
   m_TagString: Player
@@ -771,29 +770,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &600810662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 600810661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69a719ec93f59774c81bd37928926cdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allySelfScript: {fileID: 0}
-  allyFriendScript: {fileID: 0}
-  playerHealthScript: {fileID: 0}
-  reviveMax: 100
-  reviveCurrent: 0
-  reviveRate: 100
-  reviveBarFill: {fileID: 0}
-  isAllyDead: 0
-  isPlayerDead: 0
-  isDebugStopped: 1
-  colerOriginal: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &600810664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,10 +785,11 @@ MonoBehaviour:
   playerMaxHealth: 5
   playerCurrentHealth: 0
   healthBarFill: {fileID: 0}
+  isDebuffed: 0
+  isDebuffable: 1
   isPlayerDead: 0
   isPlayerKillable: 1
   reviveBarFill: {fileID: 0}
-  revivingAlly: {fileID: 0}
 --- !u!114 &600810665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -825,11 +802,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc464d0a969de96489fbaee3aea85949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCam: {fileID: 0}
   rb: {fileID: 600810666}
   moveSpeed: 5
   theGun: {fileID: 414749397}
   playerHealthScript: {fileID: 0}
+  dashSpeed: 10
+  dashTime: 0.1
+  dashUses: 1
+  cooldown: 3
+  cooldownTimer: 0
 --- !u!54 &600810666
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1072,7 +1053,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &991433314
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1315,7 +1296,6 @@ GameObject:
   - component: {fileID: 1641742624}
   - component: {fileID: 1641742623}
   - component: {fileID: 1641742628}
-  - component: {fileID: 1641742627}
   m_Layer: 0
   m_Name: AllyCube1
   m_TagString: GoodGuys
@@ -1399,29 +1379,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1641742627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1641742622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69a719ec93f59774c81bd37928926cdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allySelfScript: {fileID: 0}
-  allyFriendScript: {fileID: 0}
-  playerHealthScript: {fileID: 0}
-  reviveMax: 100
-  reviveCurrent: 0
-  reviveRate: 100
-  reviveBarFill: {fileID: 89401848}
-  isAllyDead: 1
-  isPlayerDead: 0
-  isDebugStopped: 1
-  colerOriginal: {r: 0, g: 0, b: 0, a: 0}
 --- !u!135 &1641742628
 SphereCollider:
   m_ObjectHideFlags: 0
