@@ -41,7 +41,16 @@ public class BulletController : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             // need to use TryGetComponent for this one!
-            other.gameObject.GetComponent<EnemyZombie>().DamageTaken(damageGiven);
+            //other.gameObject.GetComponent<EnemyZombie>().DamageTaken(damageGiven);
+
+            if(other.transform.TryGetComponent<EnemyZombie>(out EnemyZombie _enemyZombie))
+            {
+                _enemyZombie.DamageTaken(damageGiven);
+            }
+            if(other.transform.TryGetComponent<EnemyShooter>(out EnemyShooter _enemyShooter))
+            {
+                _enemyShooter.DamageTaken(damageGiven);
+            }
 
             // destroys the bullet when hitting the enemy
             Destroy(gameObject);
@@ -51,6 +60,7 @@ public class BulletController : MonoBehaviour
             // destroys the bullet when hitting a wall
             Destroy(gameObject);
         }
+        // friendly fire
         if(other.gameObject.tag == "GoodGuys" || other.gameObject.tag == "Player")
         {
             Destroy(gameObject);

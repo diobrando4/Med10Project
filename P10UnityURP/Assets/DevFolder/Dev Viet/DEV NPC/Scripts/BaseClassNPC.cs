@@ -36,7 +36,6 @@ public class BaseClassNPC : MonoBehaviour
 
     // for raycast
     private RaycastHit rayHit;
-    private float attackDistance = 10f; // replace this with distanceB4Shoot
     Vector3 rayOffset; // we need this, otherwise the raycast might hit unwanted objects
 
     void Awake()

@@ -33,6 +33,7 @@ public class EnemyShooter : BaseClassEnemy
             if (inCombat == true)
             {
             Follow(target);
+            ShootNearestObject(target);
             }
         }
     }
