@@ -297,6 +297,7 @@ GameObject:
   - component: {fileID: 2065505483842465992}
   - component: {fileID: 2065505483842465994}
   - component: {fileID: 2065505483842465996}
+  - component: {fileID: 8319435718228594390}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -412,11 +413,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc464d0a969de96489fbaee3aea85949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCam: {fileID: 0}
   rb: {fileID: 2065505483842465993}
   moveSpeed: 5
   theGun: {fileID: 2065505482962927233}
   playerHealthScript: {fileID: 0}
+  dashSpeed: 10
+  dashTime: 0.1
+  dashUses: 1
+  cooldown: 3
+  cooldownTimer: 0
 --- !u!114 &2065505483842465994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +437,8 @@ MonoBehaviour:
   playerMaxHealth: 5
   playerCurrentHealth: 0
   healthBarFill: {fileID: 0}
+  isDebuffed: 0
+  isDebuffable: 1
   isPlayerDead: 0
   isPlayerKillable: 1
   reviveBarFill: {fileID: 0}
@@ -457,6 +464,19 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &8319435718228594390
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065505483842465971}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2065505483924516753
 GameObject:
   m_ObjectHideFlags: 0
