@@ -34,8 +34,15 @@ public class BaseClassNPC : MonoBehaviour
     [SerializeField]
     protected Transform muzzle;
 
+    // for raycast
+    private RaycastHit rayHit;
+    private float attackDistance = 10f; // replace this with distanceB4Shoot
+    Vector3 rayOffset; // we need this, otherwise the raycast might hit unwanted objects
+
     void Awake()
     {
+        rayOffset = new Vector3(0,-0.2f,0);
+
         //so we don't get a bunch of errors when it's missing
         if (debuffMan != null)
         {
@@ -97,11 +104,56 @@ public class BaseClassNPC : MonoBehaviour
     //Function that dictates shooting the nearest GameObject
     protected void ShootNearestObject(GameObject target2Shoot)
     {
-        if (target2Shoot != null && inCombat == true) //If there is enemies
+        // replace "attackDistance" (from test script) with "distanceB4Shoot"
+        
+        /*
+        if (Physics.Raycast(transform.position + rayOffset, transform.forward, out rayHit, distanceB4Shoot))
         {
-            float enemyDistance = Vector3.Distance(transform.position, target2Shoot.transform.position); //Calculate distance between ally and enemy
+            Debug.DrawLine(transform.position + rayOffset, rayHit.point, Color.red);
+
             
-            if(enemyDistance < distanceB4Shoot)
+            if (rayHit.transform.gameObject.CompareTag("Enemy"))
+            {
+                // the attack happens here!
+            }
+            
+        }
+        else
+        {
+            Debug.DrawRay(transform.position + rayOffset, transform.forward * distanceB4Shoot, Color.green);
+        }
+        */
+
+        if (target2Shoot != null ) //If there are enemies
+        {
+            float targetDistance = Vector3.Distance(transform.position, target2Shoot.transform.position); //Calculate distance between ally and enemy
+            
+            if (Physics.Raycast(transform.position + rayOffset, transform.forward, out rayHit, distanceB4Shoot) && targetDistance < distanceB4Shoot)
+            //if(targetDistance < distanceB4Shoot)
+            {
+                Debug.DrawLine(transform.position + rayOffset, rayHit.point, Color.red);
+
+                shotCounter -= Time.deltaTime;
+                if(shotCounter <= 0)
+                {
+                    shotCounter = fireRate;
+                    BulletController newNPCBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
+                    newNPCBullet.speed = projectileSpeed;                
+                }
+            }
+            else
+            {
+                Debug.DrawRay(transform.position + rayOffset, transform.forward * distanceB4Shoot, Color.green);
+                shotCounter = 0;
+            }
+        }
+
+        /*
+        if (target2Shoot != null && inCombat == true) //If there are enemies
+        {
+            float targetDistance = Vector3.Distance(transform.position, target2Shoot.transform.position); //Calculate distance between ally and enemy
+            
+            if(targetDistance < distanceB4Shoot)
             {
                 shotCounter -= Time.deltaTime;
                 if(shotCounter <= 0)
@@ -113,8 +165,10 @@ public class BaseClassNPC : MonoBehaviour
             }
             else
             {
-                shotCounter = 0;                
+                shotCounter = 0;
             }
         }
+        */
+        
     }//ShootNearest
 }
