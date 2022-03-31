@@ -33,9 +33,21 @@ public class EnemyBulletController : MonoBehaviour
         if(other.gameObject.tag == "GoodGuys" || other.gameObject.tag == "Player")
         {
             // need to use TryGetComponent for this one!
-            //other.gameObject.GetComponent<EnemyZombie>().DamageTaken(damageGiven);
+            //other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
 
-            other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
+            // so enemy can deal damage to player
+            if(other.transform.TryGetComponent<PlayerHealthManager>(out PlayerHealthManager _playerHealthManager))
+            {
+                _playerHealthManager.HurtPlayer(damageGiven);
+            }
+
+            //other.gameObject.GetComponent<Ally>().DamageTaken(damageGiven);
+
+            // so enemy can deal damage to ally
+            if(other.transform.TryGetComponent<Ally>(out Ally _ally))
+            {
+                _ally.DamageTaken(damageGiven);
+            }
 
             // destroys the bullet when hitting the enemy
             Destroy(gameObject);

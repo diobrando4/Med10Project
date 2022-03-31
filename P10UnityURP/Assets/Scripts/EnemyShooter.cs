@@ -11,6 +11,10 @@ public class EnemyShooter : BaseClassEnemy
         maxHealth = 5;
         currHealth = maxHealth;
         damageGiven = 1;
+        distanceB4Shoot = 10; 
+        projectileSpeed = 10f;
+        fireRate = 0.75f;
+        muzzle = gameObject.transform.Find("EnemyGun/Muzzle");
         
         if (agent == null)
         {
@@ -37,6 +41,4 @@ public class EnemyShooter : BaseClassEnemy
             }
         }
     }
-
-    
 }

@@ -43,10 +43,12 @@ public class BulletController : MonoBehaviour
             // need to use TryGetComponent for this one!
             //other.gameObject.GetComponent<EnemyZombie>().DamageTaken(damageGiven);
 
+            // so player/ally can deal damage to zombies
             if(other.transform.TryGetComponent<EnemyZombie>(out EnemyZombie _enemyZombie))
             {
                 _enemyZombie.DamageTaken(damageGiven);
             }
+            // so player/ally can deal damage to shooters
             if(other.transform.TryGetComponent<EnemyShooter>(out EnemyShooter _enemyShooter))
             {
                 _enemyShooter.DamageTaken(damageGiven);
