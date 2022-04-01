@@ -17,12 +17,21 @@ public class DebugLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Physics.Raycast(start.position+offset, start.TransformDirection(Vector3.forward),out hit, Mathf.Infinity);
-        Debug.DrawRay(start.position+offset, start.TransformDirection(Vector3.forward)*100,Color.yellow);
-        if (hit.transform != null)
+        Physics.Raycast(start.position+offset, start.TransformDirection(Vector3.forward),out hit, Mathf.Infinity); //Raycast
+        Debug.DrawRay(start.position+offset, start.TransformDirection(Vector3.forward)*100,Color.yellow);//Debug raycast line
+        if (hit.transform != null) //As long as there is something intersecting the raycast
         {
-            Debug.Log(hit.transform.name);
+            if(hit.transform.tag == "Player") //If it hits a gameobject with the tag "Player"
+            {
+                if(hit.transform.Find("Tag").tag == "GoodGuys")//Find the child called "Tag" and get its tag, then if it is "GoodGuys"
+                {
+                    Debug.Log(hit.transform.Find("Tag").tag); //Do something
+                }
+            }
+            else
+            {
+                Debug.Log(hit.transform.tag);
+            }
         }
-        
     }
 }
