@@ -12,60 +12,72 @@ public class BulletController : MonoBehaviour
     public float speed;
     public float lifeTime = 3.0f; // in seconds?
     public int damageGiven = 1;
-    public Rigidbody rb;
+    protected Rigidbody rb;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        // rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // this needs to use rigidbody instead!
-        //transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        // // this needs to use rigidbody instead!
+        // //transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
-        rb.velocity = transform.forward * speed;
+        // rb.velocity = transform.forward * speed;
 
-        // destroys the bullet after having reached the end of its life time
-        lifeTime -= Time.deltaTime;
-        if(lifeTime <= 0)
-        {
-            Destroy(gameObject);
-        }
+        // // destroys the bullet after having reached the end of its life time
+        // lifeTime -= Time.deltaTime;
+        // if(lifeTime <= 0)
+        // {
+        //     Destroy(gameObject);
+        // }
     }
 
-    // for when bullets hit something (seems like you need rigidbody to make this work)
-    void OnCollisionEnter(Collision other)
+    // // for when bullets hit something (seems like you need rigidbody to make this work)
+    // void OnCollisionEnter(Collision other)
+    // {
+    //     if(other.gameObject.tag == "Enemy")
+    //     {
+    //         // need to use TryGetComponent for this one!
+    //         //other.gameObject.GetComponent<EnemyZombie>().DamageTaken(damageGiven);
+
+    //         // so player/ally can deal damage to zombies
+    //         if(other.transform.TryGetComponent<EnemyZombie>(out EnemyZombie _enemyZombie))
+    //         {
+    //             _enemyZombie.DamageTaken(damageGiven);
+    //         }
+    //         // so player/ally can deal damage to shooters
+    //         if(other.transform.TryGetComponent<EnemyShooter>(out EnemyShooter _enemyShooter))
+    //         {
+    //             _enemyShooter.DamageTaken(damageGiven);
+    //         }
+
+    //         // destroys the bullet when hitting the enemy
+    //         Destroy(gameObject);
+    //     }
+    //     if(other.gameObject.tag == "Wall" || other.gameObject.tag == "Untagged")
+    //     {
+    //         // destroys the bullet when hitting a wall
+    //         Destroy(gameObject);
+    //     }
+    //     // friendly fire
+    //     if(other.gameObject.tag == "GoodGuys" || other.gameObject.tag == "Player")
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // } // OnCollisionEnter
+
+    //Damages the given NPC type (Ally or Any type of BaseClassEnemy)
+    protected void HurtNPCType(GameObject _npc, int _damage)
     {
-        if(other.gameObject.tag == "Enemy")
-        {
-            // need to use TryGetComponent for this one!
-            //other.gameObject.GetComponent<EnemyZombie>().DamageTaken(damageGiven);
+        _npc.GetComponent<BaseClassNPC>().DamageTaken(_damage);
+    }//HurtEnemyType
 
-            // so player/ally can deal damage to zombies
-            if(other.transform.TryGetComponent<EnemyZombie>(out EnemyZombie _enemyZombie))
-            {
-                _enemyZombie.DamageTaken(damageGiven);
-            }
-            // so player/ally can deal damage to shooters
-            if(other.transform.TryGetComponent<EnemyShooter>(out EnemyShooter _enemyShooter))
-            {
-                _enemyShooter.DamageTaken(damageGiven);
-            }
-
-            // destroys the bullet when hitting the enemy
-            Destroy(gameObject);
-        }
-        if(other.gameObject.tag == "Wall" || other.gameObject.tag == "Untagged")
-        {
-            // destroys the bullet when hitting a wall
-            Destroy(gameObject);
-        }
-        // friendly fire
-        if(other.gameObject.tag == "GoodGuys" || other.gameObject.tag == "Player")
-        {
-            Destroy(gameObject);
-        }
-    } // OnCollisionEnter
+    //Damages the given player
+    protected void HurtPlayerType(GameObject _player, float _damage)
+    {
+        _player.GetComponent<PlayerHealthManager>().HurtPlayer(_damage);
+    }//HurtPlayerType
 }
