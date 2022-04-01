@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 2688752464953211877}
   - component: {fileID: 6150088647173010488}
   - component: {fileID: 7141075276190519151}
+  - component: {fileID: 1446204372}
   m_Layer: 0
   m_Name: AllyOrangeBot
   m_TagString: GoodGuys
@@ -330,13 +331,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inCombat: 0
+  debuffMan: {fileID: 0}
   maxHealth: 0
   currHealth: 0
   damageGiven: 0
   fireRate: 0
   projectileSpeed: 0
   distanceB4Shoot: 0
-  bullet: {fileID: -2671395265167506613, guid: 03c5e20a095d6fa4aa5bf2f892748f51, type: 3}
+  goodGuysBullet: {fileID: 2098971575481728396, guid: 03c5e20a095d6fa4aa5bf2f892748f51, type: 3}
+  enemyBullet: {fileID: 0}
   muzzle: {fileID: 0}
   player: {fileID: 0}
   stopDistanceFromPlayer: 6
@@ -355,6 +358,19 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &1446204372
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688752464953211875}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2688752465373272286
 GameObject:

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunController : MonoBehaviour
+public class PlayerGunController : MonoBehaviour
 {
     public bool isFiring;
 
-    public BulletController bullet;
+    public GoodGuysBullet bullet;
     public float bulletSpeed;
 
     public float timeBetweenShots;
@@ -23,7 +23,7 @@ public class GunController : MonoBehaviour
             if(shotCounter <= 0)
             {
                 shotCounter = timeBetweenShots;
-                BulletController newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as BulletController;
+                GoodGuysBullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as GoodGuysBullet;
                 newBullet.speed = bulletSpeed;
             }
         }

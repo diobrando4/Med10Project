@@ -752,6 +752,7 @@ GameObject:
   - component: {fileID: 9175027577546554148}
   - component: {fileID: 6264798026682359731}
   - component: {fileID: 755510215287330003}
+  - component: {fileID: 1818606590}
   m_Layer: 0
   m_Name: AllyBlueBot
   m_TagString: GoodGuys
@@ -889,13 +890,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inCombat: 0
+  debuffMan: {fileID: 0}
   maxHealth: 0
   currHealth: 0
   damageGiven: 0
   fireRate: 0
   projectileSpeed: 0
   distanceB4Shoot: 0
-  bullet: {fileID: -2671395265167506613, guid: 03c5e20a095d6fa4aa5bf2f892748f51, type: 3}
+  goodGuysBullet: {fileID: 2098971575481728396, guid: 03c5e20a095d6fa4aa5bf2f892748f51, type: 3}
+  enemyBullet: {fileID: 0}
   muzzle: {fileID: 0}
   player: {fileID: 0}
   stopDistanceFromPlayer: 3
@@ -914,6 +917,19 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &1818606590
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9175027577546554141}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7496629121037717100
 PrefabInstance:

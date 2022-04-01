@@ -30,7 +30,8 @@ public class BaseClassNPC : MonoBehaviour
     public float projectileSpeed;
     public float distanceB4Shoot; //Distance before shooting at target2Shoot
     private float shotCounter;
-    public BulletController bullet;
+    public GoodGuysBullet goodGuysBullet; // for player and ally (GoodGuys)
+    public EnemyBullet enemyBullet; // for enemy
     [SerializeField]
     protected Transform muzzle;
 
@@ -131,31 +132,35 @@ public class BaseClassNPC : MonoBehaviour
             //if(targetDistance < distanceB4Shoot)
             {
                 Debug.DrawLine(transform.position + rayOffset, rayHit.point, Color.red);
-                Debug.Log("DrawLine: " + rayHit.transform.tag);
+                //Debug.Log("DrawLine: " + rayHit.transform.tag);
 
                 shotCounter -= Time.deltaTime;
                 // for ally
                 if(rayHit.transform.gameObject.CompareTag("Enemy") && shotCounter <= 0)
                 {
                     shotCounter = fireRate;
-                    BulletController newNPCBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
-                    newNPCBullet.speed = projectileSpeed;
+                    GoodGuysBullet newGoodGuysBullet = Instantiate(goodGuysBullet, muzzle.position, muzzle.rotation) as GoodGuysBullet;
+                    newGoodGuysBullet.speed = projectileSpeed;
+                    //Debug.Log("good guys bullet instantiated");
                 }
                 // for enemy
                 // if we don't add player tag here, then shooter will only shoot at ally. but if we add player tag, then ally will also shoot at player
                 // i guess it's because the raycast never hits the child tag, so it can't see both player and goodguys tag, only whatever main tag is
                 if(rayHit.transform.gameObject.CompareTag("GoodGuys") && shotCounter <= 0)
+                //if(rayHit.transform.gameObject.CompareTag("GoodGuys") && shotCounter <= 0)
                 {
                     shotCounter = fireRate;
                     // this should be changed to the enemy bullet controller
-                    BulletController newNPCBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
-                    newNPCBullet.speed = projectileSpeed;
+                    //BulletController newNPCBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
+                    EnemyBullet newEnemyBullet = Instantiate(enemyBullet, muzzle.position, muzzle.rotation) as EnemyBullet;
+                    newEnemyBullet.speed = projectileSpeed;
+                    //Debug.Log("enemy bullet instantiated");
                 }
             }
             else
             {
                 Debug.DrawRay(transform.position + rayOffset, transform.forward * distanceB4Shoot, Color.green);
-                Debug.Log("DrawRay: " + rayHit.transform.tag);
+                //Debug.Log("DrawRay: " + rayHit.transform.tag);
                 shotCounter = 0;
             }
         }

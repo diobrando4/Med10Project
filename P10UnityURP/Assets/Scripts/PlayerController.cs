@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     
     private Vector3 moveInput;
     private Vector3 moveVelocity;
-    public GunController theGun;
+    public PlayerGunController theGun;
     public PlayerHealthManager playerHealthScript;
 
     // for dash

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2251306016547873288}
   - component: {fileID: 8373648456015753000}
   - component: {fileID: 5460793695754842385}
-  - component: {fileID: -2671395265167506613}
+  - component: {fileID: 2098971575481728396}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: GoodGuysBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &-2671395265167506613
+--- !u!114 &2098971575481728396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,10 +122,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4682840337215281819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9f54194dc23c8442bf40c188ea80d6e, type: 3}
+  m_Script: {fileID: 11500000, guid: f0d89b747e2629a4988f1dbe1fb3438b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
   lifeTime: 3
   damageGiven: 1
-  rb: {fileID: 0}
