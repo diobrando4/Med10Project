@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     public float cooldown = 3f;
     [SerializeField]
     private float cooldownTimer;
-    
+    ParticleSystem dashTrail;
     
     void Awake()
     {
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
         baseSpeed = moveSpeed;
         dashUsesMax = dashUses;
         cooldownTimer = cooldown;
+        dashTrail = transform.Find("DashTrail").GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
                 if (dashUses > 0)
                 {
                     dashUses -= 1;
+                    dashTrail.Play();
 
                     if (!isDashing)
                     {
