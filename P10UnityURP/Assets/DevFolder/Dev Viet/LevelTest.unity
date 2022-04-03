@@ -17353,6 +17353,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 351256563}
+    - target: {fileID: 4330766044417100204, guid: d62408dd6f8c57d468066caf36c283b8, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4340870655958682545, guid: d62408dd6f8c57d468066caf36c283b8, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -17444,6 +17448,10 @@ PrefabInstance:
     - target: {fileID: 7081924456742499543, guid: d62408dd6f8c57d468066caf36c283b8, type: 3}
       propertyPath: m_Name
       value: Room1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7081924456742499543, guid: d62408dd6f8c57d468066caf36c283b8, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7820513027006382594, guid: d62408dd6f8c57d468066caf36c283b8, type: 3}
       propertyPath: m_Mesh

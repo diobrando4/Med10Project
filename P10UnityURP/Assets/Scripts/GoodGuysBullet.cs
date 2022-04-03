@@ -27,18 +27,26 @@ public class GoodGuysBullet : BulletController
     }
 
     // for when bullets hit something (seems like you need rigidbody to make this work)
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Enemy")
+        if(other.gameObject.tag != "Projectile")
         {
-            //Function inherited from Parent, refers to the enemy's BaseClassNPC Component 
-            HurtNPCType(other.gameObject,damageGiven);
-            // destroys the bullet when hitting the enemy
-            Destroy(gameObject);
+            if(other.gameObject.tag == "Enemy")
+            {
+                //Function inherited from Parent, refers to the enemy's BaseClassNPC Component 
+                HurtNPCType(other.gameObject,damageGiven);
+                // destroys the bullet when hitting the enemy
+                Destroy(gameObject);
+            }
+            else if(other.gameObject.tag == "GoodGuys" || other.gameObject.tag == "Player")
+            {
+                 
+            }
+            else
+            {
+                Destroy(gameObject);  
+            }
         }
-        else
-        {
-            Destroy(gameObject);   
-        }
+
     } // OnCollisionEnter
 }

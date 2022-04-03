@@ -8,6 +8,7 @@ TagManager:
   - NPC
   - GoodGuys
   - Wall
+  - Projectile
   layers:
   - Default
   - TransparentFX

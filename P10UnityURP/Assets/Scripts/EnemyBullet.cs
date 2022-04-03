@@ -24,21 +24,28 @@ public class EnemyBullet : BulletController
     }
 
     // for when bullets hit something (seems like you need rigidbody to make this work)
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "GoodGuys") //If it hits something with tag GoodGuys
+        if(other.gameObject.tag != "Projectile")
         {
-            HurtNPCType(other.gameObject,damageGiven); //Hurt the given gO that was collided with
-            Destroy(gameObject);
-        }
-        else if(other.gameObject.tag == "Player") //If it hits something with tag Player
-        {
-            HurtPlayerType(other.gameObject,damageGiven); //Hurt player
-            Destroy(gameObject);
-        }
-        else //If it collides with anything else, Destroy self
-        {
-            Destroy(gameObject);
+            if(other.gameObject.tag == "GoodGuys") //If it hits something with tag GoodGuys
+            {
+                HurtNPCType(other.gameObject,damageGiven); //Hurt the given gO that was collided with
+                Destroy(gameObject);
+            }
+            else if(other.gameObject.tag == "Player") //If it hits something with tag Player
+            {
+                HurtPlayerType(other.gameObject,damageGiven); //Hurt player
+                Destroy(gameObject);
+            }
+            else if(other.gameObject.tag == "Enemy")
+            {
+
+            }
+            else //If it collides with anything else, Destroy self
+            {
+                Destroy(gameObject);
+            }
         }
     } // OnCollisionEnter
 }
