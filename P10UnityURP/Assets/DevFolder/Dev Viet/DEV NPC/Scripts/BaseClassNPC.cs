@@ -114,8 +114,8 @@ public class BaseClassNPC : MonoBehaviour
         if (target2Shoot != null ) //If there are enemies
         {
             //if (Physics.Raycast(transform.position + rayOffset, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
-            if (HasLineOfSightTo(target2Shoot) == true)
-            //If the raycast is cast and hits something within the distance
+            if (Physics.SphereCast(transform.position + rayOffset, 0.2f, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
+            //If the raycasted sphere hits something within the distance
             {
                 Debug.DrawLine(transform.position + rayOffset, rayHit.point, Color.red);
 
