@@ -36,7 +36,9 @@ public class DebuffManager : MonoBehaviour
         playerDefaultSpeed = playerCont.moveSpeed;
         playerDefaultHealth = playerHPMan.playerMaxHealth;
     
+        if (ally1 == null)
         ally1 = GameObject.Find("AllyBlueBot").GetComponent<Ally>();
+        if (ally2 == null)
         ally2 = GameObject.Find("AllyOrangeBot").GetComponent<Ally>();
     }
 

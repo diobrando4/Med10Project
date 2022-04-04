@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8978342255219579051}
   - component: {fileID: 8978342255219579050}
   - component: {fileID: 8978342255219579049}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ArmCube1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8978342255377534611}
   - component: {fileID: 8978342255377534610}
   - component: {fileID: 8978342255377534609}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ArmCube2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 8978342255453304524}
   - component: {fileID: 8978342255453304515}
   - component: {fileID: -4844319622958717224}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Zombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -341,11 +341,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inCombat: 0
+  debuffMan: {fileID: 0}
   maxHealth: 5
   currHealth: 5
   damageGiven: 1
   fireRate: 0
   projectileSpeed: 0
   distanceB4Shoot: 0
+  goodGuysBullet: {fileID: 0}
+  enemyBullet: {fileID: 0}
   bullet: {fileID: 0}
   muzzle: {fileID: 0}

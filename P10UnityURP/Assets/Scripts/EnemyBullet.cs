@@ -7,6 +7,8 @@ public class EnemyBullet : BulletController
 
     void Awake()
     {
+        lifeTime = 3.0f;
+        damageGiven = 1;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -24,7 +26,7 @@ public class EnemyBullet : BulletController
     }
 
     // for when bullets hit something (seems like you need rigidbody to make this work)
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag != "Projectile")
         {
@@ -38,14 +40,16 @@ public class EnemyBullet : BulletController
                 HurtPlayerType(other.gameObject,damageGiven); //Hurt player
                 Destroy(gameObject);
             }
-            else if(other.gameObject.tag == "Enemy")
-            {
-
-            }
             else //If it collides with anything else, Destroy self
             {
                 Destroy(gameObject);
             }
         }
+        else
+        {
+            //If it hits something with the tag Projectile, ignore collision between the other bullet and itself
+            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+        }
+        
     } // OnCollisionEnter
 }

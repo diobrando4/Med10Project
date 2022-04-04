@@ -126,12 +126,4 @@ public class PlayerHealthManager : MonoBehaviour
         }
         yield break;
     }//Debuffimmunity
-    // private void OnTriggerEnter(Collider col)
-    // {
-    //     if(col.TryGetComponent(typeof(BaseClassNPC),out Component base1))
-    //     {
-    //         //Do something here
-    //         Debug.Log(base1);
-    //     }
-    // }
 }

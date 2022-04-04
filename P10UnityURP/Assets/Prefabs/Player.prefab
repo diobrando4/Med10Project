@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2009124272}
   - component: {fileID: 2009124271}
   - component: {fileID: 2009124270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DashTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4876,7 +4876,7 @@ GameObject:
   - component: {fileID: 2065505482962927247}
   - component: {fileID: 2065505482962927246}
   - component: {fileID: 2065505482962927233}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GunCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4989,7 +4989,7 @@ GameObject:
   - component: {fileID: 2065505483258346538}
   - component: {fileID: 2065505483258346537}
   - component: {fileID: 2065505483258346536}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5087,7 +5087,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2065505483260570074}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: SpeechBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5123,7 +5123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2065505483405367239}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5161,7 +5161,7 @@ GameObject:
   - component: {fileID: 2065505483842465994}
   - component: {fileID: 2065505483842465996}
   - component: {fileID: 8319435718228594390}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -5350,7 +5350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2065505483924516754}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5388,7 +5388,7 @@ GameObject:
   - component: {fileID: 2065505484469430407}
   - component: {fileID: 2065505484469430425}
   - component: {fileID: 2065505484469430424}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: imgBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5464,7 +5464,7 @@ GameObject:
   - component: {fileID: 2065505484537763230}
   - component: {fileID: 2065505484537763229}
   - component: {fileID: 2065505484537763228}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: TextTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5598,7 +5598,7 @@ GameObject:
   - component: {fileID: 2065505484584301691}
   - component: {fileID: 2065505484584301693}
   - component: {fileID: 2065505484584301692}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: imgFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5673,7 +5673,7 @@ GameObject:
   - component: {fileID: 2065505484758527947}
   - component: {fileID: 2065505484758527949}
   - component: {fileID: 2065505484758527948}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: RectBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5747,7 +5747,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2065505484806968467}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tag
   m_TagString: GoodGuys
   m_Icon: {fileID: 0}
@@ -5822,6 +5822,26 @@ PrefabInstance:
     - target: {fileID: 2325628383871414863, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}
       propertyPath: m_Name
       value: ReviveBarPopUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325628383871414863, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325628383893296580, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325628383981193034, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325628385140908764, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325628385384144520, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}

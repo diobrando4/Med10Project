@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4262984574129984500}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4262984574491471469}
   - component: {fileID: 4262984574491471468}
   - component: {fileID: 4262984574491471471}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyShooter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -187,8 +187,7 @@ MonoBehaviour:
   fireRate: 0
   projectileSpeed: 0
   distanceB4Shoot: 0
-  goodGuysBullet: {fileID: 0}
-  enemyBullet: {fileID: 6919509014701225088, guid: a710e0d0609a07148995aa8be720908b, type: 3}
+  bullet: {fileID: 6919509014701225088, guid: a710e0d0609a07148995aa8be720908b, type: 3}
   muzzle: {fileID: 0}
 --- !u!1 &4262984574548157854
 GameObject:
@@ -202,7 +201,7 @@ GameObject:
   - component: {fileID: 4262984574548157922}
   - component: {fileID: 4262984574548157853}
   - component: {fileID: 4262984574548157852}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}

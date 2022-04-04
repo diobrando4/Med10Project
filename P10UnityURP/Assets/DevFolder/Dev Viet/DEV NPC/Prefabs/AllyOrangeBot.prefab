@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1115512776}
   - component: {fileID: 1115512778}
   - component: {fileID: 1115512777}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: SpeechIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 7880250927076469169}
   - component: {fileID: 1248591627482157554}
   - component: {fileID: 5078170632320919639}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 6150088647173010488}
   - component: {fileID: 7141075276190519151}
   - component: {fileID: 1446204372}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AllyOrangeBot
   m_TagString: GoodGuys
   m_Icon: {fileID: 0}
@@ -338,8 +338,7 @@ MonoBehaviour:
   fireRate: 0
   projectileSpeed: 0
   distanceB4Shoot: 0
-  goodGuysBullet: {fileID: 2098971575481728396, guid: 03c5e20a095d6fa4aa5bf2f892748f51, type: 3}
-  enemyBullet: {fileID: 0}
+  bullet: {fileID: 2098971575481728396, guid: 03c5e20a095d6fa4aa5bf2f892748f51, type: 3}
   muzzle: {fileID: 0}
   player: {fileID: 0}
   stopDistanceFromPlayer: 6
@@ -384,7 +383,7 @@ GameObject:
   - component: {fileID: 2688752465373272290}
   - component: {fileID: 2688752465373272289}
   - component: {fileID: 2688752465373272288}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AllyGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2688752465800141552}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +508,7 @@ GameObject:
   - component: {fileID: 3627348105848927206}
   - component: {fileID: 7549002269813974829}
   - component: {fileID: 7628515775628521712}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: RectBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +584,7 @@ GameObject:
   - component: {fileID: 2620536620634017172}
   - component: {fileID: 3598942816571457957}
   - component: {fileID: 2307132156027243073}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: imgFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -658,7 +657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5522509664310713872}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: SpeechBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -696,7 +695,7 @@ GameObject:
   - component: {fileID: 2672778575233858211}
   - component: {fileID: 2432501322941444706}
   - component: {fileID: 3203854945409570198}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: imgBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +771,7 @@ GameObject:
   - component: {fileID: 4170947076536455992}
   - component: {fileID: 3445881741980330303}
   - component: {fileID: 6342591523729379401}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: TextTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -904,7 +903,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7865293780700341094}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -985,6 +984,26 @@ PrefabInstance:
     - target: {fileID: 2325628383871414863, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}
       propertyPath: m_Name
       value: ReviveBarPopUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325628383871414863, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325628383893296580, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325628383981193034, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325628385140908764, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325628385384144520, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38ba05c6a79263b40981e3c9f5c1545f, type: 3}

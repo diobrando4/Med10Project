@@ -10,11 +10,17 @@ public class BaseClassNPC : MonoBehaviour
 {
     protected NavMeshAgent agent; //NavMeshAgent of GameObject
     protected GameObject target; //GameObject that it needs to target
-
+    
+    [Header("Internal variables")]
     public bool inCombat = true; //Bool if combat mode is active
-
+    public int damageGiven; //default damage given.
+    //[SerializeField]
+    protected int ignoreOwnLayer;
+    //[SerializeField]
+    //protected int ownLayer;
+    
     //Variables related to status effect
-    [SerializeField]
+    
     protected DebuffManager debuffMan;
 
     [Header("Health related variables")]
@@ -22,16 +28,15 @@ public class BaseClassNPC : MonoBehaviour
     public int currHealth; //Current health of GameObject
     protected bool isDead = false; //Death check
 
-    [Header("Only Relevant for non-shooting enemies")]
-    public int damageGiven; //Damage given. Relevant to Enemies
-
+    
     [Header("Only Relevant if it shoots")]
     public float fireRate;
     public float projectileSpeed;
     public float distanceB4Shoot; //Distance before shooting at target2Shoot
     private float shotCounter;
-    public GoodGuysBullet goodGuysBullet; // for player and ally (GoodGuys)
-    public EnemyBullet enemyBullet; // for enemy
+    //public GoodGuysBullet goodGuysBullet; // for player and ally (GoodGuys)
+    //public EnemyBullet enemyBullet; // for enemy
+    public BulletController bullet = null; //Can either be GoodGuysBullet or EnemyBullet
     [SerializeField]
     protected Transform muzzle;
 
@@ -52,7 +57,23 @@ public class BaseClassNPC : MonoBehaviour
         if (debuffMan == null)
         {
             Debug.Log("DebuffManager is null");
-        }
+        } 
+        //Bit shift index of own layer to create a bit mask
+        ignoreOwnLayer = 1<<gameObject.layer;
+        //Invert the bit mask e.g. focus only on own layer to, focus on all other layers than own
+        ignoreOwnLayer = ~ignoreOwnLayer;
+        // if (gameObject.layer == LayerMask.NameToLayer("Enemies"))
+        // {
+        //     targetLayer = (1<<gameObject.layer);
+        // }
+        // else if (gameObject.layer == LayerMask.NameToLayer("GoodGuys"))
+        // {
+        //     targetLayer = LayerMask.NameToLayer("Enemies");
+        // }
+        // if(muzzle == null)
+        // {
+        //     muzzle = transform.Find("Muzzle");
+        // }
     }
 
     //Function to find the closest target with the given tag
@@ -104,88 +125,35 @@ public class BaseClassNPC : MonoBehaviour
     //Function that dictates shooting the nearest GameObject
     protected void ShootNearestObject(GameObject target2Shoot)
     {
-        // replace "attackDistance" (from test script) with "distanceB4Shoot"
-        
-        /*
-        if (Physics.Raycast(transform.position + rayOffset, transform.forward, out rayHit, distanceB4Shoot))
-        {
-            Debug.DrawLine(transform.position + rayOffset, rayHit.point, Color.red);
-
-            
-            if (rayHit.transform.gameObject.CompareTag("Enemy"))
-            {
-                // the attack happens here!
-            }
-            
-        }
-        else
-        {
-            Debug.DrawRay(transform.position + rayOffset, transform.forward * distanceB4Shoot, Color.green);
-        }
-        */
-
         if (target2Shoot != null ) //If there are enemies
         {
-            float targetDistance = Vector3.Distance(transform.position, target2Shoot.transform.position); //Calculate distance between ally and enemy
-            
-            if (Physics.Raycast(transform.position + rayOffset, transform.forward, out rayHit, distanceB4Shoot) && targetDistance < distanceB4Shoot)
-            //if(targetDistance < distanceB4Shoot)
+            if (Physics.Raycast(transform.position + rayOffset, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
+            //If the raycast is cast and hits something within the distance
             {
                 Debug.DrawLine(transform.position + rayOffset, rayHit.point, Color.red);
-                //Debug.Log("DrawLine: " + rayHit.transform.tag);
 
                 shotCounter -= Time.deltaTime;
-                // for ally
-                if(rayHit.transform.gameObject.CompareTag("Enemy") && shotCounter <= 0)
+                if(rayHit.transform != null) //If the ray is hitting something and it does not share the same tag as self
                 {
-                    shotCounter = fireRate;
-                    GoodGuysBullet newGoodGuysBullet = Instantiate(goodGuysBullet, muzzle.position, muzzle.rotation) as GoodGuysBullet;
-                    newGoodGuysBullet.speed = projectileSpeed;
-                    //Debug.Log("good guys bullet instantiated");
-                }
-                // for enemy
-                // if we don't add player tag here, then shooter will only shoot at ally. but if we add player tag, then ally will also shoot at player
-                // i guess it's because the raycast never hits the child tag, so it can't see both player and goodguys tag, only whatever main tag is
-                if(rayHit.transform.gameObject.CompareTag("GoodGuys") && shotCounter <= 0)
-                //if(rayHit.transform.gameObject.CompareTag("GoodGuys") && shotCounter <= 0)
-                {
-                    shotCounter = fireRate;
-                    // this should be changed to the enemy bullet controller
-                    //BulletController newNPCBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
-                    EnemyBullet newEnemyBullet = Instantiate(enemyBullet, muzzle.position, muzzle.rotation) as EnemyBullet;
-                    newEnemyBullet.speed = projectileSpeed;
-                    //Debug.Log("enemy bullet instantiated");
+                    if(rayHit.transform.gameObject.layer != gameObject.layer && 
+                       rayHit.transform.gameObject.layer == LayerMask.NameToLayer("GoodGuys") || 
+                       rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy")) //If the object hit by the ray doesnt share the same layer as self, but is also on the layer GoodGuys/Enemy
+                    {
+                        if(shotCounter <= 0)
+                        {
+                            shotCounter = fireRate;
+                            BulletController newBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
+                            newBullet.speed = projectileSpeed;
+                            newBullet.damageGiven = damageGiven;
+                        }
+                    }
                 }
             }
             else
             {
                 Debug.DrawRay(transform.position + rayOffset, transform.forward * distanceB4Shoot, Color.green);
-                //Debug.Log("DrawRay: " + rayHit.transform.tag);
                 shotCounter = 0;
             }
-        }
-
-        /*
-        if (target2Shoot != null && inCombat == true) //If there are enemies
-        {
-            float targetDistance = Vector3.Distance(transform.position, target2Shoot.transform.position); //Calculate distance between ally and enemy
-            
-            if(targetDistance < distanceB4Shoot)
-            {
-                shotCounter -= Time.deltaTime;
-                if(shotCounter <= 0)
-                {
-                    shotCounter = fireRate;
-                    BulletController newNPCBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
-                    newNPCBullet.speed = projectileSpeed;                
-                }
-            }
-            else
-            {
-                shotCounter = 0;
-            }
-        }
-        */
-        
+        }       
     }//ShootNearest
 }

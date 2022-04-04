@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class GoodGuysBullet : BulletController
 {
-
     void Awake()
     {
+        lifeTime = 3.0f;
+        damageGiven = 1;
         rb = GetComponent<Rigidbody>();
+        //GetComponent<Collider>().enabled = false;
     }
 
     // Update is called once per frame
@@ -27,10 +29,10 @@ public class GoodGuysBullet : BulletController
     }
 
     // for when bullets hit something (seems like you need rigidbody to make this work)
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag != "Projectile")
-        {
+            {
             if(other.gameObject.tag == "Enemy")
             {
                 //Function inherited from Parent, refers to the enemy's BaseClassNPC Component 
@@ -38,15 +40,15 @@ public class GoodGuysBullet : BulletController
                 // destroys the bullet when hitting the enemy
                 Destroy(gameObject);
             }
-            else if(other.gameObject.tag == "GoodGuys" || other.gameObject.tag == "Player")
-            {
-                 
-            }
             else
             {
                 Destroy(gameObject);  
             }
         }
-
+        else
+        {
+            //If it hits something with the tag Projectile, ignore collision between the other bullet and itself
+            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+        }
     } // OnCollisionEnter
 }
