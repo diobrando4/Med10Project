@@ -318,7 +318,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 30
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -341,14 +341,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inCombat: 0
-  debuffMan: {fileID: 0}
+  damageGiven: 1
   maxHealth: 5
   currHealth: 5
-  damageGiven: 1
   fireRate: 0
   projectileSpeed: 0
   distanceB4Shoot: 0
-  goodGuysBullet: {fileID: 0}
-  enemyBullet: {fileID: 0}
   bullet: {fileID: 0}
   muzzle: {fileID: 0}

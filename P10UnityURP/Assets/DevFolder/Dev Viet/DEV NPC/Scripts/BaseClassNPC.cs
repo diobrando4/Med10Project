@@ -13,14 +13,10 @@ public class BaseClassNPC : MonoBehaviour
     
     [Header("Internal variables")]
     public bool inCombat = true; //Bool if combat mode is active
-    public int damageGiven; //default damage given.
-    //[SerializeField]
-    protected int ignoreOwnLayer;
-    //[SerializeField]
-    //protected int ownLayer;
-    
+    public int damageGiven = 1; //default damage given.
+    protected int ignoreOwnLayer; //Should ignore the layer its in, in order to ignore targets of the same "faction"
+
     //Variables related to status effect
-    
     protected DebuffManager debuffMan;
 
     [Header("Health related variables")]
@@ -42,6 +38,8 @@ public class BaseClassNPC : MonoBehaviour
 
     // for raycast
     private RaycastHit rayHit;
+    private RaycastHit sphereHit;
+
     Vector3 rayOffset; // we need this, otherwise the raycast might hit unwanted objects
 
     void Awake()
@@ -62,18 +60,6 @@ public class BaseClassNPC : MonoBehaviour
         ignoreOwnLayer = 1<<gameObject.layer;
         //Invert the bit mask e.g. focus only on own layer to, focus on all other layers than own
         ignoreOwnLayer = ~ignoreOwnLayer;
-        // if (gameObject.layer == LayerMask.NameToLayer("Enemies"))
-        // {
-        //     targetLayer = (1<<gameObject.layer);
-        // }
-        // else if (gameObject.layer == LayerMask.NameToLayer("GoodGuys"))
-        // {
-        //     targetLayer = LayerMask.NameToLayer("Enemies");
-        // }
-        // if(muzzle == null)
-        // {
-        //     muzzle = transform.Find("Muzzle");
-        // }
     }
 
     //Function to find the closest target with the given tag
@@ -127,7 +113,8 @@ public class BaseClassNPC : MonoBehaviour
     {
         if (target2Shoot != null ) //If there are enemies
         {
-            if (Physics.Raycast(transform.position + rayOffset, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
+            //if (Physics.Raycast(transform.position + rayOffset, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
+            if (HasLineOfSightTo(target2Shoot) == true)
             //If the raycast is cast and hits something within the distance
             {
                 Debug.DrawLine(transform.position + rayOffset, rayHit.point, Color.red);
@@ -156,4 +143,15 @@ public class BaseClassNPC : MonoBehaviour
             }
         }       
     }//ShootNearest
+    protected bool HasLineOfSightTo(GameObject _target)
+    {
+        if(Physics.SphereCast(transform.position + rayOffset, 0.2f, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
