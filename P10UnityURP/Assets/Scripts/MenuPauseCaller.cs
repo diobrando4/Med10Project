@@ -36,7 +36,7 @@ public class MenuPauseCaller : MonoBehaviour
         }
 
         /*
-        // this was an attempt to make the code more efficient, but i couldn't get it to work
+        // this was an attempt to make the code more efficient, but i couldn't get it to work properly
 
         //someInt = PlayerPrefs.GetInt("Pause");
 
@@ -58,7 +58,7 @@ public class MenuPauseCaller : MonoBehaviour
 
     public void GameRunning()
     {
-        Debug.Log("Running");
+        //Debug.Log("Running");
         //someInt = 1; // this was used in the attempt to make the code more efficient
         someBool = false;
         PlayerPrefs.SetInt("Pause", 0);
@@ -68,7 +68,7 @@ public class MenuPauseCaller : MonoBehaviour
 
     public void GamePaused()
     {
-        Debug.Log("Paused");
+        //Debug.Log("Paused");
         //someInt = 0; // this was used in the attempt to make the code more efficient
         someBool = true;
         PlayerPrefs.SetInt("Pause", 1);
