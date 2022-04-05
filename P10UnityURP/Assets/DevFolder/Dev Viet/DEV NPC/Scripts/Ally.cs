@@ -127,13 +127,21 @@ public class Ally : BaseClassNPC
 
                     agent.stoppingDistance = 3f;
                     agent.SetDestination(newPos);
-                    //print(gameObject + " Avoiding");
+                    //Debug.Log("Avoiding");
                 }
                 else if (enemyDistance > runAwayDistance) //If enemies are not too close, move closer
                 {
                     agent.stoppingDistance = 6f;
-                    agent.SetDestination(m2target.transform.position);
-                    //print(gameObject + " Engaging");
+                    if(HasLineOfSightTo(m2target, runAwayDistance)) //If the width of their body
+                    {
+                        agent.SetDestination(m2target.transform.position);
+                        if(sphereHit.transform.gameObject.tag != "Enemy")
+                        {
+                            agent.stoppingDistance = 5.1f;
+                            //Debug.Log("Target Obstructed");   
+                        }
+                    //print(gameObject + " Engaging");    
+                    }  
                 }
                 transform.LookAt(m2target.transform);
             }

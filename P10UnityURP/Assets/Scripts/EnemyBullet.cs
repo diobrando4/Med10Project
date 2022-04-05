@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnemyBullet : BulletController
 {
-
-    void Awake()
+    void Start()
     {
         lifeTime = 3.0f;
         damageGiven = 1;

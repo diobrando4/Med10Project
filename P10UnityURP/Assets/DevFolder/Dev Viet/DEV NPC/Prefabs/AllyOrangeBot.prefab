@@ -192,7 +192,6 @@ GameObject:
   - component: {fileID: 2688752464953211878}
   - component: {fileID: 2688752464953211877}
   - component: {fileID: 6150088647173010488}
-  - component: {fileID: 7141075276190519151}
   - component: {fileID: 1446204372}
   m_Layer: 6
   m_Name: AllyOrangeBot
@@ -331,10 +330,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inCombat: 0
-  debuffMan: {fileID: 0}
+  damageGiven: 0
   maxHealth: 0
   currHealth: 0
-  damageGiven: 0
   fireRate: 0
   projectileSpeed: 0
   distanceB4Shoot: 0
@@ -345,19 +343,6 @@ MonoBehaviour:
   healthBarFill: {fileID: 0}
   isAllyDead: 0
   reviveBarFill: {fileID: 2693093776016837105}
---- !u!135 &7141075276190519151
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2688752464953211875}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &1446204372
 SphereCollider:
   m_ObjectHideFlags: 0

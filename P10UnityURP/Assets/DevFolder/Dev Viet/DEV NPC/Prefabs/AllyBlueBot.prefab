@@ -751,7 +751,6 @@ GameObject:
   - component: {fileID: 9175027577546554142}
   - component: {fileID: 9175027577546554148}
   - component: {fileID: 6264798026682359731}
-  - component: {fileID: 755510215287330003}
   - component: {fileID: 1818606590}
   m_Layer: 6
   m_Name: AllyBlueBot
@@ -890,10 +889,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inCombat: 0
-  debuffMan: {fileID: 0}
+  damageGiven: 0
   maxHealth: 0
   currHealth: 0
-  damageGiven: 0
   fireRate: 0
   projectileSpeed: 0
   distanceB4Shoot: 0
@@ -904,19 +902,6 @@ MonoBehaviour:
   healthBarFill: {fileID: 0}
   isAllyDead: 0
   reviveBarFill: {fileID: 5210430326797429966}
---- !u!135 &755510215287330003
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9175027577546554141}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &1818606590
 SphereCollider:
   m_ObjectHideFlags: 0

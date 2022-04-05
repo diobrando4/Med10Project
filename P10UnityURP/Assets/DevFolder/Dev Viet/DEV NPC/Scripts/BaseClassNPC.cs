@@ -38,13 +38,13 @@ public class BaseClassNPC : MonoBehaviour
 
     // for raycast
     private RaycastHit rayHit;
-    private RaycastHit sphereHit;
+    protected RaycastHit sphereHit;
 
-    Vector3 rayOffset; // we need this, otherwise the raycast might hit unwanted objects
+    Vector3 rayOffset; // we need this, otherwise the raycast might hit unwanted objects EDIT: No longer an issue with the new layer filtering
 
     void Awake()
     {
-        rayOffset = new Vector3(0,-0.2f,0);
+        rayOffset = new Vector3(0,0,0);
 
         //so we don't get a bunch of errors when it's missing
         if (debuffMan != null)
@@ -131,7 +131,6 @@ public class BaseClassNPC : MonoBehaviour
                             shotCounter = fireRate;
                             BulletController newBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
                             newBullet.speed = projectileSpeed;
-                            newBullet.damageGiven = damageGiven;
                         }
                     }
                 }
@@ -143,9 +142,11 @@ public class BaseClassNPC : MonoBehaviour
             }
         }       
     }//ShootNearest
-    protected bool HasLineOfSightTo(GameObject _target)
+
+    //Check if there is line of sight to target with the bullet width in mind
+    protected bool HasLineOfSightTo(GameObject _target, float _distance)
     {
-        if(Physics.SphereCast(transform.position + rayOffset, 0.2f, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
+        if(Physics.SphereCast(transform.position + rayOffset, 0.2f, transform.forward, out sphereHit, _distance, ignoreOwnLayer))
         {
             return true;
         }
@@ -153,5 +154,5 @@ public class BaseClassNPC : MonoBehaviour
         {
             return false;
         }
-    }
+    }//HasLineOfSightTo
 }

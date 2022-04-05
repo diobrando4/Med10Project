@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoodGuysBullet : BulletController
 {
-    void Awake()
+    void Start()
     {
         lifeTime = 3.0f;
         damageGiven = 1;
