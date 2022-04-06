@@ -11,8 +11,7 @@ public class Effect : MonoBehaviour
 {
     public float lifeTime; // duration
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Destroy(gameObject, lifeTime);
     }

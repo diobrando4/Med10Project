@@ -9,6 +9,7 @@ public class TestDeath : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // this is just for testing
         if(Input.GetKeyDown(KeyCode.T))
         {
             Instantiate(deathParticle, transform.position, Quaternion.identity);
