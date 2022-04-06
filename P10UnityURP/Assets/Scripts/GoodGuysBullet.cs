@@ -40,6 +40,10 @@ public class GoodGuysBullet : BulletController
                 // destroys the bullet when hitting the enemy
                 Destroy(gameObject);
             }
+            else if(other.gameObject.layer == gameObject.layer) //If it shares the same layer as this bullet, ignore collision
+            {
+                Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+            }
             else
             {
                 Destroy(gameObject);  

@@ -19,12 +19,15 @@ public class PlayerHealthManager : MonoBehaviour
     public bool isPlayerKillable = true;
 
     //Revive Related
-    private float reviveMax = 100;
-    private float reviveCurrent = 0; // has to be reset each time reviving is aborted
+    [HideInInspector] public float reviveMax = 100;
+    [HideInInspector] public float reviveCurrent = 0; // has to be reset each time reviving is aborted
     private float reviveRate = 100;
-    public Image reviveBarFill;
+    private Image reviveBarFill;
+    [HideInInspector] 
+    public bool isBeingRevived = false;
     //[SerializeField]
-    private GameObject revivingAlly; //Need to make sure that the revive bar does not reset just because the other ally is passing through
+    //[HideInInspector] 
+    public GameObject revivingAlly; //Need to make sure that the revive bar does not reset just because the other ally is passing through
     
 
     // Start is called before the first frame update
@@ -74,6 +77,7 @@ public class PlayerHealthManager : MonoBehaviour
         {
             if(isPlayerDead == true)
             {
+                isBeingRevived = true;
                 revivingAlly = col.gameObject;
                 gameObject.GetComponentInChildren<Image>().enabled = true;
                 StartCoroutine(RevivePlayer());
@@ -83,9 +87,10 @@ public class PlayerHealthManager : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        //Reset revive bar to 0 if player exits the radius
+        //Reset revive bar to 0 if ally exits the radius
         if(col.gameObject == revivingAlly)
         {
+            isBeingRevived = false;
             reviveCurrent = 0;
             reviveBarFill.fillAmount = 0;
             gameObject.GetComponentInChildren<Image>().enabled = false;
@@ -100,6 +105,7 @@ public class PlayerHealthManager : MonoBehaviour
             reviveCurrent += reviveMax / reviveRate;
             if (reviveCurrent >= reviveMax)
             {
+                isBeingRevived = false;
                 isPlayerDead = false;
                 playerCurrentHealth = playerMaxHealth;
                 revivingAlly = null;
@@ -119,10 +125,10 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if (isDebuffable == false)
         {
-            Debug.Log("Player Immune!");
+            //Debug.Log("Player Immune!");
             yield return new WaitForSeconds(3);
             isDebuffable = true;
-            Debug.Log("Player Not Immune!");
+            //Debug.Log("Player Not Immune!");
         }
         yield break;
     }//Debuffimmunity

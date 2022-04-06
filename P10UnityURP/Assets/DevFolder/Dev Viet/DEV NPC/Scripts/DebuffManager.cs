@@ -45,8 +45,8 @@ public class DebuffManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // DebuffSelector(selectorNum);
+         if (Input.GetKeyDown(KeyCode.Space))
+         DebuffSelector(selectorNum);
     }
 
     public void DebuffSelector (int number)
@@ -92,6 +92,7 @@ public class DebuffManager : MonoBehaviour
     {
         playerHPMan.isDebuffed = false;
         playerCont.moveSpeed = playerDefaultSpeed;
+        debuffText = "";
     }
 
     //Change player health to a new MaxHP value and update current health to match, return to default MaxHP values after
@@ -111,5 +112,6 @@ public class DebuffManager : MonoBehaviour
         playerHPMan.isDebuffed = false;
         playerHPMan.playerMaxHealth = playerDefaultHealth;
         playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth; //For now, restores curr HP to max HP
+        debuffText = "";
     }
 }

@@ -18,12 +18,20 @@ public class Ally : BaseClassNPC
     public bool isAllyDead = false;
 
     //Revive Related
-    private float reviveMax = 100;
-    private float reviveCurrent = 0; // has to be reset each time reviving is aborted
+    [HideInInspector] 
+    public float reviveMax = 100;
+    [HideInInspector] 
+    public float reviveCurrent = 0; // has to be reset each time reviving is aborted
     private float reviveRate = 100;
-    public Image reviveBarFill;
+    private Image reviveBarFill;
+    [HideInInspector] 
+    public bool isRevived = false;
+    //private bool isBeingRevived;
 
+    //Dispel related
     private bool canCureDebuff = true;
+    //[HideInInspector]
+    public bool isUsingDispel = false;
 
     void Start()
     {
@@ -67,17 +75,32 @@ public class Ally : BaseClassNPC
     void Update()
     {
         //DestroyOnDeath(); //Inherited function
-        //Debug.Log(player);
+        //Debug.Log(isRevived);
         target = FindClosestTargetWithTag("Enemy");//Inherited function
         if (isAllyDead == false) 
         {
             Move2Target(target);
             ShootNearestObject(target);//Inherited function
 
+            //If player is debuffed and ally can use dispell on the player
             if (player.GetComponent<PlayerHealthManager>().isDebuffed == true && canCureDebuff == true)
             {
+                isUsingDispel = true;
                 StartCoroutine(Dispel());
             }
+            else
+            {
+                isUsingDispel = false;
+            }
+        }
+
+        if (target == null)
+        {
+            inCombat = false;
+        }
+        else
+        {
+            inCombat = true;
         }
 
         UpdateHealthBar();
@@ -206,8 +229,12 @@ public class Ally : BaseClassNPC
                 currHealth = maxHealth;
                 reviveCurrent = 0;
                 reviveBarFill.fillAmount = 0;
+                isRevived = true;
+                yield return new WaitForSeconds(0.1f);
+                isRevived = false;
             }
             // fill revive bar here
+            
             reviveBarFill.fillAmount = reviveCurrent / reviveMax;
             yield break; // makes the coroutine stop; when x is no longer inside the trigger, so we don't have to use StopAllCoroutines
         }
@@ -216,16 +243,16 @@ public class Ally : BaseClassNPC
     //Restores Player speed and MaxHP default values, then enter a cooldown before it can be reapplied
     private IEnumerator Dispel()
     {
+        yield return new WaitForSeconds(1f);
         debuffMan.RestorePlayerHealth();
         debuffMan.RestorePlayerSpeed();
         player.GetComponent<PlayerHealthManager>().isDebuffable = false;
         canCureDebuff = false;
         StartCoroutine(player.GetComponent<PlayerHealthManager>().DebuffImmunity());
-        Debug.Log(gameObject+" Dispel Cooldown Start");
-        yield return new WaitForSeconds(5);
-
+        //Debug.Log(gameObject+" Dispel Cooldown Start");
+        yield return new WaitForSeconds(4f);
         canCureDebuff = true;
-        Debug.Log(gameObject+" Dispel Cooldown End");
+        //Debug.Log(gameObject+" Dispel Cooldown End");
         yield break;
     }//Dispel
 }

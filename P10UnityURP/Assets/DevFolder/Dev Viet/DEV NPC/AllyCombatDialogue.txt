@@ -29,3 +29,35 @@ Player downed
 [1]Commander down!
 [1]Hold it together!
 [1]Thats not good...
+
+Revived by Player
+[0]Systems back online
+[0]Update complete
+[0]Recalibrating
+[1]Thank you!
+[1]Im back up!
+[1]I LIVE!
+
+Reviving Player
+[0]Reviving Commander
+[0]Administering Revive
+[0]Attempting to Revive
+[1]I got you!
+[1]Get back up!
+[1]Reviving!
+
+Removing Debuff on Player
+[0]Removed Ailments
+[0]Reseting Parameters
+[0]Eliminated Hostile Influence
+[1]Cleared your Debuff!
+[1]You should be fine again!
+[1]De-Debuffing!
+
+No more enemies
+[0]Hostiles Eliminated
+[0]Room Clear
+[0]Task Complete
+[1]Jobs Finished
+[1]No more enemies!
+[1]Ready to proceed!

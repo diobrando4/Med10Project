@@ -9,7 +9,8 @@ using UnityEngine.AI;
 public class BaseClassNPC : MonoBehaviour
 {
     protected NavMeshAgent agent; //NavMeshAgent of GameObject
-    protected GameObject target; //GameObject that it needs to target
+    [HideInInspector]
+    public GameObject target; //GameObject that it needs to target
     
     [Header("Internal variables")]
     public bool inCombat = true; //Bool if combat mode is active
@@ -46,16 +47,14 @@ public class BaseClassNPC : MonoBehaviour
     {
         rayOffset = new Vector3(0,0,0);
 
-        //so we don't get a bunch of errors when it's missing
-        if (debuffMan != null)
+        if (debuffMan == null)
         {
             debuffMan = GameObject.Find("DebuffManager").GetComponent<DebuffManager>();
         }
-        //runs debug if it's missing
-        if (debuffMan == null)
+        else
         {
-            Debug.Log("DebuffManager is null");
-        } 
+            Debug.Log("Check if DebuffManager is missing");
+        }
         //Bit shift index of own layer to create a bit mask
         ignoreOwnLayer = 1<<gameObject.layer;
         //Invert the bit mask e.g. focus only on own layer to, focus on all other layers than own

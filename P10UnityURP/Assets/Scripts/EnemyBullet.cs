@@ -39,6 +39,10 @@ public class EnemyBullet : BulletController
                 HurtPlayerType(other.gameObject,damageGiven); //Hurt player
                 Destroy(gameObject);
             }
+            else if(other.gameObject.layer == gameObject.layer) //If it shares the same layer as this bullet, ignore collision
+            {
+                Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+            }
             else //If it collides with anything else, Destroy self
             {
                 Destroy(gameObject);
