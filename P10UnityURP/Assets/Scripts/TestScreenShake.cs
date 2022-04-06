@@ -13,18 +13,21 @@ public class TestScreenShake : MonoBehaviour
         // this is just for testing
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            Debug.Log("screen shake");
+            //Debug.Log("screen shake");
 
             // version 1
             StartCoroutine(ShakeCamera(.15f, .4f));
 
             // version 2
+
         }
     }
 
     public IEnumerator ShakeCamera(float duration, float magnitude)
     {
         // get current position of camera
+        // this might not be a good way of doing this, since the camera might not placed at the right location yet, 
+        // becuase another script puts the camera into the correct position, which ight happen at a later point?
         Vector3 originalPosition = transform.localPosition;
 
         float elapsed = 0.0f;
