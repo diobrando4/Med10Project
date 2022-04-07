@@ -296,11 +296,12 @@ public class CombatDialogueManager : MonoBehaviour
         // if (Input.GetKeyDown(KeyCode.Space))
         // {
         //     //dialogueTrigger = false;
-        //     //ally1Health.DamageTaken(1);
-        //     //ally2Health.DamageTaken(1);
-        //     //ally1Health.UpdateHealthBar();
+        //     ally1Health.DamageTaken(1);
+        //     ally2Health.DamageTaken(1);
+        //     ally1Health.UpdateHealthBar();
+        //     ally2Health.UpdateHealthBar();
         //     //Debug.Log("Space Pressed");
-        //     playerHealth.HurtPlayer(1);
+        //     //playerHealth.HurtPlayer(1);
         // }
     }// Update
 

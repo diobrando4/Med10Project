@@ -36,7 +36,7 @@ public class PlayerHealthManager : MonoBehaviour
         // starting with full health
         playerCurrentHealth = playerMaxHealth;
         reviveBarFill = gameObject.transform.Find("ReviveBarPopUp/Canvas/ReviveBar/imgBackground/imgFill").GetComponent<Image>();
-
+        healthBarFill = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderPlayerHealthBar/imgBackground/imgFillPlayer").GetComponent<Image>();
         gameObject.GetComponentInChildren<Image>().enabled = false; //Disable Image comp of Imgbackground on start
     }
 
@@ -116,6 +116,7 @@ public class PlayerHealthManager : MonoBehaviour
         while(reviveCurrent < reviveMax)
         {
             reviveCurrent += reviveMax / reviveRate;
+            FindObjectOfType<SoundManager>().SoundRepeatWOInterrupt("ReviveSound");
             //Add ReviveSound on a loop
             if (reviveCurrent >= reviveMax)
             {

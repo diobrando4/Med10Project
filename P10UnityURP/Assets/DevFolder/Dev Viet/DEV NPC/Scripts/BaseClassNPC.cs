@@ -153,11 +153,43 @@ public class BaseClassNPC : MonoBehaviour
             return false;
         }
     }//HasLineOfSightTo
-    public void PlaySound(string sound)
+
+    public void PlaySound(string _sound)
     {
         if (FindObjectOfType<SoundManager>())
         {
-            FindObjectOfType<SoundManager>().SoundPlay(sound);
+            FindObjectOfType<SoundManager>().SoundPlay(_sound);
+        }
+        else
+        {
+            Debug.Log("Can't find SoundManager");
+        }
+    }//PlaySound
+
+    public void PlaySound(string _sound,bool _stop)
+    {
+        if (FindObjectOfType<SoundManager>())
+        {
+            if(_stop == false)
+            {
+                FindObjectOfType<SoundManager>().SoundPlay(_sound);
+            }
+            else if (_stop == true)
+            {
+                FindObjectOfType<SoundManager>().SoundStop(_sound);
+            }
+        }
+        else
+        {
+            Debug.Log("Can't find SoundManager");
+        }
+    }//PlaySound
+
+    public void PlaySoundRepeat(string _sound)
+    {
+        if (FindObjectOfType<SoundManager>())
+        {
+            FindObjectOfType<SoundManager>().SoundRepeatWOInterrupt(_sound);
         }
         else
         {
