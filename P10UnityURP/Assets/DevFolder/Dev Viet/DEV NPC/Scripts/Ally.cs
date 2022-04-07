@@ -109,6 +109,7 @@ public class Ally : BaseClassNPC
         if (currHealth <= 0)
         {
             isAllyDead = true;
+            PlaySound("PlayerAllyDowned");
             gameObject.GetComponentInChildren<Image>().enabled = true;
         }
     }//Update
@@ -155,9 +156,9 @@ public class Ally : BaseClassNPC
                 else if (enemyDistance > runAwayDistance) //If enemies are not too close, move closer
                 {
                     agent.stoppingDistance = 6f;
+                    agent.SetDestination(m2target.transform.position);
                     if(HasLineOfSightTo(m2target, runAwayDistance)) //If the width of their body
                     {
-                        agent.SetDestination(m2target.transform.position);
                         if(sphereHit.transform.gameObject.tag != "Enemy")
                         {
                             agent.stoppingDistance = 5.1f;
@@ -222,6 +223,7 @@ public class Ally : BaseClassNPC
         while(reviveCurrent < reviveMax)
         {
             reviveCurrent += reviveMax / reviveRate;
+            //Add soundloop for reviving in progress here
             if (reviveCurrent >= reviveMax)
             {
                 isAllyDead = false;
@@ -229,6 +231,7 @@ public class Ally : BaseClassNPC
                 currHealth = maxHealth;
                 reviveCurrent = 0;
                 reviveBarFill.fillAmount = 0;
+                PlaySound("ReviveEnd");
                 isRevived = true;
                 yield return new WaitForSeconds(0.1f);
                 isRevived = false;
@@ -248,6 +251,7 @@ public class Ally : BaseClassNPC
         debuffMan.RestorePlayerSpeed();
         player.GetComponent<PlayerHealthManager>().isDebuffable = false;
         canCureDebuff = false;
+        PlaySound("AllyCureDebuff");
         StartCoroutine(player.GetComponent<PlayerHealthManager>().DebuffImmunity());
         //Debug.Log(gameObject+" Dispel Cooldown Start");
         yield return new WaitForSeconds(4f);

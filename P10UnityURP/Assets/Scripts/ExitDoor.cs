@@ -21,7 +21,16 @@ public class ExitDoor : MonoBehaviour
         if (remainingEnemies.Count == 0)
         {
             //Debug.Log("all enemies are dead");
+            if (FindObjectOfType<SoundManager>())
+            {
+                FindObjectOfType<SoundManager>().SoundPlay("DoorOpen");
+            }
             Destroy(gameObject);
         }
+    }
+
+    public void RemoveFromList(GameObject _enemy)
+    {
+        remainingEnemies.Remove(_enemy);
     }
 }

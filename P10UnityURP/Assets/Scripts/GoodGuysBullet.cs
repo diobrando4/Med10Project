@@ -46,6 +46,10 @@ public class GoodGuysBullet : BulletController
             }
             else
             {
+                if (FindObjectOfType<SoundManager>())
+                {
+                    FindObjectOfType<SoundManager>().SoundPlay("BulletImpact");
+                }
                 Destroy(gameObject);  
             }
         }

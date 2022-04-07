@@ -1829,6 +1829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d5ac84cffdffb458efa9b9bdb4b3eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   inCombat: 0
   damageGiven: 0
   maxHealth: 0

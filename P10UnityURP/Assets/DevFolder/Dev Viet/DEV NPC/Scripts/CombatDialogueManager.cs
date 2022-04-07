@@ -311,37 +311,45 @@ public class CombatDialogueManager : MonoBehaviour
             case 1://Getting hit themselves
                 //Debug.Log(ally1CombatLines[Random.Range(0,3)]);
                 dialogueTrigger = false;
+                ally1Health.PlaySound("Ally1Talk"+Random.Range(0,5));
                 return ally1CombatLines[Random.Range(0,3)];
 
             case 2://Reaching 0 HP themselves
                 //Debug.Log(ally1CombatLines[Random.Range(2,6)]);
                 dialogueTrigger = false;
+                ally1Health.PlaySound("Ally1Talk"+Random.Range(0,5));
                 return ally1CombatLines[Random.Range(2,6)];
 
             case 3://Player hit
                 //Debug.Log(ally1CombatLines[Random.Range(6,9)]);
                 dialogueTrigger = false;
+                ally1Health.PlaySound("Ally1Talk"+Random.Range(0,5));
                 return ally1CombatLines[Random.Range(6,9)];
 
             case 4://Player downed
                 //Debug.Log(ally1CombatLines[Random.Range(9,12)]);
                 dialogueTrigger = false;
+                ally1Health.PlaySound("Ally1Talk"+Random.Range(0,5));
                 return ally1CombatLines[Random.Range(9,12)];    
 
             case 5://Ally revived by Player
                 dialogueTrigger = false;
+                ally1Health.PlaySound("Ally1Talk"+Random.Range(0,5));
                 return ally1CombatLines[Random.Range(12,15)];
 
             case 6://Ally reviving player
                 dialogueTrigger = false;
+                ally1Health.PlaySound("Ally1Talk"+Random.Range(0,5));
                 return ally1CombatLines[Random.Range(15,18)];
 
             case 7://Ally removing debuff on player
                 dialogueTrigger = false;
+                ally1Health.PlaySound("Ally1Talk"+Random.Range(0,5));
                 return ally1CombatLines[Random.Range(18,21)];
 
             case 8://Ally reports no more enemies in level
                 dialogueTrigger = false;
+                ally1Health.PlaySound("Ally1Talk"+Random.Range(0,5));
                 return ally1CombatLines[Random.Range(21,24)];
 
             default:
@@ -356,37 +364,45 @@ public class CombatDialogueManager : MonoBehaviour
             case 1://Getting hit themselves
                 //Debug.Log(ally2CombatLines[Random.Range(0,3)]);
                 dialogueTrigger = false;
+                ally2Health.PlaySound("Ally2Talk"+Random.Range(0,5));
                 return ally2CombatLines[Random.Range(0,3)];
 
             case 2://Reaching 0 HP themselves
                 //Debug.Log(ally2CombatLines[Random.Range(2,6)]);
                 dialogueTrigger = false;
+                ally2Health.PlaySound("Ally2Talk"+Random.Range(0,5));
                 return ally2CombatLines[Random.Range(2,6)];
 
             case 3://Player hit
                 //Debug.Log(ally2CombatLines[Random.Range(6,9)]);
                 dialogueTrigger = false;
+                ally2Health.PlaySound("Ally2Talk"+Random.Range(0,5));
                 return ally2CombatLines[Random.Range(6,9)];
 
             case 4://Player downed
                 //Debug.Log(ally2CombatLines[Random.Range(9,12)]);
                 dialogueTrigger = false;
+                ally2Health.PlaySound("Ally2Talk"+Random.Range(0,5));
                 return ally2CombatLines[Random.Range(9,12)];    
             
             case 5://Ally revived by Player
                 dialogueTrigger = false;
+                ally2Health.PlaySound("Ally2Talk"+Random.Range(0,5));
                 return ally2CombatLines[Random.Range(12,15)];
 
             case 6://Ally reviving player
                 dialogueTrigger = false;
+                ally2Health.PlaySound("Ally2Talk"+Random.Range(0,5));
                 return ally2CombatLines[Random.Range(15,18)];
 
             case 7://Ally removing debuff on player
                 dialogueTrigger = false;
+                ally2Health.PlaySound("Ally2Talk"+Random.Range(0,5));
                 return ally2CombatLines[Random.Range(18,21)];
 
             case 8://Ally reports no more enemies in level
                 dialogueTrigger = false;
+                ally2Health.PlaySound("Ally2Talk"+Random.Range(0,5));
                 return ally2CombatLines[Random.Range(21,24)];
 
             default:

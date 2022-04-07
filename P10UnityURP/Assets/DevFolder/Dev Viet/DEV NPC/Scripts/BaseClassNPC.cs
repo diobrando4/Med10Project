@@ -46,7 +46,7 @@ public class BaseClassNPC : MonoBehaviour
     void Awake()
     {
         rayOffset = new Vector3(0,0,0);
-
+        inCombat = true;
         if (debuffMan == null)
         {
             debuffMan = GameObject.Find("DebuffManager").GetComponent<DebuffManager>();
@@ -91,20 +91,18 @@ public class BaseClassNPC : MonoBehaviour
         agent.SetDestination(target2Follow.transform.position);
     }//Follow
 
-    //Function that destroys GameObject on 0 or less HP. Can be changed to a disable
-    protected void DestroyOnDeath()
-    {
-        if (currHealth <= 0)
-        {
-            Destroy(gameObject);
-            isDead = true;
-        }
-    }//DestroyOnDeath
-
     //Call function to reduce health
     public void DamageTaken(int damage)
     {
         currHealth -= damage;
+        if(gameObject.tag == "Enemy")
+        {
+            PlaySound("EnemyHurt");
+        }
+        else if(gameObject.tag == "GoodGuys")
+        {
+            PlaySound("PlayerAllyHurt");
+        }
     }//DamageTaken
 
     //Function that dictates shooting the nearest GameObject
@@ -129,6 +127,7 @@ public class BaseClassNPC : MonoBehaviour
                         {
                             shotCounter = fireRate;
                             BulletController newBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
+                            PlaySound("Gunshot");
                             newBullet.speed = projectileSpeed;
                         }
                     }
@@ -154,4 +153,15 @@ public class BaseClassNPC : MonoBehaviour
             return false;
         }
     }//HasLineOfSightTo
+    public void PlaySound(string sound)
+    {
+        if (FindObjectOfType<SoundManager>())
+        {
+            FindObjectOfType<SoundManager>().SoundPlay(sound);
+        }
+        else
+        {
+            Debug.Log("Can't find SoundManager");
+        }
+    }
 }

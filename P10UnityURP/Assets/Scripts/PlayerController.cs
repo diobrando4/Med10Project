@@ -94,6 +94,13 @@ public class PlayerController : MonoBehaviour
                         StartCoroutine(Dash());
                     }
                 }
+                else
+                {
+                    if(FindObjectOfType<SoundManager>())
+                    {  
+                        FindObjectOfType<SoundManager>().SoundPlay("DodgeNoCharge");
+                    }
+                }
                 
             }
         }
@@ -134,6 +141,10 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("isPlayerKillable: " + playerHealthScript.isPlayerKillable);
         
         moveSpeed *= dashSpeed;
+        if(FindObjectOfType<SoundManager>())
+        {
+            FindObjectOfType<SoundManager>().SoundPlay("Dodge"+Random.Range(0,4));
+        }
 
         yield return new WaitForSeconds(dashTime);
 

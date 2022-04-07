@@ -85,6 +85,10 @@ public class DebuffManager : MonoBehaviour
         if(playerHPMan.isDebuffable == true){
             playerHPMan.isDebuffed = true;
             playerCont.moveSpeed = newSpeed;
+            if(FindObjectOfType<SoundManager>())
+            {
+                FindObjectOfType<SoundManager>().SoundPlay("PlayerDebuffed");
+            }
         }
     }
     //Revert player speed to default
@@ -103,7 +107,11 @@ public class DebuffManager : MonoBehaviour
         if(playerHPMan.isDebuffable == true){
             playerHPMan.isDebuffed = true;
             playerHPMan.playerMaxHealth = newHealth;
-            playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth;   
+            playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth;  
+            if(FindObjectOfType<SoundManager>())
+            {
+                FindObjectOfType<SoundManager>().SoundPlay("PlayerDebuffed");
+            } 
         }
     }
     //Revert player MaxHP to default

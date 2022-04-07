@@ -44,7 +44,119 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: PlayerHurt
-    clip: {fileID: 8300000, guid: 07ee1daa05f8a164fb400c4f26ace5fd, type: 3}
-    volume: 1
+  - name: 
+    clip: {fileID: 8300000, guid: 4d77ff7860a77924eb98a5e05e5c4633, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 188c0e5f13f47734f8f45e71b4fa64fe, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: fdf865dd611d4b14394af9e3fdbc7186, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 3b45142175fa7f54d896c3467eb63c78, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 0e3b33c92a13c2a4091ac86f667048fc, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 6270ecd8f4595184da302209868b59dd, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: a59518625786f204ea3cce9712bc3068, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: cbb0254de8649d94b9e190fc692c0b71, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 49d38306032b09548b7094579240c245, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: edb3ec38f8e5b65429cfa8ee32c51258, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 7c6f056a10fc3e1479a9c0caf0b8f000, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 3d8849483fc47d54f92ed4e874d82197, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: e2a114f4ef2573946bc71d1c84185261, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 8e4b5ace009e82c46808a894faf4035a, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: cc3871202ae8cc34299f9201952f8d56, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 44b3f77ba52cb574fb6146cb8dd57d46, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: cc224bf369e2a444394f8375d1b6fc14, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: c91532db6f5507d4d8c90209f37188cb, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 4ccce66235bd6e545b3a1a9d0beca903, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: ca9736a425fe8874d9ab9e8d4659ec25, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 2ca6f4c0b54febc4a9d32945406493bb, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: a94b33ee55426164da2bcb36f34772ef, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: b0cee95ff673347489e5b3109c28bb3e, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: f889ee1e825151e4c99e1ddbd9e9e86d, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 67fbb300af26e19478b47ad6fd9eb85b, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: a956908e716e34d4f862984ff09ed602, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 43d7f162f68e6324a931f76ecb47fdd9, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 69cb49f905e0e1f49aeaa4f18e169bdc, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 5e6f991eb359f1a4d9f7b6eee618c53a, type: 3}
+    volume: 0.1
     source: {fileID: 0}

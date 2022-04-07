@@ -25,6 +25,10 @@ public class PlayerGunController : MonoBehaviour
                 shotCounter = timeBetweenShots;
                 GoodGuysBullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as GoodGuysBullet;
                 newBullet.speed = bulletSpeed;
+                if (FindObjectOfType<SoundManager>())
+                {
+                    FindObjectOfType<SoundManager>().SoundPlay("Gunshot");
+                }
             }
         }
         else

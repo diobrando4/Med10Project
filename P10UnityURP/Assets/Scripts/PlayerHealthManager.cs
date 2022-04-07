@@ -66,8 +66,21 @@ public class PlayerHealthManager : MonoBehaviour
         if (isPlayerKillable == true)
         {
             playerCurrentHealth -= damageTaken;
-            FindObjectOfType<SoundManager>().SoundPlay("PlayerHurt");
             healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
+            if(playerCurrentHealth <= 0)
+            {
+                if (FindObjectOfType<SoundManager>())
+                {
+                    FindObjectOfType<SoundManager>().SoundPlay("PlayerAllyDowned");
+                }
+            }
+            else
+            {
+                if (FindObjectOfType<SoundManager>())
+                {
+                    FindObjectOfType<SoundManager>().SoundPlay("PlayerAllyHurt");
+                }
+            }
         }
     }
 
@@ -103,6 +116,7 @@ public class PlayerHealthManager : MonoBehaviour
         while(reviveCurrent < reviveMax)
         {
             reviveCurrent += reviveMax / reviveRate;
+            //Add ReviveSound on a loop
             if (reviveCurrent >= reviveMax)
             {
                 isBeingRevived = false;
@@ -113,6 +127,10 @@ public class PlayerHealthManager : MonoBehaviour
                 reviveBarFill.fillAmount = 0;
                 gameObject.GetComponentInChildren<Image>().enabled = false;
                 healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
+                if (FindObjectOfType<SoundManager>())
+                {
+                    FindObjectOfType<SoundManager>().SoundPlay("ReviveEnd");
+                }
             }
             // fill revive bar here
             reviveBarFill.fillAmount = reviveCurrent / reviveMax;

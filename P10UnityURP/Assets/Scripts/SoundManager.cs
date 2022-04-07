@@ -26,6 +26,7 @@ public class SoundManager : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
+            s.name = s.clip.name;
 
             s.source.volume = s.volume;
             // you can also do this for: pitch, loop, etc.

@@ -21,6 +21,21 @@ public class BaseClassEnemy : BaseClassNPC
 
     }
 
+    //Function that destroys GameObject on 0 or less HP. Can be changed to a disable
+    protected void DestroyOnDeath()
+    {
+        if (currHealth <= 0)
+        {
+            if(FindObjectOfType<ExitDoor>())
+            {
+                FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+            }
+            isDead = true;
+            PlaySound("EnemyKilled");
+            Destroy(gameObject);
+        }
+    }//DestroyOnDeath
+
     //When damaging target, destroy self
     protected void SuicideSingleAttack(GameObject victim)
     {
@@ -31,13 +46,13 @@ public class BaseClassEnemy : BaseClassNPC
             {
                 victim.GetComponent<Ally>().DamageTaken(damageGiven);
                 hasDamaged = true;
-                Destroy(gameObject);
+                DestroyOnDeath();
             }
             else if(victim.tag == "Player")
             {
                 victim.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
                 hasDamaged = true;
-                Destroy(gameObject);
+                DestroyOnDeath();
             }
         }
     }//SuicideSingleAttack
@@ -53,7 +68,7 @@ public class BaseClassEnemy : BaseClassNPC
                 victim.GetComponent<Ally>().DamageTaken(damageGiven);
                 
                 hasDamaged = true;
-                Destroy(gameObject);
+                DestroyOnDeath();
             }
             else if(victim.tag == "Player")
             {
@@ -61,7 +76,7 @@ public class BaseClassEnemy : BaseClassNPC
                 //victim.GetComponent<PlayerHealthManager>().isDebuffed = true;
                 debuffMan.DebuffSelector(debuffNum);
                 hasDamaged = true;
-                Destroy(gameObject);
+                DestroyOnDeath();
             }
         }
     }//SuicideSingleAttack

@@ -45,6 +45,10 @@ public class EnemyBullet : BulletController
             }
             else //If it collides with anything else, Destroy self
             {
+                if (FindObjectOfType<SoundManager>())
+                {
+                    FindObjectOfType<SoundManager>().SoundPlay("BulletImpact");
+                }
                 Destroy(gameObject);
             }
         }
