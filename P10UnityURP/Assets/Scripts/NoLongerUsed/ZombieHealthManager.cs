@@ -24,10 +24,23 @@ public class ZombieHealthManager : MonoBehaviour
             // if we don't do this and there isn't an exit door; then zombies can't be destroyed and we'll get a lot of errors
             if (exitDoor != null)
             {
+                // removes enemy from a list; to open the exit door when all enemies are dead
                 exitDoor.remainingEnemies.Remove(gameObject);
             }
             Destroy(gameObject);
         }
+
+        // this is just for testing
+        /*
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            if (exitDoor != null)
+            {
+                exitDoor.remainingEnemies.Remove(gameObject);
+            }
+            Destroy(gameObject);
+        }
+        */
     }
 
     public void HurtZombie(int damageTaken)

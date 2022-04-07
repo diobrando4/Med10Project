@@ -76,7 +76,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1277098463529061975
 Transform:
@@ -1585,6 +1585,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door0
       objectReference: {fileID: 0}
+    - target: {fileID: 404104020575261507, guid: 2a54084155c05d74e9fb7438f53a815a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4009532502261577189, guid: 2a54084155c05d74e9fb7438f53a815a, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1643,11 +1647,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a54084155c05d74e9fb7438f53a815a, type: 3}
+--- !u!1 &1450863034325123972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 404104020575261507, guid: 2a54084155c05d74e9fb7438f53a815a, type: 3}
+  m_PrefabInstance: {fileID: 1277098462693019847}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8994834424128236815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7885020136378056136, guid: 2a54084155c05d74e9fb7438f53a815a, type: 3}
   m_PrefabInstance: {fileID: 1277098462693019847}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1597683613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450863034325123972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5841c6895c33aea44993b48bbb6060df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  remainingEnemies: []
 --- !u!1001 &1277098464456455822
 PrefabInstance:
   m_ObjectHideFlags: 0
