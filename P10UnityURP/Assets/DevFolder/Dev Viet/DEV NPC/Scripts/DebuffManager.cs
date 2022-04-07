@@ -45,8 +45,8 @@ public class DebuffManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //  if (Input.GetKeyDown(KeyCode.Space))
-        //  DebuffSelector(selectorNum);
+         if (Input.GetKeyDown(KeyCode.Space))
+         DebuffSelector(selectorNum);
     }
 
     public void DebuffSelector (int number)

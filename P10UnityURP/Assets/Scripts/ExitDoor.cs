@@ -27,6 +27,7 @@ public class ExitDoor : MonoBehaviour
             }
             Destroy(gameObject);
         }
+        remainingEnemies.RemoveAll(item => item == null);
     }
 
     public void RemoveFromList(GameObject _enemy)

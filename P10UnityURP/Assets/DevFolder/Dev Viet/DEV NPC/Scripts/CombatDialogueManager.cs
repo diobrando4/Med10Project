@@ -43,6 +43,8 @@ public class CombatDialogueManager : MonoBehaviour
     //public int endAtLine;
 
     private bool dialogueTrigger = false;
+    private bool checkClear = false;
+    private bool checkDebuff = false;
     private bool checkIfAlly1Downed = false;
     private bool checkIfAlly2Downed = false;
     private bool checkIfPlayerDowned = false;
@@ -168,8 +170,14 @@ public class CombatDialogueManager : MonoBehaviour
             dialogueTrigger = false;
             if (dialogueTrigger == false && checkIfPlayerDowned == false)
             {
-                ShowFloatingTextAlly1(ResponseAlly1(3));
-                ShowFloatingTextAlly2(ResponseAlly2(3));  
+                if (checkIfAlly1Downed == false)
+                {
+                    ShowFloatingTextAlly1(ResponseAlly1(3));
+                }
+                if (checkIfAlly2Downed == false)
+                {
+                    ShowFloatingTextAlly2(ResponseAlly2(3));
+                }
                 playerHPTracker = playerHealth.playerCurrentHealth; 
                 dialogueTrigger = true;
                 //Debug.Log("Player HP: "+playerHPTracker+" | "+playerHealth.playerCurrentHealth);
@@ -181,8 +189,14 @@ public class CombatDialogueManager : MonoBehaviour
             dialogueTrigger = false;
             if (dialogueTrigger == false && checkIfPlayerDowned == false)
             {
-                ShowFloatingTextAlly1(ResponseAlly1(4));
-                ShowFloatingTextAlly2(ResponseAlly2(4));  
+                if (checkIfAlly1Downed == false)
+                {
+                    ShowFloatingTextAlly1(ResponseAlly1(4));
+                }
+                if (checkIfAlly2Downed == false)
+                {
+                    ShowFloatingTextAlly2(ResponseAlly2(4));
+                }
                 playerHPTracker = playerHealth.playerCurrentHealth; 
                 dialogueTrigger = true;
                 checkIfPlayerDowned = true;
@@ -254,43 +268,59 @@ public class CombatDialogueManager : MonoBehaviour
         if(ally1Health.isUsingDispel == true)
         {
             dialogueTrigger = false;
-            if(dialogueTrigger == false && checkIfAlly1Downed == false)
+            if(dialogueTrigger == false && checkIfAlly1Downed == false && checkDebuff == false)
             {
                 ShowFloatingTextAlly1(ResponseAlly1(7));
                 dialogueTrigger = true;
+                checkDebuff = true;
             }
+        }
+        else
+        {
+            checkDebuff = false;
         }
 
         //If Ally2 is Removing Debuff on Player
         if(ally2Health.isUsingDispel == true)
         {
             dialogueTrigger = false;
-            if(dialogueTrigger == false && checkIfAlly1Downed == false)
+            if(dialogueTrigger == false && checkIfAlly1Downed == false && checkDebuff == false)
             {
                 ShowFloatingTextAlly2(ResponseAlly2(7));
                 dialogueTrigger = true;
+                checkDebuff = true;
             }
+        }
+        else
+        {
+            checkDebuff = false;
         }
 
         //If there are no more enemies on the floor
-        // if(ally1Health.inCombat == false)
-        // {
-        //     dialogueTrigger = false;
-        //     if(dialogueTrigger == false && checkIfAlly1Downed == false)
-        //     {
-        //         ShowFloatingTextAlly1(ResponseAlly1(8));
-        //         dialogueTrigger = true;
-        //     }
-        // }
-        // if(ally2Health.inCombat == false)
-        // {
-        //     dialogueTrigger = false;
-        //     if(dialogueTrigger == false && checkIfAlly2Downed == false)
-        //     {
-        //         ShowFloatingTextAlly2(ResponseAlly2(8));
-        //         dialogueTrigger = true;
-        //     }
-        // }
+        if(ally1Health.inCombat == false && FindObjectOfType<ExitDoor>() == null)
+        {
+            dialogueTrigger = false;
+            if(dialogueTrigger == false && checkClear == false)
+            {
+                if (checkIfAlly1Downed == false)
+                {
+                    ShowFloatingTextAlly1(ResponseAlly1(8));
+                }
+                if (checkIfAlly2Downed == false)
+                {
+                    ShowFloatingTextAlly2(ResponseAlly2(8));
+                }
+                dialogueTrigger = true;
+                checkClear = true;
+            }
+        }
+        else
+        {
+            if(FindObjectOfType<ExitDoor>() != null)
+            {
+                checkClear = false;
+            }
+        }
 
         //FOR DEBUGGING
         // if (Input.GetKeyDown(KeyCode.Space))

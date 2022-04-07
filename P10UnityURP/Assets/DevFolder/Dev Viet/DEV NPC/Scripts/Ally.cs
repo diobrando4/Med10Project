@@ -249,17 +249,20 @@ public class Ally : BaseClassNPC
     //Restores Player speed and MaxHP default values, then enter a cooldown before it can be reapplied
     private IEnumerator Dispel()
     {
-        yield return new WaitForSeconds(1f);
-        debuffMan.RestorePlayerHealth();
-        debuffMan.RestorePlayerSpeed();
-        player.GetComponent<PlayerHealthManager>().isDebuffable = false;
-        canCureDebuff = false;
-        PlaySound("AllyCureDebuff");
-        StartCoroutine(player.GetComponent<PlayerHealthManager>().DebuffImmunity());
-        //Debug.Log(gameObject+" Dispel Cooldown Start");
-        yield return new WaitForSeconds(4f);
-        canCureDebuff = true;
-        //Debug.Log(gameObject+" Dispel Cooldown End");
-        yield break;
+        if(canCureDebuff == true)
+        {
+            PlaySound("AllyCureDebuff");
+            canCureDebuff = false;
+            yield return new WaitForSeconds(1f);
+            debuffMan.RestorePlayerHealth();
+            debuffMan.RestorePlayerSpeed();
+            player.GetComponent<PlayerHealthManager>().isDebuffable = false;
+            StartCoroutine(player.GetComponent<PlayerHealthManager>().DebuffImmunity());
+            //Debug.Log(gameObject+" Dispel Cooldown Start");
+            yield return new WaitForSeconds(4f);
+            canCureDebuff = true;
+            //Debug.Log(gameObject+" Dispel Cooldown End");
+            yield break;    
+        }
     }//Dispel
 }

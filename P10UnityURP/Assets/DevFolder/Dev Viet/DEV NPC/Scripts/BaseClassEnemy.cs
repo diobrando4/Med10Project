@@ -46,13 +46,23 @@ public class BaseClassEnemy : BaseClassNPC
             {
                 victim.GetComponent<Ally>().DamageTaken(damageGiven);
                 hasDamaged = true;
-                DestroyOnDeath();
+                if(FindObjectOfType<ExitDoor>())
+                {
+                    FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                }
+                PlaySound("EnemyKilled");
+                Destroy(gameObject);
             }
             else if(victim.tag == "Player")
             {
                 victim.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
                 hasDamaged = true;
-                DestroyOnDeath();
+                if(FindObjectOfType<ExitDoor>())
+                {
+                    FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                }                
+                PlaySound("EnemyKilled");
+                Destroy(gameObject);
             }
         }
     }//SuicideSingleAttack
@@ -68,7 +78,12 @@ public class BaseClassEnemy : BaseClassNPC
                 victim.GetComponent<Ally>().DamageTaken(damageGiven);
                 
                 hasDamaged = true;
-                DestroyOnDeath();
+                if(FindObjectOfType<ExitDoor>())
+                {
+                    FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                }                
+                PlaySound("EnemyKilled");
+                Destroy(gameObject);
             }
             else if(victim.tag == "Player")
             {
@@ -76,7 +91,12 @@ public class BaseClassEnemy : BaseClassNPC
                 //victim.GetComponent<PlayerHealthManager>().isDebuffed = true;
                 debuffMan.DebuffSelector(debuffNum);
                 hasDamaged = true;
-                DestroyOnDeath();
+                if(FindObjectOfType<ExitDoor>())
+                {
+                    FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                }                
+                PlaySound("EnemyKilled");
+                Destroy(gameObject);
             }
         }
     }//SuicideSingleAttack
