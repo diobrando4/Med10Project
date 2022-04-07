@@ -94,7 +94,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4f473b9f381867c46a36697ff1237d88, type: 2}
+  - {fileID: 2100000, guid: 74193530bc9d5ef41821c1e943907456, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eec9fcfa1c412d40867214b8c63ae73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   inCombat: 0
   damageGiven: 0
   maxHealth: 0
@@ -249,7 +250,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4f473b9f381867c46a36697ff1237d88, type: 2}
+  - {fileID: 2100000, guid: 74193530bc9d5ef41821c1e943907456, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
