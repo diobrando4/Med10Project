@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet : BulletController
+public class EnemyDebuffBullet : BulletController
 {
+    public int debuff2Use;
+    // Start is called before the first frame update
     void Start()
     {
         lifeTime = 3.0f;
         damageGiven = 1;
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();        
     }
 
     // Update is called once per frame
@@ -23,10 +25,9 @@ public class EnemyBullet : BulletController
             Destroy(gameObject);
         }
     }
-
-    // for when bullets hit something (seems like you need rigidbody to make this work)
+// for when bullets hit something (seems like you need rigidbody to make this work)
     void OnCollisionEnter(Collision col)
     {
-        EnemyBulletFilter(col,0);
+        EnemyBulletFilter(col,debuff2Use);
     } // OnCollisionEnter
 }

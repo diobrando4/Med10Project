@@ -12,8 +12,10 @@ public class DebuffManager : MonoBehaviour
     private GameObject player;
     private PlayerController playerCont;
     private PlayerHealthManager playerHPMan;
+    private PlayerGunController playerGunCont;
     private float playerDefaultSpeed;
     private float playerDefaultHealth;
+    private float playerDefaultFireRate;
     //Ally related variables
     private Ally ally1;
     private Ally ally2;
@@ -21,6 +23,7 @@ public class DebuffManager : MonoBehaviour
     private float slowedSpeed = 3;
     private float reverseSpeed = -5;
     private float reducedHealth = 3;
+    private float reducedFireRate = 0.50f;
     //State related variables
     public int selectorNum = 0;
     //public bool isActive = false;
@@ -32,9 +35,11 @@ public class DebuffManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerCont = player.GetComponent<PlayerController>();
         playerHPMan = player.GetComponent<PlayerHealthManager>();
+        playerGunCont = player.transform.Find("GunCube").GetComponent<PlayerGunController>();
 
         playerDefaultSpeed = playerCont.moveSpeed;
         playerDefaultHealth = playerHPMan.playerMaxHealth;
+        playerDefaultFireRate = playerGunCont.timeBetweenShots;
     
         if (ally1 == null)
         ally1 = GameObject.Find("AllyBlueBot").GetComponent<Ally>();
@@ -45,8 +50,8 @@ public class DebuffManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if (Input.GetKeyDown(KeyCode.Space))
-         DebuffSelector(selectorNum);
+        //  if (Input.GetKeyDown(KeyCode.Space))
+        //  DebuffSelector(selectorNum);
     }
 
     public void DebuffSelector (int number)
@@ -54,7 +59,7 @@ public class DebuffManager : MonoBehaviour
         switch (number)
         {
             case 0: //No Debuff
-                debuffText = "All Clear!";
+                debuffText = "";
                 break;
 
             case 1: //Slow player
@@ -72,6 +77,11 @@ public class DebuffManager : MonoBehaviour
                 debuffText = "Reduced Health!";
                 break;
 
+            case 4: //Reduce Fire Rate
+                ChangePlayerFireRate(reducedFireRate);
+                debuffText = "Reduced Fire Rate!";
+                break;
+
             default:
                 Debug.Log("Not a valid int");
                 debuffText = "ERROR! no seriously";
@@ -82,7 +92,8 @@ public class DebuffManager : MonoBehaviour
     //Change player speed, return to default if deactivated
     public void ChangePlayerSpeed(float newSpeed)
     {
-        if(playerHPMan.isDebuffable == true){
+        if(playerHPMan.isDebuffable == true)
+        {
             playerHPMan.isDebuffed = true;
             playerCont.moveSpeed = newSpeed;
             if(FindObjectOfType<SoundManager>())
@@ -104,7 +115,8 @@ public class DebuffManager : MonoBehaviour
     //Not sure what to do if the player has lost health and the debuff goes away
     public void ChangePlayerHealth(float newHealth)
     {
-        if(playerHPMan.isDebuffable == true){
+        if(playerHPMan.isDebuffable == true)
+        {
             playerHPMan.isDebuffed = true;
             playerHPMan.playerMaxHealth = newHealth;
             playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth;  
@@ -114,12 +126,35 @@ public class DebuffManager : MonoBehaviour
             } 
         }
     }
+
     //Revert player MaxHP to default
     public void RestorePlayerHealth()
     {
         playerHPMan.isDebuffed = false;
         playerHPMan.playerMaxHealth = playerDefaultHealth;
         playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth; //For now, restores curr HP to max HP
+        debuffText = "";
+    }
+
+    //Change Player FireRate
+    public void ChangePlayerFireRate(float newFireRate)
+    {
+        if (playerHPMan.isDebuffable == true)
+        {
+            playerHPMan.isDebuffed = true;
+            playerGunCont.timeBetweenShots = newFireRate;
+            if(FindObjectOfType<SoundManager>())
+            {
+                FindObjectOfType<SoundManager>().SoundPlay("PlayerDebuffed");
+            } 
+        }
+    }
+
+    //Restore Player FireRate
+    public void RestorePlayerFireRate()
+    {
+        playerHPMan.isDebuffed = false;
+        playerGunCont.timeBetweenShots = playerDefaultFireRate;
         debuffText = "";
     }
 }

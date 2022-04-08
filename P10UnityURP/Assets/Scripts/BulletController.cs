@@ -31,4 +31,39 @@ public class BulletController : MonoBehaviour
     {
         _player.GetComponent<PlayerHealthManager>().HurtPlayer(_damage);
     }//HurtPlayerType
+
+    protected void EnemyBulletFilter(Collision other, int debuffNum)
+    {
+        if(other.gameObject.tag != "Projectile")
+        {
+            if(other.gameObject.tag == "GoodGuys") //If it hits something with tag GoodGuys
+            {
+                HurtNPCType(other.gameObject,damageGiven); //Hurt the given gO that was collided with
+                Destroy(gameObject);
+            }
+            else if(other.gameObject.tag == "Player") //If it hits something with tag Player
+            {
+                HurtPlayerType(other.gameObject,damageGiven); //Hurt player
+                FindObjectOfType<DebuffManager>().DebuffSelector(debuffNum);
+                Destroy(gameObject);
+            }
+            else if(other.gameObject.layer == gameObject.layer) //If it shares the same layer as this bullet, ignore collision
+            {
+                Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+            }
+            else //If it collides with anything else, Destroy self
+            {
+                if (FindObjectOfType<SoundManager>())
+                {
+                    FindObjectOfType<SoundManager>().SoundPlay("BulletImpact");
+                }
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            //If it hits something with the tag Projectile, ignore collision between the other bullet and itself
+            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+        }
+    }//EnemyBulletFilter
 }

@@ -77,8 +77,11 @@ public class BaseClassNPC : MonoBehaviour
             float curDist = diff.sqrMagnitude;
             if (curDist < distance)
             {
-                closestTarget = posCand;
-                distance = curDist;
+                if(posCand.GetComponent<PlayerHealthManager>().isPlayerDead == false || posCand.GetComponent<BaseClassNPC>().isDead == false) //Prevents enemy/ally from targeting already dead targets
+                {
+                    closestTarget = posCand;
+                    distance = curDist;
+                }
             }
         }
         return closestTarget;
@@ -117,11 +120,11 @@ public class BaseClassNPC : MonoBehaviour
                 Debug.DrawLine(transform.position + rayOffset, rayHit.point, Color.red);
 
                 shotCounter -= Time.deltaTime;
-                if(rayHit.transform != null) //If the ray is hitting something and it does not share the same tag as self
+                if(rayHit.transform != null) //If the ray is hitting something
                 {
                     if(rayHit.transform.gameObject.layer != gameObject.layer && 
                        rayHit.transform.gameObject.layer == LayerMask.NameToLayer("GoodGuys") || 
-                       rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy")) //If the object hit by the ray doesnt share the same layer as self, but is also on the layer GoodGuys/Enemy
+                       rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy")) //If the object hit by the ray doesnt share the same layer as self, but is also either on the layer GoodGuys/Enemy
                     {
                         if(shotCounter <= 0)
                         {

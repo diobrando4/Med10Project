@@ -39,7 +39,7 @@ public class Ally : BaseClassNPC
         maxHealth = 6;
         currHealth = maxHealth;
         distanceB4Shoot = 10; 
-        projectileSpeed = 10f;
+        projectileSpeed = 15f;
         fireRate = 0.75f;
         muzzle = gameObject.transform.Find("AllyGun/Muzzle");
 
@@ -256,6 +256,7 @@ public class Ally : BaseClassNPC
             yield return new WaitForSeconds(1f);
             debuffMan.RestorePlayerHealth();
             debuffMan.RestorePlayerSpeed();
+            debuffMan.RestorePlayerFireRate();
             player.GetComponent<PlayerHealthManager>().isDebuffable = false;
             StartCoroutine(player.GetComponent<PlayerHealthManager>().DebuffImmunity());
             //Debug.Log(gameObject+" Dispel Cooldown Start");

@@ -94,10 +94,9 @@ public class CombatDialogueManager : MonoBehaviour
                 ally2CombatLines.Add(textLinesCombat[i]);  
             }
         }
-        // if (endAtLine == 0)
-        // {
-        //     endAtLine = textLinesCombat.Length - 1;
-        // }
+        ShowFloatingTextAlly1("Lets Go!");
+        ShowFloatingTextAlly2("Ready");
+
     }
 
     // Update is called once per frame

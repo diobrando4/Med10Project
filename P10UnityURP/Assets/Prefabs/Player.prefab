@@ -4974,7 +4974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFiring: 0
   bullet: {fileID: 2098971575481728396, guid: 03c5e20a095d6fa4aa5bf2f892748f51, type: 3}
-  bulletSpeed: 5
+  bulletSpeed: 15
   timeBetweenShots: 0.2
   firePoint: {fileID: 2065505483405367239}
 --- !u!1 &2065505483258346518
@@ -5305,7 +5305,10 @@ MonoBehaviour:
   isDebuffable: 1
   isPlayerDead: 0
   isPlayerKillable: 1
-  reviveBarFill: {fileID: 0}
+  reviveMax: 100
+  reviveCurrent: 0
+  isBeingRevived: 0
+  revivingAlly: {fileID: 0}
 --- !u!195 &2065505483842465996
 NavMeshAgent:
   m_ObjectHideFlags: 0
