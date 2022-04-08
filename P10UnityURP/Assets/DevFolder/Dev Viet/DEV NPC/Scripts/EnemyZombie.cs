@@ -43,6 +43,7 @@ public class EnemyZombie : BaseClassEnemy
     void OnCollisionEnter(Collision other)
     {
         SuicideSingleAttack(other.gameObject); //From BaseClassEnemy
+        Debug.Log(other);
     }//OnCollisionEnter
 }
 

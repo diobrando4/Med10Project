@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8978342255219579049}
   m_Layer: 7
   m_Name: ArmCube1
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 8978342255377534609}
   m_Layer: 7
   m_Name: ArmCube2
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

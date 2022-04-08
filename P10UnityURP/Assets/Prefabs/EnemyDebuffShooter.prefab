@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8296648337095798724}
   m_Layer: 7
   m_Name: EnemyGun
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 2057941272484698869}
   m_Layer: 7
   m_Name: Muzzle
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 1668694049112551983}
   - component: {fileID: 2711009828338057043}
   - component: {fileID: 2085713565041705172}
+  - component: {fileID: 6201420283627469311}
   m_Layer: 7
   m_Name: EnemyDebuffShooter
   m_TagString: Enemy
@@ -781,3 +782,25 @@ MonoBehaviour:
   distanceB4Shoot: 0
   bullet: {fileID: 237088019972761527, guid: 79487e6a6c0565e4f9dcda927d84711f, type: 3}
   muzzle: {fileID: 0}
+--- !u!195 &6201420283627469311
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7727238486193816379}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.7
+  m_Speed: 0.1
+  m_Acceleration: 8
+  avoidancePriority: 30
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

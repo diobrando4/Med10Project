@@ -111,6 +111,7 @@ public class Ally : BaseClassNPC
         if (currHealth <= 0)
         {
             isAllyDead = true;
+            isDead = isAllyDead;
             PlaySound("PlayerAllyDowned");
             gameObject.GetComponentInChildren<Image>().enabled = true;
         }
@@ -230,6 +231,7 @@ public class Ally : BaseClassNPC
             if (reviveCurrent >= reviveMax)
             {
                 isAllyDead = false;
+                isDead = isAllyDead;
                 gameObject.GetComponentInChildren<Image>().enabled = false;
                 currHealth = maxHealth;
                 reviveCurrent = 0;

@@ -75,13 +75,33 @@ public class BaseClassNPC : MonoBehaviour
         {
             Vector3 diff = posCand.transform.position - pos;
             float curDist = diff.sqrMagnitude;
-            if (curDist < distance)
-            {
-                if(posCand.GetComponent<PlayerHealthManager>().isPlayerDead == false || posCand.GetComponent<BaseClassNPC>().isDead == false) //Prevents enemy/ally from targeting already dead targets
+             if (curDist < distance)
+             {
+                if(posCand.GetComponentInParent<PlayerHealthManager>())
                 {
-                    closestTarget = posCand;
-                    distance = curDist;
+                    if(posCand.GetComponentInParent<PlayerHealthManager>().isPlayerDead == false)
+                    {
+                        //if (curDist < distance)
+                        //{
+                        //Debug.Log(posCand);   
+                        closestTarget = posCand;
+                        distance = curDist; 
+                        //}
+                    } 
                 }
+                else if(posCand.GetComponent<BaseClassNPC>())
+                {
+                    if(posCand.GetComponent<BaseClassNPC>().isDead == false)
+                    {
+                        //if (curDist < distance)
+                        //{
+                        //Debug.Log(posCand);   
+                        closestTarget = posCand;
+                        distance = curDist; 
+                        //}
+                    }
+                    else{Debug.Log(posCand+" "+posCand.GetComponent<BaseClassNPC>().isDead);}
+                }                 
             }
         }
         return closestTarget;
