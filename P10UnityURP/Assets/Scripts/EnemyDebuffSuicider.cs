@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-//Child of BaseClassEnemy, Zombie enemy. A simple suicide damage dealer
-
-public class EnemyZombie : BaseClassEnemy
+public class EnemyDebuffSuicider : BaseClassEnemy
 {
     // Start is called before the first frame update
     void Start()
@@ -42,8 +40,7 @@ public class EnemyZombie : BaseClassEnemy
 
     void OnCollisionEnter(Collision other)
     {
-        SuicideSingleAttack(other.gameObject); //From BaseClassEnemy
+        SuicideSingleAttack(other.gameObject,2); //From BaseClassEnemy, Current Debuff is Reverse
         //Debug.Log(other);
     }//OnCollisionEnter
 }
-
