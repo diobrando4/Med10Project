@@ -2,33 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// either shove this script into the camera follow script, 
-// or call this script from another script
-
 public class TestScreenShake : MonoBehaviour
 {
-    // Update is called once per frame
+    // version 2
+    // singleton
+    public static TestScreenShake instance;
+    // can be assessed by: 
+    // TestScreenShake.instance.StartShake(.2f, .1f); // time, power
+    // can set specific values for different things, fx light shake on fire, heavy shake on damage, etc.
+
+    // version 2
+    private float shakeTimeRemaining;
+    private float shakePower;
+    private float shakeFadeTime;
+
+    void Start()
+    {
+        instance = this;
+    }
+
     void Update()
     {
+        // version 2
         // this is just for testing
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.U))
         {
-            //Debug.Log("screen shake");
-
-            // version 1
-            StartCoroutine(ShakeCamera(.15f, .4f));
-
-            // version 2
-
+            //Debug.Log("pressing U");
+            StartShake(1f, .4f); // time, power
         }
     }
 
-    public IEnumerator ShakeCamera(float duration, float magnitude)
+    void LateUpdate() // make use lateupdate rather than update?
+    {
+        // version 1
+        // this is just for testing
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            //Debug.Log("pressing Y");
+            StartCoroutine(Shaking(1f, .4f)); // duration, magnitude
+        }
+
+        // version 2
+        if (shakeTimeRemaining > 0)
+        {
+            shakeTimeRemaining -= Time.deltaTime;
+
+            float xAmount = Random.Range(-1f, 1f) * shakePower;
+            float yAmount = Random.Range(-1f, 1f) * shakePower;
+
+            transform.position += new Vector3(xAmount, yAmount, 0f);
+
+            shakePower = Mathf.MoveTowards(shakePower, 0f, shakeFadeTime * Time.deltaTime);
+        }
+    }
+    
+    // version 2
+    public void StartShake(float length, float power)
+    {
+        shakeTimeRemaining = length;
+        shakePower = power;
+
+        shakeFadeTime = power / length;
+    }
+
+    // version 1
+    public IEnumerator Shaking(float duration, float magnitude)
     {
         // get current position of camera
-        // this might not be a good way of doing this, since the camera might not placed at the right location yet, 
-        // becuase another script puts the camera into the correct position, which ight happen at a later point?
-        Vector3 originalPosition = transform.localPosition;
+        //Vector3 originalPosition = transform.localPosition;
+        //Vector3 originalPosition = transform.position;
 
         float elapsed = 0.0f;
 
@@ -38,7 +80,9 @@ public class TestScreenShake : MonoBehaviour
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
 
-            transform.localPosition = new Vector3(x, y, originalPosition.z);
+            //transform.localPosition += new Vector3(x, y, originalPosition.z);
+            //transform.position += new Vector3(x, y, originalPosition.z);
+            transform.position += new Vector3(x, y, 0f);
 
             elapsed += Time.deltaTime;
 
@@ -46,8 +90,7 @@ public class TestScreenShake : MonoBehaviour
         }
 
         // reset position of camera
-        transform.localPosition = originalPosition;
+        //transform.localPosition = originalPosition;
+        //transform.position = originalPosition;
     }
-
-
 }

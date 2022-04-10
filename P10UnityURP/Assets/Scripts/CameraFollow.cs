@@ -15,22 +15,19 @@ public class CameraFollow : MonoBehaviour
         // finds the player automatically
         target = GameObject.FindWithTag("Player").transform;
 
-        // version 1
         // in case we want to change the rotation of the camera in the script
         transform.rotation = Quaternion.Euler(55,0,0);
 
-        // in case we want to circumvent/bypass the inspector and set the values ourselves
+        // in case we want to bypass the inspector and set the values ourselves
         offset = new Vector3(0,16,-12);
     }
 
-    void LateUpdate()
+    void Update() // maybe use update rather than lateupdate?
     {
-        // version 1
-        // it's very basic but it works
-        transform.position = target.position + offset;
-
-        // version 2
-        // there isn't a version 2 yet
+        if (target != null)
+        {
+            transform.position = target.position + offset;
+        }
     }
 
     // the old version of this script

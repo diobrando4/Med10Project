@@ -13,6 +13,9 @@ public class TestDeath : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T))
         {
             Instantiate(deathParticle, transform.position, Quaternion.identity);
+
+            TestScreenShake.instance.StartShake(.2f, .5f);
+
             Destroy(gameObject); // this has to be last
         }
     }
