@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestScreenShake : MonoBehaviour
+public class CameraShake : MonoBehaviour
 {
     // version 2
     // singleton
-    public static TestScreenShake instance;
+    public static CameraShake instance;
     // can be assessed by: 
-    // TestScreenShake.instance.StartShake(.2f, .1f); // time, power
+    // CameraScreenShake.instance.StartShake(.2f, .1f); // time, power
     // can set specific values for different things, fx light shake on fire, heavy shake on damage, etc.
 
     // version 2
@@ -36,11 +36,13 @@ public class TestScreenShake : MonoBehaviour
     {
         // version 1
         // this is just for testing
+        /*
         if (Input.GetKeyDown(KeyCode.Y))
         {
             //Debug.Log("pressing Y");
             StartCoroutine(Shaking(1f, .4f)); // duration, magnitude
         }
+        */
 
         // version 2
         if (shakeTimeRemaining > 0)
