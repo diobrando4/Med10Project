@@ -20,10 +20,10 @@ public class DebuffManager : MonoBehaviour
     private Ally ally1;
     private Ally ally2;
     //Debuff related variables
-    private float slowedSpeed = 3;
-    private float reverseSpeed = -5;
-    private float reducedHealth = 3;
-    private float reducedFireRate = 0.50f;
+    private float slowedSpeed;
+    private float reverseSpeed;
+    private float reducedHealth; //Redacted Debuff
+    private float reducedFireRate; //Currently Unused
     //State related variables
     public int selectorNum = 0;
     //public bool isActive = false;
@@ -40,6 +40,9 @@ public class DebuffManager : MonoBehaviour
         playerDefaultSpeed = playerCont.moveSpeed;
         playerDefaultHealth = playerHPMan.playerMaxHealth;
         playerDefaultFireRate = playerGunCont.timeBetweenShots;
+        slowedSpeed = playerDefaultSpeed / 2;
+        reverseSpeed = playerDefaultSpeed * -1;
+        reducedFireRate = playerDefaultFireRate / 2;
     
         if (ally1 == null)
         ally1 = GameObject.Find("AllyBlueBot").GetComponent<Ally>();
