@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro; // used for the UI text dash counter
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,12 +26,13 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed = 10f; // multiplies the base speed of the player, the higher this is the faster the dash is
     public float dashTime = 0.1f; // the higher the number is; the longer the dash lasts
     // maybe dashCharges would be a better name than dashUses?
-    public int dashUses = 1; // how many times the player can dash before it needs to be reset
+    public int dashUses = 3; // how many times the player can dash
     private int dashUsesMax;
     public float cooldown = 3f;
     [SerializeField]
     private float cooldownTimer;
     ParticleSystem dashTrail;
+    public TextMeshProUGUI dashUsesText;
     
     void Awake()
     {
@@ -44,6 +46,12 @@ public class PlayerController : MonoBehaviour
         dashTrail = transform.Find("DashTrail").GetComponent<ParticleSystem>();
     }
 
+    void Start()
+    {
+        dashUsesText = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderPlayerDashCounter/TextDashCounter").GetComponent<TextMeshProUGUI>();
+        dashUsesText.text = "DASH: " + dashUses;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -55,6 +63,8 @@ public class PlayerController : MonoBehaviour
         cameraRay = mainCam.ScreenPointToRay(Input.mousePosition);
         groundPlane = new Plane(Vector3.up, Vector3.zero);
 
+        //dashUsesText.text = "DASH: test" + dashUses;
+
         // not sure if we should put this inside player death or not, it depends if we want the cooldown to keep running while the player is dead or not
         if (dashUses < dashUsesMax)
         {
@@ -65,6 +75,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 dashUses += 1;
+                dashUsesText.text = "DASH: " + dashUses;
                 cooldownTimer = cooldown;
             }
         }
@@ -87,6 +98,7 @@ public class PlayerController : MonoBehaviour
                 if (dashUses > 0)
                 {
                     dashUses -= 1;
+                    dashUsesText.text = "DASH: " + dashUses;
                     dashTrail.Play();
 
                     if (!isDashing)

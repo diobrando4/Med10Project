@@ -5283,9 +5283,10 @@ MonoBehaviour:
   playerHealthScript: {fileID: 0}
   dashSpeed: 10
   dashTime: 0.1
-  dashUses: 1
+  dashUses: 3
   cooldown: 3
   cooldownTimer: 0
+  dashUsesText: {fileID: 0}
 --- !u!114 &2065505483842465994
 MonoBehaviour:
   m_ObjectHideFlags: 0
