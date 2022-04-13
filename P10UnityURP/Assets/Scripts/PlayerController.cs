@@ -48,8 +48,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        // if we put the line below inside of the if-statement then it doesn't find it!
         dashUsesText = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderPlayerDashCounter/TextDashCounter").GetComponent<TextMeshProUGUI>();
-        dashUsesText.text = "DASH: " + dashUses;
+        if (dashUsesText != null) { dashUsesText.text = "DASH: " + dashUses; }
     }
 
     // Update is called once per frame
@@ -75,7 +76,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 dashUses += 1;
-                dashUsesText.text = "DASH: " + dashUses;
+                if (dashUsesText != null) { dashUsesText.text = "DASH: " + dashUses; }
                 cooldownTimer = cooldown;
             }
         }
@@ -98,7 +99,7 @@ public class PlayerController : MonoBehaviour
                 if (dashUses > 0)
                 {
                     dashUses -= 1;
-                    dashUsesText.text = "DASH: " + dashUses;
+                    if (dashUsesText != null) { dashUsesText.text = "DASH: " + dashUses; }
                     dashTrail.Play();
 
                     if (!isDashing)
