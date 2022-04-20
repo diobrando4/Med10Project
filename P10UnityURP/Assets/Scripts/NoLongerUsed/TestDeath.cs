@@ -14,7 +14,7 @@ public class TestDeath : MonoBehaviour
         {
             Instantiate(deathParticle, transform.position, Quaternion.identity);
 
-            CameraShake.instance.StartShake(.2f, .5f);
+            CameraShake.instance.StartShake(.2f, .5f); // time, power
 
             Destroy(gameObject); // this has to be last
         }
