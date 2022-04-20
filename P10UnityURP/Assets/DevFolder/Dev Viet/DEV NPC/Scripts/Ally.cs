@@ -95,6 +95,10 @@ public class Ally : BaseClassNPC
                 isUsingDispel = false;
             }
         }
+        else
+        {
+            agent.SetDestination(gameObject.transform.position);
+        }
 
         if (target == null)
         {
