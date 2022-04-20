@@ -46,3 +46,6 @@ MonoBehaviour:
   FloatingTextPrefab: {fileID: 4881330298396664476, guid: 5d2ca2ff8cfbd9b47ab2bb49207cb2e3, type: 3}
   offset: {x: 0, y: 3, z: 0}
   textFileCombat: {fileID: 4900000, guid: 7cfc973431d7b0b4ba6f4b6c0c2326ac, type: 3}
+  ally1CombatLines: []
+  ally2CombatLines: []
+  toggleDialogue: 1

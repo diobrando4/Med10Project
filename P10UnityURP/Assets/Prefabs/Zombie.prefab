@@ -350,3 +350,4 @@ MonoBehaviour:
   distanceB4Shoot: 0
   bullet: {fileID: 0}
   muzzle: {fileID: 0}
+  deathEffect: {fileID: 2809500710690246973, guid: e347372f2c0a301409e0d8c625eb7067, type: 3}

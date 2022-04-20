@@ -782,6 +782,7 @@ MonoBehaviour:
   distanceB4Shoot: 0
   bullet: {fileID: 237088019972761527, guid: 79487e6a6c0565e4f9dcda927d84711f, type: 3}
   muzzle: {fileID: 0}
+  deathEffect: {fileID: 2809500710690246973, guid: e347372f2c0a301409e0d8c625eb7067, type: 3}
 --- !u!195 &6201420283627469311
 NavMeshAgent:
   m_ObjectHideFlags: 0

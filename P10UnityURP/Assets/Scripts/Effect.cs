@@ -10,9 +10,17 @@ using UnityEngine;
 public class Effect : MonoBehaviour
 {
     public float lifeTime; // duration
+    public GameObject origin = null;
 
     void Awake()
     {
         Destroy(gameObject, lifeTime);
+    }
+    void Start()
+    {
+        if (origin != null)
+        {
+            GameObject.Find("Cubes").GetComponent<Renderer>().material.color = origin.GetComponent<Renderer>().material.color;
+        }
     }
 }

@@ -29,6 +29,7 @@ public class PlayerHealthManager : MonoBehaviour
     //[HideInInspector] 
     public GameObject revivingAlly; //Need to make sure that the revive bar does not reset just because the other ally is passing through
     
+    public Material deathIcon;
 
     // Start is called before the first frame update
     void Start()
@@ -38,15 +39,21 @@ public class PlayerHealthManager : MonoBehaviour
         reviveBarFill = gameObject.transform.Find("ReviveBarPopUp/Canvas/ReviveBar/imgBackground/imgFill").GetComponent<Image>();
         healthBarFill = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderPlayerHealthBar/imgBackground/imgFillPlayer").GetComponent<Image>();
         gameObject.GetComponentInChildren<Image>().enabled = false; //Disable Image comp of Imgbackground on start
+        gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         if(playerCurrentHealth <= 0)
-        {          
+        {   
+            gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = true;       
             isPlayerDead = true;
             // player movement is disabled in the player controller!
+        }
+        else
+        {
+            gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
         }
     }
 

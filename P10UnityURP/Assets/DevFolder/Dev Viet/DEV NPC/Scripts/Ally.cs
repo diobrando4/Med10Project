@@ -46,7 +46,8 @@ public class Ally : BaseClassNPC
         player = GameObject.FindGameObjectWithTag("Player");
         reviveBarFill = gameObject.transform.Find("ReviveBarPopUp/Canvas/ReviveBar/imgBackground/imgFill").GetComponent<Image>();
         gameObject.GetComponentInChildren<Image>().enabled = false; //Disable Image comp of Imgbackground on start
-        
+        gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
+
         //NAvMeshAgent Check & Init
         if (agent == null)
         {
@@ -81,23 +82,14 @@ public class Ally : BaseClassNPC
         target = FindClosestTargetWithTag("Enemy");//Inherited function
         if (isAllyDead == false) 
         {
+            gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
             Move2Target(target);
             ShootNearestObject(target);//Inherited function
-
-            //If player is debuffed and ally can use dispell on the player
-            if (player.GetComponent<PlayerHealthManager>().isDebuffed == true && canCureDebuff == true)
-            {
-                isUsingDispel = true;
-                StartCoroutine(Dispel());
-            }
-            else
-            {
-                isUsingDispel = false;
-            }
         }
         else
         {
             agent.SetDestination(gameObject.transform.position);
+            gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = true;
         }
 
         if (target == null)
@@ -125,7 +117,7 @@ public class Ally : BaseClassNPC
     //but also follow the player if no valid enemy target is found
     private void Move2Target(GameObject m2target)
     {
-        if (player.GetComponent<PlayerHealthManager>().isPlayerDead == false)//If the player is not dead
+        if (player.GetComponent<PlayerHealthManager>().isPlayerDead == false && player.GetComponent<PlayerHealthManager>().isDebuffed == false)//If the player is not dead and is not debuffed
         {
             if (inCombat == false || m2target == null) //If there is no enemies, follow player
             {
@@ -177,7 +169,7 @@ public class Ally : BaseClassNPC
                 transform.LookAt(m2target.transform);
             }
         }
-        else//If player is dead
+        else//If player is dead or Debuffed
         {
             agent.stoppingDistance = 1.5f;
             agent.SetDestination(player.transform.position);
@@ -201,14 +193,28 @@ public class Ally : BaseClassNPC
         }
     }//UpdateHealthBar
 
-    //Start coroutine for reviving Ally if they are downed and the Player is close enough
+    
     private void OnTriggerStay(Collider col)
     {
         if(col.gameObject == player)
         {
             if(isAllyDead == true)
             {
+                //Start coroutine for reviving Ally if they are downed and the Player is close enough
                 StartCoroutine(ReviveAlly());
+            }
+            if (isAllyDead == false)
+            {
+                //If player is debuffed and ally can use dispell on the player
+                if (player.GetComponent<PlayerHealthManager>().isDebuffed == true && canCureDebuff == true)
+                {
+                    isUsingDispel = true;
+                    StartCoroutine(Dispel());
+                }
+                else
+                {
+                    isUsingDispel = false;
+                }
             }
         }
     }//OntriggerStay

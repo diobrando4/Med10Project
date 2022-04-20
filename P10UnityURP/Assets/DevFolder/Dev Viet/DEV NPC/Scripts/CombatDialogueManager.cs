@@ -40,9 +40,9 @@ public class CombatDialogueManager : MonoBehaviour
     [SerializeField]
     private List<string> ally2CombatLines = new List<string>();
 
-    //public int endAtLine;
+    public bool toggleDialogue = true;
 
-    private bool dialogueTrigger = false;
+    private bool dialogueTrigger = true;
     private bool checkClear = false;
     private bool checkDebuff = false;
     private bool checkIfAlly1Downed = false;
@@ -94,235 +94,240 @@ public class CombatDialogueManager : MonoBehaviour
                 ally2CombatLines.Add(textLinesCombat[i]);  
             }
         }
-        ShowFloatingTextAlly1("Lets Go!");
-        ShowFloatingTextAlly2("Ready");
-
+        if(toggleDialogue == true)
+        {
+            ShowFloatingTextAlly1("Lets Go!");
+            ShowFloatingTextAlly2("Ready");    
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //If Ally 1 is hurt
-        if(ally1HPTracker > ally1Health.currHealth && ally1Health.currHealth != 0)//initial check
+        if(toggleDialogue == true)
         {
-            dialogueTrigger = false; //reset trigger
-            if (dialogueTrigger == false && checkIfAlly1Downed == false) //Trigger check to prevent spamming & talk when downed
+            //If Ally 1 is hurt
+            if(ally1HPTracker > ally1Health.currHealth && ally1Health.currHealth != 0)//initial check
             {
-                ShowFloatingTextAlly1(ResponseAlly1(1));
-                ally1HPTracker = ally1Health.currHealth;
-                dialogueTrigger = true; //Set trigger to true
-            }
-        }
-        //If Ally 2 is hurt
-        if(ally2HPTracker > ally2Health.currHealth && ally2Health.currHealth != 0)
-        {
-            dialogueTrigger = false;
-            if (dialogueTrigger == false && checkIfAlly2Downed == false)
-            {
-                ShowFloatingTextAlly2(ResponseAlly2(1));  
-                ally2HPTracker = ally2Health.currHealth; 
-                dialogueTrigger = true;  
-            }           
-        }
-        //If Ally 1 has 0 hp
-        if(ally1Health.currHealth <= 0)
-        {
-            dialogueTrigger = false;
-            if (dialogueTrigger == false && checkIfAlly1Downed == false)
-            {
-                ShowFloatingTextAlly1(ResponseAlly1(2));
-                ally1HPTracker = ally1Health.currHealth;
-                dialogueTrigger = true;
-                checkIfAlly1Downed = true;
-            }
-        }
-        // else if (ally1Health.currHealth > 0)
-        // {
-        //     if (checkIfAlly1Downed == true)
-        //     {
-        //         checkIfAlly1Downed = false;
-        //     }
-        // }
-        //If Ally 2 has 0 hp
-        if(ally2Health.currHealth <= 0)
-        {
-            dialogueTrigger = false;
-            if (dialogueTrigger == false && checkIfAlly2Downed == false)
-            {
-                ShowFloatingTextAlly2(ResponseAlly2(2));  
-                ally2HPTracker = ally2Health.currHealth; 
-                dialogueTrigger = true;  
-                checkIfAlly2Downed = true;
-            }           
-        }
-        // else if (ally2Health.currHealth > 0)
-        // {
-        //     if (checkIfAlly2Downed == true)
-        //     {
-        //         checkIfAlly2Downed = false;
-        //     }
-        // }
-
-        //If Player is hurt
-        if(playerHPTracker > playerHealth.playerCurrentHealth && playerHealth.playerCurrentHealth != 0)
-        {
-            dialogueTrigger = false;
-            if (dialogueTrigger == false && checkIfPlayerDowned == false)
-            {
-                if (checkIfAlly1Downed == false)
+                dialogueTrigger = false; //reset trigger
+                if (dialogueTrigger == false && checkIfAlly1Downed == false) //Trigger check to prevent spamming & talk when downed
                 {
-                    ShowFloatingTextAlly1(ResponseAlly1(3));
+                    ShowFloatingTextAlly1(ResponseAlly1(1));
+                    ally1HPTracker = ally1Health.currHealth;
+                    dialogueTrigger = true; //Set trigger to true
                 }
-                if (checkIfAlly2Downed == false)
+            }
+            //If Ally 2 is hurt
+            if(ally2HPTracker > ally2Health.currHealth && ally2Health.currHealth != 0)
+            {
+                dialogueTrigger = false;
+                if (dialogueTrigger == false && checkIfAlly2Downed == false)
                 {
-                    ShowFloatingTextAlly2(ResponseAlly2(3));
-                }
-                playerHPTracker = playerHealth.playerCurrentHealth; 
-                dialogueTrigger = true;
-                //Debug.Log("Player HP: "+playerHPTracker+" | "+playerHealth.playerCurrentHealth);
+                    ShowFloatingTextAlly2(ResponseAlly2(1));  
+                    ally2HPTracker = ally2Health.currHealth; 
+                    dialogueTrigger = true;  
+                }           
             }
-        }
-        //If player has 0 hp
-        if(playerHealth.playerCurrentHealth <= 0 && playerHealth.isBeingRevived == false)
-        { 
-            dialogueTrigger = false;
-            if (dialogueTrigger == false && checkIfPlayerDowned == false)
+            //If Ally 1 has 0 hp
+            if(ally1Health.currHealth <= 0)
             {
-                if (checkIfAlly1Downed == false)
+                dialogueTrigger = false;
+                if (dialogueTrigger == false && checkIfAlly1Downed == false)
                 {
-                    ShowFloatingTextAlly1(ResponseAlly1(4));
+                    ShowFloatingTextAlly1(ResponseAlly1(2));
+                    ally1HPTracker = ally1Health.currHealth;
+                    dialogueTrigger = true;
+                    checkIfAlly1Downed = true;
                 }
-                if (checkIfAlly2Downed == false)
+            }
+            // else if (ally1Health.currHealth > 0)
+            // {
+            //     if (checkIfAlly1Downed == true)
+            //     {
+            //         checkIfAlly1Downed = false;
+            //     }
+            // }
+            //If Ally 2 has 0 hp
+            if(ally2Health.currHealth <= 0)
+            {
+                dialogueTrigger = false;
+                if (dialogueTrigger == false && checkIfAlly2Downed == false)
                 {
-                    ShowFloatingTextAlly2(ResponseAlly2(4));
-                }
-                playerHPTracker = playerHealth.playerCurrentHealth; 
-                dialogueTrigger = true;
-                checkIfPlayerDowned = true;
-            }           
-        }
-        // else if (playerHealth.playerCurrentHealth > 0)
-        // {
-        //     if (checkIfPlayerDowned == true)
-        //     {
-        //         checkIfPlayerDowned = false;
-        //     }
-        // }
-
-        //If Ally1 is Revived by Player
-        if(ally1Health.isRevived == true)
-        {
-            dialogueTrigger = false;
-            if(dialogueTrigger == false && checkIfAlly1Downed == true)
-            {
-                //Say something
-                ShowFloatingTextAlly1(ResponseAlly1(5));
-                ally1HPTracker = ally1Health.currHealth;
-                dialogueTrigger = true;
-                checkIfAlly1Downed = false;
+                    ShowFloatingTextAlly2(ResponseAlly2(2));  
+                    ally2HPTracker = ally2Health.currHealth; 
+                    dialogueTrigger = true;  
+                    checkIfAlly2Downed = true;
+                }           
             }
-        }
+            // else if (ally2Health.currHealth > 0)
+            // {
+            //     if (checkIfAlly2Downed == true)
+            //     {
+            //         checkIfAlly2Downed = false;
+            //     }
+            // }
 
-        //If Ally2 is Revived by Player
-        if(ally2Health.isRevived == true)
-        {
-            dialogueTrigger = false;
-            if(dialogueTrigger == false && checkIfAlly2Downed == true)
+            //If Player is hurt
+            if(playerHPTracker > playerHealth.playerCurrentHealth && playerHealth.playerCurrentHealth != 0)
             {
-                //Say something
-                ShowFloatingTextAlly2(ResponseAlly2(5));
-                ally2HPTracker = ally2Health.currHealth;
-                dialogueTrigger = true;
-                checkIfAlly2Downed = false;
-            }
-        }
-
-        //If Ally1 is Reviving Player
-        if(playerHealth.isBeingRevived == true && playerHealth.revivingAlly == ally1)
-        {
-            dialogueTrigger = false;
-            if(dialogueTrigger == false && checkIfPlayerDowned == true)
-            {
-                ShowFloatingTextAlly1(ResponseAlly1(6));
-                playerHPTracker = playerHealth.playerCurrentHealth; 
-                dialogueTrigger = true;
-                checkIfPlayerDowned = false;
-            }
-        }
-
-        //If Ally2 is Reviving Player
-        if(playerHealth.isBeingRevived == true && playerHealth.revivingAlly == ally2)
-        {
-            dialogueTrigger = false;
-            if(dialogueTrigger == false && checkIfPlayerDowned == true)
-            {
-                ShowFloatingTextAlly2(ResponseAlly2(6));
-                playerHPTracker = playerHealth.playerCurrentHealth; 
-                dialogueTrigger = true;
-                checkIfPlayerDowned = false;
-            }
-        }
-
-        //If Ally1 is Removing Debuff on Player
-        if(ally1Health.isUsingDispel == true)
-        {
-            dialogueTrigger = false;
-            if(dialogueTrigger == false && checkIfAlly1Downed == false && checkDebuff == false)
-            {
-                ShowFloatingTextAlly1(ResponseAlly1(7));
-                dialogueTrigger = true;
-                checkDebuff = true;
-            }
-        }
-        else
-        {
-            checkDebuff = false;
-        }
-
-        //If Ally2 is Removing Debuff on Player
-        if(ally2Health.isUsingDispel == true)
-        {
-            dialogueTrigger = false;
-            if(dialogueTrigger == false && checkIfAlly1Downed == false && checkDebuff == false)
-            {
-                ShowFloatingTextAlly2(ResponseAlly2(7));
-                dialogueTrigger = true;
-                checkDebuff = true;
-            }
-        }
-        else
-        {
-            checkDebuff = false;
-        }
-
-        //If there are no more enemies on the floor
-        if(ally1Health.inCombat == false && FindObjectOfType<ExitDoor>() == null)
-        {
-            dialogueTrigger = false;
-            if(dialogueTrigger == false && checkClear == false)
-            {
-                if (checkIfAlly1Downed == false)
+                dialogueTrigger = false;
+                if (dialogueTrigger == false && checkIfPlayerDowned == false)
                 {
-                    ShowFloatingTextAlly1(ResponseAlly1(8));
+                    if (checkIfAlly1Downed == false)
+                    {
+                        ShowFloatingTextAlly1(ResponseAlly1(3));
+                    }
+                    if (checkIfAlly2Downed == false)
+                    {
+                        ShowFloatingTextAlly2(ResponseAlly2(3));
+                    }
+                    playerHPTracker = playerHealth.playerCurrentHealth; 
+                    dialogueTrigger = true;
+                    //Debug.Log("Player HP: "+playerHPTracker+" | "+playerHealth.playerCurrentHealth);
                 }
-                if (checkIfAlly2Downed == false)
-                {
-                    ShowFloatingTextAlly2(ResponseAlly2(8));
-                }
-                dialogueTrigger = true;
-                checkClear = true;
             }
-        }
-        else
-        {
-            if(FindObjectOfType<ExitDoor>() != null)
+            //If player has 0 hp
+            if(playerHealth.playerCurrentHealth <= 0 && playerHealth.isBeingRevived == false)
+            { 
+                dialogueTrigger = false;
+                if (dialogueTrigger == false && checkIfPlayerDowned == false)
+                {
+                    if (checkIfAlly1Downed == false)
+                    {
+                        ShowFloatingTextAlly1(ResponseAlly1(4));
+                    }
+                    if (checkIfAlly2Downed == false)
+                    {
+                        ShowFloatingTextAlly2(ResponseAlly2(4));
+                    }
+                    playerHPTracker = playerHealth.playerCurrentHealth; 
+                    dialogueTrigger = true;
+                    checkIfPlayerDowned = true;
+                }           
+            }
+            // else if (playerHealth.playerCurrentHealth > 0)
+            // {
+            //     if (checkIfPlayerDowned == true)
+            //     {
+            //         checkIfPlayerDowned = false;
+            //     }
+            // }
+
+            //If Ally1 is Revived by Player
+            if(ally1Health.isRevived == true)
             {
-                checkClear = false;
+                dialogueTrigger = false;
+                if(dialogueTrigger == false && checkIfAlly1Downed == true)
+                {
+                    //Say something
+                    ShowFloatingTextAlly1(ResponseAlly1(5));
+                    ally1HPTracker = ally1Health.currHealth;
+                    dialogueTrigger = true;
+                    checkIfAlly1Downed = false;
+                }
+            }
+
+            //If Ally2 is Revived by Player
+            if(ally2Health.isRevived == true)
+            {
+                dialogueTrigger = false;
+                if(dialogueTrigger == false && checkIfAlly2Downed == true)
+                {
+                    //Say something
+                    ShowFloatingTextAlly2(ResponseAlly2(5));
+                    ally2HPTracker = ally2Health.currHealth;
+                    dialogueTrigger = true;
+                    checkIfAlly2Downed = false;
+                }
+            }
+
+            //If Ally1 is Reviving Player
+            if(playerHealth.isBeingRevived == true && playerHealth.revivingAlly == ally1)
+            {
+                dialogueTrigger = false;
+                if(dialogueTrigger == false && checkIfPlayerDowned == true)
+                {
+                    ShowFloatingTextAlly1(ResponseAlly1(6));
+                    playerHPTracker = playerHealth.playerCurrentHealth; 
+                    dialogueTrigger = true;
+                    checkIfPlayerDowned = false;
+                }
+            }
+
+            //If Ally2 is Reviving Player
+            if(playerHealth.isBeingRevived == true && playerHealth.revivingAlly == ally2)
+            {
+                dialogueTrigger = false;
+                if(dialogueTrigger == false && checkIfPlayerDowned == true)
+                {
+                    ShowFloatingTextAlly2(ResponseAlly2(6));
+                    playerHPTracker = playerHealth.playerCurrentHealth; 
+                    dialogueTrigger = true;
+                    checkIfPlayerDowned = false;
+                }
+            }
+
+            //If Ally1 is Removing Debuff on Player
+            if(ally1Health.isUsingDispel == true)
+            {
+                dialogueTrigger = false;
+                if(dialogueTrigger == false && checkIfAlly1Downed == false && checkDebuff == false)
+                {
+                    ShowFloatingTextAlly1(ResponseAlly1(7));
+                    dialogueTrigger = true;
+                    checkDebuff = true;
+                }
+            }
+            else
+            {
+                checkDebuff = false;
+            }
+
+            //If Ally2 is Removing Debuff on Player
+            if(ally2Health.isUsingDispel == true)
+            {
+                dialogueTrigger = false;
+                if(dialogueTrigger == false && checkIfAlly1Downed == false && checkDebuff == false)
+                {
+                    ShowFloatingTextAlly2(ResponseAlly2(7));
+                    dialogueTrigger = true;
+                    checkDebuff = true;
+                }
+            }
+            else
+            {
+                checkDebuff = false;
+            }
+
+            //If there are no more enemies on the floor
+            if(ally1Health.inCombat == false && FindObjectOfType<ExitDoor>() == null)
+            {
+                dialogueTrigger = false;
+                if(dialogueTrigger == false && checkClear == false)
+                {
+                    if (checkIfAlly1Downed == false)
+                    {
+                        ShowFloatingTextAlly1(ResponseAlly1(8));
+                    }
+                    if (checkIfAlly2Downed == false)
+                    {
+                        ShowFloatingTextAlly2(ResponseAlly2(8));
+                    }
+                    dialogueTrigger = true;
+                    checkClear = true;
+                }
+            }
+            else
+            {
+                if(FindObjectOfType<ExitDoor>() != null)
+                {
+                    checkClear = false;
+                }
             }
         }
 
         //FOR DEBUGGING
-        // if (Input.GetKeyDown(KeyCode.Space))
+        // if (Input.GetKeyDown(KeyCode.Keypad0))
         // {
         //     //dialogueTrigger = false;
         //     ally1Health.DamageTaken(1);
@@ -331,6 +336,10 @@ public class CombatDialogueManager : MonoBehaviour
         //     ally2Health.UpdateHealthBar();
         //     //Debug.Log("Space Pressed");
         //     //playerHealth.HurtPlayer(1);
+        // }
+        // if (Input.GetKeyDown(KeyCode.Keypad1))
+        // {
+        //     playerHealth.HurtPlayer(1);
         // }
     }// Update
 

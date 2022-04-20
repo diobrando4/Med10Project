@@ -9,6 +9,7 @@ public class BaseClassEnemy : BaseClassNPC
 {
     //Bool checking to stop multi-hit on melee units
     protected bool hasDamaged = false;
+    public Effect deathEffect = null;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class BaseClassEnemy : BaseClassNPC
             }
             isDead = true;
             PlaySound("EnemyKilled");
+            DeathEffect();
             Destroy(gameObject);
         }
     }//DestroyOnDeath
@@ -51,6 +53,7 @@ public class BaseClassEnemy : BaseClassNPC
                     FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
                 }
                 PlaySound("EnemyKilled");
+                DeathEffect();
                 Destroy(gameObject);
             }
             else if(victim.tag == "Player")
@@ -62,6 +65,7 @@ public class BaseClassEnemy : BaseClassNPC
                     FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
                 }                
                 PlaySound("EnemyKilled");
+                DeathEffect();
                 Destroy(gameObject);
             }
         }
@@ -83,6 +87,7 @@ public class BaseClassEnemy : BaseClassNPC
                     FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
                 }                
                 PlaySound("EnemyKilled");
+                DeathEffect();
                 Destroy(gameObject);
             }
             else if(victim.tag == "Player")
@@ -96,6 +101,7 @@ public class BaseClassEnemy : BaseClassNPC
                     FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
                 }                
                 PlaySound("EnemyKilled");
+                DeathEffect();
                 Destroy(gameObject);
             }
         }
@@ -107,5 +113,11 @@ public class BaseClassEnemy : BaseClassNPC
         {
             debuffMan.DebuffSelector(debuffNum);
         }
+    }
+
+    protected void DeathEffect()
+    {
+        Effect newEffect = Instantiate(deathEffect, transform.position, transform.rotation) as Effect;
+        newEffect.origin = gameObject;
     }
 }
