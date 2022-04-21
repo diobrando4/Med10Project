@@ -196,7 +196,7 @@ public class Ally : BaseClassNPC
     
     private void OnTriggerStay(Collider col)
     {
-        if(col.gameObject == player)
+        if(col.gameObject == player && player.GetComponent<PlayerHealthManager>().isPlayerDead == false)
         {
             if(isAllyDead == true)
             {

@@ -30,6 +30,8 @@ public class PlayerHealthManager : MonoBehaviour
     public GameObject revivingAlly; //Need to make sure that the revive bar does not reset just because the other ally is passing through
     
     public Material deathIcon;
+    public Renderer deathRenderer;
+    public Renderer debuffRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +41,11 @@ public class PlayerHealthManager : MonoBehaviour
         reviveBarFill = gameObject.transform.Find("ReviveBarPopUp/Canvas/ReviveBar/imgBackground/imgFill").GetComponent<Image>();
         healthBarFill = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderPlayerHealthBar/imgBackground/imgFillPlayer").GetComponent<Image>();
         gameObject.GetComponentInChildren<Image>().enabled = false; //Disable Image comp of Imgbackground on start
-        gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
+        
+        deathRenderer = gameObject.transform.Find("StatusIcon").GetComponent<Renderer>();
+        deathRenderer.enabled = false;
+        debuffRenderer = gameObject.transform.Find("DebuffIcon").GetComponent<Renderer>();
+        debuffRenderer.enabled = false;
     }
 
     // Update is called once per frame
@@ -47,13 +53,13 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if(playerCurrentHealth <= 0)
         {   
-            gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = true;       
+            deathRenderer.enabled = true;       
             isPlayerDead = true;
             // player movement is disabled in the player controller!
         }
         else
         {
-            gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
+            deathRenderer.enabled = false;
         }
     }
 
@@ -93,7 +99,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     private void OnTriggerStay(Collider col)
     {
-        if(col.gameObject.tag == "GoodGuys")
+        if(col.gameObject.tag == "GoodGuys" && col.gameObject.GetComponent<Ally>().isAllyDead == false)
         {
             if(isPlayerDead == true)
             {
@@ -151,6 +157,7 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if (isDebuffable == false)
         {
+            debuffRenderer.enabled = false;
             //Debug.Log("Player Immune!");
             yield return new WaitForSeconds(3);
             isDebuffable = true;

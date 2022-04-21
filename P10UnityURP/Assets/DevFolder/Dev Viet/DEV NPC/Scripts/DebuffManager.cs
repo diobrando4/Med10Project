@@ -29,6 +29,9 @@ public class DebuffManager : MonoBehaviour
     //public bool isActive = false;
     public string debuffText;
 
+    public Material debuffSlowIcon;
+    public Material debuffReverseIcon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,8 +56,8 @@ public class DebuffManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-          //if (Input.GetKeyDown(KeyCode.Space))
-          //DebuffSelector(selectorNum);
+          if (Input.GetKeyDown(KeyCode.Keypad9))
+          DebuffSelector(selectorNum);
     }
 
     public void DebuffSelector (int number)
@@ -67,11 +70,13 @@ public class DebuffManager : MonoBehaviour
 
             case 1: //Slow player
                 ChangePlayerSpeed(slowedSpeed);
+                playerHPMan.debuffRenderer.material = debuffSlowIcon;
                 debuffText = "Slowed!";
                 break; 
 
             case 2: //Reversed Speed 
                 ChangePlayerSpeed(reverseSpeed);
+                playerHPMan.debuffRenderer.material = debuffReverseIcon;
                 debuffText = "Reverse!";
                 break;   
 
@@ -99,6 +104,8 @@ public class DebuffManager : MonoBehaviour
         {
             playerHPMan.isDebuffed = true;
             playerCont.moveSpeed = newSpeed;
+            
+            playerHPMan.debuffRenderer.enabled = true;
             if(FindObjectOfType<SoundManager>())
             {
                 FindObjectOfType<SoundManager>().SoundPlay("PlayerDebuffed");
@@ -123,6 +130,8 @@ public class DebuffManager : MonoBehaviour
             playerHPMan.isDebuffed = true;
             playerHPMan.playerMaxHealth = newHealth;
             playerHPMan.playerCurrentHealth = playerHPMan.playerMaxHealth;  
+            
+            playerHPMan.debuffRenderer.enabled = true;
             if(FindObjectOfType<SoundManager>())
             {
                 FindObjectOfType<SoundManager>().SoundPlay("PlayerDebuffed");

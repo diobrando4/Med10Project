@@ -45,3 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectorNum: 0
   debuffText: 
+  debuffSlowIcon: {fileID: 2100000, guid: 7dc046dba1bed3b4085dea46971b75ff, type: 2}
+  debuffReverseIcon: {fileID: 2100000, guid: a0d3496a4c183d04e8498d907d0a4fd9, type: 2}
