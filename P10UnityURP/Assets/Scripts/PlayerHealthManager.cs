@@ -32,6 +32,8 @@ public class PlayerHealthManager : MonoBehaviour
     public Material deathIcon;
     public Renderer deathRenderer;
     public Renderer debuffRenderer;
+    public ParticleSystem revivePart;
+    public ParticleSystem dispelPart;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +48,9 @@ public class PlayerHealthManager : MonoBehaviour
         deathRenderer.enabled = false;
         debuffRenderer = gameObject.transform.Find("DebuffIcon").GetComponent<Renderer>();
         debuffRenderer.enabled = false;
+        
+        revivePart = gameObject.transform.Find("ReviveParticles").GetComponent<ParticleSystem>();
+        revivePart.Pause();
     }
 
     // Update is called once per frame
@@ -61,6 +66,8 @@ public class PlayerHealthManager : MonoBehaviour
         {
             deathRenderer.enabled = false;
         }
+        if (revivePart.isEmitting)
+        Debug.Log(revivePart.isEmitting);
     }
 
     //[SerializeField]
@@ -106,6 +113,7 @@ public class PlayerHealthManager : MonoBehaviour
                 isBeingRevived = true;
                 revivingAlly = col.gameObject;
                 gameObject.GetComponentInChildren<Image>().enabled = true;
+                revivePart.Play();
                 StartCoroutine(RevivePlayer());
             }
         }
@@ -120,6 +128,7 @@ public class PlayerHealthManager : MonoBehaviour
             reviveCurrent = 0;
             reviveBarFill.fillAmount = 0;
             gameObject.GetComponentInChildren<Image>().enabled = false;
+            revivePart.Pause();
             revivingAlly = null;
         }
     }
@@ -141,6 +150,7 @@ public class PlayerHealthManager : MonoBehaviour
                 reviveBarFill.fillAmount = 0;
                 gameObject.GetComponentInChildren<Image>().enabled = false;
                 healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
+                revivePart.Pause();
                 if (FindObjectOfType<SoundManager>())
                 {
                     FindObjectOfType<SoundManager>().SoundPlay("ReviveEnd");
@@ -165,4 +175,9 @@ public class PlayerHealthManager : MonoBehaviour
         }
         yield break;
     }//Debuffimmunity
+
+    public void DispelEffect()
+    {
+        ParticleSystem newDispelPart = Instantiate(dispelPart, transform.position, dispelPart.transform.rotation) as ParticleSystem;
+    }
 }

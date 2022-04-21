@@ -35,18 +35,29 @@ public class DebuffManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerCont = player.GetComponent<PlayerController>();
-        playerHPMan = player.GetComponent<PlayerHealthManager>();
-        playerGunCont = player.transform.Find("GunCube").GetComponent<PlayerGunController>();
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
 
-        playerDefaultSpeed = playerCont.moveSpeed;
-        playerDefaultHealth = playerHPMan.playerMaxHealth;
-        playerDefaultFireRate = playerGunCont.timeBetweenShots;
-        slowedSpeed = playerDefaultSpeed / 2;
-        reverseSpeed = playerDefaultSpeed * -1;
-        reducedFireRate = playerDefaultFireRate / 2;
-    
+        if(player != null)
+        {
+            playerCont = player.GetComponent<PlayerController>();
+            playerHPMan = player.GetComponent<PlayerHealthManager>();
+            playerGunCont = player.transform.Find("GunCube").GetComponent<PlayerGunController>();
+        
+            playerDefaultSpeed = playerCont.moveSpeed;
+            playerDefaultHealth = playerHPMan.playerMaxHealth;
+            playerDefaultFireRate = playerGunCont.timeBetweenShots;
+            slowedSpeed = playerDefaultSpeed / 2;
+            reverseSpeed = playerDefaultSpeed * -1;
+            reducedFireRate = playerDefaultFireRate / 2;        
+        }
+        else
+        {
+            Debug.Log("No Player Found");
+        }
+
         if (ally1 == null)
         ally1 = GameObject.Find("AllyBlueBot").GetComponent<Ally>();
         if (ally2 == null)
@@ -117,6 +128,7 @@ public class DebuffManager : MonoBehaviour
     {
         playerHPMan.isDebuffed = false;
         playerCont.moveSpeed = playerDefaultSpeed;
+        playerHPMan.DispelEffect();
         debuffText = "";
     }
 
