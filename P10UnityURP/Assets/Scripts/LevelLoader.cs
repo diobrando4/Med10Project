@@ -10,14 +10,14 @@ public class LevelLoader : MonoBehaviour
     public float transitionTime = 1f;
     public TextMeshProUGUI levelText;
 
-    // testing level counter
     void Start()
     {
         //Debug.Log(SceneManager.GetActiveScene().buildIndex);
 
         // if we put the line below inside of the if-statement then it doesn't find it!
         levelText = GameObject.Find("CanvasHealthBars/HolderLevelCounter/TextLevelCounter").GetComponent<TextMeshProUGUI>();
-        if (levelText != null) { levelText.text = "LEVEL: " + SceneManager.GetActiveScene().buildIndex.ToString(); }
+        if (levelText != null)
+        levelText.text = "LEVEL: " + SceneManager.GetActiveScene().buildIndex.ToString();
     }
 
     public void LoadNextLevel()
@@ -25,6 +25,11 @@ public class LevelLoader : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //LoadLevel(SceneManager.GetActiveScene().buildIndex + 1)
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+
+    public void RestartCurrentLevel()
+    {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
     }
 
     IEnumerator LoadLevel(int levelIndex)

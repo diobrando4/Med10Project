@@ -93,7 +93,8 @@ public class PlayerController : MonoBehaviour
                 theGun.isFiring = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            // dash
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Space))
             //if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (dashUses > 0)

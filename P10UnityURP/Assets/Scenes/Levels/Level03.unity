@@ -7604,6 +7604,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyOrangeBot
       objectReference: {fileID: 0}
+    - target: {fileID: 2688752464953211875, guid: ec29c5457db0aee468a804d383800b1e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2688752464953211882, guid: ec29c5457db0aee468a804d383800b1e, type: 3}
       propertyPath: m_RootOrder
       value: 2

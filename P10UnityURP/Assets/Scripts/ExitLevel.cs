@@ -10,6 +10,11 @@ public class ExitLevel : MonoBehaviour
 
     public LevelLoader levelLoader;
 
+    void Start()
+    {
+        levelLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
