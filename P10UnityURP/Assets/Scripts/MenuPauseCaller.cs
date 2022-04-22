@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuPauseCaller : MonoBehaviour
 {
-    bool someBool = false;
-    int someInt;
+    public bool isPaused = false;
+    private int someInt;
 
     // Update is called once per frame
     void Update()
@@ -16,16 +16,16 @@ public class MenuPauseCaller : MonoBehaviour
 
         if (someInt == 1)
         {
-            someBool = true;
+            isPaused = true;
         }
         if (someInt == 0)
         {
-            someBool = false;
+            isPaused = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
-            if(someBool)
+            if(isPaused)
             {
                 GameRunning();
             }
@@ -60,7 +60,7 @@ public class MenuPauseCaller : MonoBehaviour
     {
         //Debug.Log("Running");
         //someInt = 1; // this was used in the attempt to make the code more efficient
-        someBool = false;
+        isPaused = false;
         PlayerPrefs.SetInt("Pause", 0);
         Time.timeScale = 1f; // is running
         SceneManager.UnloadSceneAsync("MenuPause");
@@ -70,7 +70,7 @@ public class MenuPauseCaller : MonoBehaviour
     {
         //Debug.Log("Paused");
         //someInt = 0; // this was used in the attempt to make the code more efficient
-        someBool = true;
+        isPaused = true;
         PlayerPrefs.SetInt("Pause", 1);
         Time.timeScale = 0f; // is paused
         SceneManager.LoadScene("MenuPause", LoadSceneMode.Additive);
