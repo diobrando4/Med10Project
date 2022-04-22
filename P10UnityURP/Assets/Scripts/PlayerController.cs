@@ -150,6 +150,10 @@ public class PlayerController : MonoBehaviour
                 transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
             }
         }
+        else
+        {
+            rb.velocity *= 0;
+        }
     }
     
     IEnumerator Dash()
