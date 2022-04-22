@@ -133,7 +133,7 @@ public class BaseClassNPC : MonoBehaviour
     //Function that dictates shooting the nearest GameObject
     protected void ShootNearestObject(GameObject target2Shoot)
     {
-        if (target2Shoot != null ) //If there are enemies
+        if (target2Shoot != null ) //If there are targets
         {
             //if (Physics.Raycast(transform.position + rayOffset, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
             if (Physics.SphereCast(transform.position + rayOffset, 0.2f, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
@@ -141,15 +141,17 @@ public class BaseClassNPC : MonoBehaviour
             {
                 Debug.DrawLine(transform.position + rayOffset, rayHit.point, Color.red);
 
-                shotCounter -= Time.deltaTime;
                 if(rayHit.transform != null) //If the ray is hitting something
                 {
                     if(rayHit.transform.gameObject.layer != gameObject.layer && 
-                       rayHit.transform.gameObject.layer == LayerMask.NameToLayer("GoodGuys") || 
-                       rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy")) //If the object hit by the ray doesnt share the same layer as self, but is also either on the layer GoodGuys/Enemy
+                        rayHit.transform.gameObject.layer == LayerMask.NameToLayer("GoodGuys") || 
+                        rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy")) //If the object hit by the ray doesnt share the same layer as self, but is also either on the layer GoodGuys/Enemy
                     {
+                        shotCounter -= Time.deltaTime;
+
                         if(shotCounter <= 0)
                         {
+                        
                             shotCounter = fireRate;
                             BulletController newBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
                             PlaySound("Gunshot");
@@ -157,12 +159,15 @@ public class BaseClassNPC : MonoBehaviour
                             muzzleSmoke.Play();
                         }
                     }
+                    else
+                    {
+                        shotCounter = 0;
+                    }
                 }
             }
             else
             {
-                Debug.DrawRay(transform.position + rayOffset, transform.forward * distanceB4Shoot, Color.green);
-                shotCounter = 0;
+                Debug.DrawRay(transform.position + rayOffset, transform.forward * distanceB4Shoot, Color.green); 
             }
         }       
     }//ShootNearest
