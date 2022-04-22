@@ -50,7 +50,7 @@ public class PlayerHealthManager : MonoBehaviour
         debuffRenderer.enabled = false;
         
         revivePart = gameObject.transform.Find("ReviveParticles").GetComponent<ParticleSystem>();
-        revivePart.Pause();
+        revivePart.Stop();
     }
 
     // Update is called once per frame
@@ -128,7 +128,7 @@ public class PlayerHealthManager : MonoBehaviour
             reviveCurrent = 0;
             reviveBarFill.fillAmount = 0;
             gameObject.GetComponentInChildren<Image>().enabled = false;
-            revivePart.Pause();
+            revivePart.Stop();
             revivingAlly = null;
         }
     }
@@ -150,7 +150,7 @@ public class PlayerHealthManager : MonoBehaviour
                 reviveBarFill.fillAmount = 0;
                 gameObject.GetComponentInChildren<Image>().enabled = false;
                 healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
-                revivePart.Pause();
+                revivePart.Stop();
                 if (FindObjectOfType<SoundManager>())
                 {
                     FindObjectOfType<SoundManager>().SoundPlay("ReviveEnd");

@@ -129,6 +129,7 @@ MonoBehaviour:
   speed: 0
   lifeTime: 0
   damageGiven: 0
+  impactPart: {fileID: 37006869145360881, guid: ce71dd6cea294f040b6e403e3e138b23, type: 3}
   debuff2Use: 1
 --- !u!96 &3071772107363485725
 TrailRenderer:

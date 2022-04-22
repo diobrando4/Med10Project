@@ -27,6 +27,7 @@ public class Ally : BaseClassNPC
     [HideInInspector] 
     public bool isRevived = false;
     //private bool isBeingRevived;
+    public ParticleSystem revivePart;
 
     //Dispel related
     private bool canCureDebuff = true;
@@ -73,6 +74,7 @@ public class Ally : BaseClassNPC
         muzzle = gameObject.transform.Find("AllyGun/Muzzle");
         muzzleSmoke = gameObject.transform.Find("AllyGun/SmokeParticles").GetComponent<ParticleSystem>();
         UpdateHealthBar();
+        revivePart.Stop();
     }//Start
 
     // Update is called once per frame
@@ -202,6 +204,7 @@ public class Ally : BaseClassNPC
             if(isAllyDead == true)
             {
                 //Start coroutine for reviving Ally if they are downed and the Player is close enough
+                revivePart.Play();
                 StartCoroutine(ReviveAlly());
             }
             if (isAllyDead == false)
@@ -228,6 +231,7 @@ public class Ally : BaseClassNPC
         {
             reviveCurrent = 0;
             reviveBarFill.fillAmount = 0;
+            revivePart.Stop();
         }
     }//OnTriggerExit
 
@@ -249,6 +253,7 @@ public class Ally : BaseClassNPC
                 reviveBarFill.fillAmount = 0;
                 PlaySound("ReviveEnd");
                 isRevived = true;
+                revivePart.Stop();
                 yield return new WaitForSeconds(0.1f);
                 isRevived = false;
             }

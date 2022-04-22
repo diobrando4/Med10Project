@@ -129,6 +129,7 @@ MonoBehaviour:
   speed: 0
   lifeTime: 3
   damageGiven: 1
+  impactPart: {fileID: 37006869145360881, guid: ce71dd6cea294f040b6e403e3e138b23, type: 3}
 --- !u!96 &7536313068743436285
 TrailRenderer:
   serializedVersion: 2
