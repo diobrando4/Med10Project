@@ -12,7 +12,7 @@ public class EnemyShooter : BaseClassEnemy
         currHealth = maxHealth;
         damageGiven = 1;
         distanceB4Shoot = 15; 
-        projectileSpeed = 15f;
+        projectileSpeed = 10f;
         fireRate = 0.75f;
         muzzle = gameObject.transform.Find("EnemyGun/Muzzle");
         
