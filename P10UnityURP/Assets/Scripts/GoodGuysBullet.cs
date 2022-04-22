@@ -38,7 +38,7 @@ public class GoodGuysBullet : BulletController
                 //Function inherited from Parent, refers to the enemy's BaseClassNPC Component 
                 HurtNPCType(other.gameObject,damageGiven);
                 // destroys the bullet when hitting the enemy
-                ImpactEffect(other);
+                ImpactEffect();
                 Destroy(gameObject);
             }
             else if(other.gameObject.layer == gameObject.layer) //If it shares the same layer as this bullet, ignore collision
@@ -51,7 +51,7 @@ public class GoodGuysBullet : BulletController
                 {
                     FindObjectOfType<SoundManager>().SoundPlay("BulletImpact");
                 }
-                ImpactEffect(other);
+                ImpactEffect();
                 Destroy(gameObject);  
             }
         }
