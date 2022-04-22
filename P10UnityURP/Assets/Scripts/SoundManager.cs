@@ -29,7 +29,7 @@ public class SoundManager : MonoBehaviour
             s.name = s.clip.name;
 
             s.source.volume = s.volume;
-            // you can also do this for: pitch, loop, etc.
+            //s.source.pitch = s.pitch;
         }
     }
 
