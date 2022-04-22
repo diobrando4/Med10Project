@@ -50,7 +50,10 @@ public class PlayerController : MonoBehaviour
     {
         // if we put the line below inside of the if-statement then it doesn't find it!
         dashUsesText = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderPlayerDashCounter/TextDashCounter").GetComponent<TextMeshProUGUI>();
-        if (dashUsesText != null) { dashUsesText.text = "DASH: " + dashUses; }
+        if (dashUsesText != null) 
+        { 
+            dashUsesText.text = "DASH: " + dashUses; 
+        }
     }
 
     // Update is called once per frame
