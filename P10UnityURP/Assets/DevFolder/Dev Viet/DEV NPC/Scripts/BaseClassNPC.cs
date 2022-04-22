@@ -41,6 +41,8 @@ public class BaseClassNPC : MonoBehaviour
     private RaycastHit rayHit;
     protected RaycastHit sphereHit;
 
+    protected ParticleSystem muzzleSmoke;
+
     Vector3 rayOffset; // we need this, otherwise the raycast might hit unwanted objects EDIT: No longer an issue with the new layer filtering
 
     void Awake()
@@ -152,6 +154,7 @@ public class BaseClassNPC : MonoBehaviour
                             BulletController newBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
                             PlaySound("Gunshot");
                             newBullet.speed = projectileSpeed;
+                            muzzleSmoke.Play();
                         }
                     }
                 }

@@ -70,7 +70,8 @@ public class Ally : BaseClassNPC
             allyFriend = GameObject.Find("AllyBlueBot").GetComponent<Ally>();
         }
         //Find where the bullet spawns from
-        muzzle = gameObject.transform.GetChild(0).Find("Muzzle");
+        muzzle = gameObject.transform.Find("AllyGun/Muzzle");
+        muzzleSmoke = gameObject.transform.Find("AllyGun/SmokeParticles").GetComponent<ParticleSystem>();
         UpdateHealthBar();
     }//Start
 

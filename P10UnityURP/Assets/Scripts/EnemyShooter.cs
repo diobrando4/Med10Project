@@ -15,6 +15,7 @@ public class EnemyShooter : BaseClassEnemy
         projectileSpeed = 10f;
         fireRate = 0.75f;
         muzzle = gameObject.transform.Find("EnemyGun/Muzzle");
+        muzzleSmoke = gameObject.transform.Find("EnemyGun/SmokeParticles").GetComponent<ParticleSystem>();
         
         if (agent == null)
         {

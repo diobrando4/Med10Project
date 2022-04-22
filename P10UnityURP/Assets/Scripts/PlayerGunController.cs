@@ -13,6 +13,12 @@ public class PlayerGunController : MonoBehaviour
     private float shotCounter;
 
     public Transform firePoint;
+    public ParticleSystem muzzleSmoke;
+
+    void Start()
+    {
+        muzzleSmoke = gameObject.transform.Find("SmokeParticles").GetComponent<ParticleSystem>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -25,6 +31,8 @@ public class PlayerGunController : MonoBehaviour
                 shotCounter = timeBetweenShots;
                 GoodGuysBullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as GoodGuysBullet;
                 newBullet.speed = bulletSpeed;
+                muzzleSmoke.Play();
+
                 if (FindObjectOfType<SoundManager>())
                 {
                     FindObjectOfType<SoundManager>().SoundPlay("Gunshot");
