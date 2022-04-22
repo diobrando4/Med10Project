@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     private float cooldownTimer;
     ParticleSystem dashTrail;
     public TextMeshProUGUI dashUsesText;
+
+    public bool isPaused = false;
     
     void Awake()
     {
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (playerHealthScript.isPlayerDead == false)
+        if (playerHealthScript.isPlayerDead == false && isPaused == false)
         {            
             // Left click @ mouse button
             if(Input.GetMouseButtonDown(0))

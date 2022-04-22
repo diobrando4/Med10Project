@@ -17,10 +17,12 @@ public class MenuPauseCaller : MonoBehaviour
         if (someInt == 1)
         {
             isPaused = true;
+            GameObject.Find("Player").GetComponent<PlayerController>().isPaused = isPaused;
         }
         if (someInt == 0)
         {
             isPaused = false;
+            GameObject.Find("Player").GetComponent<PlayerController>().isPaused = isPaused;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
@@ -61,6 +63,7 @@ public class MenuPauseCaller : MonoBehaviour
         //Debug.Log("Running");
         //someInt = 1; // this was used in the attempt to make the code more efficient
         isPaused = false;
+        GameObject.Find("Player").GetComponent<PlayerController>().isPaused = isPaused;
         PlayerPrefs.SetInt("Pause", 0);
         Time.timeScale = 1f; // is running
         SceneManager.UnloadSceneAsync("MenuPause");
@@ -71,6 +74,7 @@ public class MenuPauseCaller : MonoBehaviour
         //Debug.Log("Paused");
         //someInt = 0; // this was used in the attempt to make the code more efficient
         isPaused = true;
+        GameObject.Find("Player").GetComponent<PlayerController>().isPaused = isPaused;
         PlayerPrefs.SetInt("Pause", 1);
         Time.timeScale = 0f; // is paused
         SceneManager.LoadScene("MenuPause", LoadSceneMode.Additive);

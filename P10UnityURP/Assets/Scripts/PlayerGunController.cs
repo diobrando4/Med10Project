@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerGunController : MonoBehaviour
 {
-    public bool isFiring;
+    public bool isFiring = false;
 
     public GoodGuysBullet bullet;
     public float bulletSpeed;
@@ -18,6 +18,7 @@ public class PlayerGunController : MonoBehaviour
     void Start()
     {
         muzzleSmoke = gameObject.transform.Find("SmokeParticles").GetComponent<ParticleSystem>();
+
     }
 
     // Update is called once per frame
@@ -32,7 +33,6 @@ public class PlayerGunController : MonoBehaviour
                 GoodGuysBullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as GoodGuysBullet;
                 newBullet.speed = bulletSpeed;
                 muzzleSmoke.Play();
-
                 if (FindObjectOfType<SoundManager>())
                 {
                     FindObjectOfType<SoundManager>().SoundPlay("Gunshot");
