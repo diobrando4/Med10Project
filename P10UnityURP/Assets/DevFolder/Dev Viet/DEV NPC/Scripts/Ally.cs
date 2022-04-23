@@ -112,7 +112,7 @@ public class Ally : BaseClassNPC
             isAllyDead = true;
             isDead = isAllyDead;
             PlaySound("PlayerAllyDowned");
-            gameObject.GetComponentInChildren<Image>().enabled = true;
+            //gameObject.GetComponentInChildren<Image>().enabled = true;
         }
     }//Update
 
@@ -205,6 +205,7 @@ public class Ally : BaseClassNPC
             {
                 //Start coroutine for reviving Ally if they are downed and the Player is close enough
                 revivePart.Play();
+                gameObject.GetComponentInChildren<Image>().enabled = true;
                 StartCoroutine(ReviveAlly());
             }
             if (isAllyDead == false)
@@ -232,6 +233,7 @@ public class Ally : BaseClassNPC
             reviveCurrent = 0;
             reviveBarFill.fillAmount = 0;
             revivePart.Stop();
+            gameObject.GetComponentInChildren<Image>().enabled = false;
         }
     }//OnTriggerExit
 
