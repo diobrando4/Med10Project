@@ -10,7 +10,7 @@ public class EnemyZombie : BaseClassEnemy
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = 5;
+        maxHealth = 3;
         currHealth = maxHealth;
         damageGiven = 1;
         

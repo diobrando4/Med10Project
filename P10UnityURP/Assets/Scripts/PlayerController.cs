@@ -99,8 +99,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // dash
-            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Space))
-            //if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(1))
             {
                 if (dashUses > 0)
                 {

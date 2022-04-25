@@ -37,7 +37,7 @@ public class Ally : BaseClassNPC
     void Start()
     {
         //Initial Values can be defined for the inherited variables
-        maxHealth = 6;
+        maxHealth = 10;
         currHealth = maxHealth;
         distanceB4Shoot = 10; 
         projectileSpeed = 15f;

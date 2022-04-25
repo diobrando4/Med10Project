@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    public float playerMaxHealth = 5; // should probably rename this into max health
+    public float playerMaxHealth = 10; // should probably rename this into max health
     public float playerCurrentHealth;
     public Image healthBarFill;
 
