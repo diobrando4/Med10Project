@@ -5305,7 +5305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c8e25991210d94b8a2977c94234258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHealth: 0
+  playerMaxHealth: 5
   playerCurrentHealth: 0
   healthBarFill: {fileID: 0}
   isDebuffed: 0
