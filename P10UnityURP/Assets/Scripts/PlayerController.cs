@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour
     ParticleSystem dashTrail;
     public TextMeshProUGUI dashUsesText;
 
-    public bool isPaused = false;
+    //[HideInInspector]
+    public bool isPaused;
     
     void Awake()
     {
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //if (playerHealthScript.isPlayerDead == false && isPaused == false)
         if (playerHealthScript.isPlayerDead == false && isPaused == false)
         {            
             // Left click @ mouse button

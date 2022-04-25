@@ -726,7 +726,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -54}
-  m_SizeDelta: {x: 800, y: 400}
+  m_SizeDelta: {x: 910, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &991382953
 MonoBehaviour:
@@ -748,9 +748,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Controls and mechanics:\n\nAim\t\t\tMouse\nMovement\t\tWASD\nAttack /
-    Shoot\tLeft mouse button\nDodge / Dash\tShift / Spacebar\n\nRevive\t\tStay close
-    to companion\nRemove Debuffs\tMove close to companion\n\nMenu / Pause\tEscape
+  m_text: "Controls and mechanics:\n\nAim\t\t\tMouse\nMovement\t\tW A S D\nAttack
+    / Shoot\tLeft mouse button\nDodge / Dash\tRight mouse button / Shift / Spacebar\n\nRevive\t\tStay
+    close to companion\nRemove Debuffs\tMove close to companion\n\nMenu / Pause\tEscape
     / P"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

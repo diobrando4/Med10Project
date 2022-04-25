@@ -5,10 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MenuPauseCaller : MonoBehaviour
 {
+    //[HideInInspector]
     public bool isPaused = false;
     private int someInt;
 
     // Update is called once per frame
+    void Start()
+    {
+        PlayerPrefs.SetInt("Pause", 0);
+    }
+
     void Update()
     {
         // we need to find a better way to update this, so it doesn't run 24/7! but i didn't manage to pull it off (see further down)

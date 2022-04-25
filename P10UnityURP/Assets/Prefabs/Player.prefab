@@ -4978,6 +4978,7 @@ MonoBehaviour:
   bulletSpeed: 15
   timeBetweenShots: 0.2
   firePoint: {fileID: 2065505483405367239}
+  muzzleSmoke: {fileID: 0}
 --- !u!1 &2065505483258346518
 GameObject:
   m_ObjectHideFlags: 0
@@ -5291,6 +5292,7 @@ MonoBehaviour:
   cooldown: 3
   cooldownTimer: 0
   dashUsesText: {fileID: 0}
+  isPaused: 0
 --- !u!114 &2065505483842465994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5303,7 +5305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c8e25991210d94b8a2977c94234258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHealth: 5
+  playerMaxHealth: 0
   playerCurrentHealth: 0
   healthBarFill: {fileID: 0}
   isDebuffed: 0
