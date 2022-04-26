@@ -7,8 +7,7 @@ using TMPro;
 public class TextLog : MonoBehaviour
 {
     public List<string> lastDialogueSaid = new List<string>();
-    public List<Color> lastDialogueColor = new List<Color>();
-    public int maxNumberOfLines = 10;
+    public int maxNumberOfLines = 10; //Max amount of lines to show
     public TMP_Text textField;
     public Color color1;
     public Color color2;

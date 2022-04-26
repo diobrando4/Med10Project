@@ -5893,7 +5893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb60efe026c1038458eb1a613f594244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderQueuePos: 5000
+  renderQueuePos: 4500
 --- !u!114 &7428704532071679977
 MonoBehaviour:
   m_ObjectHideFlags: 0

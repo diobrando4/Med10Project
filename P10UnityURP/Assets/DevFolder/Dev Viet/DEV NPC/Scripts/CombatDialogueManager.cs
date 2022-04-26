@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; //Need this to know which scene we are in
 using TMPro;
 
 //This script takes care of all combat related dialogues that needs to pop up above the Ally's head
@@ -40,8 +41,6 @@ public class CombatDialogueManager : MonoBehaviour
     [SerializeField]
     private List<string> ally2CombatLines = new List<string>();
 
-    public List<string> lastDialogueSaid = new List<string>();
-
     public bool toggleDialogue = true;
 
     private bool dialogueTrigger = true;
@@ -50,6 +49,12 @@ public class CombatDialogueManager : MonoBehaviour
     private bool checkIfAlly1Downed = false;
     private bool checkIfAlly2Downed = false;
     private bool checkIfPlayerDowned = false;
+
+    //====TextLog Related====
+    private List<string> lastDialogueSaid = new List<string>();
+    public int maxNumberOfLines = 10;
+    private TMP_Text textLog;
+    //=======================
 
     // Start is called before the first frame update
     void Start()
@@ -101,7 +106,13 @@ public class CombatDialogueManager : MonoBehaviour
             ShowFloatingTextAlly1("Lets Go!");
             ShowFloatingTextAlly2("Ready");    
         }
-    }
+
+        if (GameObject.Find("CanvasHealthBars/TextLogBg/TextLogText"))
+        {
+            textLog = GameObject.Find("CanvasHealthBars/TextLogBg/TextLogText").GetComponentInChildren<TMP_Text>();
+        }
+
+    }//Start()
 
     // Update is called once per frame
     void Update()
@@ -302,7 +313,7 @@ public class CombatDialogueManager : MonoBehaviour
             }
 
             //If there are no more enemies on the floor
-            if(ally1Health.inCombat == false && FindObjectOfType<ExitDoor>() == null)
+            if(ally1Health.inCombat == false && FindObjectOfType<ExitDoor>() == null && SceneManager.GetActiveScene().buildIndex > 1)
             {
                 dialogueTrigger = false;
                 if(dialogueTrigger == false && checkClear == false)
@@ -326,7 +337,13 @@ public class CombatDialogueManager : MonoBehaviour
                     checkClear = false;
                 }
             }
-        }
+            //Clear the oldest entry that is beyond the max number of lines    
+            while (lastDialogueSaid.Count > maxNumberOfLines)
+            {
+                lastDialogueSaid.RemoveAt(lastDialogueSaid.Count-1);
+            }
+            DisplayTextLog();
+        }//toggleDialogue
 
         //FOR DEBUGGING
         // if (Input.GetKeyDown(KeyCode.Keypad0))
@@ -343,6 +360,7 @@ public class CombatDialogueManager : MonoBehaviour
         // {
         //     playerHealth.HurtPlayer(1);
         // }
+        
     }// Update
 
     string ResponseAlly1(int response) //Return a string with the response dialogue
@@ -469,6 +487,7 @@ public class CombatDialogueManager : MonoBehaviour
             ally1TextBackgroundRect = ally1floatText.GetComponentInChildren<RectTransform>();
             ally1TextBackgroundSize = ally1floatText.GetComponentInChildren<TMP_Text>().GetRenderedValues(true);
             ally1TextBackgroundRect.sizeDelta = ally1TextBackgroundSize;
+            lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(ally1TextColor)+">"+text+"</color>");
         }
     }//ShowFloatingTextAlly1
 
@@ -490,6 +509,13 @@ public class CombatDialogueManager : MonoBehaviour
             ally2TextBackgroundRect = ally2floatText.GetComponentInChildren<RectTransform>();
             ally2TextBackgroundSize = ally2floatText.GetComponentInChildren<TMP_Text>().GetRenderedValues(true);
             ally2TextBackgroundRect.sizeDelta = ally2TextBackgroundSize;
+            lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(ally2TextColor)+">"+text+"</color>");
         }
     }//ShowFloatingTextAlly2
+    
+    //Takes the list of strings of latest dialogues, then turn it into a single string divded by \n for new lines
+    private void DisplayTextLog()
+    {
+        textLog.text = string.Join("\n", lastDialogueSaid);
+    }//DisplayTextLog()
 }

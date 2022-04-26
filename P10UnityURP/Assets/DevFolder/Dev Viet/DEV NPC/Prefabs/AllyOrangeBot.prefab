@@ -763,7 +763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb60efe026c1038458eb1a613f594244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderQueuePos: 5000
+  renderQueuePos: 4500
 --- !u!1 &4623539246764920699
 GameObject:
   m_ObjectHideFlags: 0
