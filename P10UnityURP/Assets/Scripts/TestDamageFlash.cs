@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestDamageFlash : MonoBehaviour
 {
-    [SerializeField]
+    //[SerializeField]
     private MeshRenderer meshRenderer;
     private Color originalColor;
 

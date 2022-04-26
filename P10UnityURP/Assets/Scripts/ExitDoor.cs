@@ -7,6 +7,8 @@ public class ExitDoor : MonoBehaviour
     //public GameObject[] allEnemies;
     public List<GameObject> remainingEnemies;
 
+    public bool isLevelOver = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,7 @@ public class ExitDoor : MonoBehaviour
             {
                 FindObjectOfType<SoundManager>().SoundPlay("DoorOpen");
             }
+            isLevelOver = true;
             Destroy(gameObject);
         }
         remainingEnemies.RemoveAll(item => item == null);

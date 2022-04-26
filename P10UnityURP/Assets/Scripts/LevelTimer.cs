@@ -11,16 +11,16 @@ public class LevelTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject); // don't destory this game object when loading a new scene
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isLevelSwitched == false)
+        if (isLevelSwitched == false) // we should probably also use || for whenever the menu pause is open
         {
             timer -= Time.deltaTime; // 1f = 1 second?
-            Debug.Log(timer);
+            //Debug.Log(timer);
         }
         
         if (timer <= 0 && !isLevelSwitched)
