@@ -7,7 +7,7 @@ public class ExitDoor : MonoBehaviour
     //public GameObject[] allEnemies;
     public List<GameObject> remainingEnemies;
 
-    public bool isLevelOver = false;
+    public bool areAllEnemiesDead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +15,7 @@ public class ExitDoor : MonoBehaviour
         //remainingEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         //List<GameObject>remainingEnemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
         remainingEnemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        //areAllEnemiesDead = false;
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class ExitDoor : MonoBehaviour
             {
                 FindObjectOfType<SoundManager>().SoundPlay("DoorOpen");
             }
-            isLevelOver = true;
+            areAllEnemiesDead = true;
             Destroy(gameObject);
         }
         remainingEnemies.RemoveAll(item => item == null);
