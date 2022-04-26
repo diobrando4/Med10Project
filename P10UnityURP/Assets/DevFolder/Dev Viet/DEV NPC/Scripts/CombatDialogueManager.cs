@@ -340,7 +340,8 @@ public class CombatDialogueManager : MonoBehaviour
             //Clear the oldest entry that is beyond the max number of lines    
             while (lastDialogueSaid.Count > maxNumberOfLines)
             {
-                lastDialogueSaid.RemoveAt(lastDialogueSaid.Count-1);
+                //lastDialogueSaid.RemoveAt(lastDialogueSaid.Count-1);
+                lastDialogueSaid.RemoveAt(0);
             }
             DisplayTextLog();
         }//toggleDialogue
@@ -487,7 +488,8 @@ public class CombatDialogueManager : MonoBehaviour
             ally1TextBackgroundRect = ally1floatText.GetComponentInChildren<RectTransform>();
             ally1TextBackgroundSize = ally1floatText.GetComponentInChildren<TMP_Text>().GetRenderedValues(true);
             ally1TextBackgroundRect.sizeDelta = ally1TextBackgroundSize;
-            lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(ally1TextColor)+">"+text+"</color>");
+            //lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(ally1TextColor)+">"+text+"</color>");
+            lastDialogueSaid.Add("<color=#"+ColorUtility.ToHtmlStringRGB(ally1TextColor)+">"+text+"</color>");
         }
     }//ShowFloatingTextAlly1
 
@@ -509,7 +511,8 @@ public class CombatDialogueManager : MonoBehaviour
             ally2TextBackgroundRect = ally2floatText.GetComponentInChildren<RectTransform>();
             ally2TextBackgroundSize = ally2floatText.GetComponentInChildren<TMP_Text>().GetRenderedValues(true);
             ally2TextBackgroundRect.sizeDelta = ally2TextBackgroundSize;
-            lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(ally2TextColor)+">"+text+"</color>");
+            //lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(ally2TextColor)+">"+text+"</color>");
+            lastDialogueSaid.Add("<color=#"+ColorUtility.ToHtmlStringRGB(ally2TextColor)+">"+text+"</color>");
         }
     }//ShowFloatingTextAlly2
     
@@ -518,4 +521,5 @@ public class CombatDialogueManager : MonoBehaviour
     {
         textLog.text = string.Join("\n", lastDialogueSaid);
     }//DisplayTextLog()
+
 }

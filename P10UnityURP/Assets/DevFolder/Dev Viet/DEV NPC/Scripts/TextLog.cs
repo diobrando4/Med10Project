@@ -30,19 +30,23 @@ public class TextLog : MonoBehaviour
             //Insert a string into the first position of the list, basically pushing the oldest entry down the list.
             //Then apply a color tag to the string, with a hex color code converted from whatever Color is used, in this case "color1"
             //Currently prints out Time.deltaTime converted to string
-            lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(color1)+">"+Time.deltaTime.ToString()+"</color>");
-            //lastDialogueColor.Insert(0, color1);
+            //lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(color1)+">"+Time.deltaTime.ToString()+"</color>");
+            lastDialogueSaid.Add("<color=#"+ColorUtility.ToHtmlStringRGBA(color1)+">"+Time.deltaTime.ToString()+"</color>");
+            
         }
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
-            lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(color2)+">"+Time.deltaTime.ToString()+"</color>");
-            //lastDialogueColor.Insert(0, color2);
+            //lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(color2)+">"+Time.deltaTime.ToString()+"</color>");
+            lastDialogueSaid.Add("<alpha=#"+"99"+">"+"<color=#"+ColorUtility.ToHtmlStringRGBA(color2)+">"+Time.deltaTime.ToString()+"</color>");
+            StartCoroutine(FadeOutTxt(lastDialogueSaid[0],0.1f));
+            
         }
         //======================================
 
         while (lastDialogueSaid.Count > maxNumberOfLines)
         {
-            lastDialogueSaid.RemoveAt(lastDialogueSaid.Count-1);
+            //lastDialogueSaid.RemoveAt(lastDialogueSaid.Count-1);
+            lastDialogueSaid.RemoveAt(0);
             //lastDialogueColor.RemoveAt(lastDialogueColor.Count-1);
         }
         
@@ -52,6 +56,18 @@ public class TextLog : MonoBehaviour
     //Takes the list of strings of latest dialogues, then turn it into a single string divded by \n for new lines
     private void DisplayTextLog()
     {
+        //lastDialogueSaid.Reverse();
         textField.text = string.Join("\n", lastDialogueSaid);
+    }
+
+    public IEnumerator FadeOutTxt(TMP_Text text, float fadeSpeed){
+        while(text.GetComponent<TMP_Text>().color.a > 0){
+            Color txtCol = text.GetComponent<TMP_Text>().color;
+            float fadeAmount = txtCol.a - (fadeSpeed * Time.deltaTime);
+
+            txtCol = new Color(txtCol.r, txtCol.g, txtCol.b, fadeAmount);
+            text.GetComponent<TMP_Text>().color = txtCol;
+            yield return null;
+        }
     }
 }
