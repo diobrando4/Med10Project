@@ -5,7 +5,7 @@ using UnityEngine;
 public class LookAtCamAndLinger : MonoBehaviour
 {
 
-    public float lingerTime = 1f;
+    public float lingerTime = 3f;
     private Camera cameraToLookAt;
     //Color parentColor;
 

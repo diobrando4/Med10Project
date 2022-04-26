@@ -40,6 +40,8 @@ public class CombatDialogueManager : MonoBehaviour
     [SerializeField]
     private List<string> ally2CombatLines = new List<string>();
 
+    public List<string> lastDialogueSaid = new List<string>();
+
     public bool toggleDialogue = true;
 
     private bool dialogueTrigger = true;
@@ -350,7 +352,7 @@ public class CombatDialogueManager : MonoBehaviour
             case 1://Getting hit themselves
                 //Debug.Log(ally1CombatLines[Random.Range(0,3)]);
                 dialogueTrigger = false;
-                ally1Health.PlaySound("Ally1Talk"+Random.Range(0,5));
+                ally1Health.PlaySound("Ally1Talk"+Random.Range(0,5)); //Play 1 out of 5 sounds for talking randomly
                 return ally1CombatLines[Random.Range(0,3)];
 
             case 2://Reaching 0 HP themselves
@@ -467,7 +469,6 @@ public class CombatDialogueManager : MonoBehaviour
             ally1TextBackgroundRect = ally1floatText.GetComponentInChildren<RectTransform>();
             ally1TextBackgroundSize = ally1floatText.GetComponentInChildren<TMP_Text>().GetRenderedValues(true);
             ally1TextBackgroundRect.sizeDelta = ally1TextBackgroundSize;
-            
         }
     }//ShowFloatingTextAlly1
 
