@@ -38,7 +38,7 @@ public class TextLog : MonoBehaviour
         {
             //lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(color2)+">"+Time.deltaTime.ToString()+"</color>");
             lastDialogueSaid.Add("<alpha=#"+"99"+">"+"<color=#"+ColorUtility.ToHtmlStringRGBA(color2)+">"+Time.deltaTime.ToString()+"</color>");
-            StartCoroutine(FadeOutTxt(lastDialogueSaid[0],0.1f));
+            //StartCoroutine(FadeOutTxt(lastDialogueSaid[0],0.1f));
             
         }
         //======================================
@@ -60,14 +60,14 @@ public class TextLog : MonoBehaviour
         textField.text = string.Join("\n", lastDialogueSaid);
     }
 
-    public IEnumerator FadeOutTxt(TMP_Text text, float fadeSpeed){
-        while(text.GetComponent<TMP_Text>().color.a > 0){
-            Color txtCol = text.GetComponent<TMP_Text>().color;
-            float fadeAmount = txtCol.a - (fadeSpeed * Time.deltaTime);
+    // public IEnumerator FadeOutTxt(TMP_Text text, float fadeSpeed){
+    //     while(text.GetComponent<TMP_Text>().color.a > 0){
+    //         Color txtCol = text.GetComponent<TMP_Text>().color;
+    //         float fadeAmount = txtCol.a - (fadeSpeed * Time.deltaTime);
 
-            txtCol = new Color(txtCol.r, txtCol.g, txtCol.b, fadeAmount);
-            text.GetComponent<TMP_Text>().color = txtCol;
-            yield return null;
-        }
-    }
+    //         txtCol = new Color(txtCol.r, txtCol.g, txtCol.b, fadeAmount);
+    //         text.GetComponent<TMP_Text>().color = txtCol;
+    //         yield return null;
+    //     }
+    // }
 }
