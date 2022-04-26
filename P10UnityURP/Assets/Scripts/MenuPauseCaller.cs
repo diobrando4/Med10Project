@@ -23,6 +23,8 @@ public class MenuPauseCaller : MonoBehaviour
         if (someInt == 1)
         {
             isPaused = true;
+
+            // this just makes it so the pause var in the player controller is the same as in the menu pause caller
             if (GameObject.Find("Player")) 
             {
                 GameObject.Find("Player").GetComponent<PlayerController>().isPaused = isPaused;
@@ -31,6 +33,8 @@ public class MenuPauseCaller : MonoBehaviour
         if (someInt == 0)
         {
             isPaused = false;
+
+            // this just makes it so the pause var in the player controller is the same as in the menu pause caller
             if (GameObject.Find("Player")) 
             {
                 GameObject.Find("Player").GetComponent<PlayerController>().isPaused = isPaused;

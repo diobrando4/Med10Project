@@ -34,8 +34,7 @@ public class PlayerController : MonoBehaviour
     ParticleSystem dashTrail;
     public TextMeshProUGUI dashUsesText;
 
-    //[HideInInspector]
-    public bool isPaused;
+    public bool isPaused; // this var is changed in the menu pause caller
     
     void Awake()
     {
