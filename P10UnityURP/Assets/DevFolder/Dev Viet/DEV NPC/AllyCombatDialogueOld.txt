@@ -2,94 +2,62 @@ Getting hit
 [0]Just a flesh wound
 [0]Hull compromised
 [0]Damage taken
-[0]I'm hit
-[0]That'll sting later
 [1]Ow!
 [1]Cut it out!
 [1]Why!?
-[1]I've taken damage!
-[1]It got me!
 
 Downed
 [0]Life.exe stopped working
 [0]Update in progress
 [0]-ERROR-
-[0]I'm downed
-[0]I require assistance
 [1]Im down!...
 [1]Sorry...
 [1]Help!...
-[1]I need help!..
-[1]They got me...
 
 Player hit
 [0]Commander Damaged
 [0]Warning: You lost health
 [0]Error: No repair kit
-[0]Dodge their attacks
-[0]You are hurt
 [1]Are you okay?
 [1]Watch out!
 [1]Careful!
-[1]How bad is the damage?
-[1]You'll be fine, keep going!
 
 Player downed
 [0]Commander Compromised
 [0]Leader has been downed
 [0]Failure imminent
-[0]Attempting Revive
-[0]Assisting Commander
 [1]Commander down!
 [1]Hold it together!
 [1]Thats not good...
-[1]On my way!
-[1]Let me help you up!
 
 Revived by Player
 [0]Systems back online
 [0]Update complete
 [0]Recalibrating
-[0]Appreciated
-[0]Returning to Duty
 [1]Thank you!
 [1]Im back up!
 [1]I LIVE!
-[1]Back at it!
-[1]I owe you one!
 
 Reviving Player
 [0]Reviving Commander
 [0]Administering Revive
 [0]Attempting to Revive
-[0]Please stand by
-[0]I got you
 [1]I got you!
 [1]Get back up!
 [1]Reviving!
-[1]You're not done yet!
-[1]Come on, back up!
 
 Removing Debuff on Player
 [0]Removed Ailments
 [0]Reseting Parameters
 [0]Eliminated Hostile Influence
-[0]Applying Anti-Debuff
-[0]Cleansing Debuff
 [1]Cleared your Debuff!
 [1]You should be fine again!
 [1]De-Debuffing!
-[1]Removed your debuff!
-[1]That should clear you up!
 
 No more enemies
 [0]Hostiles Eliminated
 [0]Room Clear
 [0]Task Complete
-[0]Enemies Defeated
-[0]We can proceed
 [1]Jobs Finished
 [1]No more enemies!
-[1]Ready to move!
-[1]Good fight!
-[1]No more things to shoot?
+[1]Ready to proceed!
