@@ -28,11 +28,12 @@ public class PlayerController : MonoBehaviour
     // maybe dashCharges would be a better name than dashUses?
     public int dashUses = 3; // how many times the player can dash
     private int dashUsesMax;
-    public float cooldown = 3f;
+    public float cooldown = 3f; // is bascially the same as max health
     [SerializeField]
     private float cooldownTimer;
     ParticleSystem dashTrail;
     public TextMeshProUGUI dashUsesText;
+    public GameObject dashBar0, dashBar1, dashBar2;
 
     public bool isPaused; // this var is changed in the menu pause caller
     
@@ -55,8 +56,12 @@ public class PlayerController : MonoBehaviour
         dashUsesText = GameObject.Find("CanvasHealthBars/HolderPlayerDashCounter/TextDashCounter").GetComponent<TextMeshProUGUI>();
         if (dashUsesText != null) 
         { 
-            dashUsesText.text = "DASH: " + dashUses; 
+            dashUsesText.text = "DASH: " + dashUses;
         }
+
+        dashBar0 = GameObject.Find("CanvasHealthBars/HolderPlauerDashBar/imgBar0");
+        dashBar1 = GameObject.Find("CanvasHealthBars/HolderPlauerDashBar/imgBar1");
+        dashBar2 = GameObject.Find("CanvasHealthBars/HolderPlauerDashBar/imgBar2");
     }
 
     // Update is called once per frame
@@ -82,7 +87,10 @@ public class PlayerController : MonoBehaviour
             else
             {
                 dashUses += 1;
-                if (dashUsesText != null) { dashUsesText.text = "DASH: " + dashUses; }
+                if (dashUsesText != null)
+                {
+                    dashUsesText.text = "DASH: " + dashUses;
+                }
                 cooldownTimer = cooldown;
             }
         }
@@ -105,7 +113,10 @@ public class PlayerController : MonoBehaviour
                 if (dashUses > 0)
                 {
                     dashUses -= 1;
-                    if (dashUsesText != null) { dashUsesText.text = "DASH: " + dashUses; }
+                    if (dashUsesText != null)
+                    {
+                        dashUsesText.text = "DASH: " + dashUses;
+                    }
                     dashTrail.Play();
 
                     if (!isDashing)
@@ -132,6 +143,8 @@ public class PlayerController : MonoBehaviour
         // not sure if the movement should happen in fixed or not, since rigidbody is already using the physics engine?
         //rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
         //rb.velocity = moveVelocity;
+
+        DashBarUpdate();
     }
 
     // used for physics
@@ -158,6 +171,33 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.velocity *= 0;
+        }
+    }
+
+    void DashBarUpdate()
+    {
+        switch (dashUses)
+        {
+            case 3:
+                dashBar0.SetActive(true);
+                dashBar1.SetActive(true);
+                dashBar2.SetActive(true);
+                break;
+            case 2:
+                dashBar0.SetActive(true);
+                dashBar1.SetActive(true);
+                dashBar2.SetActive(false);
+                break;
+            case 1:
+                dashBar0.SetActive(true);
+                dashBar1.SetActive(false);
+                dashBar2.SetActive(false);
+                break;
+            case 0:
+                dashBar0.SetActive(false);
+                dashBar1.SetActive(false);
+                dashBar2.SetActive(false);
+                break;
         }
     }
     
