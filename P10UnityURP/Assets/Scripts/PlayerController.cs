@@ -87,7 +87,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //if (playerHealthScript.isPlayerDead == false && isPaused == false)
         if (playerHealthScript.isPlayerDead == false && isPaused == false)
         {            
             // Left click @ mouse button
@@ -123,6 +122,11 @@ public class PlayerController : MonoBehaviour
                 }
                 
             }
+        }
+        // if we didn't have this; then the player could keep shooting, if they held down mouse0 when dying
+        if (playerHealthScript.isPlayerDead == true)
+        {
+            theGun.isFiring = false;
         }
 
         // not sure if the movement should happen in fixed or not, since rigidbody is already using the physics engine?
