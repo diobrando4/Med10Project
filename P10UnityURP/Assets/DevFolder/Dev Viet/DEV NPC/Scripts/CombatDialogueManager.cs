@@ -91,8 +91,8 @@ public class CombatDialogueManager : MonoBehaviour
             playerHPTracker = playerHealth.playerMaxHealth;
         }
         // //Text file processing
-        ally1CombatLines = ProcessTxtFile(textFileCombat,"[0]","[1]");
-        ally2CombatLines = ProcessTxtFile(textFileCombat,"[1]","[0]");
+        ally1CombatLines = ProcessTxtFile(textFileCombat,"[0]");
+        ally2CombatLines = ProcessTxtFile(textFileCombat,"[1]");
 
         ally1LevelLines = ProcessTxtFile(textFileLevel,"[0]","[1]");
         ally2LevelLines = ProcessTxtFile(textFileLevel,"[1]","[0]");
@@ -570,6 +570,48 @@ public class CombatDialogueManager : MonoBehaviour
     }//DisplayTextLog()
 
     //Takes a txt file, then filter out lines with a tag, and add it to a list.
+    private List<string> ProcessTxtFile(TextAsset _TxtFile, string _tag)
+    {
+        string[] textLines = null;
+        List<string> outputLines = new List<string>();
+
+        //Text file processing
+        if(_TxtFile != null) //If there is a text file
+        {
+            textLines = (_TxtFile.text.Split('\n')); //Seperate per line
+        }
+        for (int i = 0; i < textLines.Length; i++) //Split textfile between ally1 and ally2 depending on marker [0] and [1]
+        {
+            if(textLines[i].Contains(_tag))
+            {
+                textLines[i] = textLines[i].Replace(_tag, "");                
+                outputLines.Add(textLines[i]);
+                    
+            }
+        }
+        return outputLines; 
+        // //Text file processing
+        // if(textFileCombat != null) //If there is a text file
+        // {
+        //     textLinesCombat = (textFileCombat.text.Split('\n')); //Seperate per line
+        // }
+        // for (int i = 0; i < textLinesCombat.Length; i++) //Split textfile between ally1 and ally2 depending on marker [0] and [1]
+        // {
+        //     if(textLinesCombat[i].Contains("[0]"))
+        //     {
+        //         textLinesCombat[i] = textLinesCombat[i].Replace("[0]", "");                
+        //         ally1CombatLines.Add(textLinesCombat[i]);
+        //         //ally2CombatLines.Add(" ");
+        //     }
+        //     else if (textLinesCombat[i].Contains("[1]"))
+        //     {
+        //         textLinesCombat[i] = textLinesCombat[i].Replace("[1]", "");
+        //         //ally1CombatLines.Add(" ");
+        //         ally2CombatLines.Add(textLinesCombat[i]);  
+        //     }
+        // }
+    }
+
     private List<string> ProcessTxtFile(TextAsset _TxtFile, string _tag, string _otherTag)
     {
         string[] textLines = null;
@@ -594,26 +636,6 @@ public class CombatDialogueManager : MonoBehaviour
             }
         }
         return outputLines;
-        // //Text file processing
-        // if(textFileCombat != null) //If there is a text file
-        // {
-        //     textLinesCombat = (textFileCombat.text.Split('\n')); //Seperate per line
-        // }
-        // for (int i = 0; i < textLinesCombat.Length; i++) //Split textfile between ally1 and ally2 depending on marker [0] and [1]
-        // {
-        //     if(textLinesCombat[i].Contains("[0]"))
-        //     {
-        //         textLinesCombat[i] = textLinesCombat[i].Replace("[0]", "");                
-        //         ally1CombatLines.Add(textLinesCombat[i]);
-        //         //ally2CombatLines.Add(" ");
-        //     }
-        //     else if (textLinesCombat[i].Contains("[1]"))
-        //     {
-        //         textLinesCombat[i] = textLinesCombat[i].Replace("[1]", "");
-        //         //ally1CombatLines.Add(" ");
-        //         ally2CombatLines.Add(textLinesCombat[i]);  
-        //     }
-        // }
     }
 
     IEnumerator ProgressDialogue(List<string> _lines1, List<string> _lines2, int _numOfLines , int _dialogueSpeed)
