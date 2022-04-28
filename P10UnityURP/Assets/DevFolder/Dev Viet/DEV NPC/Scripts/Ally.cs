@@ -64,12 +64,14 @@ public class Ally : BaseClassNPC
         //allyFriend Check & Init
         if (gameObject == GameObject.Find("AllyBlueBot"))
         {
-            healthBarFill = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderBlueHealthBar/imgBackground/imgFillBlue").GetComponent<Image>();;
+            //healthBarFill = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderBlueHealthBar/imgBackground/imgFillBlue").GetComponent<Image>();
+            healthBarFill = GameObject.Find("CanvasHealthBars/HolderBlueHealthBar/imgBackground/imgFillBlue").GetComponent<Image>();
             allyFriend = GameObject.Find("AllyOrangeBot").GetComponent<Ally>();
         }
         else if (gameObject == GameObject.Find("AllyOrangeBot"))
         {
-            healthBarFill = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderOrangeHealthBar/imgBackground/imgFillOrange").GetComponent<Image>();;
+            //healthBarFill = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderOrangeHealthBar/imgBackground/imgFillOrange").GetComponent<Image>();
+            healthBarFill = GameObject.Find("CanvasHealthBars/HolderOrangeHealthBar/imgBackground/imgFillOrange").GetComponent<Image>();
             allyFriend = GameObject.Find("AllyBlueBot").GetComponent<Ally>();
         }
         //Find where the bullet spawns from

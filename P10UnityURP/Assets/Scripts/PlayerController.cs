@@ -51,7 +51,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // if we put the line below inside of the if-statement then it doesn't find it!
-        dashUsesText = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderPlayerDashCounter/TextDashCounter").GetComponent<TextMeshProUGUI>();
+        //dashUsesText = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderPlayerDashCounter/TextDashCounter").GetComponent<TextMeshProUGUI>();
+        dashUsesText = GameObject.Find("CanvasHealthBars/HolderPlayerDashCounter/TextDashCounter").GetComponent<TextMeshProUGUI>();
         if (dashUsesText != null) 
         { 
             dashUsesText.text = "DASH: " + dashUses; 

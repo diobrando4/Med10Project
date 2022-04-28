@@ -41,7 +41,8 @@ public class PlayerHealthManager : MonoBehaviour
         // starting with full health
         playerCurrentHealth = playerMaxHealth;
         reviveBarFill = gameObject.transform.Find("ReviveBarPopUp/Canvas/ReviveBar/imgBackground/imgFill").GetComponent<Image>();
-        healthBarFill = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderPlayerHealthBar/imgBackground/imgFillPlayer").GetComponent<Image>();
+        //healthBarFill = GameObject.Find("CanvasHealthBars/HolderHealthBars/HolderPlayerHealthBar/imgBackground/imgFillPlayer").GetComponent<Image>();
+        healthBarFill = GameObject.Find("CanvasHealthBars/HolderPlayerHealthBar/imgBackground/imgFillPlayer").GetComponent<Image>();
         gameObject.GetComponentInChildren<Image>().enabled = false; //Disable Image comp of Imgbackground on start
         
         deathRenderer = gameObject.transform.Find("StatusIcon").GetComponent<Renderer>();
