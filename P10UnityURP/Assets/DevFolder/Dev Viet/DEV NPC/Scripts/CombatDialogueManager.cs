@@ -110,7 +110,7 @@ public class CombatDialogueManager : MonoBehaviour
 
         if (GameObject.Find("CanvasHealthBars/TextLogBg/TextLogText"))
         {
-            textLog = GameObject.Find("CanvasHealthBars/HolderTxtLog/TextLogBg/TextLogText").GetComponentInChildren<TMP_Text>();
+            textLog = GameObject.Find("CanvasHealthBars/TextLogBg/TextLogText").GetComponentInChildren<TMP_Text>();
         }
 
     }//Start()
