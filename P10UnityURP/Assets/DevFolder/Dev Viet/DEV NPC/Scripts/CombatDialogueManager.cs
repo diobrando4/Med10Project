@@ -35,11 +35,18 @@ public class CombatDialogueManager : MonoBehaviour
     private Vector2 ally2TextBackgroundSize;
 
     public TextAsset textFileCombat; //For lines said during combat
-    private string[] textLinesCombat;
     [SerializeField]
     private List<string> ally1CombatLines = new List<string>();
     [SerializeField]
     private List<string> ally2CombatLines = new List<string>();
+
+    public TextAsset textFileLevel;
+    [SerializeField]
+    private List<string> ally1LevelLines = new List<string>();
+    [SerializeField]
+    private List<string> ally2LevelLines = new List<string>();
+    public int narrativeDialogueSpeed = 3;
+
     private int numOfDialoguePer = 5;
 
     public bool toggleDialogue = true;
@@ -50,6 +57,7 @@ public class CombatDialogueManager : MonoBehaviour
     private bool checkIfAlly1Downed = false;
     private bool checkIfAlly2Downed = false;
     private bool checkIfPlayerDowned = false;
+    //private bool checkIfNarrativeIsRunning = false;
 
     //====TextLog Related====
     private List<string> lastDialogueSaid = new List<string>();
@@ -83,9 +91,12 @@ public class CombatDialogueManager : MonoBehaviour
             playerHPTracker = playerHealth.playerMaxHealth;
         }
         // //Text file processing
-        ally1CombatLines = ProcessTxtFile(textFileCombat,"[0]");
-        ally2CombatLines = ProcessTxtFile(textFileCombat,"[1]");
+        ally1CombatLines = ProcessTxtFile(textFileCombat,"[0]","[1]");
+        ally2CombatLines = ProcessTxtFile(textFileCombat,"[1]","[0]");
 
+        ally1LevelLines = ProcessTxtFile(textFileLevel,"[0]","[1]");
+        ally2LevelLines = ProcessTxtFile(textFileLevel,"[1]","[0]");
+        
         //What they say at the start of the level basically
         if(toggleDialogue == true)
         {
@@ -333,7 +344,7 @@ public class CombatDialogueManager : MonoBehaviour
                     //Should contain method to show dialogue if both Ally is no longer in combat and alive.
                     //Should be like a conversation
                     //Should not trigger instantly
-
+                    //StartCoroutine(ProgressDialogue(ally1LevelLines,ally2LevelLines,5,narrativeDialogueSpeed));
                 }
 
                 //Level 2 Idle Dialogues
@@ -559,7 +570,7 @@ public class CombatDialogueManager : MonoBehaviour
     }//DisplayTextLog()
 
     //Takes a txt file, then filter out lines with a tag, and add it to a list.
-    private List<string> ProcessTxtFile(TextAsset _TxtFile, string tag)
+    private List<string> ProcessTxtFile(TextAsset _TxtFile, string _tag, string _otherTag)
     {
         string[] textLines = null;
         List<string> outputLines = new List<string>();
@@ -571,10 +582,15 @@ public class CombatDialogueManager : MonoBehaviour
         }
         for (int i = 0; i < textLines.Length; i++) //Split textfile between ally1 and ally2 depending on marker [0] and [1]
         {
-            if(textLines[i].Contains(tag))
+            if(textLines[i].Contains(_tag))
             {
-                textLines[i] = textLines[i].Replace(tag, "");                
+                textLines[i] = textLines[i].Replace(_tag, "");                
                 outputLines.Add(textLines[i]);
+                    
+            }
+            else if (textLines[i].Contains(_otherTag))
+            {
+                outputLines.Add("");
             }
         }
         return outputLines;
@@ -598,6 +614,21 @@ public class CombatDialogueManager : MonoBehaviour
         //         ally2CombatLines.Add(textLinesCombat[i]);  
         //     }
         // }
+    }
+
+    IEnumerator ProgressDialogue(List<string> _lines1, List<string> _lines2, int _numOfLines , int _dialogueSpeed)
+    {
+        int lineTracker = 0;
+        yield return new WaitForSeconds(2);
+        //for (int i = 0; i < _numOfLines; i++)
+        while(lineTracker < _numOfLines)
+        {
+            ShowFloatingTextAlly1(_lines1[lineTracker]);
+            ShowFloatingTextAlly2(_lines2[lineTracker]);
+            lineTracker += 1;
+            yield return new WaitForSeconds(_dialogueSpeed);
+        }
+        yield break;
     }
 
 }

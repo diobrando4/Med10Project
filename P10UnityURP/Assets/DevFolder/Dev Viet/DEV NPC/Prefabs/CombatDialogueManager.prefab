@@ -48,5 +48,8 @@ MonoBehaviour:
   textFileCombat: {fileID: 4900000, guid: 9350cd12b56e2dd42aab5882d4006aa6, type: 3}
   ally1CombatLines: []
   ally2CombatLines: []
+  textFileLevel: {fileID: 4900000, guid: 97f7c170682215848b38467c7a9e5490, type: 3}
+  ally1LevelLines: []
+  ally2LevelLines: []
   toggleDialogue: 1
   maxNumberOfLines: 10

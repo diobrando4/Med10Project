@@ -18,7 +18,9 @@ public class UIManager : MonoBehaviour
 
     public TextAsset textFileNarrative; //Need to make an interchangeable system
     private string[] textLinesNarrative;
+    [SerializeField]
     private List<string> ally1NarrativeLines = new List<string>();
+    [SerializeField]
     private List<string> ally2NarrativeLines = new List<string>();
 
     public int currentLine;
@@ -50,8 +52,9 @@ public class UIManager : MonoBehaviour
             else if (textLinesNarrative[i].Contains("[1]"))
             {
                 textLinesNarrative[i] = textLinesNarrative[i].Replace("[1]", "");
-                ally1NarrativeLines.Add(" ");
+                
                 ally2NarrativeLines.Add(textLinesNarrative[i]);  
+                ally1NarrativeLines.Add(" ");
             }
         }
         if (endAtLine == 0)
