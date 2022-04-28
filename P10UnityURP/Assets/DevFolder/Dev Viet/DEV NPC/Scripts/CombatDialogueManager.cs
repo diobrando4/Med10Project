@@ -82,26 +82,11 @@ public class CombatDialogueManager : MonoBehaviour
             playerHealth = player.GetComponent<PlayerHealthManager>();
             playerHPTracker = playerHealth.playerMaxHealth;
         }
+        // //Text file processing
+        ally1CombatLines = ProcessTxtFile(textFileCombat,"[0]");
+        ally2CombatLines = ProcessTxtFile(textFileCombat,"[1]");
 
-        if(textFileCombat != null) //If there is a text file
-        {
-            textLinesCombat = (textFileCombat.text.Split('\n')); //Seperate per line
-        }
-        for (int i = 0; i < textLinesCombat.Length; i++) //Split textfile between ally1 and ally2 depending on marker [0] and [1]
-        {
-            if(textLinesCombat[i].Contains("[0]"))
-            {
-                textLinesCombat[i] = textLinesCombat[i].Replace("[0]", "");                
-                ally1CombatLines.Add(textLinesCombat[i]);
-                //ally2CombatLines.Add(" ");
-            }
-            else if (textLinesCombat[i].Contains("[1]"))
-            {
-                textLinesCombat[i] = textLinesCombat[i].Replace("[1]", "");
-                //ally1CombatLines.Add(" ");
-                ally2CombatLines.Add(textLinesCombat[i]);  
-            }
-        }
+        //What they say at the start of the level basically
         if(toggleDialogue == true)
         {
             ShowFloatingTextAlly1("Lets Go!");
@@ -338,13 +323,62 @@ public class CombatDialogueManager : MonoBehaviour
                     checkClear = false;
                 }
             }
+
+            //Post combat dialogue should trigger if not in combat, and all GoodGuys are alive
+            if (ally1Health.inCombat == false && ally2Health.inCombat == false && checkIfAlly1Downed == false && checkIfAlly2Downed == false && checkIfPlayerDowned == false)
+            {
+                //Level 1 Idle Dialogues
+                if (SceneManager.GetActiveScene().buildIndex == 1)
+                {
+                    //Should contain method to show dialogue if both Ally is no longer in combat and alive.
+                    //Should be like a conversation
+                    //Should not trigger instantly
+
+                }
+
+                //Level 2 Idle Dialogues
+                else if (SceneManager.GetActiveScene().buildIndex == 2)
+                {
+
+                }
+
+                //Level 3 Idle Dialogues
+                else if (SceneManager.GetActiveScene().buildIndex == 3)
+                {
+
+                }
+
+                //Level 4 Idle Dialogues
+                else if (SceneManager.GetActiveScene().buildIndex == 4)
+                {
+
+                }
+
+                //Level 5 Idle Dialogues
+                else if (SceneManager.GetActiveScene().buildIndex == 5)
+                {
+
+                }
+
+                //Level 6 Idle Dialogues
+                else if (SceneManager.GetActiveScene().buildIndex == 6)
+                {
+
+                }
+
+                //Level 7 Idle Dialogues
+                else if (SceneManager.GetActiveScene().buildIndex == 7)
+                {
+
+                }
+            }
+            DisplayTextLog();
             //Clear the oldest entry that is beyond the max number of lines    
             while (lastDialogueSaid.Count > maxNumberOfLines)
             {
                 //lastDialogueSaid.RemoveAt(lastDialogueSaid.Count-1);
                 lastDialogueSaid.RemoveAt(0);
             }
-            DisplayTextLog();
         }//toggleDialogue
 
         //FOR DEBUGGING
@@ -523,5 +557,47 @@ public class CombatDialogueManager : MonoBehaviour
     {
         textLog.text = string.Join("\n", lastDialogueSaid);
     }//DisplayTextLog()
+
+    //Takes a txt file, then filter out lines with a tag, and add it to a list.
+    private List<string> ProcessTxtFile(TextAsset _TxtFile, string tag)
+    {
+        string[] textLines = null;
+        List<string> outputLines = new List<string>();
+
+        //Text file processing
+        if(_TxtFile != null) //If there is a text file
+        {
+            textLines = (_TxtFile.text.Split('\n')); //Seperate per line
+        }
+        for (int i = 0; i < textLines.Length; i++) //Split textfile between ally1 and ally2 depending on marker [0] and [1]
+        {
+            if(textLines[i].Contains(tag))
+            {
+                textLines[i] = textLines[i].Replace(tag, "");                
+                outputLines.Add(textLines[i]);
+            }
+        }
+        return outputLines;
+        // //Text file processing
+        // if(textFileCombat != null) //If there is a text file
+        // {
+        //     textLinesCombat = (textFileCombat.text.Split('\n')); //Seperate per line
+        // }
+        // for (int i = 0; i < textLinesCombat.Length; i++) //Split textfile between ally1 and ally2 depending on marker [0] and [1]
+        // {
+        //     if(textLinesCombat[i].Contains("[0]"))
+        //     {
+        //         textLinesCombat[i] = textLinesCombat[i].Replace("[0]", "");                
+        //         ally1CombatLines.Add(textLinesCombat[i]);
+        //         //ally2CombatLines.Add(" ");
+        //     }
+        //     else if (textLinesCombat[i].Contains("[1]"))
+        //     {
+        //         textLinesCombat[i] = textLinesCombat[i].Replace("[1]", "");
+        //         //ally1CombatLines.Add(" ");
+        //         ally2CombatLines.Add(textLinesCombat[i]);  
+        //     }
+        // }
+    }
 
 }
