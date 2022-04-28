@@ -14,7 +14,8 @@ public class Ally : BaseClassNPC
 
     private Ally allyFriend;
 
-    public Image healthBarFill; //Need to automate this later
+    private Image healthBarFill; //Need to automate this later
+    [HideInInspector] 
     public bool isAllyDead = false;
 
     //Revive Related
@@ -32,6 +33,7 @@ public class Ally : BaseClassNPC
     //Dispel related
     private bool canCureDebuff = true;
     //[HideInInspector]
+    [HideInInspector] 
     public bool isUsingDispel = false;
 
     void Start()
