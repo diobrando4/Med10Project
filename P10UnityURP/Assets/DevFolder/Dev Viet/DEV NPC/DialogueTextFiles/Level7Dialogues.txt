@@ -1,3 +1,7 @@
 Level 7 Dialogue
-[0]
-[1]
+[1]Are we there yet?
+[1]As much as I love shooting
+[1]I don't want to be buried by a tsunami of enemies
+[0]As a matter of fact we are
+[0]Commander, best prepare yourself for the next room
+[1]Fiiinally, I'm going for a swim after we return home

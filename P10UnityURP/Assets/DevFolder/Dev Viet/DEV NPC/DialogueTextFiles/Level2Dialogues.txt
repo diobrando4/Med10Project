@@ -4,4 +4,4 @@ Level 2 Dialogue
 [0]Don't forget why we are here
 [1]Oh I'm not forgetting
 [1]Just want some more action
-[0]Let's continue then
+[0]Shall we continue then?

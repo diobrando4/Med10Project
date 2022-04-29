@@ -99,13 +99,13 @@ public class CombatDialogueManager : MonoBehaviour
         //What they say at the start of the level basically
         if(toggleDialogue == true && SceneManager.GetActiveScene().buildIndex != 1)
         {
-            ShowFloatingTextAlly1("Lets Go!");
-            ShowFloatingTextAlly2("Ready");    
+            ShowFloatingTextAlly1("Ready");  
+            ShowFloatingTextAlly2("Lets Go!"); 
         }
 
-        if (GameObject.Find("CanvasHealthBars/TextLogBg/TextLogText"))
+        if (GameObject.Find("CanvasHealthBars/TextLogBg/Mask/TextLogText"))
         {
-            textLog = GameObject.Find("CanvasHealthBars/TextLogBg/TextLogText").GetComponentInChildren<TMP_Text>();
+            textLog = GameObject.Find("CanvasHealthBars/TextLogBg/Mask/TextLogText").GetComponentInChildren<TMP_Text>();
         }
 
     }//Start()
