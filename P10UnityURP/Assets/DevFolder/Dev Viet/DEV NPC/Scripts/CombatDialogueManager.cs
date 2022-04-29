@@ -40,7 +40,7 @@ public class CombatDialogueManager : MonoBehaviour
     [SerializeField]
     private List<string> ally2CombatLines = new List<string>();
 
-    public TextAsset textFileLevel;
+    public TextAsset[] textFileLevel;
     [SerializeField]
     private List<string> ally1LevelLines = new List<string>();
     [SerializeField]
@@ -95,8 +95,6 @@ public class CombatDialogueManager : MonoBehaviour
         ally1CombatLines = ProcessTxtFile(textFileCombat,"[0]");
         ally2CombatLines = ProcessTxtFile(textFileCombat,"[1]");
 
-        ally1LevelLines = ProcessTxtFile(textFileLevel,"[0]","[1]");
-        ally2LevelLines = ProcessTxtFile(textFileLevel,"[1]","[0]");
         
         //What they say at the start of the level basically
         if(toggleDialogue == true && SceneManager.GetActiveScene().buildIndex != 1)
@@ -339,50 +337,19 @@ public class CombatDialogueManager : MonoBehaviour
             //Post combat dialogue should trigger if not in combat, and all GoodGuys are alive
             if (ally1Health.inCombat == false && ally2Health.inCombat == false && checkIfAlly1Downed == false && checkIfAlly2Downed == false && checkIfPlayerDowned == false)
             {
-                //Level 1 Idle Dialogues
-                if (SceneManager.GetActiveScene().buildIndex == 1 && narrativeTrigger == false)
+                for (int i = 1; i <= textFileLevel.Length; i++)
                 {
-                    //Should contain method to show dialogue if both Ally is no longer in combat and alive.
-                    //Should be like a conversation
-                    //Should not trigger instantly
-                    StartCoroutine(ProgressDialogue(ally1LevelLines,ally2LevelLines,5,narrativeDialogueSpeed));
-                    narrativeTrigger = true;
-                }
-
-                //Level 2 Idle Dialogues
-                else if (SceneManager.GetActiveScene().buildIndex == 2 && narrativeTrigger == false)
-                {
-
-                }
-
-                //Level 3 Idle Dialogues
-                else if (SceneManager.GetActiveScene().buildIndex == 3 && narrativeTrigger == false)
-                {
-
-                }
-
-                //Level 4 Idle Dialogues
-                else if (SceneManager.GetActiveScene().buildIndex == 4 && narrativeTrigger == false)
-                {
-
-                }
-
-                //Level 5 Idle Dialogues
-                else if (SceneManager.GetActiveScene().buildIndex == 5 && narrativeTrigger == false)
-                {
-
-                }
-
-                //Level 6 Idle Dialogues
-                else if (SceneManager.GetActiveScene().buildIndex == 6 && narrativeTrigger == false)
-                {
-
-                }
-
-                //Level 7 Idle Dialogues
-                else if (SceneManager.GetActiveScene().buildIndex == 7 && narrativeTrigger == false)
-                {
-
+                    if (SceneManager.GetActiveScene().buildIndex == i && narrativeTrigger == false)
+                    {
+                        //Triggers only once due to narrativeTrigger
+                        if (textFileLevel[i-1] != null)
+                        {
+                            ally1LevelLines = ProcessTxtFile(textFileLevel[i-1],"[0]","[1]");
+                            ally2LevelLines = ProcessTxtFile(textFileLevel[i-1],"[1]","[0]");
+                            StartCoroutine(ProgressDialogue(ally1LevelLines,ally2LevelLines,ally1LevelLines.Count,narrativeDialogueSpeed));
+                            narrativeTrigger = true;
+                        }
+                    }
                 }
             }
             DisplayTextLog();
@@ -527,7 +494,7 @@ public class CombatDialogueManager : MonoBehaviour
         }
 
         //ally1floatText = (GameObject)Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
-        if (ally1 != null)
+        if (ally1 != null && text != "")
         {
             ally1floatText = (GameObject)Instantiate(FloatingTextPrefab, ally1.transform.position, Quaternion.identity, ally1.transform);
             ally1floatText.GetComponentInChildren<TMP_Text>().color = ally1TextColor;
@@ -538,10 +505,7 @@ public class CombatDialogueManager : MonoBehaviour
             ally1TextBackgroundSize = ally1floatText.GetComponentInChildren<TMP_Text>().GetRenderedValues(true);
             ally1TextBackgroundRect.sizeDelta = ally1TextBackgroundSize;
             //lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(ally1TextColor)+">"+text+"</color>");
-            if (text != "")
-            {
-                lastDialogueSaid.Add("<color=#"+ColorUtility.ToHtmlStringRGB(ally1TextColor)+">"+text+"</color>");
-            }
+            lastDialogueSaid.Add("<color=#"+ColorUtility.ToHtmlStringRGB(ally1TextColor)+">"+text+"</color>");
         }
     }//ShowFloatingTextAlly1
 
@@ -553,7 +517,7 @@ public class CombatDialogueManager : MonoBehaviour
         }
 
         //ally2floatText = (GameObject)Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
-        if (ally2 != null)
+        if (ally2 != null && text != "")
         {
             ally2floatText = (GameObject)Instantiate(FloatingTextPrefab, ally2.transform.position, Quaternion.identity, ally2.transform);
             ally2floatText.GetComponentInChildren<TMP_Text>().color = ally2TextColor;
@@ -564,10 +528,7 @@ public class CombatDialogueManager : MonoBehaviour
             ally2TextBackgroundSize = ally2floatText.GetComponentInChildren<TMP_Text>().GetRenderedValues(true);
             ally2TextBackgroundRect.sizeDelta = ally2TextBackgroundSize;
             //lastDialogueSaid.Insert(0,"<color=#"+ColorUtility.ToHtmlStringRGB(ally2TextColor)+">"+text+"</color>");
-            if (text != "")
-            {
-                lastDialogueSaid.Add("<color=#"+ColorUtility.ToHtmlStringRGB(ally2TextColor)+">"+text+"</color>");
-            }
+            lastDialogueSaid.Add("<color=#"+ColorUtility.ToHtmlStringRGB(ally2TextColor)+">"+text+"</color>");
         }
     }//ShowFloatingTextAlly2
     
