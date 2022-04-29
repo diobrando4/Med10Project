@@ -51,5 +51,6 @@ MonoBehaviour:
   textFileLevel: {fileID: 4900000, guid: 97f7c170682215848b38467c7a9e5490, type: 3}
   ally1LevelLines: []
   ally2LevelLines: []
+  narrativeDialogueSpeed: 3
   toggleDialogue: 1
   maxNumberOfLines: 10
