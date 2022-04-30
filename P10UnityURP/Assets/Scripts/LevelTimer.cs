@@ -27,7 +27,16 @@ public class LevelTimer : MonoBehaviour
         {
             isLevelSwitched = true;
             //Debug.Log("level is switched: " + isLevelSwitched);
-            SceneManager.LoadScene("MenuEnd");
+            
+            // needs to open one of two different versions of the end menu
+            if (PlayerPrefs.GetInt("GameVersion") == 1)
+            {
+                SceneManager.LoadScene("MenuEnd");
+            }
+            if (PlayerPrefs.GetInt("GameVersion") == 2)
+            {
+                SceneManager.LoadScene("MenuEnd");
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ public class DialogueController : MonoBehaviour
         {
             Debug.Log("Dialogue is enabled");
             combatDialogueManager.toggleDialogue = true;
+            // need a bool to enable the text-log with
         }
         if (PlayerPrefs.GetInt("GameVersion") == 2)
         {
