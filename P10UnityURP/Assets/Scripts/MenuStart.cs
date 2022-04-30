@@ -20,27 +20,27 @@ public class MenuStart : MonoBehaviour
     }
 
     // just for testing
-    /*
     void Update()
     {
         // to reset it
         if(Input.GetKeyDown(KeyCode.R))
         {
-            //PlayerPrefs.DeleteAll();
+            PlayerPrefs.DeleteAll();
+            gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
         }
         // to test/active it
         if(Input.GetKeyDown(KeyCode.T))
         {
             RandomGameVersion();
+            gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
         }
         // to see/print the value of it
         if(Input.GetKeyDown(KeyCode.G))
         {
-            Debug.Log("GetInt: " + PlayerPrefs.GetInt("GameVersion")); // default value seems to be zero
-            gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
+            //Debug.Log("GetInt: " + PlayerPrefs.GetInt("GameVersion")); // default value seems to be zero
+            //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
         }
     }
-    */
 
     void RandomGameVersion()
     {
