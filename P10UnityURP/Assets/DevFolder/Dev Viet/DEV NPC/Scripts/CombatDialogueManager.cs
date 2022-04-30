@@ -95,18 +95,27 @@ public class CombatDialogueManager : MonoBehaviour
         ally1CombatLines = ProcessTxtFile(textFileCombat,"[0]");
         ally2CombatLines = ProcessTxtFile(textFileCombat,"[1]");
 
-        
-        //What they say at the start of the level basically
-        if(toggleDialogue == true && SceneManager.GetActiveScene().buildIndex != 1)
-        {
-            ShowFloatingTextAlly1("Ready");  
-            ShowFloatingTextAlly2("Lets Go!"); 
-        }
-
         if (GameObject.Find("CanvasHealthBars/TextLogBg/Mask/TextLogText"))
         {
             textLog = GameObject.Find("CanvasHealthBars/TextLogBg/Mask/TextLogText").GetComponentInChildren<TMP_Text>();
+        }        
+
+        //What they say at the start of the level basically
+        if(toggleDialogue == true)
+        {
+            GameObject.Find("CanvasHealthBars/TextLogBg").SetActive(true);
+            if(SceneManager.GetActiveScene().buildIndex != 1)
+            {
+                ShowFloatingTextAlly1("Ready");  
+                ShowFloatingTextAlly2("Lets Go!"); 
+            }
         }
+        else
+        {
+            GameObject.Find("CanvasHealthBars/TextLogBg").SetActive(false);
+        }
+
+
 
     }//Start()
 
