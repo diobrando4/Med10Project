@@ -227,4 +227,31 @@ public class BaseClassNPC : MonoBehaviour
             Debug.Log("Can't find SoundManager");
         }
     }
+
+    protected void Move2Target(GameObject _target, float _backoff, float _stopDistBackoff, float _stopDistApproach)
+    {
+        float _targetDist = Vector3.Distance(transform.position, _target.transform.position);
+        float _backOffDistance = _backoff;
+        if(_targetDist <= _backOffDistance) //Back Off
+        {
+            Vector3 dir2Target = transform.position - _target.transform.position;
+            Vector3 newPos = transform.position + dir2Target;
+
+            agent.stoppingDistance = _stopDistBackoff;
+            agent.SetDestination(newPos);
+        }
+        else if(_targetDist > _backOffDistance) //Move Closer
+        {
+            agent.stoppingDistance = _stopDistApproach;
+            agent.SetDestination(_target.transform.position);
+            if(HasLineOfSightTo(_target, _backOffDistance)) //If the width of their body
+            {
+                if(sphereHit.transform.gameObject.tag != _target.tag)
+                {
+                    agent.stoppingDistance = _stopDistApproach-1f;  
+                }   
+            }  
+        }
+        transform.LookAt(_target.transform);
+    }//Move2Target
 }

@@ -90,7 +90,7 @@ public class Ally : BaseClassNPC
         if (isAllyDead == false) 
         {
             gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
-            Move2Target(target);
+            Move(target);
             ShootNearestObject(target);//Inherited function
         }
         else
@@ -120,67 +120,27 @@ public class Ally : BaseClassNPC
         }
     }//Update
 
-    //Special made function that allows Ally to move towards a target without getting too close, 
-    //but also follow the player if no valid enemy target is found
-    private void Move2Target(GameObject m2target)
+    //Function that handles conditions on how to move
+    private void Move(GameObject m2target)
     {
         if (player.GetComponent<PlayerHealthManager>().isPlayerDead == false && player.GetComponent<PlayerHealthManager>().isDebuffed == false)//If the player is not dead and is not debuffed
         {
             if (inCombat == false || m2target == null) //If there is no enemies, follow player
-            {
-                float playerDistance = Vector3.Distance(transform.position, player.transform.position);
-                float spacingDistance = 3;
-                if(playerDistance <= spacingDistance) //If player is too close, back off
-                {
-                    Vector3 dir2Player = transform.position - player.transform.position;
-                    Vector3 newPos = transform.position + dir2Player;
-
-                    agent.stoppingDistance = stopDistanceFromPlayer;
-                    agent.SetDestination(newPos);
-                    //Debug.Log("Avoiding");
-                }
-                else if(playerDistance > spacingDistance) //If player is too far, get closer
-                {
-                    agent.stoppingDistance = stopDistanceFromPlayer;
-                    agent.SetDestination(player.transform.position);
-                }
-                transform.LookAt(player.transform);
+            {   
+                //Move2Target(GameObject Target, float BackoffDistance, float StopDistOnBackoff, float StopDistanceOnApproach)
+                Move2Target(player,3,stopDistanceFromPlayer,stopDistanceFromPlayer);
             } 
             else if (inCombat == true && m2target.tag == "Enemy") //If there is enemies
             {
-                float enemyDistance = Vector3.Distance(transform.position, m2target.transform.position); //Calc Distance between self and enemy
-                float runAwayDistance = 5; //Distance before backing off
-                if(enemyDistance <= runAwayDistance) //If enemies are too close, backoff
-                {
-                    Vector3 dir2Enemy = transform.position - m2target.transform.position; //Calc direction to enemy
-                    Vector3 newPos = transform.position + dir2Enemy; //Add position with enemy direction
-
-                    agent.stoppingDistance = 3f;
-                    agent.SetDestination(newPos);
-                    //Debug.Log("Avoiding");
-                }
-                else if (enemyDistance > runAwayDistance) //If enemies are not too close, move closer
-                {
-                    agent.stoppingDistance = 6f;
-                    agent.SetDestination(m2target.transform.position);
-                    if(HasLineOfSightTo(m2target, runAwayDistance)) //If the width of their body
-                    {
-                        if(sphereHit.transform.gameObject.tag != "Enemy")
-                        {
-                            agent.stoppingDistance = 5.1f;
-                            //Debug.Log("Target Obstructed");   
-                        }
-                    //print(gameObject + " Engaging");    
-                    }  
-                }
-                transform.LookAt(m2target.transform);
+                //Move2Target(GameObject Target, float BackoffDistance,float MaxDistanceAwayFromPlayer , float StopDistOnBackoff, float StopDistanceOnApproach)
+                Move2Target(m2target,5,10,3,6);
             }
         }
         else//If player is dead or Debuffed
         {
             agent.stoppingDistance = 1.5f;
             agent.SetDestination(player.transform.position);
-            if(m2target != null)
+            if(m2target != null) //If there is still enemies, look at them, if not, look at player
             {
                transform.LookAt(m2target.transform); 
             }
@@ -290,4 +250,43 @@ public class Ally : BaseClassNPC
             yield break;    
         }
     }//Dispel
+
+    //Overloaded version of Move2Target from BaseClassNPC
+    //Takes in the consideration of distance from player
+    protected void Move2Target(GameObject _target, float _backoff,float maxDistFromPlayer, float _stopDistBackoff, float _stopDistApproach)
+    {
+        float _targetDist = Vector3.Distance(transform.position, _target.transform.position);
+        float _playerDist = Vector3.Distance(transform.position, player.transform.position);
+        float _spacing2Player = maxDistFromPlayer;
+        float _backOffDistance = _backoff;
+
+        if(_playerDist > _spacing2Player) //If far from player, Move Closer to player
+        {
+            agent.stoppingDistance = _spacing2Player/2;
+            agent.SetDestination(player.transform.position);
+        }
+        else
+        {
+            if(_targetDist <= _backOffDistance) //If too close to target, Back off from target
+            {
+                Vector3 dir2Target = transform.position - _target.transform.position;
+                Vector3 newPos = transform.position + dir2Target;
+                agent.stoppingDistance = _stopDistBackoff;
+                agent.SetDestination(newPos);
+            }
+            else if(_targetDist > _backOffDistance) //If far from target, Move Closer to target
+            {
+                agent.stoppingDistance = _stopDistApproach;
+                agent.SetDestination(_target.transform.position);
+                if(HasLineOfSightTo(_target, _backOffDistance)) //If the width of their body cant reach target, it is obstructed
+                {
+                    if(sphereHit.transform.gameObject.tag != _target.tag)
+                    {
+                        agent.stoppingDistance = _stopDistApproach-1f;  
+                    }   
+                }  
+            }
+        }
+        transform.LookAt(_target.transform);
+    }
 }
