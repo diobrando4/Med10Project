@@ -10,7 +10,19 @@ public class Ally : BaseClassNPC
 {
     [SerializeField]
     private GameObject player;
+
+    //Movement related
+    [Header("Movement Related")]
+    [Tooltip("How close will the Ally follow the player off Combat?")]
     public float stopDistanceFromPlayer;
+    [Tooltip("How close will the enemy be before the Ally begins to back off?")]
+    public float distanceBeforeRunAway = 5f;
+    [Tooltip("How far away will Ally move away from player during combat?")]
+    public float maxDistanceFromPlayer = 10f;
+    [Tooltip("While backing off, how close will Ally be to the target?")]
+    public float stopDistanceOnBackoff = 3f;
+    [Tooltip("While approaching, how close will Ally be to the target?")]
+    public float stopDistanceOnApproach = 6f;
 
     private Ally allyFriend;
 
@@ -35,6 +47,9 @@ public class Ally : BaseClassNPC
     //[HideInInspector]
     [HideInInspector] 
     public bool isUsingDispel = false;
+
+    
+
 
     void Start()
     {
@@ -133,7 +148,7 @@ public class Ally : BaseClassNPC
             else if (inCombat == true && m2target.tag == "Enemy") //If there is enemies
             {
                 //Move2Target(GameObject Target, float BackoffDistance,float MaxDistanceAwayFromPlayer , float StopDistOnBackoff, float StopDistanceOnApproach)
-                Move2Target(m2target,5,10,3,6);
+                Move2Target(m2target,distanceBeforeRunAway,maxDistanceFromPlayer,stopDistanceOnBackoff,stopDistanceOnApproach);
             }
         }
         else//If player is dead or Debuffed

@@ -20,7 +20,7 @@ public class Effect : MonoBehaviour
     {
         if (origin != null)
         {
-            GameObject.Find("Cubes").GetComponent<Renderer>().material.color = origin.GetComponent<Renderer>().material.color;
+            GameObject.Find("Cubes").GetComponent<Renderer>().material = origin.GetComponent<Renderer>().material;
         }
     }
 }
