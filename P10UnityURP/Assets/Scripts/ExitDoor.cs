@@ -7,7 +7,9 @@ public class ExitDoor : MonoBehaviour
     //public GameObject[] allEnemies;
     public List<GameObject> remainingEnemies;
 
-    public bool areAllEnemiesDead = false;
+    public bool areAllEnemiesDead = false; // what is this used for?
+
+    private CombatDialogueManager combatDialogueManager;
 
     // Start is called before the first frame update
     void Start()
@@ -16,19 +18,23 @@ public class ExitDoor : MonoBehaviour
         //List<GameObject>remainingEnemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
         remainingEnemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
         //areAllEnemiesDead = false;
+        combatDialogueManager = GameObject.Find("CombatDialogueManager").GetComponent<CombatDialogueManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (remainingEnemies.Count == 0)
+        if (remainingEnemies.Count == 0 && combatDialogueManager.isDialogueDone == true)
         {
             //Debug.Log("all enemies are dead");
+
+            // we also need to make sure the door only opens when the main dialogue is finished, maybe it should be inside its own if-statement?
+            
             if (FindObjectOfType<SoundManager>())
             {
                 FindObjectOfType<SoundManager>().SoundPlay("DoorOpen");
             }
-            areAllEnemiesDead = true;
+            areAllEnemiesDead = true; // what is this used for?
             Destroy(gameObject);
         }
         remainingEnemies.RemoveAll(item => item == null);
