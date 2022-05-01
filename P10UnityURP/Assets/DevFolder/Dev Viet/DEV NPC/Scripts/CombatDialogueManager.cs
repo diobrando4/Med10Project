@@ -35,16 +35,20 @@ public class CombatDialogueManager : MonoBehaviour
     private Vector2 ally2TextBackgroundSize;
 
     public TextAsset textFileCombat; //For lines said during combat
+    public TextAsset textFileIdle; //For lines said during Idling after End dialogue is finished
     [SerializeField]
     private List<string> ally1CombatLines = new List<string>();
     [SerializeField]
     private List<string> ally2CombatLines = new List<string>();
 
     public TextAsset[] textFileLevel;
+    public TextAsset[] textFileStartLevel;
     [SerializeField]
     private List<string> ally1LevelLines = new List<string>();
     [SerializeField]
     private List<string> ally2LevelLines = new List<string>();
+    private string ally1LevelStartLines;
+    private string ally2LevelStartLines;
 
     private int numOfDialoguePer = 5;
 
@@ -52,6 +56,7 @@ public class CombatDialogueManager : MonoBehaviour
 
     private bool dialogueTrigger = true;
     private bool narrativeTrigger = false;
+    private bool idleTrigger = false;
     private bool checkClear = false;
     private bool checkDebuff = false;
     private bool checkIfAlly1Downed = false;
@@ -105,10 +110,18 @@ public class CombatDialogueManager : MonoBehaviour
         if(toggleDialogue == true)
         {
             GameObject.Find("CanvasHealthBars/TextLogBg").SetActive(true);
-            if(SceneManager.GetActiveScene().buildIndex != 1)
+            for(int i = 1; i <= textFileStartLevel.Length; i++)
             {
-                ShowFloatingTextAlly1("Ready");  
-                ShowFloatingTextAlly2("Lets Go!"); 
+                if(SceneManager.GetActiveScene().buildIndex == i)
+                {
+                    if(textFileStartLevel[i-1] != null)
+                    {
+                        ally1LevelStartLines = string.Join("",ProcessTxtFile(textFileStartLevel[i-1],"[0]"));
+                        ally2LevelStartLines = string.Join("",ProcessTxtFile(textFileStartLevel[i-1],"[1]"));
+                        ShowFloatingTextAlly1(ally1LevelStartLines);  
+                        ShowFloatingTextAlly2(ally2LevelStartLines); 
+                    }
+                }
             }
         }
         else
@@ -319,7 +332,7 @@ public class CombatDialogueManager : MonoBehaviour
             }
 
             //If there are no more enemies on the floor, and it is not the first floor
-            if(ally1Health.inCombat == false && FindObjectOfType<ExitDoor>() == null && SceneManager.GetActiveScene().buildIndex > 1)
+            if(ally1Health.inCombat == false && GameObject.FindGameObjectWithTag("Enemy") == null && SceneManager.GetActiveScene().buildIndex > 1)
             {
                 dialogueTrigger = false;
                 if(dialogueTrigger == false && checkClear == false)
@@ -345,7 +358,7 @@ public class CombatDialogueManager : MonoBehaviour
             }
 
             //Post combat dialogue should trigger if not in combat, and all GoodGuys are alive
-            if (ally1Health.inCombat == false && ally2Health.inCombat == false && checkIfAlly1Downed == false && checkIfAlly2Downed == false && checkIfPlayerDowned == false)
+            if (ally1Health.inCombat == false && ally2Health.inCombat == false && checkIfAlly1Downed == false && checkIfAlly2Downed == false && checkIfPlayerDowned == false && GameObject.FindGameObjectWithTag("Enemy") == null)
             {
                 for (int i = 1; i <= textFileLevel.Length; i++)
                 {
@@ -361,7 +374,15 @@ public class CombatDialogueManager : MonoBehaviour
                         }
                     }
                 }
+                if(isDialogueDone == true && idleTrigger == false)
+                {
+                    ally1LevelLines = ProcessTxtFile(textFileIdle,"[0]","[1]");
+                    ally2LevelLines = ProcessTxtFile(textFileIdle,"[1]","[0]");
+                    StartCoroutine(IdleDialogue(ally1LevelLines,ally2LevelLines,ally1LevelLines.Count,5));
+                    idleTrigger = true;
+                }
             }
+
             DisplayTextLog();
             //Clear the oldest entry that is beyond the max number of lines    
             while (lastDialogueSaid.Count > maxNumberOfLines)
@@ -610,6 +631,21 @@ public class CombatDialogueManager : MonoBehaviour
             yield return new WaitForSeconds(_dialogueSpeed);
         }
         isDialogueDone = true;
+        yield break;
+    }//ProgressDialogue
+
+    IEnumerator IdleDialogue(List<string> _lines1, List<string> _lines2, int _numOfLines , int _dialogueSpeed)
+    {
+        int randomInt = 0;
+        yield return new WaitForSeconds(8);
+        while (isDialogueDone == true && idleTrigger == true)
+        {
+            randomInt = Random.Range(0,_lines1.Count);
+            ShowFloatingTextAlly1(_lines1[randomInt]);
+            ShowFloatingTextAlly2(_lines2[randomInt]);
+            yield return new WaitForSeconds(_dialogueSpeed);
+            idleTrigger = false;
+        }
         yield break;
     }
 }

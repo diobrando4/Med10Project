@@ -1,0 +1,3 @@
+Level 2 Start Dialogue
+[0]Let's get to work
+[1]Wooo! Action!

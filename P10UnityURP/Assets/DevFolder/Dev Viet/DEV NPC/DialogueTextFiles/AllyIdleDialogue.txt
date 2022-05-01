@@ -1,0 +1,5 @@
+Player is idling
+[0]Commander, we should proceed
+[0]Time is short, we need to keep moving
+[1]I'm itching for more action, come on!
+[1]What are we waiting for? Lets go!

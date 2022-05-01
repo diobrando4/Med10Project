@@ -1,0 +1,3 @@
+Level 5 Dialogue
+[0]Type 2 melee and ranged enemies!
+[1]They'll mess up your movement on hit!

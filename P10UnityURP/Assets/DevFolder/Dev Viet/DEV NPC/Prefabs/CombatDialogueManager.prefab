@@ -47,6 +47,7 @@ MonoBehaviour:
   FloatingTextPrefab: {fileID: 4881330298396664476, guid: 5d2ca2ff8cfbd9b47ab2bb49207cb2e3, type: 3}
   offset: {x: 0, y: 3, z: 0}
   textFileCombat: {fileID: 4900000, guid: 9350cd12b56e2dd42aab5882d4006aa6, type: 3}
+  textFileIdle: {fileID: 4900000, guid: 7cfc973431d7b0b4ba6f4b6c0c2326ac, type: 3}
   ally1CombatLines: []
   ally2CombatLines: []
   textFileLevel:
@@ -57,10 +58,19 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 680b7fcd5148ea7408a396b0818187b5, type: 3}
   - {fileID: 4900000, guid: 48130b7246ef4e647a66f1fd692b8790, type: 3}
   - {fileID: 4900000, guid: bc1ec8b9d66ff68479025d0c69fc60c5, type: 3}
+  textFileStartLevel:
+  - {fileID: 4900000, guid: 5866263271bb6bd499466a17eab77697, type: 3}
+  - {fileID: 4900000, guid: 14e3b155a32446546b7f265ee5028eb8, type: 3}
+  - {fileID: 4900000, guid: 99c06120a280d95459b208970765a9f6, type: 3}
+  - {fileID: 4900000, guid: 5dda0a31f3c0f644fb73caf5564655b8, type: 3}
+  - {fileID: 4900000, guid: 401b444a002e684468c130987b5db3ac, type: 3}
+  - {fileID: 4900000, guid: fd4448c8f42dfbd4a9b663f4a6a22096, type: 3}
+  - {fileID: 4900000, guid: 811751f958d9b3b44b1659a39e992f34, type: 3}
   ally1LevelLines: []
   ally2LevelLines: []
-  narrativeDialogueSpeed: 2
   toggleDialogue: 1
+  isDialogueDone: 0
+  narrativeDialogueSpeed: 2
   maxNumberOfLines: 10
 --- !u!114 &9152502003438309172
 MonoBehaviour:
