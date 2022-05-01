@@ -8,3 +8,4 @@ Level 1 Dialogue
 [0]Try not to rush out too much Orange
 [1]Yeah yea, I got it 
 [1]The Commander got our backs!
+[0]Door is about to open, let's move

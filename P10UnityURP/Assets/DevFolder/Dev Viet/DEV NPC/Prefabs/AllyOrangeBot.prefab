@@ -343,7 +343,10 @@ MonoBehaviour:
   muzzle: {fileID: 0}
   player: {fileID: 0}
   stopDistanceFromPlayer: 6
-  healthBarFill: {fileID: 0}
+  distanceBeforeRunAway: 5
+  maxDistanceFromPlayer: 12
+  stopDistanceOnBackoff: 3
+  stopDistanceOnApproach: 6
   isAllyDead: 0
   reviveMax: 100
   reviveCurrent: 0

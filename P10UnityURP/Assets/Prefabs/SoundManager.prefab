@@ -46,51 +46,51 @@ MonoBehaviour:
   sounds:
   - name: 
     clip: {fileID: 8300000, guid: 4d77ff7860a77924eb98a5e05e5c4633, type: 3}
-    volume: 0.1
+    volume: 0.3
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: 188c0e5f13f47734f8f45e71b4fa64fe, type: 3}
-    volume: 0.1
+    volume: 0.3
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: fdf865dd611d4b14394af9e3fdbc7186, type: 3}
-    volume: 0.1
+    volume: 0.3
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: 3b45142175fa7f54d896c3467eb63c78, type: 3}
-    volume: 0.1
+    volume: 0.3
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: 0e3b33c92a13c2a4091ac86f667048fc, type: 3}
-    volume: 0.1
+    volume: 0.3
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: 6270ecd8f4595184da302209868b59dd, type: 3}
-    volume: 0.1
+    volume: 0.3
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: a59518625786f204ea3cce9712bc3068, type: 3}
-    volume: 0.1
+    volume: 0.3
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: cbb0254de8649d94b9e190fc692c0b71, type: 3}
-    volume: 0.1
+    volume: 0.3
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: 49d38306032b09548b7094579240c245, type: 3}
-    volume: 0.1
+    volume: 0.3
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: edb3ec38f8e5b65429cfa8ee32c51258, type: 3}
-    volume: 0.1
+    volume: 0.3
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: 7c6f056a10fc3e1479a9c0caf0b8f000, type: 3}
-    volume: 0.1
+    volume: 0.3
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: 3d8849483fc47d54f92ed4e874d82197, type: 3}
-    volume: 0.1
+    volume: 0.3
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: e2a114f4ef2573946bc71d1c84185261, type: 3}
@@ -126,7 +126,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: 2ca6f4c0b54febc4a9d32945406493bb, type: 3}
-    volume: 0.1
+    volume: 0.5
     source: {fileID: 0}
   - name: 
     clip: {fileID: 8300000, guid: a94b33ee55426164da2bcb36f34772ef, type: 3}
