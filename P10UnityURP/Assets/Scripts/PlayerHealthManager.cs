@@ -35,6 +35,11 @@ public class PlayerHealthManager : MonoBehaviour
     public ParticleSystem revivePart;
     public ParticleSystem dispelPart;
 
+    // for flashing white whenever they are hurt
+    private MeshRenderer meshRenderer;
+    private Color originalColor;
+    private float flashTime = 0.10f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +57,10 @@ public class PlayerHealthManager : MonoBehaviour
         
         revivePart = gameObject.transform.Find("ReviveParticles").GetComponent<ParticleSystem>();
         revivePart.Stop();
+
+        // for flashing white whenever they are hurt
+        meshRenderer = GetComponent<MeshRenderer>();
+        originalColor = meshRenderer.material.color;
     }
 
     // Update is called once per frame
@@ -67,8 +76,8 @@ public class PlayerHealthManager : MonoBehaviour
         {
             deathRenderer.enabled = false;
         }
-        if (revivePart.isEmitting)
-        Debug.Log(revivePart.isEmitting);
+        //if (revivePart.isEmitting)
+        //Debug.Log(revivePart.isEmitting);
     }
 
     //[SerializeField]
@@ -86,6 +95,7 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if (isPlayerKillable == true)
         {
+            StartCoroutine(Flash());
             playerCurrentHealth -= damageTaken;
             healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
             if(playerCurrentHealth <= 0)
@@ -132,6 +142,14 @@ public class PlayerHealthManager : MonoBehaviour
             revivePart.Stop();
             revivingAlly = null;
         }
+    }//OnTriggerExit
+
+    // for flashing white whenever they are hurt
+    IEnumerator Flash()
+    {
+        meshRenderer.material.color = Color.white;
+        yield return new WaitForSeconds(flashTime);
+        meshRenderer.material.color = originalColor;
     }
 
     private IEnumerator RevivePlayer()
