@@ -45,7 +45,6 @@ public class CombatDialogueManager : MonoBehaviour
     private List<string> ally1LevelLines = new List<string>();
     [SerializeField]
     private List<string> ally2LevelLines = new List<string>();
-    public int narrativeDialogueSpeed = 3;
 
     private int numOfDialoguePer = 5;
 
@@ -58,10 +57,12 @@ public class CombatDialogueManager : MonoBehaviour
     private bool checkIfAlly1Downed = false;
     private bool checkIfAlly2Downed = false;
     private bool checkIfPlayerDowned = false;
-    //private bool checkIfNarrativeIsRunning = false;
+    [HideInInspector]
+    public bool isDialogueDone = false;
 
     //====TextLog Related====
     private List<string> lastDialogueSaid = new List<string>();
+    public int narrativeDialogueSpeed = 3;
     public int maxNumberOfLines = 10;
     private TMP_Text textLog;
     //=======================
@@ -608,6 +609,7 @@ public class CombatDialogueManager : MonoBehaviour
             lineTracker += 1;
             yield return new WaitForSeconds(_dialogueSpeed);
         }
+        isDialogueDone = true;
         yield break;
     }
 }
