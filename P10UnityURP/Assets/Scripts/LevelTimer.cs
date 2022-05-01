@@ -31,11 +31,11 @@ public class LevelTimer : MonoBehaviour
             // needs to open one of two different versions of the end menu
             if (PlayerPrefs.GetInt("GameVersion") == 1)
             {
-                SceneManager.LoadScene("MenuEnd");
+                SceneManager.LoadScene("MenuEnd"); // end menu for game version 1
             }
             if (PlayerPrefs.GetInt("GameVersion") == 2)
             {
-                SceneManager.LoadScene("MenuEnd");
+                SceneManager.LoadScene("MenuEnd"); // end menu for game version 2
             }
         }
     }

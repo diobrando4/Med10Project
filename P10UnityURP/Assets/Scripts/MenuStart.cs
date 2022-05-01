@@ -48,17 +48,17 @@ public class MenuStart : MonoBehaviour
         // you can only change the version once because its default value is zero
         if (PlayerPrefs.GetInt("GameVersion") == 0)
         {
-            int rnd = Random.Range(0, 2); // 0-1
-            //Debug.Log("rnd: " + rnd);
-
-            if (rnd == 0)
+            int rnd = Random.Range(1, 3); // 1 or 2
+            Debug.Log("rnd: " + rnd);
+            
+            if (rnd == 1)
             {
                 PlayerPrefs.SetInt("GameVersion", 1);
                 //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
 
                 // have whatever variable is need to enable or disable companion dialogue
             }
-            else if (rnd == 1)
+            else if (rnd == 2)
             {
                 PlayerPrefs.SetInt("GameVersion", 2);
                 //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
