@@ -68,13 +68,20 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if(playerCurrentHealth <= 0)
         {   
-            deathRenderer.enabled = true;       
+                 
             isPlayerDead = true;
+            if(reviveCurrent <= 0)
+            {
+                deathRenderer.enabled = true;     
+            }
             // player movement is disabled in the player controller!
         }
         else
         {
-            deathRenderer.enabled = false;
+            if(reviveCurrent > 0)
+            {
+                deathRenderer.enabled = false;     
+            }
         }
         //if (revivePart.isEmitting)
         //Debug.Log(revivePart.isEmitting);
