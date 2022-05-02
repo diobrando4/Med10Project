@@ -113,11 +113,11 @@ public class Ally : BaseClassNPC
             agent.SetDestination(gameObject.transform.position);
             if(reviveCurrent <= 0)
             {
-                gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
+                gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = true;
             }
             else
             {
-                gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = true;
+                gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
             }
         }
 
