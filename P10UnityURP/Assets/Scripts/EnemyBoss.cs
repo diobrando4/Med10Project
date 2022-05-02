@@ -54,11 +54,11 @@ public class EnemyBoss : BaseClassEnemy
             for (int i = 0; i < firePoints.Length; i++)
             {
                 BulletController newBullet = Instantiate(bullet, firePoints[i].position, firePoints[i].rotation) as BulletController;
+                newBullet.speed = projectileSpeed;
+                muzzleSmoke.Play();
+                PlaySound("Gunshot");
             }
             //BulletController newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as BulletController;
-            PlaySound("Gunshot");
-            newBullet.speed = projectileSpeed;
-            muzzleSmoke.Play();
         }
     }
 }
