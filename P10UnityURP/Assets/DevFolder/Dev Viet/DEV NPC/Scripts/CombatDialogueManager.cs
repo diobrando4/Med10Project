@@ -127,6 +127,7 @@ public class CombatDialogueManager : MonoBehaviour
         else
         {
             GameObject.Find("CanvasHealthBars/TextLogBg").SetActive(false);
+            isDialogueDone = true;
         }
 
 
