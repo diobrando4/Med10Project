@@ -58,6 +58,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 680b7fcd5148ea7408a396b0818187b5, type: 3}
   - {fileID: 4900000, guid: 48130b7246ef4e647a66f1fd692b8790, type: 3}
   - {fileID: 4900000, guid: bc1ec8b9d66ff68479025d0c69fc60c5, type: 3}
+  - {fileID: 4900000, guid: 89817b7e77279374d9b55c089b727083, type: 3}
   textFileStartLevel:
   - {fileID: 4900000, guid: 5866263271bb6bd499466a17eab77697, type: 3}
   - {fileID: 4900000, guid: 14e3b155a32446546b7f265ee5028eb8, type: 3}
@@ -66,6 +67,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 401b444a002e684468c130987b5db3ac, type: 3}
   - {fileID: 4900000, guid: fd4448c8f42dfbd4a9b663f4a6a22096, type: 3}
   - {fileID: 4900000, guid: 811751f958d9b3b44b1659a39e992f34, type: 3}
+  - {fileID: 4900000, guid: 157361e910125b048a5478d16d18c91f, type: 3}
   ally1LevelLines: []
   ally2LevelLines: []
   toggleDialogue: 1
