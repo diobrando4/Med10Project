@@ -104,14 +104,20 @@ public class Ally : BaseClassNPC
         target = FindClosestTargetWithTag("Enemy");//Inherited function
         if (isAllyDead == false) 
         {
-            gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
             Move(target);
             ShootNearestObject(target);//Inherited function
+            if(reviveCurrent <= 0)
+            {
+                gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
+            }
         }
         else
         {
             agent.SetDestination(gameObject.transform.position);
-            gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = true;
+            if(reviveCurrent > 0)
+            {
+                gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = true;
+            }
         }
 
         if (target == null)
