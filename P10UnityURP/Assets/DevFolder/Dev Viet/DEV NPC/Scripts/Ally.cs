@@ -106,15 +106,16 @@ public class Ally : BaseClassNPC
         {
             Move(target);
             ShootNearestObject(target);//Inherited function
-            if(reviveCurrent <= 0)
-            {
-                gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
-            }
+            gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
         }
         else
         {
             agent.SetDestination(gameObject.transform.position);
-            if(reviveCurrent > 0)
+            if(reviveCurrent <= 0)
+            {
+                gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
+            }
+            else
             {
                 gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = true;
             }
