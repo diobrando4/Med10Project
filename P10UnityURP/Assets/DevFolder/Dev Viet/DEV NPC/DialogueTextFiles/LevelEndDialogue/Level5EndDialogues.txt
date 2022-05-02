@@ -1,9 +1,7 @@
 Level 5 Dialogue
-[0]Best be carefull with the new enemies
+[0]Best be careful with the new hostiles
 [0]Their attacks have a negative effect
 [0]We can remove it though
-[1]Hey, uuuh...
-[1]Isn't that a broken thingy?
-[1]You know like the thing that got us here?
-[0]Huh you are right 
+[1]Hey, uuuh… isn't that a broken thingy?
+[1]You know, like the thing that got us here?
 [0]No wonder we were so far off target

@@ -1,7 +1,8 @@
 Level 8 Dialogue
-[1]Are we there yet?
-[1]As much as I love shooting
-[1]I don't want to be buried by a tsunami of enemies
-[0]As a matter of fact we are
-[0]Commander, best prepare yourself for the next room
-[1]Fiiinally, I'm going for a swim after we return home
+[0]Mission accomplished, we’re done here
+[0]Good job everyone
+[1]Awesome! Now…
+[1]How do we get out of here?
+[0]There should be a way out up ahead
+[1]Come on Commander, let’s get outta here!
+[1]The one with the lowest kill count pays the tab!

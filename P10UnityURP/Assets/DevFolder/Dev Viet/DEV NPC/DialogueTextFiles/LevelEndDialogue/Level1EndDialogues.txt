@@ -1,11 +1,11 @@
 Level 1 Dialogue
-[0]Starting remote door unlocking
+[0]Deciphering door lock
 [0]We've arrived off target
 [0]Guess that was to be expected
 [0]Is everyone prepared?
 [1]Locked and loaded!
-[0]Watch out for enemies 
-[0]Try not to rush out too much Orange
-[1]Yeah yea, I got it 
+[0]Watch out for hostiles
+[0]Don't run off Orange
+[1]Yeah yea, I got it
 [1]The Commander got our backs!
-[0]Door is about to open, let's move
+[0]The door is about to open, let's move
