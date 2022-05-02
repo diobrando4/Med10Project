@@ -8,12 +8,12 @@ public class EnemyBoss : BaseClassEnemy
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = 25;
+        maxHealth = 75;
         currHealth = maxHealth;
         damageGiven = 1;
         //distanceB4Shoot = 15; 
         projectileSpeed = 10f;
-        fireRate = 0.75f;
+        //fireRate = 0.75f;
         //muzzle = gameObject.transform.Find("EnemyGun/Muzzle");
         muzzleSmoke = gameObject.transform.Find("EnemyGun/SmokeParticles").GetComponent<ParticleSystem>();
         
@@ -31,26 +31,24 @@ public class EnemyBoss : BaseClassEnemy
         StartCoroutine(BulletSpawner());
     }
 
-    public float timeBetweenBullets;
-    private float bulletCounter;
+    private float rotationSpeed = 40f;
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(new Vector3(0, 25f, 0) * Time.deltaTime);
+        transform.Rotate(new Vector3(0, rotationSpeed, 0) * Time.deltaTime);
 
         DestroyOnDeath();
     }
 
-    //public Transform firePoint;
     public Transform[] firePoints;
 
     IEnumerator BulletSpawner()
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.5f);
-            //Debug.Log("BulletSpawner is running");
+            yield return new WaitForSeconds(0.20f); // this bascially acts as the firerate! lower = faster
+            //Debug.Log("BulletSpawner is executed");
             for (int i = 0; i < firePoints.Length; i++)
             {
                 BulletController newBullet = Instantiate(bullet, firePoints[i].position, firePoints[i].rotation) as BulletController;
@@ -58,7 +56,6 @@ public class EnemyBoss : BaseClassEnemy
                 muzzleSmoke.Play();
                 PlaySound("Gunshot");
             }
-            //BulletController newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as BulletController;
         }
     }
 }
