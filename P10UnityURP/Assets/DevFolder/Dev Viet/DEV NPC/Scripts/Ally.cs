@@ -258,7 +258,7 @@ public class Ally : BaseClassNPC
         {
             PlaySound("AllyCureDebuff");
             canCureDebuff = false;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
             debuffMan.RestorePlayerHealth();
             debuffMan.RestorePlayerSpeed();
             debuffMan.RestorePlayerFireRate();
