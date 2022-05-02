@@ -11,7 +11,7 @@ public class EnemyBoss : BaseClassEnemy
         maxHealth = 25;
         currHealth = maxHealth;
         damageGiven = 1;
-        distanceB4Shoot = 15; 
+        //distanceB4Shoot = 15; 
         projectileSpeed = 10f;
         fireRate = 0.75f;
         //muzzle = gameObject.transform.Find("EnemyGun/Muzzle");
@@ -42,10 +42,8 @@ public class EnemyBoss : BaseClassEnemy
         DestroyOnDeath();
     }
 
-    private float attackCooldown;
-    private float cooldownTimer;
-    public Transform firePoint1;
-    public Transform firePoint2;
+    //public Transform firePoint;
+    public Transform[] firePoints;
 
     IEnumerator BulletSpawner()
     {
@@ -53,8 +51,11 @@ public class EnemyBoss : BaseClassEnemy
         {
             yield return new WaitForSeconds(0.5f);
             //Debug.Log("BulletSpawner is running");
-            // needs a for loop for multiple shooting points
-            BulletController newBullet = Instantiate(bullet, firePoint1.position, firePoint1.rotation) as BulletController;
+            for (int i = 0; i < firePoints.Length; i++)
+            {
+                BulletController newBullet = Instantiate(bullet, firePoints[i].position, firePoints[i].rotation) as BulletController;
+            }
+            //BulletController newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as BulletController;
             PlaySound("Gunshot");
             newBullet.speed = projectileSpeed;
             muzzleSmoke.Play();
