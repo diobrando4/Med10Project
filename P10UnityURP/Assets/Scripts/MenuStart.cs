@@ -17,29 +17,45 @@ public class MenuStart : MonoBehaviour
     {
         gameVersionText = GameObject.Find("Canvas/TextGameVersion").GetComponent<TextMeshProUGUI>();
         gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
+        RandomGameVersion();
     }
 
     // just for testing
     void Update()
     {
         // to reset it
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.I))
+        //if ((Input.GetButton(KeyCode.I) && Input.GetButtonDown(KeyCode.O)) || (Input.GetButtonDown(KeyCode.I) && Input.GetButton(KeyCode.O))) // couldn't get this to work
         {
             PlayerPrefs.DeleteAll();
             gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
         }
         // to test/active it
+        /*
         if(Input.GetKeyDown(KeyCode.T))
         {
             RandomGameVersion();
             gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
         }
+        */
         // to see/print the value of it
+        /*
         if(Input.GetKeyDown(KeyCode.G))
         {
             //Debug.Log("GetInt: " + PlayerPrefs.GetInt("GameVersion")); // default value seems to be zero
             //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
         }
+        */
+    }
+
+    public void GameStart()
+    {
+        levelLoader.LoadNextLevel();
+    }
+
+    public void GameQuit()
+    {
+        Application.Quit();
     }
 
     void RandomGameVersion()
@@ -54,28 +70,15 @@ public class MenuStart : MonoBehaviour
             if (rnd == 1)
             {
                 PlayerPrefs.SetInt("GameVersion", 1);
-                //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
-
-                // have whatever variable is need to enable or disable companion dialogue
+                gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
             }
             else if (rnd == 2)
             {
                 PlayerPrefs.SetInt("GameVersion", 2);
-                //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
-
-                // have whatever variable is need to enable or disable companion dialogue
+                gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
             }
         }
     }
 
-    public void GameStart()
-    {
-        // RandomGameVersion();
-        levelLoader.LoadNextLevel();
-    }
-
-    public void GameQuit()
-    {
-        Application.Quit();
-    }
+    
 }
