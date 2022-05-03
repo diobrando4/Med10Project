@@ -15,7 +15,6 @@ public class TestPlayerPrefsSave : MonoBehaviour
             versionNum = PlayerPrefs.GetInt(SavedVersion); //Use that int as versionNum
             Debug.Log("Existing save found with the number: "+versionNum);
         }
-        
     }
 
     // Update is called once per frame
@@ -41,6 +40,10 @@ public class TestPlayerPrefsSave : MonoBehaviour
             PlayerPrefs.DeleteKey(SavedVersion); //Delete the key
             versionNum = 0; //Reset value
             Debug.Log("Deleting SavedVersion");
+        }
+        if(Input.GetKey(KeyCode.I) &&Input.GetKey(KeyCode.R))
+        {
+            Debug.Log("Test");
         }
     }
 }

@@ -10,42 +10,66 @@ public class MenuStart : MonoBehaviour
 {
     public LevelLoader levelLoader;
     public TextMeshProUGUI gameVersionText;
+    private int versionNum;
 
     // make a function that auto loads the level loader?
 
     void Start()
     {
+        if (PlayerPrefs.HasKey("GameVersion") == true) //If there already is a saved key
+        {
+            versionNum = PlayerPrefs.GetInt("GameVersion"); //Use that int as versionNum
+            Debug.Log("Existing save found with the number: "+versionNum);     
+        }
+        else
+        {
+            //RandomGameVersion();
+            versionNum = Random.Range(1,3);
+            PlayerPrefs.SetInt("GameVersion", versionNum); //Set the int versionNum to the SavedVersion Key
+            PlayerPrefs.Save(); //Save the changes to registry
+            //If used In-Editor - Registry can be found using "RegEdit" with the path being Computer/HKEY_CURRENT_USER/Software/Unity/UnityEditor/DefaultCompany/Med10P1/SavedVersion_xxxxxxxx
+            Debug.Log("New version number is: "+versionNum);
+        }
+        
         gameVersionText = GameObject.Find("Canvas/TextGameVersion").GetComponent<TextMeshProUGUI>();
         gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
-        RandomGameVersion();
     }
 
     // just for testing
     void Update()
     {
-        // to reset it
-        //if(Input.GetKeyDown(KeyCode.I))
-        if ((Input.GetKey(KeyCode.I) && Input.GetKeyDown(KeyCode.O)) || (Input.GetKeyDown(KeyCode.I) && Input.GetKey(KeyCode.O)))
+        //DEBUG
+        if(Input.GetKey(KeyCode.I))
         {
-            PlayerPrefs.DeleteAll();
-            gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
+            if(Input.GetKeyDown(KeyCode.O))// Delete Key
+            {
+                PlayerPrefs.DeleteAll();
+                versionNum = 0;
+                gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
+                Debug.Log("Deleting all Keys");  
+            }
+            else if(Input.GetKeyDown(KeyCode.Keypad1)) //TESTING Change to version 1
+            {   
+                PlayerPrefs.SetInt("GameVersion", 1);
+                versionNum = PlayerPrefs.GetInt("GameVersion");
+                PlayerPrefs.Save();
+                Debug.Log("Making new version "+versionNum);
+                gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
+            }
+            else if(Input.GetKeyDown(KeyCode.Keypad2)) //TESTING Change to version 2
+            {
+                PlayerPrefs.SetInt("GameVersion", 2);
+                versionNum = PlayerPrefs.GetInt("GameVersion");
+                PlayerPrefs.Save();
+                Debug.Log("Making new version "+versionNum);
+                gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
+            }
+            else if(Input.GetKeyDown(KeyCode.P)) //TESTING print out game version number
+            {
+                Debug.Log("Version check: "+versionNum);  
+            }
+            
         }
-        // to test/active it
-        /*
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            RandomGameVersion();
-            gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
-        }
-        */
-        // to see/print the value of it
-        /*
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            //Debug.Log("GetInt: " + PlayerPrefs.GetInt("GameVersion")); // default value seems to be zero
-            //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
-        }
-        */
     }
 
     public void GameStart()
@@ -56,29 +80,5 @@ public class MenuStart : MonoBehaviour
     public void GameQuit()
     {
         Application.Quit();
-    }
-
-    void RandomGameVersion()
-    {
-        // this is the only way i could think of to lock it
-        // you can only change the version once because its default value is zero
-        if (PlayerPrefs.GetInt("GameVersion") == 0)
-        {
-            int rnd = Random.Range(1, 3); // 1 or 2
-            Debug.Log("rnd: " + rnd);
-            
-            if (rnd == 1)
-            {
-                PlayerPrefs.SetInt("GameVersion", 1);
-                gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
-            }
-            else if (rnd == 2)
-            {
-                PlayerPrefs.SetInt("GameVersion", 2);
-                gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
-            }
-        }
-    }
-
-    
+    }    
 }
