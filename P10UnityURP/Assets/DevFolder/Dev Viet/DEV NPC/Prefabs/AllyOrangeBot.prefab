@@ -344,7 +344,7 @@ MonoBehaviour:
   player: {fileID: 0}
   stopDistanceFromPlayer: 6
   distanceBeforeRunAway: 5
-  maxDistanceFromPlayer: 15
+  maxDistanceFromPlayer: 12
   stopDistanceOnBackoff: 3
   stopDistanceOnApproach: 6
   isAllyDead: 0
