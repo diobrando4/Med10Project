@@ -19,7 +19,7 @@ public class LookAtCamAndLinger : MonoBehaviour
         Destroy(gameObject, lingerTime);
 
     }
-    void Update()
+    void FixedUpdate()
     {
         transform.LookAt(cameraToLookAt.transform);
         transform.rotation = Quaternion.LookRotation(cameraToLookAt.transform.forward);
