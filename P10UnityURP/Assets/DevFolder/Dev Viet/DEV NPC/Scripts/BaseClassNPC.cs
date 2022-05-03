@@ -45,6 +45,11 @@ public class BaseClassNPC : MonoBehaviour
 
     Vector3 rayOffset; // we need this, otherwise the raycast might hit unwanted objects EDIT: No longer an issue with the new layer filtering
 
+    // for flashing white whenever they are hurt
+    protected MeshRenderer meshRenderer;
+    protected Color originalColor;
+    protected float flashTime = 0.10f;
+
     void Awake()
     {
         rayOffset = new Vector3(0,0,0);
@@ -61,6 +66,14 @@ public class BaseClassNPC : MonoBehaviour
         ignoreOwnLayer = 1<<gameObject.layer;
         //Invert the bit mask e.g. focus only on own layer to, focus on all other layers than own
         ignoreOwnLayer = ~ignoreOwnLayer;
+    }
+
+    // these can probably be in Awake?
+    void Start()
+    {
+        // for flashing white whenever they are hurt
+        meshRenderer = GetComponent<MeshRenderer>();
+        originalColor = meshRenderer.material.color;
     }
 
     //Function to find the closest target with the given tag
@@ -120,6 +133,10 @@ public class BaseClassNPC : MonoBehaviour
     public void DamageTaken(int damage)
     {
         currHealth -= damage;
+
+        // for flashing white whenever they are hurt
+        StartCoroutine(Flash());
+
         if(gameObject.tag == "Enemy")
         {
             PlaySound("EnemyHurt");
@@ -254,4 +271,12 @@ public class BaseClassNPC : MonoBehaviour
         }
         transform.LookAt(_target.transform);
     }//Move2Target
+
+    // for flashing white whenever they are hurt
+    protected IEnumerator Flash()
+    {
+        meshRenderer.material.color = Color.white;
+        yield return new WaitForSeconds(flashTime);
+        meshRenderer.material.color = originalColor;
+    }
 }

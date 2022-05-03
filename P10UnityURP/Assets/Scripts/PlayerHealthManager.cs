@@ -103,7 +103,9 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if (isPlayerKillable == true)
         {
+            // for flashing white whenever they are hurt
             StartCoroutine(Flash());
+
             playerCurrentHealth -= damageTaken;
             healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
             if(isPlayerDead == false)
