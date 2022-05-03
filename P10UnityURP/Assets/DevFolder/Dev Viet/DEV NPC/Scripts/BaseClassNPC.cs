@@ -142,10 +142,6 @@ public class BaseClassNPC : MonoBehaviour
     public void DamageTaken(int damage)
     {
         currHealth -= damage;
-
-        // for flashing white whenever they are hurt
-        StartCoroutine(Flash());
-
         if(gameObject.tag == "Enemy")
         {
             PlaySound("EnemyHurt");
@@ -153,6 +149,11 @@ public class BaseClassNPC : MonoBehaviour
         else if(gameObject.tag == "GoodGuys")
         {
             PlaySound("PlayerAllyHurt");
+        }
+        if(currHealth > 0)
+        {
+            // for flashing white whenever they are hurt
+            StartCoroutine(Flash());
         }
     }//DamageTaken
 
