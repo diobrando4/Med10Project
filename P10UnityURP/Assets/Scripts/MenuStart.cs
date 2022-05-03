@@ -24,8 +24,8 @@ public class MenuStart : MonoBehaviour
     void Update()
     {
         // to reset it
-        if(Input.GetKeyDown(KeyCode.I))
-        //if ((Input.GetButton(KeyCode.I) && Input.GetButtonDown(KeyCode.O)) || (Input.GetButtonDown(KeyCode.I) && Input.GetButton(KeyCode.O))) // couldn't get this to work
+        //if(Input.GetKeyDown(KeyCode.I))
+        if ((Input.GetKey(KeyCode.I) && Input.GetKeyDown(KeyCode.O)) || (Input.GetKeyDown(KeyCode.I) && Input.GetKey(KeyCode.O)))
         {
             PlayerPrefs.DeleteAll();
             gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
