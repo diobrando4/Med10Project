@@ -46,9 +46,13 @@ public class BaseClassNPC : MonoBehaviour
     Vector3 rayOffset; // we need this, otherwise the raycast might hit unwanted objects EDIT: No longer an issue with the new layer filtering
 
     // for flashing white whenever they are hurt
-    protected MeshRenderer meshRenderer;
-    protected Color originalColor;
+    [SerializeField]
+    protected List<MeshRenderer> meshRenderer = new List<MeshRenderer>();
+    [SerializeField]
+    protected List<Color> originalColor = new List<Color>();
     protected float flashTime = 0.10f;
+    
+
 
     void Awake()
     {
@@ -67,8 +71,17 @@ public class BaseClassNPC : MonoBehaviour
         //Invert the bit mask e.g. focus only on own layer to, focus on all other layers than own
         ignoreOwnLayer = ~ignoreOwnLayer;
         // for flashing white whenever they are hurt
-        meshRenderer = GetComponent<MeshRenderer>();
-        originalColor = meshRenderer.material.color;        
+        //meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.AddRange(GetComponentsInChildren<MeshRenderer>());  
+        for (int i = 0; i < meshRenderer.Count; i++)
+        {
+            originalColor.Add(meshRenderer[i].material.color);
+            if(meshRenderer[i].name == "StatusIcon")
+            {
+                meshRenderer.RemoveAt(i);
+                originalColor.RemoveAt(i);
+            }
+        }   
     }
 
     //Function to find the closest target with the given tag
@@ -270,9 +283,15 @@ public class BaseClassNPC : MonoBehaviour
     // for flashing white whenever they are hurt
     protected IEnumerator Flash()
     {
-        meshRenderer.material.color = Color.white;
+        for (int i = 0; i < meshRenderer.Count; i++)
+        {
+            meshRenderer[i].material.color = Color.white;
+        }
         yield return new WaitForSeconds(flashTime);
-        meshRenderer.material.color = originalColor;
+        for (int i = 0; i < meshRenderer.Count; i++)
+        {
+            meshRenderer[i].material.color = originalColor[i];
+        }
         yield break;
     }
 }
