@@ -54,11 +54,11 @@ public class Ally : BaseClassNPC
     void Start()
     {
         //Initial Values can be defined for the inherited variables
-        maxHealth = 7;
+        //maxHealth = 7;
         currHealth = maxHealth;
-        distanceB4Shoot = 10; 
-        projectileSpeed = 15f;
-        fireRate = 0.75f;
+        // distanceB4Shoot = 10; 
+        // projectileSpeed = 15f;
+        // fireRate = 0.75f;
         muzzle = gameObject.transform.Find("AllyGun/Muzzle");
 
         player = GameObject.FindGameObjectWithTag("Player");

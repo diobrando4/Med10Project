@@ -334,17 +334,17 @@ MonoBehaviour:
   target: {fileID: 0}
   inCombat: 0
   damageGiven: 0
-  maxHealth: 0
+  maxHealth: 7
   currHealth: 0
-  fireRate: 0
-  projectileSpeed: 0
-  distanceB4Shoot: 0
+  fireRate: 0.75
+  projectileSpeed: 15
+  distanceB4Shoot: 15
   bullet: {fileID: 2098971575481728396, guid: 03c5e20a095d6fa4aa5bf2f892748f51, type: 3}
   muzzle: {fileID: 0}
   player: {fileID: 0}
   stopDistanceFromPlayer: 6
   distanceBeforeRunAway: 5
-  maxDistanceFromPlayer: 12
+  maxDistanceFromPlayer: 15
   stopDistanceOnBackoff: 3
   stopDistanceOnApproach: 6
   isAllyDead: 0

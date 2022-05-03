@@ -66,14 +66,9 @@ public class BaseClassNPC : MonoBehaviour
         ignoreOwnLayer = 1<<gameObject.layer;
         //Invert the bit mask e.g. focus only on own layer to, focus on all other layers than own
         ignoreOwnLayer = ~ignoreOwnLayer;
-    }
-
-    // these can probably be in Awake?
-    void Start()
-    {
         // for flashing white whenever they are hurt
         meshRenderer = GetComponent<MeshRenderer>();
-        originalColor = meshRenderer.material.color;
+        originalColor = meshRenderer.material.color;        
     }
 
     //Function to find the closest target with the given tag
@@ -278,5 +273,6 @@ public class BaseClassNPC : MonoBehaviour
         meshRenderer.material.color = Color.white;
         yield return new WaitForSeconds(flashTime);
         meshRenderer.material.color = originalColor;
+        yield break;
     }
 }
