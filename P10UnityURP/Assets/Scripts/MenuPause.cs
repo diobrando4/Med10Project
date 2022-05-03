@@ -12,7 +12,7 @@ public class MenuPause : MonoBehaviour
 
     public void GameResume()
     {
-        Debug.Log("Running");
+        //Debug.Log("Running");
         Time.timeScale = 1f; // not sure if this is needed
         PlayerPrefs.SetInt("Pause", 0);
         SceneManager.UnloadSceneAsync("MenuPause");

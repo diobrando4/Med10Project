@@ -19,7 +19,7 @@ public class MenuStart : MonoBehaviour
         if (PlayerPrefs.HasKey("GameVersion") == true) //If there already is a saved key
         {
             versionNum = PlayerPrefs.GetInt("GameVersion"); //Use that int as versionNum
-            Debug.Log("Existing save found with the number: "+versionNum);     
+            //Debug.Log("Existing save found with the number: "+versionNum);     
         }
         else
         {
@@ -28,7 +28,7 @@ public class MenuStart : MonoBehaviour
             PlayerPrefs.SetInt("GameVersion", versionNum); //Set the int versionNum to the SavedVersion Key
             PlayerPrefs.Save(); //Save the changes to registry
             //If used In-Editor - Registry can be found using "RegEdit" with the path being Computer/HKEY_CURRENT_USER/Software/Unity/UnityEditor/DefaultCompany/Med10P1/SavedVersion_xxxxxxxx
-            Debug.Log("New version number is: "+versionNum);
+            //Debug.Log("New version number is: "+versionNum);
         }
         
         gameVersionText = GameObject.Find("Canvas/TextGameVersion").GetComponent<TextMeshProUGUI>();
@@ -46,14 +46,14 @@ public class MenuStart : MonoBehaviour
                 PlayerPrefs.DeleteAll();
                 versionNum = 0;
                 gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
-                Debug.Log("Deleting all Keys");  
+                //Debug.Log("Deleting all Keys");  
             }
             else if(Input.GetKeyDown(KeyCode.Keypad1)) //TESTING Change to version 1
             {   
                 PlayerPrefs.SetInt("GameVersion", 1);
                 versionNum = PlayerPrefs.GetInt("GameVersion");
                 PlayerPrefs.Save();
-                Debug.Log("Making new version "+versionNum);
+                //Debug.Log("Making new version "+versionNum);
                 gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
             }
             else if(Input.GetKeyDown(KeyCode.Keypad2)) //TESTING Change to version 2
@@ -61,12 +61,12 @@ public class MenuStart : MonoBehaviour
                 PlayerPrefs.SetInt("GameVersion", 2);
                 versionNum = PlayerPrefs.GetInt("GameVersion");
                 PlayerPrefs.Save();
-                Debug.Log("Making new version "+versionNum);
+                //Debug.Log("Making new version "+versionNum);
                 gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
             }
             else if(Input.GetKeyDown(KeyCode.P)) //TESTING print out game version number
             {
-                Debug.Log("Version check: "+versionNum);  
+                //Debug.Log("Version check: "+versionNum);  
             }
             
         }
