@@ -121,7 +121,10 @@ public class BaseClassNPC : MonoBehaviour
                         distance = curDist; 
                         //}
                     }
-                    else{Debug.Log(posCand+" "+posCand.GetComponent<BaseClassNPC>().isDead);}
+                    else
+                    {
+                        //Debug.Log(posCand+" "+posCand.GetComponent<BaseClassNPC>().isDead);
+                    }
                 }                 
             }
         }
