@@ -10,7 +10,7 @@ using UnityEngine;
 public class Effect : MonoBehaviour
 {
     public float lifeTime; // duration
-    public GameObject origin = null;
+    public Color origin;
 
     void Awake()
     {
@@ -20,7 +20,7 @@ public class Effect : MonoBehaviour
     {
         if (origin != null)
         {
-            GameObject.Find("Cubes").GetComponent<Renderer>().material.color = origin.GetComponent<Renderer>().material.color;
+            GameObject.Find("Cubes").GetComponent<Renderer>().material.color = origin;
         }
     }
 }

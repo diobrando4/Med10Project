@@ -118,6 +118,6 @@ public class BaseClassEnemy : BaseClassNPC
     protected void DeathEffect()
     {
         Effect newEffect = Instantiate(deathEffect, transform.position, transform.rotation) as Effect;
-        newEffect.origin = gameObject;
+        newEffect.origin = originalColor;
     }
 }
