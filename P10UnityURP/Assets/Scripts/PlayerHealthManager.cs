@@ -116,14 +116,14 @@ public class PlayerHealthManager : MonoBehaviour
             {
                 CameraShake.instance.StartShake(.2f, .5f); // time, power
             }
-            if(playerCurrentHealth <= 0)
+            else
             {
                 if (FindObjectOfType<SoundManager>())
                 {
                     FindObjectOfType<SoundManager>().SoundPlay("PlayerAllyDowned");
                 }
             }
-            else
+            if(playerCurrentHealth > 0)
             {
                 if (FindObjectOfType<SoundManager>())
                 {
