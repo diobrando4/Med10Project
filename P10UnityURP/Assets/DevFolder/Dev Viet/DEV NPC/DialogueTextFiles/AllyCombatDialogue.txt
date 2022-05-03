@@ -1,67 +1,67 @@
 Getting hit
-[0]Just a flesh wound
-[0]Hull compromised
-[0]Damage taken
+[0]It’s just a flesh wound
+[0]Argh!
+[0]I'm hurt
 [0]I'm hit
 [0]That'll sting later
 [1]Ow!
 [1]Cut it out!
 [1]Why!?
-[1]I've taken damage!
+[1]That hurts!
 [1]It got me!
 
 Downed
-[0]Life.exe stopped working
-[0]Update in progress
-[0]-ERROR-
-[0]I'm downed
+[0]I'm down
+[0]That’s it for me
+[0]I need a revive
+[0]I need help
 [0]I require assistance
-[1]Im down!...
+[1]I'm downed!
 [1]Sorry...
 [1]Help!...
 [1]I need help!..
 [1]They got me...
 
 Player hit
-[0]Commander Damaged
-[0]Warning: You lost health
-[0]Error: No repair kit
-[0]Dodge their attacks
+[0]The Commander has been hit
+[0]Shake it off
+[0]How bad is the damage?
+[0]Are you holding up?
 [0]You are hurt
 [1]Are you okay?
 [1]Watch out!
 [1]Careful!
-[1]How bad is the damage?
+[1]Why didn’t you dodge?
 [1]You'll be fine, keep going!
 
 Player downed
-[0]Commander Compromised
-[0]Leader has been downed
-[0]Failure imminent
-[0]Attempting Revive
-[0]Assisting Commander
+[0]The Commander has been compromised
+[0]The Commander is down
+[0]Commander down!
+[0]Attempting to revive
+[0]Assisting the Commander
 [1]Commander down!
 [1]Hold it together!
-[1]Thats not good...
+[1]That's not good...
 [1]On my way!
 [1]Let me help you up!
 
 Revived by Player
-[0]Systems back online
-[0]Update complete
-[0]Recalibrating
-[0]Appreciated
-[0]Returning to Duty
+[0]Back in action
+[0]Ready again
+[0]Thank you, Commander
+[0]Thanks for the assist
+[0]Returning to duty
 [1]Thank you!
-[1]Im back up!
-[1]I LIVE!
+[1]I’m back up!
+[1]I LIVE AGAIN!
 [1]Back at it!
 [1]I owe you one!
 
 Reviving Player
-[0]Reviving Commander
+[0]Reviving the Commander
 [0]Administering Revive
-[0]Attempting to Revive
+[0]Attempting to revive
 [0]Please stand by
 [0]I got you
 [1]I got you!
@@ -71,9 +71,9 @@ Reviving Player
 [1]Come on, back up!
 
 Removing Debuff on Player
-[0]Removed Ailments
-[0]Reseting Parameters
-[0]Eliminated Hostile Influence
+[0]Removed Debuff
+[0]You are clear to move
+[0]Eliminated hostile influence
 [0]Applying Anti-Debuff
 [0]Cleansing Debuff
 [1]Cleared your Debuff!
@@ -83,13 +83,13 @@ Removing Debuff on Player
 [1]That should clear you up!
 
 No more enemies
-[0]Hostiles Eliminated
-[0]Room Clear
-[0]Task Complete
-[0]Enemies Defeated
-[0]We can proceed
-[1]Jobs Finished
-[1]No more enemies!
-[1]Ready to move!
+[0]Hostiles eliminated
+[0]Room clear
+[0]Clear!
+[0]No more hostiles in the vicinity
+[0]No more targets
+[1]RIP
+[1]No more hostiles!
+[1]Yeah! All Clear!
 [1]Good fight!
 [1]No more things to shoot?
