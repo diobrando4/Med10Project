@@ -46,9 +46,7 @@ public class BaseClassNPC : MonoBehaviour
     Vector3 rayOffset; // we need this, otherwise the raycast might hit unwanted objects EDIT: No longer an issue with the new layer filtering
 
     // for flashing white whenever they are hurt
-    [SerializeField]
     protected List<MeshRenderer> meshRenderer = new List<MeshRenderer>();
-    [SerializeField]
     protected List<Color> originalColor = new List<Color>();
     protected float flashTime = 0.10f;
     

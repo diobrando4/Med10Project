@@ -36,8 +36,8 @@ public class PlayerHealthManager : MonoBehaviour
     public ParticleSystem dispelPart;
 
     // for flashing white whenever they are hurt
-    private MeshRenderer meshRenderer;
-    private Color originalColor;
+    protected List<MeshRenderer> meshRenderer = new List<MeshRenderer>();
+    protected List<Color> originalColor = new List<Color>();
     private float flashTime = 0.10f;
 
     // Start is called before the first frame update
@@ -59,8 +59,12 @@ public class PlayerHealthManager : MonoBehaviour
         revivePart.Stop();
 
         // for flashing white whenever they are hurt
-        meshRenderer = GetComponent<MeshRenderer>();
-        originalColor = meshRenderer.material.color;
+        meshRenderer.Add(GetComponent<MeshRenderer>());
+        meshRenderer.Add(gameObject.transform.Find("GunCube").GetComponent<MeshRenderer>());  
+        for (int i = 0; i < meshRenderer.Count; i++)
+        {
+            originalColor.Add(meshRenderer[i].material.color);
+        }   
     }
 
     // Update is called once per frame
@@ -159,11 +163,18 @@ public class PlayerHealthManager : MonoBehaviour
     }//OnTriggerExit
 
     // for flashing white whenever they are hurt
-    IEnumerator Flash()
+    protected IEnumerator Flash()
     {
-        meshRenderer.material.color = Color.white;
+        for (int i = 0; i < meshRenderer.Count; i++)
+        {
+            meshRenderer[i].material.color = Color.white;
+        }
         yield return new WaitForSeconds(flashTime);
-        meshRenderer.material.color = originalColor;
+        for (int i = 0; i < meshRenderer.Count; i++)
+        {
+            meshRenderer[i].material.color = originalColor[i];
+        }
+        yield break;
     }
 
     private IEnumerator RevivePlayer()
