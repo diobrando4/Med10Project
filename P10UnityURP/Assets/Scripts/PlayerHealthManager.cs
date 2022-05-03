@@ -106,6 +106,10 @@ public class PlayerHealthManager : MonoBehaviour
             StartCoroutine(Flash());
             playerCurrentHealth -= damageTaken;
             healthBarFill.fillAmount = playerCurrentHealth / playerMaxHealth;
+            if(isPlayerDead == false)
+            {
+                CameraShake.instance.StartShake(.2f, .5f); // time, power
+            }
             if(playerCurrentHealth <= 0)
             {
                 if (FindObjectOfType<SoundManager>())

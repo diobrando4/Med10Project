@@ -21,16 +21,18 @@ public class CameraShake : MonoBehaviour
         instance = this;
     }
 
+    /*
+    // this is just for testing
     void Update()
     {
         // version 2
-        // this is just for testing
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             //Debug.Log("pressing U");
             StartShake(1f, .4f); // time, power
         }
     }
+    */
 
     void LateUpdate() // make use lateupdate rather than update?
     {

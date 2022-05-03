@@ -853,6 +853,9 @@ MonoBehaviour:
   cooldown: 3
   cooldownTimer: 0
   dashUsesText: {fileID: 0}
+  dashBar0: {fileID: 0}
+  dashBar1: {fileID: 0}
+  dashBar2: {fileID: 0}
   isPaused: 0
 --- !u!54 &600810666
 Rigidbody:
@@ -1057,6 +1060,7 @@ GameObject:
   - component: {fileID: 687981506}
   - component: {fileID: 687981505}
   - component: {fileID: 687981504}
+  - component: {fileID: 687981508}
   m_Layer: 0
   m_Name: TestCamera
   m_TagString: Untagged
@@ -1162,6 +1166,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 55, y: 0, z: 0}
+--- !u!114 &687981508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687981503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a82285fbaeb8d54ab9dc221bf24b148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &899814845
 PrefabInstance:
   m_ObjectHideFlags: 0
