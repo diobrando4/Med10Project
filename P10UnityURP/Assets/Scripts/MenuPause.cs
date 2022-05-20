@@ -22,7 +22,8 @@ public class MenuPause : MonoBehaviour
     {
         Time.timeScale = 1f; // not sure if this is needed
         PlayerPrefs.SetInt("Pause", 0);
-        SceneManager.LoadScene("MenuStart");
+        //SceneManager.LoadScene("MenuStart");
+        SceneManager.LoadScene(0);
     }
 
     public void GameQuit()

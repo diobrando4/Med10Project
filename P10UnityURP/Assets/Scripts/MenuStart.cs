@@ -12,8 +12,6 @@ public class MenuStart : MonoBehaviour
     //public TextMeshProUGUI gameVersionText;
     private int versionNum;
 
-    // make a function that auto loads the level loader?
-
     void Start()
     {
         if (PlayerPrefs.HasKey("GameVersion") == true) //If there already is a saved key
@@ -35,7 +33,6 @@ public class MenuStart : MonoBehaviour
         //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
     }
 
-    // just for testing
     void Update()
     {
         //DEBUG
@@ -68,7 +65,6 @@ public class MenuStart : MonoBehaviour
             {
                 //Debug.Log("Version check: "+versionNum);  
             }
-            
         }
     }
 
