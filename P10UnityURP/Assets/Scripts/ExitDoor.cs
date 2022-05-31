@@ -11,6 +11,9 @@ public class ExitDoor : MonoBehaviour
 
     private CombatDialogueManager combatDialogueManager;
 
+    public Ally ally1;
+    public Ally ally2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,15 @@ public class ExitDoor : MonoBehaviour
         remainingEnemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
         //areAllEnemiesDead = false;
         combatDialogueManager = GameObject.Find("CombatDialogueManager").GetComponent<CombatDialogueManager>();
+        if (ally1 != null)
+        {
+            ally1 = GameObject.Find("AllyBlueBot").GetComponent<Ally>();
+            
+        }
+        if (ally2 != null)
+        {
+            ally2 = GameObject.Find("AllyOrangeBot").GetComponent<Ally>();
+        }
     }
 
     // Update is called once per frame
@@ -26,17 +38,21 @@ public class ExitDoor : MonoBehaviour
     {
         if (remainingEnemies.Count == 0 && combatDialogueManager.isDialogueDone == true)
         {
-            //Debug.Log("all enemies are dead");
+                //Debug.Log("all enemies are dead");
 
-            // we also need to make sure the door only opens when the main dialogue is finished, maybe it should be inside its own if-statement?
-            
-            if (FindObjectOfType<SoundManager>())
-            {
-                FindObjectOfType<SoundManager>().SoundPlay("DoorOpen");
-            }
-            areAllEnemiesDead = true; // what is this used for?
-            Destroy(gameObject);
+                // we also need to make sure the door only opens when the main dialogue is finished, maybe it should be inside its own if-statement?
+                
+                if (FindObjectOfType<SoundManager>())
+                {
+                    FindObjectOfType<SoundManager>().SoundPlay("DoorOpen");
+                }
+                if (ally1.isAllyDead == false && ally2.isAllyDead == false)
+                {
+                    areAllEnemiesDead = true; // what is this used for?
+                    Destroy(gameObject);
+                }
         }
+            
         remainingEnemies.RemoveAll(item => item == null);
     }
 
