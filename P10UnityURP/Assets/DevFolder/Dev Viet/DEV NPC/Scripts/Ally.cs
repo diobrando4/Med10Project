@@ -138,7 +138,7 @@ public class Ally : BaseClassNPC
             //gameObject.GetComponentInChildren<Image>().enabled = true;
 
             // for disabling meat shield
-            gameObject.layer = 8; // 8 = dead layer
+            //gameObject.layer = 8; // 8 = dead layer
             //this.GetComponent<BoxCollider>().enabled = false;
             //this.GetComponent<NavMeshAgent>().enabled = false;
         }
@@ -248,8 +248,8 @@ public class Ally : BaseClassNPC
                 isRevived = false;
 
                 // for disabling meat shield
-                gameObject.layer = 6; // 6 = good guys
-                //this.GetComponent<BoxCollider>().enabled = true; // this didn't do anything
+                //gameObject.layer = 6; // 6 = good guys
+                //this.GetComponent<BoxCollider>().enabled = true;
                 //this.GetComponent<NavMeshAgent>().enabled = true;
             }
             // fill revive bar here
