@@ -48,9 +48,6 @@ public class Ally : BaseClassNPC
     [HideInInspector] 
     public bool isUsingDispel = false;
 
-    
-
-
     void Start()
     {
         //Initial Values can be defined for the inherited variables
@@ -66,7 +63,7 @@ public class Ally : BaseClassNPC
         gameObject.GetComponentInChildren<Image>().enabled = false; //Disable Image comp of Imgbackground on start
         gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
 
-        //NAvMeshAgent Check & Init
+        //NavMeshAgent Check & Init
         if (agent == null)
         {
             agent = GetComponent<NavMeshAgent>();
@@ -139,6 +136,11 @@ public class Ally : BaseClassNPC
             isDead = isAllyDead;
             PlaySound("PlayerAllyDowned");
             //gameObject.GetComponentInChildren<Image>().enabled = true;
+
+            // for disabling meat shield
+            gameObject.layer = 8; // 8 = dead layer
+            //this.GetComponent<BoxCollider>().enabled = false;
+            //this.GetComponent<NavMeshAgent>().enabled = false;
         }
     }//Update
 
@@ -244,6 +246,11 @@ public class Ally : BaseClassNPC
                 revivePart.Stop();
                 yield return new WaitForSeconds(0.1f);
                 isRevived = false;
+
+                // for disabling meat shield
+                gameObject.layer = 6; // 6 = good guys
+                //this.GetComponent<BoxCollider>().enabled = true; // this didn't do anything
+                //this.GetComponent<NavMeshAgent>().enabled = true;
             }
             // fill revive bar here
             

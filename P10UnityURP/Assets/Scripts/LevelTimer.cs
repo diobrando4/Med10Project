@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelTimer : MonoBehaviour
 {
+    /*
     private float timer = 600f; // 60f = 1 minute?
     private bool isLevelSwitched = false;
 
@@ -39,4 +40,5 @@ public class LevelTimer : MonoBehaviour
             }
         }
     }
+    */
 }
