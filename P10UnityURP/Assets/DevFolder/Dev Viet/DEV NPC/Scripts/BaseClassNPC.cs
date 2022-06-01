@@ -129,7 +129,6 @@ public class BaseClassNPC : MonoBehaviour
             }
         }
         return closestTarget;
-
     }//FindClosestTarget
 
     //Simple follow to a GameObject
