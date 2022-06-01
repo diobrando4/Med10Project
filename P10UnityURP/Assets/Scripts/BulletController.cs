@@ -10,15 +10,11 @@ public class BulletController : MonoBehaviour
     protected Rigidbody rb;
     public ParticleSystem impactPart;
 
-    void Awake()
+    //private Ally _ally;
+
+    void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        //_ally = GameObject.FindWithTag("GoodGuys").GetComponent<Ally>();
     }
 
     //Damages the given NPC type (Ally or Any type of BaseClassEnemy)
@@ -50,6 +46,13 @@ public class BulletController : MonoBehaviour
                 ImpactEffect();
                 Destroy(gameObject);
             }
+            /*
+            else if(_ally.isAllyDead == true) // need a solution here for when ally is dead = enemy projectile can shoot through downed allies
+            {
+                Debug.Log("_ally.isAllyDead == true");
+                Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>()); // This might not work for NavMesh Agent?
+            }
+            */
             else if(other.gameObject.layer == gameObject.layer) //If it shares the same layer as this bullet, ignore collision
             {
                 Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
