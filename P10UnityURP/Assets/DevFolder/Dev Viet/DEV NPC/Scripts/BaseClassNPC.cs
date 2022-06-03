@@ -11,7 +11,7 @@ public class BaseClassNPC : MonoBehaviour
     protected NavMeshAgent agent; //NavMeshAgent of GameObject
     [HideInInspector]
     public GameObject target; //GameObject that it needs to target
-    public GameObject trackedProjectile; //Projectile to track
+    protected GameObject trackedProjectile; //Projectile to track
 
     [Header("Internal variables")]
     public bool inCombat = true; //Bool if combat mode is active
@@ -47,9 +47,7 @@ public class BaseClassNPC : MonoBehaviour
     Vector3 rayOffset; // we need this, otherwise the raycast might hit unwanted objects EDIT: No longer an issue with the new layer filtering
 
     // for flashing white whenever they are hurt
-    [SerializeField]
     protected List<MeshRenderer> meshRenderer = new List<MeshRenderer>();
-    [SerializeField]
     protected List<Color> originalColor = new List<Color>();
     protected float flashTime = 0.10f;
     
@@ -327,55 +325,74 @@ public class BaseClassNPC : MonoBehaviour
     {
         float _targetDist = Vector3.Distance(transform.position, _target.transform.position);
         float _backOffDistance = _backoff;
-        if(_targetDist <= _backOffDistance) //Back Off
+        if(trackedProjectile == null)
         {
-            Vector3 dir2Target = transform.position - _target.transform.position;
-            Vector3 newPos = transform.position + dir2Target;
-
-            agent.stoppingDistance = _stopDistBackoff;
-            agent.SetDestination(newPos);
-        }
-        else if(_targetDist > _backOffDistance) //Move Closer
-        {
-            agent.stoppingDistance = _stopDistApproach;
-            agent.SetDestination(_target.transform.position);
-            if(HasLineOfSightTo(_target, _backOffDistance)) //If the width of their body
+            if(_targetDist <= _backOffDistance) //Back Off
             {
-                if(sphereHit.transform.gameObject.tag != _target.tag)
+                Vector3 dir2Target = transform.position - _target.transform.position;
+                Vector3 newPos = transform.position + dir2Target;
+
+                agent.stoppingDistance = _stopDistBackoff;
+                //Debug.DrawLine(transform.position, newPos);
+                agent.SetDestination(newPos);
+            }
+            else if(_targetDist > _backOffDistance) //Move Closer
+            {
+                agent.stoppingDistance = _stopDistApproach;
+                //Debug.DrawLine(transform.position, _target.transform.position);
+                agent.SetDestination(_target.transform.position);
+                if(HasLineOfSightTo(_target, _backOffDistance)) //If the width of their body
                 {
-                    agent.stoppingDistance = _stopDistApproach-1f;  
-                }   
-            }  
+                    if(sphereHit.transform.gameObject.tag != _target.tag)
+                    {
+                        agent.stoppingDistance = _stopDistApproach-1f;  
+                    }   
+                }  
+            }
+        }
+        else
+        {
+            //Debug.DrawLine(transform.position, PosisitionAwayFromProjectile(trackedProjectile,25));
+            agent.SetDestination(PosisitionAwayFromProjectile(trackedProjectile, 25));
         }
         transform.LookAt(_target.transform);
     }//Move2Target
 
-    protected void PosisitionAwayFromProjectile(GameObject proj2Avoid)
+    protected Vector3 PosisitionAwayFromProjectile(GameObject proj2Avoid, float sensitivity)
     {
         Vector3 moveDir = proj2Avoid.transform.position - transform.position;
         //Direction to target
         Vector3 dir2Proj = Vector3.Normalize(moveDir);
         moveDir *= -1;
+        moveDir.y = transform.position.y;
         //float sidestep = evadeSpeed * Time.deltaTime;
         
         //Dir of target Left/Right, in relation to Forward facing dir of self
-        float dotOfDir = Vector3.Dot(transform.right, dir2Proj);
+        float dotOfDirLR = Vector3.Dot(transform.right, dir2Proj);
+        float dotOfDirFB = Vector3.Dot(transform.forward, dir2Proj);
         //Debug.Log(dotOfDir);
-            if (dotOfDir > 0) //If to the Right
+            if (dotOfDirFB <= 1 && dotOfDirFB >= -0.75) //From Front and Either sides
             {
-                //Debug.Log("to the right!");
-                moveDir += -transform.right;
-            }
-            else if(dotOfDir < 0) //If to the Left
-            {
-                //Debug.Log("to the left!");
-                moveDir += transform.right;
+                moveDir += -transform.forward;
+                //Debug.DrawLine(transform.position, moveDir, Color.white);
+                if (dotOfDirLR <= 1 && dotOfDirLR >= 0) //If to the Right
+                {
+                    moveDir += -transform.right;
+                    //Debug.DrawLine(transform.position, moveDir, Color.green);
+                }
+                else if(dotOfDirLR >= -1 && dotOfDirLR < 0) //If to the Left
+                {
+                    moveDir += transform.right;
+                    //Debug.DrawLine(transform.position, moveDir, Color.red);
+                }
             }
         //agent.speed = dodgeSpeed;
-        Vector3 posAwayFromProj = transform.position + moveDir;   
-        agent.SetDestination(posAwayFromProj);
+        Vector3 posAwayFromProj = transform.position + moveDir.normalized * sensitivity;
+        //agent.ResetPath(); 
+        //Debug.DrawLine(transform.position, posAwayFromProj);
+        //agent.SetDestination(posAwayFromProj);
         //agent.speed = currMoveSpeed;
-        //return posAwayFromProj;
+        return posAwayFromProj;
     }
 
 

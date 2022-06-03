@@ -44,23 +44,36 @@ public class AvoidProjectile : MonoBehaviour
         //Direction to target
         Vector3 dir2Proj = Vector3.Normalize(moveDir);
         moveDir *= -1;
+        moveDir.y = transform.position.y;
         //float sidestep = evadeSpeed * Time.deltaTime;
         
         //Dir of target Left/Right, in relation to Forward facing dir of self
-        float dotOfDir = Vector3.Dot(transform.right, dir2Proj);
-        //Debug.Log(dotOfDir);
-            if (dotOfDir > 0) //If to the Right
+        float dotOfDirLR = Vector3.Dot(transform.right, dir2Proj);
+        float dotOfDirFB = Vector3.Dot(transform.forward, dir2Proj);
+        //Debug.Log(dotOfDirLR);
+        //Debug.Log(dotOfDirFB);
+            //if (dotOfDirFB <= -0.75) //From Front
+            //{
+                //moveDir += transform.forward;
+                //Debug.Log("WW");
+            //}
+            if (dotOfDirFB <= 1 && dotOfDirFB >= -0.75) //From Front and Either sides
             {
-                Debug.Log("to the right!");
-                moveDir += -transform.right;
+                moveDir += -transform.forward;
+                //Debug.DrawLine(transform.position, moveDir, Color.white);
+                if (dotOfDirLR <= 1 && dotOfDirLR >= 0) //If to the Right
+                {
+                    moveDir += -transform.right;
+                    //Debug.DrawLine(transform.position, moveDir, Color.green);
+                }
+                else if(dotOfDirLR >= -1 && dotOfDirLR < 0) //If to the Left
+                {
+                    moveDir += transform.right;
+                    //Debug.DrawLine(transform.position, moveDir, Color.red);
+                }
             }
-            else if(dotOfDir < 0) //If to the Left
-            {
-                Debug.Log("to the left!");
-                moveDir += transform.right;
-            }
-        //agent.speed = dodgeSpeed;
-        Vector3 newPos = transform.position + moveDir;   
+        Vector3 newPos = transform.position + moveDir.normalized;   
+        //Debug.DrawLine(transform.position, newPos,Color.yellow);
         agent.SetDestination(newPos);
         //agent.speed = currMoveSpeed;
         //return newPos;

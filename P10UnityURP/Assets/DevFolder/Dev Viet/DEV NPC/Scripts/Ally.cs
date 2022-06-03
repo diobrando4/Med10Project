@@ -23,6 +23,10 @@ public class Ally : BaseClassNPC
     public float stopDistanceOnBackoff = 3f;
     [Tooltip("While approaching, how close will Ally be to the target?")]
     public float stopDistanceOnApproach = 6f;
+    [Tooltip("What is the radius for detecting hostile projectiles?")]
+    public float projectileDetectionRange = 25;
+    [Tooltip("How sensitive are is the character to projectiles?")]
+    public float projReactivity = 50;
 
     private Ally allyFriend;
 
@@ -99,6 +103,7 @@ public class Ally : BaseClassNPC
         //DestroyOnDeath(); //Inherited function
         //Debug.Log(isRevived);
         target = FindClosestTargetWithTag("Enemy");//Inherited function
+        trackedProjectile = FindClosestTargetWithTag("Projectile", projectileDetectionRange);
         if (isAllyDead == false) 
         {
             Move(target);
@@ -289,33 +294,40 @@ public class Ally : BaseClassNPC
         float _spacing2Player = maxDistFromPlayer;
         float _backOffDistance = _backoff;
 
-        if(_playerDist > _spacing2Player) //If far from player, Move Closer to player
-        {
-            agent.stoppingDistance = _spacing2Player/2;
-            agent.SetDestination(player.transform.position);
-        }
-        else
-        {
-            if(_targetDist <= _backOffDistance) //If too close to target, Back off from target
+            if(_playerDist > _spacing2Player) //If far from player, Move Closer to player
             {
-                Vector3 dir2Target = transform.position - _target.transform.position;
-                Vector3 newPos = transform.position + dir2Target;
-                agent.stoppingDistance = _stopDistBackoff;
-                agent.SetDestination(newPos);
+                agent.stoppingDistance = _spacing2Player/2;
+                agent.SetDestination(player.transform.position);
             }
-            else if(_targetDist > _backOffDistance) //If far from target, Move Closer to target
+            else
             {
-                agent.stoppingDistance = _stopDistApproach;
-                agent.SetDestination(_target.transform.position);
-                if(HasLineOfSightTo(_target, _backOffDistance)) //If the width of their body cant reach target, it is obstructed
-                {
-                    if(sphereHit.transform.gameObject.tag != _target.tag)
+                if (trackedProjectile == null)
+                {              
+                    if(_targetDist <= _backOffDistance) //If too close to target, Back off from target
                     {
-                        agent.stoppingDistance = _stopDistApproach-1f;  
-                    }   
-                }  
+                        Vector3 dir2Target = transform.position - _target.transform.position;
+                        Vector3 newPos = transform.position + dir2Target;
+                        agent.stoppingDistance = _stopDistBackoff;
+                        agent.SetDestination(newPos);
+                    }
+                    else if(_targetDist > _backOffDistance) //If far from target, Move Closer to target
+                    {
+                        agent.stoppingDistance = _stopDistApproach;
+                        agent.SetDestination(_target.transform.position);
+                        if(HasLineOfSightTo(_target, _backOffDistance)) //If the width of their body cant reach target, it is obstructed
+                        {
+                            if(sphereHit.transform.gameObject.tag != _target.tag)
+                            {
+                                agent.stoppingDistance = _stopDistApproach-1f;  
+                            }   
+                        }  
+                    }
+                }
+                else
+                {
+                    agent.SetDestination(PosisitionAwayFromProjectile(trackedProjectile, projReactivity));
+                }                
             }
-        }
         transform.LookAt(_target.transform);
     }
 }

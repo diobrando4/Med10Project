@@ -16,7 +16,7 @@ Downed
 [0]I need a revive.
 [0]I need help.
 [0]I require assistance.
-[1]I'm downed!
+[1]I'm down!
 [1]Sorry...
 [1]Help!...
 [1]I need help!..
@@ -26,7 +26,7 @@ Player hit
 [0]The Commander has been hit.
 [0]Shake it off.
 [0]How bad is the damage?
-[0]Are you holding up?
+[0]How are you holding up?
 [0]You are hurt.
 [1]Are you okay?
 [1]Watch out!

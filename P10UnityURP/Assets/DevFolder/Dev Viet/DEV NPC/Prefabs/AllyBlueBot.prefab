@@ -1529,7 +1529,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  trackedProjectile: {fileID: 0}
   inCombat: 0
   damageGiven: 0
   maxHealth: 7
@@ -1539,14 +1538,14 @@ MonoBehaviour:
   distanceB4Shoot: 20
   bullet: {fileID: 2098971575481728396, guid: 03c5e20a095d6fa4aa5bf2f892748f51, type: 3}
   muzzle: {fileID: 0}
-  meshRenderer: []
-  originalColor: []
   player: {fileID: 0}
   stopDistanceFromPlayer: 3
   distanceBeforeRunAway: 5
   maxDistanceFromPlayer: 5
   stopDistanceOnBackoff: 3
   stopDistanceOnApproach: 6
+  projectileDetectionRange: 30
+  projReactivity: 30
   isAllyDead: 0
   reviveMax: 100
   reviveCurrent: 0

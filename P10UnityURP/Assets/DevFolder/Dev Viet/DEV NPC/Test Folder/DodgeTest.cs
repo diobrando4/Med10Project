@@ -21,21 +21,26 @@ public class DodgeTest : BaseClassEnemy
     // Update is called once per frame
     void Update()
     {
-        target = FindClosestTargetWithTag("GoodGuys");
+        //target = FindClosestTargetWithTag("GoodGuys");
+        target = GameObject.Find("Cubess");
         trackedProjectile = FindClosestTargetWithTag("Projectile", projectileDetectionRange);
         if (target != null)
         {
-            if (trackedProjectile != null)
-            {
+            //if (trackedProjectile == null)
+            //{
                 //agent.ResetPath();
                 //Move2Target(target,PosisitionAwayFromProjectile(trackedProjectile),5,3,6);
-                PosisitionAwayFromProjectile(trackedProjectile);
-            }
-            else
-            {
+                //Debug.DrawLine(transform.position, newPos);
                 Move2Target(target,5,3,6);
-            }
-            transform.LookAt(target.transform.position);
+                //Debug.Log("Moving to Player");
+            //}
+            //else if (trackedProjectile != null)
+            //{
+                //agent.ResetPath(); 
+                //PosisitionAwayFromProjectile(trackedProjectile);
+                //Debug.Log("Projectile");
+            //}
+            //transform.LookAt(target.transform.position);
         }
     }
 /*     protected void Move2Target(GameObject _target,Vector3 _projectileAvoidPos, float _backoff, float _stopDistBackoff, float _stopDistApproach)
