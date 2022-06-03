@@ -1,6 +1,8 @@
 Level 6 Dialogue
 [1]Woah that was a close one
 [1]They are getting waaay too many
-[0]Commander… I think we are getting close to the target
+[0]Commander… I think we are getting close
 [0]There will be a large group up ahead of us
-[1]Nothing that the Commander and a lot of firepower can't handle!
+[1]Nothing that the Commander ...
+[1]and a lot of firepower can't handle!
+

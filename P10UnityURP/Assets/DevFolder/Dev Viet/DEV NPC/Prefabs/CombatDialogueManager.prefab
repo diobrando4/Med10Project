@@ -72,7 +72,7 @@ MonoBehaviour:
   ally2LevelLines: []
   toggleDialogue: 1
   isDialogueDone: 0
-  narrativeDialogueSpeed: 3
+  narrativeDialogueSpeed: 2
   maxNumberOfLines: 10
 --- !u!114 &9152502003438309172
 MonoBehaviour:
