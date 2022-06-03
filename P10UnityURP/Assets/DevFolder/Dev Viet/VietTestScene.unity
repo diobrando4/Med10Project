@@ -1709,7 +1709,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998518899}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2ec788263efdfb4bad41cfe80f2a431, type: 3}
   m_Name: 
@@ -1717,6 +1717,31 @@ MonoBehaviour:
   projectile: {fileID: 0}
   minDist2Dodge: 20
   dodgeSpeed: 10
+--- !u!114 &1998518908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998518899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aace6a84058a6724b9a59416bfbc297b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  trackedProjectile: {fileID: 0}
+  inCombat: 1
+  damageGiven: 1
+  maxHealth: 0
+  currHealth: 0
+  fireRate: 0
+  projectileSpeed: 0
+  distanceB4Shoot: 0
+  bullet: {fileID: 0}
+  muzzle: {fileID: 0}
+  deathEffect: {fileID: 0}
+  projectileDetectionRange: 15
 --- !u!1 &2002316805
 GameObject:
   m_ObjectHideFlags: 0

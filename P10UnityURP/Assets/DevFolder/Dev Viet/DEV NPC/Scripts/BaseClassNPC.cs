@@ -11,7 +11,8 @@ public class BaseClassNPC : MonoBehaviour
     protected NavMeshAgent agent; //NavMeshAgent of GameObject
     [HideInInspector]
     public GameObject target; //GameObject that it needs to target
-    
+    public GameObject trackedProjectile; //Projectile to track
+
     [Header("Internal variables")]
     public bool inCombat = true; //Bool if combat mode is active
     public int damageGiven = 1; //default damage given.
@@ -125,11 +126,77 @@ public class BaseClassNPC : MonoBehaviour
                     {
                         //Debug.Log(posCand+" "+posCand.GetComponent<BaseClassNPC>().isDead);
                     }
-                }                 
+                }
+                else if(posCand.GetComponent<BulletController>())
+                {
+                    if(posCand.layer != gameObject.layer)
+                    {
+                        closestTarget = posCand;
+                        distance = curDist; 
+                    }
+                }                                 
             }
         }
         return closestTarget;
     }//FindClosestTarget
+
+    //Overload of FindClosestTarget, allows for chosing the closes of a certain distance away
+    protected GameObject FindClosestTargetWithTag(string tag, float minDist)
+    {
+        GameObject[] candidates;
+        candidates = GameObject.FindGameObjectsWithTag(tag);
+
+        GameObject closestTarget = null;
+
+        float distance = minDist;
+        Vector3 pos = transform.position;
+        foreach(GameObject posCand in candidates)
+        {
+            Vector3 diff = posCand.transform.position - pos;
+            float curDist = diff.sqrMagnitude;
+             if (curDist < distance)
+             {
+                if(posCand.GetComponentInParent<PlayerHealthManager>())
+                {
+                    if(posCand.GetComponentInParent<PlayerHealthManager>().isPlayerDead == false)
+                    {
+                        //if (curDist < distance)
+                        //{
+                        //Debug.Log(posCand);   
+                        closestTarget = posCand;
+                        distance = curDist; 
+                        //}
+                    } 
+                }
+                else if(posCand.GetComponent<BaseClassNPC>())
+                {
+                    if(posCand.GetComponent<BaseClassNPC>().isDead == false)
+                    {
+                        //if (curDist < distance)
+                        //{
+                        //Debug.Log(posCand);   
+                        closestTarget = posCand;
+                        distance = curDist; 
+                        //}
+                    }
+                    else
+                    {
+                        //Debug.Log(posCand+" "+posCand.GetComponent<BaseClassNPC>().isDead);
+                    }
+                }
+                else if(posCand.GetComponent<BulletController>())
+                {
+                    if(posCand.layer != gameObject.layer)
+                    {
+                        closestTarget = posCand;
+                        distance = curDist; 
+                    }
+                }                                 
+            }
+        }
+        return closestTarget;
+    }//FindClosestTarget
+
 
     //Simple follow to a GameObject
     public void Follow(GameObject target2Follow)
@@ -280,6 +347,35 @@ public class BaseClassNPC : MonoBehaviour
         }
         transform.LookAt(_target.transform);
     }//Move2Target
+
+    protected void PosisitionAwayFromProjectile(GameObject proj2Avoid)
+    {
+        Vector3 moveDir = proj2Avoid.transform.position - transform.position;
+        //Direction to target
+        Vector3 dir2Proj = Vector3.Normalize(moveDir);
+        moveDir *= -1;
+        //float sidestep = evadeSpeed * Time.deltaTime;
+        
+        //Dir of target Left/Right, in relation to Forward facing dir of self
+        float dotOfDir = Vector3.Dot(transform.right, dir2Proj);
+        //Debug.Log(dotOfDir);
+            if (dotOfDir > 0) //If to the Right
+            {
+                //Debug.Log("to the right!");
+                moveDir += -transform.right;
+            }
+            else if(dotOfDir < 0) //If to the Left
+            {
+                //Debug.Log("to the left!");
+                moveDir += transform.right;
+            }
+        //agent.speed = dodgeSpeed;
+        Vector3 posAwayFromProj = transform.position + moveDir;   
+        agent.SetDestination(posAwayFromProj);
+        //agent.speed = currMoveSpeed;
+        //return posAwayFromProj;
+    }
+
 
     // for flashing white whenever they are hurt
     protected IEnumerator Flash()
