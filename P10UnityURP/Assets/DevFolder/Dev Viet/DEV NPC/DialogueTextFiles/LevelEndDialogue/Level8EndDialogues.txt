@@ -1,8 +1,8 @@
 Level 8 Dialogue
-[0]Mission accomplished, we’re done here
-[0]Good job everyone
+[0]Mission accomplished, we’re done here.
+[0]Good job everyone.
 [1]Awesome! Now …
 [1]How do we get out of here?
-[0]There should be a way out up ahead
+[0]There should be a way out up ahead.
 [1]Come on Commander, let’s get outta here!
 [1]Lowest kill count pays the tab!

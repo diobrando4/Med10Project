@@ -1,8 +1,8 @@
 Level 3 Dialogue
-[1]Damn I don’t know how to dodge
+[1]Damn I don’t know how to dodge.
 [1]Not that it's going to stop me!
-[0]Keep your head cool
+[0]Keep your head cool.
 [0]You might get downed faster ...
-[0]than the Commander can revive
-[1]Yeaaah sorry, I get carried away sometimes
-[1]Thanks for leading us through Commander
+[0]than the Commander can revive.
+[1]Yeaaah sorry, I get carried away sometimes.
+[1]Thanks for leading us through Commander.

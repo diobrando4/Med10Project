@@ -1,9 +1,9 @@
 Getting hit
-[0]It’s just a flesh wound
+[0]It’s just a flesh wound.
 [0]Argh!
-[0]I'm hurt
-[0]I'm hit
-[0]That'll sting later
+[0]I'm hurt.
+[0]I'm hit.
+[0]That'll sting later.
 [1]Ow!
 [1]Cut it out!
 [1]Why!?
@@ -11,11 +11,11 @@ Getting hit
 [1]It got me!
 
 Downed
-[0]I'm down
-[0]That’s it for me
-[0]I need a revive
-[0]I need help
-[0]I require assistance
+[0]I'm down.
+[0]That’s it for me.
+[0]I need a revive.
+[0]I need help.
+[0]I require assistance.
 [1]I'm downed!
 [1]Sorry...
 [1]Help!...
@@ -23,11 +23,11 @@ Downed
 [1]They got me...
 
 Player hit
-[0]The Commander has been hit
-[0]Shake it off
+[0]The Commander has been hit.
+[0]Shake it off.
 [0]How bad is the damage?
 [0]Are you holding up?
-[0]You are hurt
+[0]You are hurt.
 [1]Are you okay?
 [1]Watch out!
 [1]Careful!
@@ -35,11 +35,11 @@ Player hit
 [1]You'll be fine, keep going!
 
 Player downed
-[0]The Commander has been compromised
-[0]The Commander is down
+[0]The Commander has been compromised.
+[0]The Commander is down.
 [0]Commander down!
-[0]Attempting to revive
-[0]Assisting the Commander
+[0]Attempting to revive.
+[0]Assisting the Commander.
 [1]Commander down!
 [1]Hold it together!
 [1]That's not good...
@@ -47,23 +47,23 @@ Player downed
 [1]Let me help you up!
 
 Revived by Player
-[0]Back in action
-[0]Ready again
-[0]Thank you, Commander
-[0]Thanks for the assist
-[0]Returning to duty
+[0]Back in action.
+[0]Ready again.
+[0]Thank you, Commander.
+[0]Thanks for the assist.
+[0]Returning to duty.
 [1]Thank you!
 [1]I’m back up!
 [1]I LIVE AGAIN!
 [1]Back at it!
 [1]I owe you one!
 
-Reviving Player
-[0]Reviving the Commander
-[0]Administering Revive
-[0]Attempting to revive
-[0]Please stand by
-[0]I got you
+Reviving Player.
+[0]Reviving the Commander.
+[0]Administering Revive.
+[0]Attempting to revive.
+[0]Please stand by.
+[0]I got you.
 [1]I got you!
 [1]Get back up!
 [1]Reviving!
@@ -71,24 +71,24 @@ Reviving Player
 [1]Come on, back up!
 
 Removing Debuff on Player
-[0]Removed Debuff
-[0]You are clear to move
-[0]Eliminated hostile influence
-[0]Applying Anti-Debuff
-[0]Cleansing Debuff
-[1]Cleared your Debuff!
+[0]Removed Debuff.
+[0]You are clear to move.
+[0]Eliminated hostile influence.
+[0]Applying Anti-Debuff.
+[0]Cleansing Debuff.
+[1]Cleared your Debuff!.
 [1]You should be fine again!
 [1]De-Debuffing!
 [1]Removed your debuff!
 [1]That should clear you up!
 
 No more enemies
-[0]Hostiles eliminated
-[0]Room clear
+[0]Hostiles eliminated.
+[0]Room clear.
 [0]Clear!
-[0]No more hostiles in the vicinity
-[0]No more targets
-[1]RIP
+[0]No more hostiles in the vicinity.
+[0]No more targets.
+[1]RIP.
 [1]No more hostiles!
 [1]Yeah! All Clear!
 [1]Good fight!

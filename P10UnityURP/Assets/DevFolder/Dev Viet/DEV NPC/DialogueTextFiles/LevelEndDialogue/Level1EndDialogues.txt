@@ -1,9 +1,9 @@
 Level 1 Dialogue
-[0]We've arrived off target
-[0]Guess that was to be expected
+[0]We've arrived off target.
+[0]Guess that was to be expected.
 [0]Is everyone prepared?
 [1]Locked and loaded!
-[0]Watch out for hostiles
-[0]Don't run off Orange
-[1]Yeah yea, I got it
+[0]Watch out for hostiles.
+[0]Don't run off Orange.
+[1]Yeah yeah, I got it.
 [1]The Commander got our backs!

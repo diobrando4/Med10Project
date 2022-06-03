@@ -1,8 +1,8 @@
 Level 4 Dialogue
-[0]Is everyone alright? Commander? Orange?
+[0]Is everyone alright?
 [1]That was a lot of hostiles!
-[0]Well done Commander for getting us through that
-[1]Yeah, thanks a lot Commander
-[1]I was half considering jumping into the pools
+[0]Well done Commander for getting us through that.
+[1]Yeah, thanks a lot Commander.
+[1]I was half considering jumping into the pools.
 [0]For leisure or for cover?
-[1]Yes
+[1]Yes.
