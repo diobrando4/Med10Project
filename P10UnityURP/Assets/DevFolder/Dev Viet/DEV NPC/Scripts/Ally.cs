@@ -301,7 +301,7 @@ public class Ally : BaseClassNPC
             }
             else
             {
-                if (trackedProjectile == null)
+                if (trackedProjectile == null) //Disable for Old version
                 {              
                     if(_targetDist <= _backOffDistance) //If too close to target, Back off from target
                     {
@@ -323,7 +323,7 @@ public class Ally : BaseClassNPC
                         }  
                     }
                 }
-                else
+                else //Disable for Old version
                 {
                     agent.SetDestination(PosisitionAwayFromProjectile(trackedProjectile, projReactivity));
                 }                
