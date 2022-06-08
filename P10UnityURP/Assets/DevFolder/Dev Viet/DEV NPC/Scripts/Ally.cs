@@ -161,8 +161,8 @@ public class Ally : BaseClassNPC
             } 
             else if (inCombat == true && m2target.tag == "Enemy") //If there is enemies
             {
-                //Move2Target(GameObject Target, float BackoffDistance,float MaxDistanceAwayFromPlayer , float StopDistOnBackoff, float StopDistanceOnApproach)
-                Move2Target(m2target,distanceBeforeRunAway,maxDistanceFromPlayer,stopDistanceOnBackoff,stopDistanceOnApproach);
+                //Move2Target(GameObject Target, float BackoffDistance,float MaxDistanceAwayFromPlayer , float StopDistOnBackoff, float StopDistanceOnApproach, bool avoidProjectiles)
+                Move2Target(m2target,distanceBeforeRunAway,maxDistanceFromPlayer,stopDistanceOnBackoff,stopDistanceOnApproach,true);
             }
         }
         else//If player is dead or Debuffed
@@ -287,7 +287,7 @@ public class Ally : BaseClassNPC
 
     //Overloaded version of Move2Target from BaseClassNPC
     //Takes in the consideration of distance from player
-    protected void Move2Target(GameObject _target, float _backoff,float maxDistFromPlayer, float _stopDistBackoff, float _stopDistApproach)
+    protected void Move2Target(GameObject _target, float _backoff,float maxDistFromPlayer, float _stopDistBackoff, float _stopDistApproach, bool avoidProjectile)
     {
         float _targetDist = Vector3.Distance(transform.position, _target.transform.position);
         float _playerDist = Vector3.Distance(transform.position, player.transform.position);
@@ -301,7 +301,7 @@ public class Ally : BaseClassNPC
             }
             else
             {
-                if (trackedProjectile == null) //Disable for Old version
+                if (trackedProjectile == null && avoidProjectile == false) //Disable for Old version
                 {              
                     if(_targetDist <= _backOffDistance) //If too close to target, Back off from target
                     {
