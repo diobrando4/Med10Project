@@ -74,6 +74,85 @@ public class BulletController : MonoBehaviour
         }
     }//EnemyBulletFilter
 
+    //Overloaded version for Meatshield Fix
+    protected void EnemyBulletFilter(Collision other, int debuffNum, bool toggleMeatshield)
+    {
+        if(other.gameObject.tag != "Projectile")
+        {
+            if(other.gameObject.tag == "GoodGuys") //If it hits something with tag GoodGuys
+            {
+                if(toggleMeatshield == true)
+                {
+                    HurtNPCType(other.gameObject,damageGiven); //Hurt the given gO that was collided with
+                    ImpactEffect();
+                    Destroy(gameObject);   
+                }
+                else
+                {
+                    if(other.gameObject.GetComponent<Ally>().isAllyDead == false)
+                    {
+                        HurtNPCType(other.gameObject,damageGiven); //Hurt the given gO that was collided with
+                        ImpactEffect();
+                        Destroy(gameObject);  
+                    }
+                    else
+                    {
+                        Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+                    }                  
+                }
+            }
+            else if(other.gameObject.tag == "Player") //If it hits something with tag Player
+            {
+                if(toggleMeatshield == true) //If true, use meatshield logic
+                {
+                    HurtPlayerType(other.gameObject,damageGiven); //Hurt player
+                    FindObjectOfType<DebuffManager>().DebuffSelector(debuffNum);
+                    ImpactEffect();
+                    Destroy(gameObject);  
+                }
+                else //If false, do not use meatshield
+                {
+                    if(other.gameObject.GetComponent<PlayerHealthManager>().isPlayerDead == false) //If not dead, allow collision
+                    {
+                        HurtPlayerType(other.gameObject,damageGiven); //Hurt player
+                        FindObjectOfType<DebuffManager>().DebuffSelector(debuffNum);
+                        ImpactEffect();
+                        Destroy(gameObject);          
+                    }  
+                    else //if dead, ignore collision
+                    {
+                        Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+                    }                            
+                }
+            }
+            /*
+            else if(_ally.isAllyDead == true) // need a solution here for when ally is dead = enemy projectile can shoot through downed allies
+            {
+                Debug.Log("_ally.isAllyDead == true");
+                Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>()); // This might not work for NavMesh Agent?
+            }
+            */
+            else if(other.gameObject.layer == gameObject.layer) //If it shares the same layer as this bullet, ignore collision
+            {
+                Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+            }
+            else //If it collides with anything else, Destroy self
+            {
+                if (FindObjectOfType<SoundManager>())
+                {
+                    FindObjectOfType<SoundManager>().SoundPlay("BulletImpact");
+                }
+                ImpactEffect();
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            //If it hits something with the tag Projectile, ignore collision between the other bullet and itself
+            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+        }
+    }//EnemyBulletFilter
+
     protected void ImpactEffect() 
     {
         ParticleSystem newImpactEffect = Instantiate(impactPart, transform.position, Quaternion.Inverse(transform.rotation)) as ParticleSystem;

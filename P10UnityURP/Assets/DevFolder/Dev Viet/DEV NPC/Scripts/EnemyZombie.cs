@@ -42,7 +42,7 @@ public class EnemyZombie : BaseClassEnemy
 
     void OnCollisionEnter(Collision other)
     {
-        SuicideSingleAttack(other.gameObject); //From BaseClassEnemy
+        SuicideSingleAttack(other.gameObject,false); //From BaseClassEnemy, Meatshield set to false
         //Debug.Log(other);
     }//OnCollisionEnter
 }

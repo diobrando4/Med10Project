@@ -27,6 +27,7 @@ public class EnemyBullet : BulletController
     // for when bullets hit something (seems like you need rigidbody to make this work)
     void OnCollisionEnter(Collision col)
     {
-        EnemyBulletFilter(col,0);
+        //EnemyBulletFilter(col,0); 
+        EnemyBulletFilter(col,0,false); //Set to true to enable projectiles old behavior
     } // OnCollisionEnter
 }

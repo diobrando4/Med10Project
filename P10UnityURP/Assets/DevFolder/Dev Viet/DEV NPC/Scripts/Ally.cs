@@ -112,7 +112,6 @@ public class Ally : BaseClassNPC
         }
         else
         {
-            agent.SetDestination(gameObject.transform.position);
             if(reviveCurrent <= 0)
             {
                 gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = true;
@@ -135,17 +134,19 @@ public class Ally : BaseClassNPC
         UpdateHealthBar();
 
         // ally death state
-        if (currHealth <= 0)
+        if (currHealth <= 0 && isDead == false)
         {
             isAllyDead = true;
             isDead = isAllyDead;
             PlaySound("PlayerAllyDowned");
+            agent.SetDestination(gameObject.transform.position);
             //gameObject.GetComponentInChildren<Image>().enabled = true;
 
             // for disabling meat shield
             //gameObject.layer = 8; // 8 = dead layer
             //this.GetComponent<BoxCollider>().enabled = false;
             //this.GetComponent<NavMeshAgent>().enabled = false;
+            agent.enabled = false; //Related to meatshield
         }
     }//Update
 
@@ -188,8 +189,19 @@ public class Ally : BaseClassNPC
             healthBarFill.fillAmount = (float)currHealth / (float)maxHealth; //Since we are dealing with percentages, int variables are casted into floats for this calculation.
         }
     }//UpdateHealthBar
-
     
+    private void OnCollisionEnter(Collision other) //NEW, attempt to fix Meatshield - WIP
+    {
+        if(isDead == true)
+        {
+            if(other.gameObject.tag == "Enemy") //Projectile ignoring is done within Bullet scripts, this only handles collision between Ally and Enemy characters
+            {
+                Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), other.gameObject.GetComponent<Collider>(), true);
+                Debug.Log(other.gameObject.tag);
+            }
+        }
+    }
+
     private void OnTriggerStay(Collider col)
     {
         if(col.gameObject == player && player.GetComponent<PlayerHealthManager>().isPlayerDead == false)
@@ -242,6 +254,7 @@ public class Ally : BaseClassNPC
             {
                 isAllyDead = false;
                 isDead = isAllyDead;
+                agent.enabled = true; //Related to Meatshield
                 gameObject.GetComponentInChildren<Image>().enabled = false;
                 currHealth = maxHealth;
                 reviveCurrent = 0;
@@ -301,8 +314,8 @@ public class Ally : BaseClassNPC
             }
             else
             {
-                if (trackedProjectile == null && avoidProjectile == false) //Disable for Old version
-                {              
+                if(avoidProjectile == false) //False is old version
+                {
                     if(_targetDist <= _backOffDistance) //If too close to target, Back off from target
                     {
                         Vector3 dir2Target = transform.position - _target.transform.position;
@@ -323,10 +336,36 @@ public class Ally : BaseClassNPC
                         }  
                     }
                 }
-                else //Disable for Old version
+                else //True is new version
                 {
-                    agent.SetDestination(PosisitionAwayFromProjectile(trackedProjectile, projReactivity));
-                }                
+                    if (trackedProjectile == null)
+                    {              
+                        if(_targetDist <= _backOffDistance) //If too close to target, Back off from target
+                        {
+                            Vector3 dir2Target = transform.position - _target.transform.position;
+                            Vector3 newPos = transform.position + dir2Target;
+                            agent.stoppingDistance = _stopDistBackoff;
+                            agent.SetDestination(newPos);
+                        }
+                        else if(_targetDist > _backOffDistance) //If far from target, Move Closer to target
+                        {
+                            agent.stoppingDistance = _stopDistApproach;
+                            agent.SetDestination(_target.transform.position);
+                            if(HasLineOfSightTo(_target, _backOffDistance)) //If the width of their body cant reach target, it is obstructed
+                            {
+                                if(sphereHit.transform.gameObject.tag != _target.tag)
+                                {
+                                    agent.stoppingDistance = _stopDistApproach-1f;  
+                                }   
+                            }  
+                        }
+                    }
+                    else
+                    {
+                        agent.SetDestination(PosisitionAwayFromProjectile(trackedProjectile, projReactivity));
+                    }      
+                }
+          
             }
         transform.LookAt(_target.transform);
     }

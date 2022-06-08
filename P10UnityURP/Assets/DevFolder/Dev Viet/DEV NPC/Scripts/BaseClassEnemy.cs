@@ -39,70 +39,145 @@ public class BaseClassEnemy : BaseClassNPC
     }//DestroyOnDeath
 
     //When damaging target, destroy self
-    protected void SuicideSingleAttack(GameObject victim)
+    protected void SuicideSingleAttack(GameObject victim, bool toggleMeatshield)
     {
         //Prevents the multi-hit bug. Even if the zombie is set to be destroyed on collision, there is still chance for it to do the multi-hit due to collisions
         if(hasDamaged == false)
         {
             if(victim.tag == "GoodGuys")
             {
-                victim.GetComponent<Ally>().DamageTaken(damageGiven);
-                hasDamaged = true;
-                if(FindObjectOfType<ExitDoor>())
+                if (toggleMeatshield == false) //If false, do not use meatshield logic
                 {
-                    FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                    if(victim.GetComponent<Ally>().isAllyDead == false) //if Ally is still alive, allow suicide
+                    {
+                        victim.GetComponent<Ally>().DamageTaken(damageGiven);
+                        hasDamaged = true;
+                        if(FindObjectOfType<ExitDoor>())
+                        {
+                            FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                        }
+                        PlaySound("EnemyKilled");
+                        DeathEffect();
+                        Destroy(gameObject);
+                    }
                 }
-                PlaySound("EnemyKilled");
-                DeathEffect();
-                Destroy(gameObject);
+                else //if true, use meatshield logic
+                {
+                    victim.GetComponent<Ally>().DamageTaken(damageGiven);
+                    hasDamaged = true;
+                    if(FindObjectOfType<ExitDoor>())
+                    {
+                        FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                    }
+                    PlaySound("EnemyKilled");
+                    DeathEffect();
+                    Destroy(gameObject);
+                }
             }
             else if(victim.tag == "Player")
             {
-                victim.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
-                hasDamaged = true;
-                if(FindObjectOfType<ExitDoor>())
+                if(toggleMeatshield == false)//If false, do not use meatshield logic
                 {
-                    FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
-                }                
-                PlaySound("EnemyKilled");
-                DeathEffect();
-                Destroy(gameObject);
+                    if(victim.GetComponent<PlayerHealthManager>().isPlayerDead == false) //Meatshield related
+                    {
+                        victim.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
+                        hasDamaged = true;
+                        if(FindObjectOfType<ExitDoor>())
+                        {
+                            FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                        }                
+                        PlaySound("EnemyKilled");
+                        DeathEffect();
+                        Destroy(gameObject);
+                    }                    
+                }
+                else//if true, use meatshield logic
+                {
+                    victim.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
+                    hasDamaged = true;
+                    if(FindObjectOfType<ExitDoor>())
+                    {
+                        FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                    }                
+                    PlaySound("EnemyKilled");
+                    DeathEffect();
+                    Destroy(gameObject);
+                }
             }
         }
     }//SuicideSingleAttack
 
     //Overload version that also deals status effect
-    protected void SuicideSingleAttack(GameObject victim, int debuffNum)
+    protected void SuicideSingleAttack(GameObject victim, int debuffNum, bool toggleMeatshield)
     {
         //Prevents the multi-hit bug. Even if the zombie is set to be destroyed on collision, there is still chance for it to do the multi-hit due to collisions
         if(hasDamaged == false)
         {
             if(victim.tag == "GoodGuys")
             {
-                victim.GetComponent<Ally>().DamageTaken(damageGiven);
-                
-                hasDamaged = true;
-                if(FindObjectOfType<ExitDoor>())
+                if(toggleMeatshield == false)//If false, do not use meatshield logic
                 {
-                    FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
-                }                
-                PlaySound("EnemyKilled");
-                DeathEffect();
-                Destroy(gameObject);
+                    if(victim.GetComponent<Ally>().isAllyDead == false) //Meatshield related
+                    {
+                        victim.GetComponent<Ally>().DamageTaken(damageGiven);
+                        
+                        hasDamaged = true;
+                        if(FindObjectOfType<ExitDoor>())
+                        {
+                            FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                        }                
+                        PlaySound("EnemyKilled");
+                        DeathEffect();
+                        Destroy(gameObject);                    
+                    }
+                }
+                else//if true, use meatshield logic
+                {
+                    victim.GetComponent<Ally>().DamageTaken(damageGiven);
+                    
+                    hasDamaged = true;
+                    if(FindObjectOfType<ExitDoor>())
+                    {
+                        FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                    }                
+                    PlaySound("EnemyKilled");
+                    DeathEffect();
+                    Destroy(gameObject); 
+                }
             }
             else if(victim.tag == "Player")
             {
-                victim.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
-                //victim.GetComponent<PlayerHealthManager>().isDebuffed = true;
-                debuffMan.DebuffSelector(debuffNum);
-                hasDamaged = true;
-                if(FindObjectOfType<ExitDoor>())
+                if(toggleMeatshield == false)//If false, do not use meatshield logic
                 {
-                    FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
-                }                
-                PlaySound("EnemyKilled");
-                DeathEffect();
-                Destroy(gameObject);
+                    if(victim.GetComponent<PlayerHealthManager>().isPlayerDead == false) //Meatshield related
+                    {
+                        victim.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
+                        //victim.GetComponent<PlayerHealthManager>().isDebuffed = true;
+                        debuffMan.DebuffSelector(debuffNum);
+                        hasDamaged = true;
+                        if(FindObjectOfType<ExitDoor>())
+                        {
+                            FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                        }                
+                        PlaySound("EnemyKilled");
+                        DeathEffect();
+                        Destroy(gameObject);                    
+                    }
+                }
+                else//if true, use meatshield logic
+                {
+                    victim.GetComponent<PlayerHealthManager>().HurtPlayer(damageGiven);
+                    //victim.GetComponent<PlayerHealthManager>().isDebuffed = true;
+                    debuffMan.DebuffSelector(debuffNum);
+                    hasDamaged = true;
+                    if(FindObjectOfType<ExitDoor>())
+                    {
+                        FindObjectOfType<ExitDoor>().RemoveFromList(gameObject);
+                    }                
+                    PlaySound("EnemyKilled");
+                    DeathEffect();
+                    Destroy(gameObject);  
+                }
             }
         }
     }//SuicideSingleAttack

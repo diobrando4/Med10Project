@@ -28,6 +28,6 @@ public class EnemyDebuffBullet : BulletController
 // for when bullets hit something (seems like you need rigidbody to make this work)
     void OnCollisionEnter(Collision col)
     {
-        EnemyBulletFilter(col,debuff2Use);
+        EnemyBulletFilter(col,debuff2Use,false); //Set to true to enable projectiles old behavior
     } // OnCollisionEnter
 }
