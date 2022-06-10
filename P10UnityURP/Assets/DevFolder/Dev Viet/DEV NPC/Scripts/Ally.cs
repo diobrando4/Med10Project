@@ -10,6 +10,8 @@ public class Ally : BaseClassNPC
 {
     [SerializeField]
     private GameObject player;
+    private GameObject accesories;
+    //public bool isOldVersion = false;
 
     //Movement related
     [Header("Movement Related")]
@@ -98,6 +100,19 @@ public class Ally : BaseClassNPC
         UpdateHealthBar();
         revivePart.Stop();
 
+        //accesories = gameObject.transform.Find("Accesories");
+
+        //Change variable to old
+        if (isOldVersion == true)
+        {
+            selectedWeapon = 0;
+            gameObject.transform.GetChild(4).gameObject.SetActive(false);
+        }
+        else 
+        {
+            gameObject.transform.GetChild(4).gameObject.SetActive(true);                      
+        }
+
         //Since you Ally cant change weapons, and weapons are not a seperate class, I have to define the fire rate here, depending on the selectedWeapon
         if(selectedWeapon == 0) //Default
         {
@@ -111,7 +126,6 @@ public class Ally : BaseClassNPC
         {
             fireRate = 2f;
         }
-
     }//Start
 //======================================================================================================================================================
     // Update is called once per frame
@@ -180,7 +194,14 @@ public class Ally : BaseClassNPC
             else if (inCombat == true && m2target.tag == "Enemy") //If there is enemies
             {
                 //Move2Target(GameObject Target, float BackoffDistance,float MaxDistanceAwayFromPlayer , float StopDistOnBackoff, float StopDistanceOnApproach, bool avoidProjectiles)
-                Move2Target(m2target,distanceBeforeRunAway,maxDistanceFromPlayer,stopDistanceOnBackoff,stopDistanceOnApproach,true);
+                if (isOldVersion == true)
+                {
+                    Move2Target(m2target,distanceBeforeRunAway,maxDistanceFromPlayer,stopDistanceOnBackoff,stopDistanceOnApproach,false);
+                }
+                else
+                {
+                    Move2Target(m2target,distanceBeforeRunAway,maxDistanceFromPlayer,stopDistanceOnBackoff,stopDistanceOnApproach,true);
+                }
             }
         }
         else//If player is dead or Debuffed
@@ -203,19 +224,22 @@ public class Ally : BaseClassNPC
     {
         if (healthBarFill != null)
         {
-            healthBarFill.fillAmount = (float)currHealth / (float)maxHealth; //Since we are dealing with percentages, int variables are casted into floats for this calculation.
+            healthBarFill.fillAmount = currHealth / maxHealth; //Since we are dealing with percentages, int variables are casted into floats for this calculation.
         }
     }//UpdateHealthBar
 //======================================================================================================================================================    
-    private void OnCollisionEnter(Collision other) //NEW, attempt to fix Meatshield - WIP
+    private void OnCollisionEnter(Collision other) //NEW, attempt to fix Meatshield
     {
-        if(isDead == true)
+        if (isOldVersion == false)
         {
-            if(other.gameObject.tag == "Enemy") //Projectile ignoring is done within Bullet scripts, this only handles collision between Ally and Enemy characters
+            if(isDead == true)
             {
-                Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), other.gameObject.GetComponent<Collider>(), true);
-                Debug.Log(other.gameObject.tag);
-            }
+                if(other.gameObject.tag == "Enemy") //Projectile ignoring is done within Bullet scripts, this only handles collision between Ally and Enemy characters
+                {
+                    Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), other.gameObject.GetComponent<Collider>(), true);
+                    Debug.Log(other.gameObject.tag);
+                }
+            }            
         }
     }
 //======================================================================================================================================================

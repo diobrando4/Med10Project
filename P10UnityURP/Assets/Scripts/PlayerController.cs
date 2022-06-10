@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public GameObject dashBar0, dashBar1, dashBar2;
 
     public bool isPaused; // this var is changed in the menu pause caller
+    public bool isOldVersion = false;
     
     void Awake()
     {
@@ -62,6 +63,15 @@ public class PlayerController : MonoBehaviour
         dashBar0 = GameObject.Find("CanvasHealthBars/HolderPlauerDashBar/imgBar0");
         dashBar1 = GameObject.Find("CanvasHealthBars/HolderPlauerDashBar/imgBar1");
         dashBar2 = GameObject.Find("CanvasHealthBars/HolderPlauerDashBar/imgBar2");
+        //Change variable to old
+        if (isOldVersion == true)
+        {
+            gameObject.transform.GetChild(8).gameObject.SetActive(false);
+        }
+        else 
+        {
+            gameObject.transform.GetChild(8).gameObject.SetActive(true);                      
+        }
     }
 
     // Update is called once per frame

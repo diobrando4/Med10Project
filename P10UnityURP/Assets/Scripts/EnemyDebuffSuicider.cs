@@ -40,7 +40,15 @@ public class EnemyDebuffSuicider : BaseClassEnemy
 
     void OnCollisionEnter(Collision other)
     {
-        SuicideSingleAttack(other.gameObject,2,false); //From BaseClassEnemy, Current Debuff is Reverse, Meatshield set to false
+        if(isOldVersion == true)
+        {
+            SuicideSingleAttack(other.gameObject,2,true);
+        }
+        else
+        {
+            SuicideSingleAttack(other.gameObject,2,false); //From BaseClassEnemy, Current Debuff is Reverse, Meatshield set to false
+        }
+        
         //Debug.Log(other);
     }//OnCollisionEnter
 }

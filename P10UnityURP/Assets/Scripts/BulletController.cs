@@ -11,6 +11,7 @@ public class BulletController : MonoBehaviour
     public ParticleSystem impactPart;
     [HideInInspector]
     public bool isPiercing = false; //Can the bullet pierce through hostiles? Only used in GoodGuysBullet so far
+    public bool isOldVersion = false;
 
     //private Ally _ally;
 

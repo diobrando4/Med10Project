@@ -37,8 +37,8 @@ public class EnemyShooter : BaseClassEnemy
         {
             if (inCombat == true)
             {
-            Move2Target(target,5,3,6);
-            ShootNearestObject(target);
+                Move2Target(target,5,3,6);
+                ShootNearestObject(target);
             }
         }
     }

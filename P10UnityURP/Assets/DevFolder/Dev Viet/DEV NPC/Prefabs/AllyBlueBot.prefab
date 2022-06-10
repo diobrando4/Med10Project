@@ -305,7 +305,7 @@ Transform:
   m_LocalScale: {x: 0.56284, y: 0.7408, z: 0.20592228}
   m_Children: []
   m_Father: {fileID: 5419867732622675450}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6917244386312129893
 MeshFilter:
@@ -395,12 +395,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4146227279018134384}
-  m_LocalRotation: {x: -0.000000013038516, y: 0.38268238, z: 0.0000000037252903, w: 0.92388004}
-  m_LocalPosition: {x: 0.000000056709432, y: 1.329999, z: 0}
-  m_LocalScale: {x: 0.2, y: 1.3563, z: 0.2}
+  m_LocalRotation: {x: 0.023922022, y: 0.3819339, z: -0.057753094, w: 0.92207307}
+  m_LocalPosition: {x: 0.017371655, y: 0.62537366, z: 0}
+  m_LocalScale: {x: 0.19378802, y: 0.10110922, z: 0.19378802}
   m_Children: []
-  m_Father: {fileID: 5619742133374446152}
-  m_RootOrder: 0
+  m_Father: {fileID: 5419867732622675450}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!33 &6311006869447249990
 MeshFilter:
@@ -595,6 +595,7 @@ Transform:
   m_Children:
   - {fileID: 3235917703781864702}
   - {fileID: 5619742133374446152}
+  - {fileID: 9015183861946632415}
   - {fileID: 6663706835244087282}
   - {fileID: 354003733123023579}
   m_Father: {fileID: 9175027577546554138}
@@ -631,7 +632,7 @@ Transform:
   m_LocalScale: {x: 0.32613775, y: 0.32613772, z: 0.32613787}
   m_Children: []
   m_Father: {fileID: 5419867732622675450}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!33 &395908867070475605
 MeshFilter:
@@ -857,8 +858,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.062511474, w: 0.99804425}
   m_LocalPosition: {x: 0.005, y: 0.527, z: 0}
   m_LocalScale: {x: 0.96893996, y: 0.074547835, z: 0.96893996}
-  m_Children:
-  - {fileID: 9015183861946632415}
+  m_Children: []
   m_Father: {fileID: 5419867732622675450}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -7.168}
@@ -1538,6 +1538,7 @@ MonoBehaviour:
   distanceB4Shoot: 20
   bullet: {fileID: 2098971575481728396, guid: 03c5e20a095d6fa4aa5bf2f892748f51, type: 3}
   muzzle: {fileID: 0}
+  isOldVersion: 0
   player: {fileID: 0}
   stopDistanceFromPlayer: 3
   distanceBeforeRunAway: 5

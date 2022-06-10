@@ -51,6 +51,8 @@ public class BaseClassNPC : MonoBehaviour
     protected List<Color> originalColor = new List<Color>();
     protected float flashTime = 0.10f;
     
+    public bool isOldVersion = false;
+
     void Awake()
     {
         rayOffset = new Vector3(0,0,0);
@@ -247,6 +249,7 @@ public class BaseClassNPC : MonoBehaviour
                             muzzleSmoke.Play();
                             //Need to work here for Different weapon types
                             BulletController newBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
+                            newBullet.isOldVersion = isOldVersion;
                             newBullet.speed = projectileSpeed;
                         }
                     }
