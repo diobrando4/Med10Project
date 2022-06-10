@@ -27,6 +27,8 @@ public class Ally : BaseClassNPC
     public float projectileDetectionRange = 25;
     [Tooltip("How sensitive are is the character to projectiles?")]
     public float projReactivity = 50;
+    [Tooltip("What weapon should the Ally use? 0 = Default, 1 = Shotgun, 2 = Sniper")]   
+    public int selectedWeapon = 0;
 
     private Ally allyFriend;
 
@@ -51,7 +53,7 @@ public class Ally : BaseClassNPC
     //[HideInInspector]
     [HideInInspector] 
     public bool isUsingDispel = false;
-
+//======================================================================================================================================================
     void Start()
     {
         //Initial Values can be defined for the inherited variables
@@ -95,8 +97,23 @@ public class Ally : BaseClassNPC
         muzzleSmoke = gameObject.transform.Find("AllyGun/SmokeParticles").GetComponent<ParticleSystem>();
         UpdateHealthBar();
         revivePart.Stop();
-    }//Start
 
+        //Since you Ally cant change weapons, and weapons are not a seperate class, I have to define the fire rate here, depending on the selectedWeapon
+        if(selectedWeapon == 0) //Default
+        {
+            fireRate = 0.75f;
+        }
+        else if (selectedWeapon == 1) //Shotgun
+        {
+            fireRate = 1f;
+        }
+        else if (selectedWeapon == 2) //Sniper
+        {
+            fireRate = 2f;
+        }
+
+    }//Start
+//======================================================================================================================================================
     // Update is called once per frame
     void Update()
     {
@@ -107,7 +124,7 @@ public class Ally : BaseClassNPC
         if (isAllyDead == false) 
         {
             Move(target);
-            ShootNearestObject(target);//Inherited function
+            ShootNearestObject(target,selectedWeapon);//Inherited function 
             gameObject.transform.Find("StatusIcon").GetComponent<Renderer>().enabled = false;
         }
         else
@@ -149,7 +166,7 @@ public class Ally : BaseClassNPC
             agent.enabled = false; //Related to meatshield
         }
     }//Update
-
+//======================================================================================================================================================
     //Function that handles conditions on how to move
     private void Move(GameObject m2target)
     {
@@ -180,7 +197,7 @@ public class Ally : BaseClassNPC
             }
         }
     }//Move2Target
-
+//======================================================================================================================================================
     //Update the healthbar on the UI, if fill image has been assigned
     public void UpdateHealthBar()
     {
@@ -189,7 +206,7 @@ public class Ally : BaseClassNPC
             healthBarFill.fillAmount = (float)currHealth / (float)maxHealth; //Since we are dealing with percentages, int variables are casted into floats for this calculation.
         }
     }//UpdateHealthBar
-    
+//======================================================================================================================================================    
     private void OnCollisionEnter(Collision other) //NEW, attempt to fix Meatshield - WIP
     {
         if(isDead == true)
@@ -201,7 +218,7 @@ public class Ally : BaseClassNPC
             }
         }
     }
-
+//======================================================================================================================================================
     private void OnTriggerStay(Collider col)
     {
         if(col.gameObject == player && player.GetComponent<PlayerHealthManager>().isPlayerDead == false)
@@ -228,7 +245,7 @@ public class Ally : BaseClassNPC
             }
         }
     }//OntriggerStay
-
+//======================================================================================================================================================
     //Reset revive timer if Player leaves the radius
     private void OnTriggerExit(Collider col)
     {
@@ -241,7 +258,7 @@ public class Ally : BaseClassNPC
             gameObject.GetComponentInChildren<Image>().enabled = false;
         }
     }//OnTriggerExit
-
+//======================================================================================================================================================
     //Revive coroutine
     private IEnumerator ReviveAlly()
     {
@@ -276,7 +293,7 @@ public class Ally : BaseClassNPC
             yield break; // makes the coroutine stop; when x is no longer inside the trigger, so we don't have to use StopAllCoroutines
         }
     }//ReviveAlly
-
+//======================================================================================================================================================
     //Restores Player speed and MaxHP default values, then enter a cooldown before it can be reapplied
     private IEnumerator Dispel()
     {
@@ -297,7 +314,7 @@ public class Ally : BaseClassNPC
             yield break;    
         }
     }//Dispel
-
+//======================================================================================================================================================
     //Overloaded version of Move2Target from BaseClassNPC
     //Takes in the consideration of distance from player
     protected void Move2Target(GameObject _target, float _backoff,float maxDistFromPlayer, float _stopDistBackoff, float _stopDistApproach, bool avoidProjectile)
@@ -368,5 +385,88 @@ public class Ally : BaseClassNPC
           
             }
         transform.LookAt(_target.transform);
-    }
+    }//Overload Move2Target
+//======================================================================================================================================================
+    //Overload to incorporate weapon types and variable fire rate
+    protected void ShootNearestObject(GameObject target2Shoot, int weaponType)
+    {
+        if (target2Shoot != null ) //If there are tfargets
+        {
+            //if (Physics.Raycast(transform.position + rayOffset, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
+            if (Physics.SphereCast(transform.position + rayOffset, 0.2f, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
+            //If the raycasted sphere hits something within the distance
+            {
+                Debug.DrawLine(transform.position + rayOffset, rayHit.point, Color.red);
+
+                if(rayHit.transform != null) //If the ray is hitting something
+                {
+                    if(rayHit.transform.gameObject.layer != gameObject.layer && 
+                        rayHit.transform.gameObject.layer == LayerMask.NameToLayer("GoodGuys") || 
+                        rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy")) //If the object hit by the ray doesnt share the same layer as self, but is also either on the layer GoodGuys/Enemy
+                    {
+                        shotCounter -= Time.deltaTime;
+
+                        if(shotCounter <= 0)
+                        {   
+                            shotCounter = fireRate;
+                            PlaySound("Gunshot");
+                            muzzleSmoke.Play();
+                            WeaponSelect(selectedWeapon);
+                            //Need to work here for Different weapon types
+                            //BulletController newBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
+                            //newBullet.speed = projectileSpeed;
+                        }
+                    }
+                    else
+                    {
+                        shotCounter = 0;
+                    }
+                }
+            }
+            else
+            {
+                Debug.DrawRay(transform.position + rayOffset, transform.forward * distanceB4Shoot, Color.green); 
+            }
+        }       
+    }//Overload ShootNearest
+//======================================================================================================================================================
+    protected void WeaponSelect (int weaponNumber)
+    {
+        switch(weaponNumber)
+        {
+            case 0: //Normal
+                BulletController DefaultBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
+                DefaultBullet.damageGiven = 1;
+                DefaultBullet.speed = 15f;
+                break;
+            case 1: //Shotgun
+                float spread = 10f;
+                int numOfPellets = 10;
+                for (int i = 0; i <= numOfPellets; i++)
+                {
+                    IEnumerator DelayBetweenPellets(float timeBetweenPellets)
+                    {
+                        yield return new WaitForSeconds(timeBetweenPellets);
+                        BulletController ShotgunPellet = Instantiate(bullet, muzzle.position, Quaternion.Euler(new Vector3(0, muzzle.transform.eulerAngles.y+Random.Range(-spread, spread), 0)));
+                        ShotgunPellet.speed = 20f;
+                        ShotgunPellet.damageGiven = 0.2f;
+                        ShotgunPellet.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+                        ShotgunPellet.GetComponent<TrailRenderer>().startWidth = 0.05f;  
+                        if (i > numOfPellets)
+                        {
+                            yield break;
+                        }                      
+                    }
+                    StartCoroutine(DelayBetweenPellets(0.01f*i));
+                }
+                break;
+            case 2: //Sniper
+                BulletController SniperBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
+                SniperBullet.isPiercing = true;
+                SniperBullet.damageGiven = 3f;
+                SniperBullet.speed = 60f;
+                SniperBullet.transform.localScale = new Vector3(0.15f,0.15f,0.5f);
+                break;
+        }    
+    }//WeaponSelect
 }

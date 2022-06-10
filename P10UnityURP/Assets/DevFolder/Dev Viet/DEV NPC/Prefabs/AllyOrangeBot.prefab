@@ -350,6 +350,7 @@ MonoBehaviour:
   stopDistanceOnApproach: 6
   projectileDetectionRange: 20
   projReactivity: 30
+  selectedWeapon: 1
   isAllyDead: 0
   reviveMax: 100
   reviveCurrent: 0

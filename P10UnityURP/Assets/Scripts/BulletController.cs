@@ -6,9 +6,11 @@ public class BulletController : MonoBehaviour
 {
     public float speed;
     public float lifeTime; // in seconds?
-    public int damageGiven;
+    public float damageGiven;
     protected Rigidbody rb;
     public ParticleSystem impactPart;
+    [HideInInspector]
+    public bool isPiercing = false; //Can the bullet pierce through hostiles? Only used in GoodGuysBullet so far
 
     //private Ally _ally;
 
@@ -18,7 +20,7 @@ public class BulletController : MonoBehaviour
     }
 
     //Damages the given NPC type (Ally or Any type of BaseClassEnemy)
-    protected void HurtNPCType(GameObject _npc, int _damage)
+    protected void HurtNPCType(GameObject _npc, float _damage)
     {
         _npc.GetComponent<BaseClassNPC>().DamageTaken(_damage);
     }//HurtEnemyType
@@ -29,7 +31,7 @@ public class BulletController : MonoBehaviour
         _player.GetComponent<PlayerHealthManager>().HurtPlayer(_damage);
     }//HurtPlayerType
 
-    protected void EnemyBulletFilter(Collision other, int debuffNum)
+/*     protected void EnemyBulletFilter(Collision other, int debuffNum)
     {
         if(other.gameObject.tag != "Projectile")
         {
@@ -46,13 +48,6 @@ public class BulletController : MonoBehaviour
                 ImpactEffect();
                 Destroy(gameObject);
             }
-            /*
-            else if(_ally.isAllyDead == true) // need a solution here for when ally is dead = enemy projectile can shoot through downed allies
-            {
-                Debug.Log("_ally.isAllyDead == true");
-                Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>()); // This might not work for NavMesh Agent?
-            }
-            */
             else if(other.gameObject.layer == gameObject.layer) //If it shares the same layer as this bullet, ignore collision
             {
                 Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
@@ -72,9 +67,9 @@ public class BulletController : MonoBehaviour
             //If it hits something with the tag Projectile, ignore collision between the other bullet and itself
             Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
         }
-    }//EnemyBulletFilter
+    }//EnemyBulletFilter */
 
-    //Overloaded version for Meatshield Fix
+    //Version for Meatshield Fix
     protected void EnemyBulletFilter(Collision other, int debuffNum, bool toggleMeatshield)
     {
         if(other.gameObject.tag != "Projectile")
@@ -125,13 +120,6 @@ public class BulletController : MonoBehaviour
                     }                            
                 }
             }
-            /*
-            else if(_ally.isAllyDead == true) // need a solution here for when ally is dead = enemy projectile can shoot through downed allies
-            {
-                Debug.Log("_ally.isAllyDead == true");
-                Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>()); // This might not work for NavMesh Agent?
-            }
-            */
             else if(other.gameObject.layer == gameObject.layer) //If it shares the same layer as this bullet, ignore collision
             {
                 Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
@@ -157,6 +145,7 @@ public class BulletController : MonoBehaviour
     {
         ParticleSystem newImpactEffect = Instantiate(impactPart, transform.position, Quaternion.Inverse(transform.rotation)) as ParticleSystem;
         newImpactEffect.GetComponent<Renderer>().material.color = gameObject.GetComponent<Renderer>().material.color;
+        newImpactEffect.transform.localScale = transform.localScale + new Vector3(0.8f,0.8f,0.8f);
         newImpactEffect.Play();
     }
 }

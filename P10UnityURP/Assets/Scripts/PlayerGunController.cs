@@ -7,13 +7,14 @@ public class PlayerGunController : MonoBehaviour
     public bool isFiring = false;
 
     public GoodGuysBullet bullet;
-    public float bulletSpeed;
+    //public float bulletSpeed; //Currently 15 in prefab
 
     public float timeBetweenShots;
     private float shotCounter;
 
     public Transform firePoint;
     public ParticleSystem muzzleSmoke;
+    public int weapon = 0;
 
     void Start()
     {
@@ -30,8 +31,9 @@ public class PlayerGunController : MonoBehaviour
             if(shotCounter <= 0)
             {
                 shotCounter = timeBetweenShots;
-                GoodGuysBullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as GoodGuysBullet;
-                newBullet.speed = bulletSpeed;
+                //GoodGuysBullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as GoodGuysBullet;
+                //newBullet.speed = bulletSpeed;
+                WeaponSelect(weapon);
                 muzzleSmoke.Play();
                 if (FindObjectOfType<SoundManager>())
                 {
@@ -44,4 +46,44 @@ public class PlayerGunController : MonoBehaviour
             shotCounter = 0;
         }
     }
+    //Switch for choosing what weapon to use - Was used for testing weapon types for Ally
+    protected void WeaponSelect (int weaponNumber)
+    {
+        switch(weaponNumber)
+        {
+            case 0: //Normal
+                GoodGuysBullet DefaultBullet = Instantiate(bullet, firePoint.position, firePoint.rotation);
+                DefaultBullet.damageGiven = 1;
+                DefaultBullet.speed = 15f;
+                break;
+            case 1: //Shotgun
+                float spread = 10f;
+                int numOfPellets = 10;
+                for (int i = 0; i <= numOfPellets; i++)
+                {
+                    IEnumerator DelayBetweenPellets(float timeBetweenPellets)
+                    {
+                        yield return new WaitForSeconds(timeBetweenPellets);
+                        GoodGuysBullet ShotgunPellet = Instantiate(bullet, firePoint.position, Quaternion.Euler(new Vector3(0, firePoint.transform.eulerAngles.y+Random.Range(-spread, spread), 0)));
+                        ShotgunPellet.speed = 15f;
+                        ShotgunPellet.damageGiven = 0.2f;
+                        ShotgunPellet.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+                        ShotgunPellet.GetComponent<TrailRenderer>().startWidth = 0.05f;  
+                        if (i > numOfPellets)
+                        {
+                            yield break;
+                        }                      
+                    }
+                    StartCoroutine(DelayBetweenPellets(0.01f*i));
+                }
+                break;
+            case 2: //Sniper
+                GoodGuysBullet SniperBullet = Instantiate(bullet, firePoint.position, firePoint.rotation);
+                SniperBullet.isPiercing = true;
+                SniperBullet.damageGiven = 3f;
+                SniperBullet.speed = 60f;
+                SniperBullet.transform.localScale = new Vector3(0.15f,0.15f,0.5f);
+                break;
+        }    
+    }//WeaponSelect
 }

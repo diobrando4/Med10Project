@@ -15,15 +15,15 @@ public class BaseClassNPC : MonoBehaviour
 
     [Header("Internal variables")]
     public bool inCombat = true; //Bool if combat mode is active
-    public int damageGiven = 1; //default damage given.
+    public float damageGiven = 1; //default damage given.
     protected int ignoreOwnLayer; //Should ignore the layer its in, in order to ignore targets of the same "faction"
 
     //Variables related to status effect
     protected DebuffManager debuffMan;
 
     [Header("Health related variables")]
-    public int maxHealth; //Max health of GameObject
-    public int currHealth; //Current health of GameObject
+    public float maxHealth; //Max health of GameObject
+    public float currHealth; //Current health of GameObject
     protected bool isDead = false; //Death check
 
     
@@ -31,7 +31,7 @@ public class BaseClassNPC : MonoBehaviour
     public float fireRate;
     public float projectileSpeed;
     public float distanceB4Shoot; //Distance before shooting at target2Shoot
-    private float shotCounter;
+    protected float shotCounter;
     //public GoodGuysBullet goodGuysBullet; // for player and ally (GoodGuys)
     //public EnemyBullet enemyBullet; // for enemy
     public BulletController bullet = null; //Can either be GoodGuysBullet or EnemyBullet
@@ -39,20 +39,18 @@ public class BaseClassNPC : MonoBehaviour
     protected Transform muzzle;
 
     // for raycast
-    private RaycastHit rayHit;
+    protected RaycastHit rayHit;
     protected RaycastHit sphereHit;
 
     protected ParticleSystem muzzleSmoke;
 
-    Vector3 rayOffset; // we need this, otherwise the raycast might hit unwanted objects EDIT: No longer an issue with the new layer filtering
+    protected Vector3 rayOffset; // we need this, otherwise the raycast might hit unwanted objects EDIT: No longer an issue with the new layer filtering
 
     // for flashing white whenever they are hurt
     protected List<MeshRenderer> meshRenderer = new List<MeshRenderer>();
     protected List<Color> originalColor = new List<Color>();
     protected float flashTime = 0.10f;
     
-
-
     void Awake()
     {
         rayOffset = new Vector3(0,0,0);
@@ -205,7 +203,7 @@ public class BaseClassNPC : MonoBehaviour
     }//Follow
 
     //Call function to reduce health
-    public void DamageTaken(int damage)
+    public void DamageTaken(float damage)
     {
         currHealth -= damage;
         if(gameObject.tag == "Enemy")
@@ -226,7 +224,7 @@ public class BaseClassNPC : MonoBehaviour
     //Function that dictates shooting the nearest GameObject
     protected void ShootNearestObject(GameObject target2Shoot)
     {
-        if (target2Shoot != null ) //If there are targets
+        if (target2Shoot != null ) //If there are tfargets
         {
             //if (Physics.Raycast(transform.position + rayOffset, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
             if (Physics.SphereCast(transform.position + rayOffset, 0.2f, transform.forward, out rayHit, distanceB4Shoot, ignoreOwnLayer))
@@ -243,13 +241,13 @@ public class BaseClassNPC : MonoBehaviour
                         shotCounter -= Time.deltaTime;
 
                         if(shotCounter <= 0)
-                        {
-                        
+                        {   
                             shotCounter = fireRate;
-                            BulletController newBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
                             PlaySound("Gunshot");
-                            newBullet.speed = projectileSpeed;
                             muzzleSmoke.Play();
+                            //Need to work here for Different weapon types
+                            BulletController newBullet = Instantiate(bullet, muzzle.position, muzzle.rotation) as BulletController;
+                            newBullet.speed = projectileSpeed;
                         }
                     }
                     else

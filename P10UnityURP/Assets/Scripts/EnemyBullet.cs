@@ -30,4 +30,5 @@ public class EnemyBullet : BulletController
         //EnemyBulletFilter(col,0); 
         EnemyBulletFilter(col,0,false); //Set to true to enable projectiles old behavior
     } // OnCollisionEnter
+    
 }
