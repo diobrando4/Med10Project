@@ -17,12 +17,15 @@ public class MenuStart : MonoBehaviour
         if (PlayerPrefs.HasKey("GameVersion") == true) //If there already is a saved key
         {
             versionNum = PlayerPrefs.GetInt("GameVersion"); //Use that int as versionNum
-            //Debug.Log("Existing save found with the number: "+versionNum);     
+            //Debug.Log("Existing save found with the number: "+versionNum);    
+            levelLoader.currentVerNum = versionNum;
         }
         else
         {
             //RandomGameVersion();
             versionNum = Random.Range(1,3);
+            levelLoader.currentVerNum = versionNum; 
+            levelLoader.oldVerNum = versionNum; 
             PlayerPrefs.SetInt("GameVersion", versionNum); //Set the int versionNum to the SavedVersion Key
             PlayerPrefs.Save(); //Save the changes to registry
             //If used In-Editor - Registry can be found using "RegEdit" with the path being Computer/HKEY_CURRENT_USER/Software/Unity/UnityEditor/DefaultCompany/Med10P1/SavedVersion_xxxxxxxx
@@ -63,7 +66,7 @@ public class MenuStart : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.P)) //TESTING print out game version number
             {
-                //Debug.Log("Version check: "+versionNum);  
+                Debug.Log("Version check: "+versionNum);  
             }
         }
     }

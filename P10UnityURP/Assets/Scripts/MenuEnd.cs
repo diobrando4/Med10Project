@@ -23,7 +23,7 @@ public class MenuEnd : MonoBehaviour
         }
     }
 
-    public void GameNextVersion() // not sure if this causes any issues if the game crashes, because then the starting version will be different?
+    public void GameNextVersion() // not sure if this causes any issues if the game crashes, because then the starting version will be different? //Optimally, PlayerPrefs should prevent that
     {
         if (PlayerPrefs.GetInt("GameVersion") == 1)
         {
