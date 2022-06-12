@@ -9,7 +9,7 @@ public class PlayerGunController : MonoBehaviour
     public GoodGuysBullet bullet;
     //public float bulletSpeed; //Currently 15 in prefab
 
-    public float timeBetweenShots;
+    public float timeBetweenShots = 0.2f;
     private float shotCounter;
 
     public Transform firePoint;
@@ -19,7 +19,6 @@ public class PlayerGunController : MonoBehaviour
     void Start()
     {
         muzzleSmoke = gameObject.transform.Find("SmokeParticles").GetComponent<ParticleSystem>();
-
     }
 
     // Update is called once per frame
@@ -30,10 +29,10 @@ public class PlayerGunController : MonoBehaviour
             shotCounter -= Time.deltaTime;
             if(shotCounter <= 0)
             {
-                shotCounter = timeBetweenShots;
+                shotCounter = timeBetweenShots; // fire rate
                 //GoodGuysBullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as GoodGuysBullet;
                 //newBullet.speed = bulletSpeed;
-                WeaponSelect(weapon);
+                WeaponSelect(weapon); // so this now instantiate bullets?
                 muzzleSmoke.Play();
                 if (FindObjectOfType<SoundManager>())
                 {
@@ -43,7 +42,11 @@ public class PlayerGunController : MonoBehaviour
         }
         else
         {
-            shotCounter = 0;
+            //shotCounter = 0; // this was what was used before trying to add the if-statement below in an attempt to fix it
+            if(shotCounter >= 0)
+            {
+                shotCounter -= Time.deltaTime;
+            }   
         }
     }
     //Switch for choosing what weapon to use - Was used for testing weapon types for Ally
