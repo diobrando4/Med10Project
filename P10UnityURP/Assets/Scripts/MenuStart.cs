@@ -9,7 +9,7 @@ using TMPro; // needed for text
 public class MenuStart : MonoBehaviour
 {
     public LevelLoader levelLoader;
-    //public TextMeshProUGUI gameVersionText;
+    public TextMeshProUGUI gameVersionText;
     private int versionNum;
 
     void Start()
@@ -32,8 +32,9 @@ public class MenuStart : MonoBehaviour
             //Debug.Log("New version number is: "+versionNum);
         }
         
-        //gameVersionText = GameObject.Find("Canvas/TextGameVersion").GetComponent<TextMeshProUGUI>();
-        //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
+        gameVersionText = GameObject.Find("Canvas/TextGameVersion").GetComponent<TextMeshProUGUI>();
+        gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
+        //gameVersionText.text = "";
     }
 
     void Update()
@@ -41,32 +42,33 @@ public class MenuStart : MonoBehaviour
         //DEBUG
         if(Input.GetKey(KeyCode.I))
         {
-            if(Input.GetKeyDown(KeyCode.O))// Delete Key
+            if(Input.GetKeyDown(KeyCode.O)) // Delete Key
             {
                 PlayerPrefs.DeleteAll();
                 versionNum = 0;
-                //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
-                //Debug.Log("Deleting all Keys");  
+                gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
+                Debug.Log("Deleting all Keys");
             }
             else if(Input.GetKeyDown(KeyCode.Keypad1)) //TESTING Change to version 1
             {   
                 PlayerPrefs.SetInt("GameVersion", 1);
                 versionNum = PlayerPrefs.GetInt("GameVersion");
                 PlayerPrefs.Save();
-                //Debug.Log("Making new version "+versionNum);
-                //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
+                Debug.Log("Making new version "+versionNum);
+                gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
             }
             else if(Input.GetKeyDown(KeyCode.Keypad2)) //TESTING Change to version 2
             {
                 PlayerPrefs.SetInt("GameVersion", 2);
                 versionNum = PlayerPrefs.GetInt("GameVersion");
                 PlayerPrefs.Save();
-                //Debug.Log("Making new version "+versionNum);
-                //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
+                Debug.Log("Making new version "+versionNum);
+                gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
             }
             else if(Input.GetKeyDown(KeyCode.P)) //TESTING print out game version number
             {
-                Debug.Log("Version check: "+versionNum);  
+                Debug.Log("Version check: "+versionNum);
+                gameVersionText.text = versionNum.ToString();
             }
         }
     }

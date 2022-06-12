@@ -15,6 +15,9 @@ public class MenuStartForExam : MonoBehaviour
     {
         // this is basically a reset
         PlayerPrefs.SetInt("GameVersion", 0);
+
+        //gameVersionText = GameObject.Find("Canvas/TextGameVersion").GetComponent<TextMeshProUGUI>();
+        //gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
     }
 
     // dialogue
