@@ -24,6 +24,27 @@ public class PlayerGunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //SOLUTION 1
+        /*
+        shotCounter -= Time.deltaTime;
+        if(isFiring == true)
+        {
+            if(shotCounter <= 0)
+            {
+                shotCounter = timeBetweenShots; // fire rate
+                //GoodGuysBullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as GoodGuysBullet;
+                //newBullet.speed = bulletSpeed;
+                WeaponSelect(weapon); // so this now instantiate bullets?
+                muzzleSmoke.Play();
+                if (FindObjectOfType<SoundManager>())
+                {
+                    FindObjectOfType<SoundManager>().SoundPlay("Gunshot");
+                }
+            }
+        }
+        */
+
+        //SOLUTION 2
         if(isFiring == true)
         {
             shotCounter -= Time.deltaTime;
