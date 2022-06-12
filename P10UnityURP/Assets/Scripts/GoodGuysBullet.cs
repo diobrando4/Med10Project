@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class GoodGuysBullet : BulletController
 {
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();        
+    }
+
     void Start()
     {
         lifeTime = 3.0f;
         //damageGiven = 1;
-        rb = GetComponent<Rigidbody>();
         //GetComponent<Collider>().enabled = false;
     }
 

@@ -7,7 +7,7 @@ public class BulletController : MonoBehaviour
     public float speed;
     public float lifeTime; // in seconds?
     public float damageGiven;
-    protected Rigidbody rb;
+    public Rigidbody rb;
     public ParticleSystem impactPart;
     [HideInInspector]
     public bool isPiercing = false; //Can the bullet pierce through hostiles? Only used in GoodGuysBullet so far

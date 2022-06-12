@@ -464,7 +464,7 @@ public class Ally : BaseClassNPC
                 DefaultBullet.speed = 15f;
                 break;
             case 1: //Shotgun
-                float spread = 10f;
+                float spread = 15f;
                 int numOfPellets = 10;
                 for (int i = 0; i <= numOfPellets; i++)
                 {
@@ -473,8 +473,9 @@ public class Ally : BaseClassNPC
                         yield return new WaitForSeconds(timeBetweenPellets);
                         BulletController ShotgunPellet = Instantiate(bullet, muzzle.position, Quaternion.Euler(new Vector3(0, muzzle.transform.eulerAngles.y+Random.Range(-spread, spread), 0)));
                         ShotgunPellet.speed = 20f;
-                        ShotgunPellet.damageGiven = 0.2f;
+                        ShotgunPellet.damageGiven = 0.15f;
                         ShotgunPellet.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+                        ShotgunPellet.rb.mass = 0.1f;
                         ShotgunPellet.GetComponent<TrailRenderer>().startWidth = 0.05f;  
                         if (i > numOfPellets)
                         {
