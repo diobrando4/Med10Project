@@ -54,7 +54,7 @@ public class GoodGuysBullet : BulletController
                         ImpactEffect();
                         Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>()); 
                         hitCount += 1;
-                        Debug.Log("HIT "+hitCount);
+                        //Debug.Log("HIT "+hitCount);
                     }
                     else if(hitCount > 1)
                     {
