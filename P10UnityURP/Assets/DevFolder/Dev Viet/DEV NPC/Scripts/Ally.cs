@@ -107,10 +107,50 @@ public class Ally : BaseClassNPC
         {
             selectedWeapon = 0;
             gameObject.transform.GetChild(4).gameObject.SetActive(false);
+            if(gameObject.name == "AllyBlueBot")
+            {
+                stopDistanceFromPlayer = 3;
+                distanceBeforeRunAway = 5f;
+                maxDistanceFromPlayer = 5f;
+                stopDistanceOnBackoff = 3f;
+                stopDistanceOnApproach = 6f;
+                projectileDetectionRange = 30;
+                projReactivity = 30;
+            }
+            else if (gameObject.name == "AllyOrangeBot")
+            {
+                stopDistanceFromPlayer = 6;
+                distanceBeforeRunAway = 5f;
+                maxDistanceFromPlayer = 12f;
+                stopDistanceOnBackoff = 3f;
+                stopDistanceOnApproach = 6f;
+                projectileDetectionRange = 20;
+                projReactivity = 30;
+            }
         }
         else 
         {
-            gameObject.transform.GetChild(4).gameObject.SetActive(true);                      
+            gameObject.transform.GetChild(4).gameObject.SetActive(true);     
+            if(gameObject.name == "AllyBlueBot")
+            {
+                stopDistanceFromPlayer = 3;
+                distanceBeforeRunAway = 8f;
+                maxDistanceFromPlayer = 4f;
+                stopDistanceOnBackoff = 6f;
+                stopDistanceOnApproach = 6f;
+                projectileDetectionRange = 30;
+                projReactivity = 30;
+            }
+            else if (gameObject.name == "AllyOrangeBot")
+            {
+                stopDistanceFromPlayer = 6;
+                distanceBeforeRunAway = 4f;
+                maxDistanceFromPlayer = 12f;
+                stopDistanceOnBackoff = 2f;
+                stopDistanceOnApproach = 4f;
+                projectileDetectionRange = 20;
+                projReactivity = 30;
+            }                 
         }
 
         //Since you Ally cant change weapons, and weapons are not a seperate class, I have to define the fire rate here, depending on the selectedWeapon
