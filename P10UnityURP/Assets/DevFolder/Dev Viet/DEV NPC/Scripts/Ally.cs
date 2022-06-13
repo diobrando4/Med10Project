@@ -163,7 +163,7 @@ public class Ally : BaseClassNPC
         else if (selectedWeapon == 2) //Sniper
         {
             fireRate = 2f;
-            distanceB4Shoot = 40f;
+            distanceB4Shoot = 30f;
         }
     }//Start
 //======================================================================================================================================================

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoodGuysBullet : BulletController
 {
-
+    public int hitCount = 0;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();        
@@ -47,10 +47,23 @@ public class GoodGuysBullet : BulletController
             {
                 if(_isPierce == true)
                 {
-                    //Function inherited from Parent, refers to the enemy's BaseClassNPC Component 
-                    HurtNPCType(other.gameObject,damageGiven);
-                    ImpactEffect();
-                    Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());                 
+                    if (hitCount <= 1)
+                    {
+                        //Function inherited from Parent, refers to the enemy's BaseClassNPC Component 
+                        HurtNPCType(other.gameObject,damageGiven);
+                        ImpactEffect();
+                        Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>()); 
+                        hitCount += 1;
+                        Debug.Log("HIT "+hitCount);
+                    }
+                    else if(hitCount > 1)
+                    {
+                        damageGiven /= 1.25f;
+                        HurtNPCType(other.gameObject,damageGiven);
+                        ImpactEffect();
+                        Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>()); 
+                        hitCount += 1;
+                    }
                 }
                 else
                 {
