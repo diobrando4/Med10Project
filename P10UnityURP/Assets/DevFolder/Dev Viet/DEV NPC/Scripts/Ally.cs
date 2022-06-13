@@ -226,6 +226,7 @@ public class Ally : BaseClassNPC
             {   
                 //Move2Target(GameObject Target, float BackoffDistance, float StopDistOnBackoff, float StopDistanceOnApproach)
                 Move2Target(player,3,stopDistanceFromPlayer,stopDistanceFromPlayer);
+                agent.speed = 5f;
             } 
             else if (inCombat == true && m2target.tag == "Enemy") //If there is enemies
             {
@@ -237,6 +238,14 @@ public class Ally : BaseClassNPC
                 else
                 {
                     Move2Target(m2target,distanceBeforeRunAway,maxDistanceFromPlayer,stopDistanceOnBackoff,stopDistanceOnApproach,true);
+                    if(gameObject.name == "AllyBlueBot")
+                    {
+                        agent.speed = 3;
+                    }
+                    else if (gameObject.name == "AllyOrangeBot")
+                    {
+                        agent.speed = 8;
+                    }  
                 }
             }
         }
