@@ -53,7 +53,7 @@ public class PlayerGunController : MonoBehaviour
                 shotCounter = timeBetweenShots; // fire rate
                 //GoodGuysBullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as GoodGuysBullet;
                 //newBullet.speed = bulletSpeed;
-                WeaponSelect(weapon); // so this now instantiate bullets?
+                WeaponSelect(weapon); // so this now instantiate bullets? //Yes
                 muzzleSmoke.Play();
                 if (FindObjectOfType<SoundManager>())
                 {
