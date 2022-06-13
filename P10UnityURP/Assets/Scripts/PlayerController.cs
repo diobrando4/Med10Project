@@ -66,11 +66,13 @@ public class PlayerController : MonoBehaviour
         //Change variable to old
         if (isOldVersion == true)
         {
-            gameObject.transform.GetChild(8).gameObject.SetActive(false);
+            gameObject.transform.GetChild(4).gameObject.SetActive(false);
+           // Debug.Log(gameObject.transform.GetChild(4).name);
         }
         else 
         {
-            gameObject.transform.GetChild(8).gameObject.SetActive(true);                      
+            gameObject.transform.GetChild(4).gameObject.SetActive(true);  
+            //Debug.Log("Wht");                    
         }
     }
 
