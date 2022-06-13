@@ -109,13 +109,11 @@ public class Ally : BaseClassNPC
             gameObject.transform.GetChild(4).gameObject.SetActive(false);
             if(gameObject.name == "AllyBlueBot")
             {
-                stopDistanceFromPlayer = 3;
-                distanceBeforeRunAway = 5f;
-                maxDistanceFromPlayer = 5f;
-                stopDistanceOnBackoff = 3f;
-                stopDistanceOnApproach = 6f;
-                projectileDetectionRange = 30;
-                projReactivity = 30;
+                stopDistanceFromPlayer = 3; //Follow distance to player when there is no more enemies
+                distanceBeforeRunAway = 5f; //How close does the enemy have to be before the ally start running away?
+                maxDistanceFromPlayer = 5f; //How far away can the companion move away from the player
+                stopDistanceOnBackoff = 3f; //Stop distance when trying to run away from at target
+                stopDistanceOnApproach = 6f; //Stop distance when approaching a target
             }
             else if (gameObject.name == "AllyOrangeBot")
             {
@@ -124,8 +122,6 @@ public class Ally : BaseClassNPC
                 maxDistanceFromPlayer = 12f;
                 stopDistanceOnBackoff = 3f;
                 stopDistanceOnApproach = 6f;
-                projectileDetectionRange = 20;
-                projReactivity = 30;
             }
         }
         else 
@@ -136,10 +132,10 @@ public class Ally : BaseClassNPC
                 stopDistanceFromPlayer = 3;
                 distanceBeforeRunAway = 8f;
                 maxDistanceFromPlayer = 4f;
-                stopDistanceOnBackoff = 6f;
+                stopDistanceOnBackoff = 10f;
                 stopDistanceOnApproach = 6f;
-                projectileDetectionRange = 30;
-                projReactivity = 30;
+                projectileDetectionRange = 30;//How far can they see the projectile that is coming in?
+                projReactivity = 30;//How fast do they react and try to avoid incoming projectiles?
             }
             else if (gameObject.name == "AllyOrangeBot")
             {
