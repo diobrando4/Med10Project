@@ -135,7 +135,7 @@ public class Ally : BaseClassNPC
                 stopDistanceOnBackoff = 10f;
                 stopDistanceOnApproach = 6f;
                 projectileDetectionRange = 30;//How far can they see the projectile that is coming in?
-                projReactivity = 30;//How fast do they react and try to avoid incoming projectiles?
+                projReactivity = 20;//How fast do they react and try to avoid incoming projectiles?
             }
             else if (gameObject.name == "AllyOrangeBot")
             {
@@ -144,8 +144,8 @@ public class Ally : BaseClassNPC
                 maxDistanceFromPlayer = 12f;
                 stopDistanceOnBackoff = 2f;
                 stopDistanceOnApproach = 4f;
-                projectileDetectionRange = 20;
-                projReactivity = 30;
+                projectileDetectionRange = 15;
+                projReactivity = 15;
             }                 
         }
 
@@ -153,14 +153,17 @@ public class Ally : BaseClassNPC
         if(selectedWeapon == 0) //Default
         {
             fireRate = 0.75f;
+            distanceB4Shoot = 20f;
         }
         else if (selectedWeapon == 1) //Shotgun
         {
             fireRate = 1f;
+            distanceB4Shoot = 20f;
         }
         else if (selectedWeapon == 2) //Sniper
         {
             fireRate = 2f;
+            distanceB4Shoot = 40f;
         }
     }//Start
 //======================================================================================================================================================
@@ -240,11 +243,11 @@ public class Ally : BaseClassNPC
                     Move2Target(m2target,distanceBeforeRunAway,maxDistanceFromPlayer,stopDistanceOnBackoff,stopDistanceOnApproach,true);
                     if(gameObject.name == "AllyBlueBot")
                     {
-                        agent.speed = 3;
+                        agent.speed = 4;
                     }
                     else if (gameObject.name == "AllyOrangeBot")
                     {
-                        agent.speed = 8;
+                        agent.speed = 6.5f;
                     }  
                 }
             }
@@ -518,7 +521,7 @@ public class Ally : BaseClassNPC
                         yield return new WaitForSeconds(timeBetweenPellets);
                         BulletController ShotgunPellet = Instantiate(bullet, muzzle.position, Quaternion.Euler(new Vector3(0, muzzle.transform.eulerAngles.y+Random.Range(-spread, spread), 0)));
                         ShotgunPellet.speed = 20f;
-                        ShotgunPellet.damageGiven = 0.15f;
+                        ShotgunPellet.damageGiven = 0.1f;
                         ShotgunPellet.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
                         ShotgunPellet.rb.mass = 0.1f;
                         ShotgunPellet.GetComponent<TrailRenderer>().startWidth = 0.05f;  
@@ -535,6 +538,7 @@ public class Ally : BaseClassNPC
                 SniperBullet.isPiercing = true;
                 SniperBullet.damageGiven = 3f;
                 SniperBullet.speed = 60f;
+                SniperBullet.rb.mass = 0.1f;
                 SniperBullet.transform.localScale = new Vector3(0.15f,0.15f,0.5f);
                 break;
         }    

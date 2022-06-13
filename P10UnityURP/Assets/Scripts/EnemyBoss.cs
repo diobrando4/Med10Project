@@ -53,6 +53,7 @@ public class EnemyBoss : BaseClassEnemy
             {
                 BulletController newBullet = Instantiate(bullet, firePoints[i].position, firePoints[i].rotation) as BulletController;
                 newBullet.speed = projectileSpeed;
+                newBullet.isOldVersion = isOldVersion;
                 muzzleSmoke.Play();
                 PlaySound("Gunshot");
             }
