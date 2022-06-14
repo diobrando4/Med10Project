@@ -25,6 +25,7 @@ public class MenuStart : MonoBehaviour
         {
             //RandomGameVersion();
             versionNum = Random.Range(1,3);
+            startingVersionNum = versionNum;
             PlayerPrefs.SetInt("GameVersion", versionNum); //Set the int versionNum to the SavedVersion Key
             PlayerPrefs.SetInt("StartingGameVersion", versionNum);
             PlayerPrefs.Save(); //Save the changes to registry
