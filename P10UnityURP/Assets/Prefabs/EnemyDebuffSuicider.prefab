@@ -676,7 +676,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1400935347158630937}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.48958045
+  m_Radius: 0.35
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -711,6 +711,7 @@ MonoBehaviour:
   distanceB4Shoot: 0
   bullet: {fileID: 0}
   muzzle: {fileID: 0}
+  isOldVersion: 0
   deathEffect: {fileID: 2809500710690246973, guid: e347372f2c0a301409e0d8c625eb7067, type: 3}
 --- !u!1 &2886084333025165219
 GameObject:
