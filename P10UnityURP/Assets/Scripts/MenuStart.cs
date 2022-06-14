@@ -49,7 +49,7 @@ public class MenuStart : MonoBehaviour
                 gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
                 Debug.Log("Deleting all Keys");
             }
-            else if(Input.GetKeyDown(KeyCode.Keypad1)) //Reset and Change to version 1
+            else if(Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1)) //Reset and Change to version 1
             {   
                 PlayerPrefs.SetInt("GameVersion", 1);
                 PlayerPrefs.SetInt("StartingGameVersion", 1);
@@ -59,7 +59,7 @@ public class MenuStart : MonoBehaviour
                 Debug.Log("Making new version "+versionNum);
                 gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
             }
-            else if(Input.GetKeyDown(KeyCode.Keypad2)) //Reset and Change to version 2
+            else if(Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2)) //Reset and Change to version 2
             {
                 PlayerPrefs.SetInt("GameVersion", 2);
                 PlayerPrefs.SetInt("StartingGameVersion", 2);

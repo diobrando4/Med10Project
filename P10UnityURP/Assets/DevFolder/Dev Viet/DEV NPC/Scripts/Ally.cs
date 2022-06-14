@@ -254,7 +254,7 @@ public class Ally : BaseClassNPC
         }
         else//If player is dead or Debuffed
         {
-            agent.stoppingDistance = 1.5f;
+            agent.stoppingDistance = 2f;
             agent.SetDestination(player.transform.position);
             if(m2target != null) //If there is still enemies, look at them, if not, look at player
             {
