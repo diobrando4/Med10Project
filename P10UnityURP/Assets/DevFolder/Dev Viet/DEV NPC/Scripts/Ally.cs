@@ -521,7 +521,7 @@ public class Ally : BaseClassNPC
                         yield return new WaitForSeconds(timeBetweenPellets);
                         BulletController ShotgunPellet = Instantiate(bullet, muzzle.position, Quaternion.Euler(new Vector3(0, muzzle.transform.eulerAngles.y+Random.Range(-spread, spread), 0)));
                         ShotgunPellet.speed = 20f;
-                        ShotgunPellet.damageGiven = 0.1f;
+                        ShotgunPellet.damageGiven = 0.125f;
                         ShotgunPellet.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
                         ShotgunPellet.rb.mass = 0.1f;
                         ShotgunPellet.GetComponent<TrailRenderer>().startWidth = 0.05f;  
