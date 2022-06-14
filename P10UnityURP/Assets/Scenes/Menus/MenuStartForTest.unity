@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -875,8 +875,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -95.111115}
-  m_SizeDelta: {x: 1000, y: 400}
+  m_AnchoredPosition: {x: 0, y: -95}
+  m_SizeDelta: {x: 1010, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1488802407
 MonoBehaviour:
@@ -900,8 +900,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Controls and mechanics:\n\nMenu / Pause\tEscape / P\n\nAim\t\t\tMouse
     cursor\nMovement\t\tW A S D\nAttack / Shoot\tHold Left mouse button\nDodge /
-    Dash\tPress Right mouse button / Shift/ Spacebar\n\nRevive\t\tStay close to companion\nRemove
-    debuff\tMove close to companion"
+    Dash\tPress Right mouse button / Shift / Spacebar\n\nRevive\t\tStay close to
+    companion\nRemove debuff\tMove close to companion"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
