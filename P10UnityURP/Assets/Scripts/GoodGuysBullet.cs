@@ -47,7 +47,7 @@ public class GoodGuysBullet : BulletController
             {
                 if(_isPierce == true)
                 {
-                    if (hitCount <= 1)
+                    if (hitCount <= 0)
                     {
                         //Function inherited from Parent, refers to the enemy's BaseClassNPC Component 
                         HurtNPCType(other.gameObject,damageGiven);
@@ -56,7 +56,7 @@ public class GoodGuysBullet : BulletController
                         hitCount += 1;
                         //Debug.Log("HIT "+hitCount);
                     }
-                    else if(hitCount > 1)
+                    else if(hitCount > 0)
                     {
                         damageGiven /= 1.25f;
                         HurtNPCType(other.gameObject,damageGiven);

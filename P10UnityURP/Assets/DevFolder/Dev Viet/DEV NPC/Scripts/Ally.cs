@@ -130,20 +130,20 @@ public class Ally : BaseClassNPC
             if(gameObject.name == "AllyBlueBot")
             {
                 stopDistanceFromPlayer = 3;
-                distanceBeforeRunAway = 8f;
+                distanceBeforeRunAway = 6f;
                 maxDistanceFromPlayer = 4f;
                 stopDistanceOnBackoff = 10f;
-                stopDistanceOnApproach = 6f;
+                stopDistanceOnApproach = 8f;
                 projectileDetectionRange = 30;//How far can they see the projectile that is coming in?
                 projReactivity = 20;//How fast do they react and try to avoid incoming projectiles?
             }
             else if (gameObject.name == "AllyOrangeBot")
             {
                 stopDistanceFromPlayer = 6;
-                distanceBeforeRunAway = 4f;
+                distanceBeforeRunAway = 5f;
                 maxDistanceFromPlayer = 12f;
                 stopDistanceOnBackoff = 2f;
-                stopDistanceOnApproach = 4f;
+                stopDistanceOnApproach = 5f;
                 projectileDetectionRange = 15;
                 projReactivity = 15;
             }                 
@@ -243,7 +243,7 @@ public class Ally : BaseClassNPC
                     Move2Target(m2target,distanceBeforeRunAway,maxDistanceFromPlayer,stopDistanceOnBackoff,stopDistanceOnApproach,true);
                     if(gameObject.name == "AllyBlueBot")
                     {
-                        agent.speed = 4;
+                        agent.speed = 5;
                     }
                     else if (gameObject.name == "AllyOrangeBot")
                     {
@@ -523,7 +523,7 @@ public class Ally : BaseClassNPC
                         ShotgunPellet.speed = 20f;
                         ShotgunPellet.damageGiven = 0.15f;
                         ShotgunPellet.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
-                        ShotgunPellet.rb.mass = 0.1f;
+                        ShotgunPellet.rb.mass = 0.03f;
                         ShotgunPellet.GetComponent<TrailRenderer>().startWidth = 0.05f;  
                         if (i > numOfPellets)
                         {
@@ -538,7 +538,7 @@ public class Ally : BaseClassNPC
                 SniperBullet.isPiercing = true;
                 SniperBullet.damageGiven = 3f;
                 SniperBullet.speed = 60f;
-                SniperBullet.rb.mass = 0.1f;
+                SniperBullet.rb.mass = 0.05f;
                 SniperBullet.transform.localScale = new Vector3(0.15f,0.15f,0.5f);
                 break;
         }    
