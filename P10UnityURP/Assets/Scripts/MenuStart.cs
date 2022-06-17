@@ -18,8 +18,15 @@ public class MenuStart : MonoBehaviour
         if (PlayerPrefs.HasKey("GameVersion") == true) //If there already is a saved key
         {
             versionNum = PlayerPrefs.GetInt("GameVersion"); //Use that int as versionNum
-            startingVersionNum =  PlayerPrefs.GetInt("StartingGameVersion");
-            Debug.Log("Existing save found with the number: "+versionNum+ " and "+startingVersionNum);    
+            if(PlayerPrefs.HasKey("StartingGameVersion") == true)
+            {
+                startingVersionNum = PlayerPrefs.GetInt("StartingGameVersion");
+            }
+            else
+            {
+                startingVersionNum = versionNum;
+            }
+            Debug.Log("Existing save found with the number: "+versionNum+ " and "+startingVersionNum); 
         }
         else
         {
