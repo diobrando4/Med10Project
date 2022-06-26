@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement; // needed to change scene
 
 public class MenuEnd : MonoBehaviour
 {
-    // url for survey goes here
-    private string url1 = "https://forms.gle/GRXwE3utGC8ZbUU6A"; // questionnaire 1-2
-    private string url2 = "https://forms.gle/Ty3SMUS5mq4rGNTH9"; // questionnaire 2-1
+    // urls for questionnaires goes here
+    private string url1 = "https://duckduckgo.com/?q=1";
+    private string url2 = "https://duckduckgo.com/?q=2";
     private bool isClicked = false;
 
     public void GameOpenLink()

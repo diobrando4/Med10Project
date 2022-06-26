@@ -104,5 +104,5 @@ public class MenuStart : MonoBehaviour
     public void GameQuit()
     {
         Application.Quit();
-    }    
+    }
 }
