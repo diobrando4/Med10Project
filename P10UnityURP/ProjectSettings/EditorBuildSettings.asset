@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Menus/MenuStartForTest.unity
+  - enabled: 0
+    path: Assets/Scenes/Menus/NoLongerUsed/MenuStartForTest.unity
     guid: 2b64ff837c1584f45bdf793b3d202b08
   - enabled: 0
-    path: Assets/Scenes/Menus/MenuStartForExam.unity
+    path: Assets/Scenes/Menus/NoLongerUsed/MenuStartForExam.unity
     guid: 6afde20631a1e6141af415176a9fa7ca
+  - enabled: 1
+    path: Assets/Scenes/Menus/MenuStart.unity
+    guid: 63d79258cc5f364468eb7f4237a345a0
   - enabled: 1
     path: Assets/Scenes/Levels/Level00.unity
     guid: b61232f992caee146ba6824444177d85
@@ -35,9 +38,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level07.unity
     guid: 840d7160bde425a4ca0070c4c1b9e3b7
-  - enabled: 1
-    path: Assets/Scenes/Menus/MenuEndMiddle.unity
-    guid: f250ec88814f1244e88f117ccb35b01c
   - enabled: 1
     path: Assets/Scenes/Menus/MenuEndFinal.unity
     guid: 428888be273ef8942a7895c0fe38d7a9

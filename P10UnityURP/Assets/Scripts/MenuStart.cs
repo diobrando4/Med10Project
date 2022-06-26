@@ -4,17 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement; // needed to change scene
 using TMPro; // needed for text
 
-// used for buttons in the start menu
+// used for buttons in the start menu, it was also used for version handling during experiment
 
 public class MenuStart : MonoBehaviour
 {
     public LevelLoader levelLoader;
+    /*
     public TextMeshProUGUI gameVersionText;
     private int versionNum;
     private int startingVersionNum;
+    */
 
     void Start()
     {
+        /*
         if (PlayerPrefs.HasKey("GameVersion") == true) //If there already is a saved key
         {
             versionNum = PlayerPrefs.GetInt("GameVersion"); //Use that int as versionNum
@@ -42,12 +45,13 @@ public class MenuStart : MonoBehaviour
         
         gameVersionText = GameObject.Find("Canvas/TextGameVersion").GetComponent<TextMeshProUGUI>();
         gameVersionText.text = PlayerPrefs.GetInt("GameVersion").ToString();
-        //gameVersionText.text = "";
+        */
     }
 
     void Update()
     {
         //DEBUG
+        /*
         if(Input.GetKey(KeyCode.I))
         {
             if(Input.GetKeyDown(KeyCode.O)) // Delete Key
@@ -84,11 +88,17 @@ public class MenuStart : MonoBehaviour
                 gameVersionText.text = versionNum.ToString();
             }
         }
+        */
     }
 
-    public void GameStart()
+    public void GameStartStory() // story mode
     {
         levelLoader.LoadNextLevel();
+    }
+
+    public void GameStartEndless() // endless mode
+    {
+        //
     }
 
     public void GameQuit()
