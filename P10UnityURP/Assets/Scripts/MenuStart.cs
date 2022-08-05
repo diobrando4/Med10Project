@@ -17,6 +17,8 @@ public class MenuStart : MonoBehaviour
 
     void Start()
     {
+        PlayerPrefs.SetInt("GameVersion", 2);
+
         /*
         if (PlayerPrefs.HasKey("GameVersion") == true) //If there already is a saved key
         {
