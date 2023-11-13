@@ -21,7 +21,8 @@ public class LevelLoader : MonoBehaviour
             if (PlayerPrefs.GetInt("GameVersion") != PlayerPrefs.GetInt("StartingGameVersion")) //and if the current GameVersion is not the same as the one that was originally assigned
             {
                 //Debug.Log("Trying to load EndFinal");
-                StartCoroutine(LoadLevel(10)); //Load EndFinal
+                StartCoroutine(LoadLevel(9)); //Load EndFinal
+                // this was set to "10" which loaded the pause menu instead, but why was it set to "10"?
             }
             else//Else load levels as usually
             {
